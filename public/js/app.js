@@ -11460,7 +11460,7 @@ jQuery.parseXML = function( data ) {
 
 var
 	rbracket = /\[\]$/,
-	rCRLF = /\r?\n/g,
+	rLF = /\r?\n/g,
 	rsubmitterTypes = /^(?:submit|button|image|reset|file)$/i,
 	rsubmittable = /^(?:input|select|textarea|keygen)/i;
 
@@ -11567,11 +11567,11 @@ jQuery.fn.extend( {
 
 			if ( Array.isArray( val ) ) {
 				return jQuery.map( val, function( val ) {
-					return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+					return { name: elem.name, value: val.replace( rLF, "\r\n" ) };
 				} );
 			}
 
-			return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+			return { name: elem.name, value: val.replace( rLF, "\r\n" ) };
 		} ).get();
 	}
 } );
