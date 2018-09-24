@@ -12,7 +12,7 @@ class CreateInfPagesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('slug');
-            $table->string('sub_title');
+            $table->string('sub_title')->nullable();
             $table->string('description')->nullable();
             $table->string('top_textarea')->nullable();
             $table->string('left_textarea')->nullable();
@@ -20,13 +20,13 @@ class CreateInfPagesTable extends Migration
             $table->integer('views_count')->default(0);
             $table->integer('img_id')->nullable();
             $table->integer('menu')->default(0);
-            $table->integer('index_id')->default(0);
-            $table->string('index_description');
+            $table->integer('if_desc')->default(0);
+            $table->string('text_description')->nullable();
             $table->integer('sort')->nullable();
             $table->integer('original')->default(0);
-            $table->string('keywords');
-            $table->string('meta_desc');
-            $table->integer('meta_id');
+            $table->string('keywords')->nullable();
+            $table->string('meta_desc')->nullable();
+            $table->integer('meta_id')->nullable();
             $table->integer('language_id')->default(0);
             $table->timestamps();
         });
