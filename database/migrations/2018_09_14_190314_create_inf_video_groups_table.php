@@ -12,9 +12,9 @@ class CreateInfVideoGroupsTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('title');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('keywords')->nullable();
-            $table->string('meta_desc')->nullable();
+            $table->text('meta_desc')->nullable();
             $table->integer('meta_id')->nullable();
             $table->integer('language_id')->default(0);
             $table->timestamps();

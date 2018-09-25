@@ -11,7 +11,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="{{route('adminvideo_collections.index')}}">Video Collections</a></li>
+            <li><a href="{{route('video_collections.index')}}">Video Collections</a></li>
             <li class="active">Create</li>
         </ol>
     </section>
@@ -21,26 +21,52 @@
 
         <!-- Default box -->
         <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Добавляем новую видео-группу</h3>
-            </div>
-            <div class="box-body">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Название</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
-                    </div>
+            {!! Form::open(['route' => 'video_collections.store']) !!}
+                <div class="box-header with-border">
+                    <h3 class="box-title">Добавляем новую видео-группу</h3>
+                    @include('admin.error')
                 </div>
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Название</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" name="title">
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Описание</label>
+                            <textarea name="description" id="" cols="80" rows="10" class="form-control">{{old('description')}}</textarea>
+                        </div>
+                    </div>
+
+                    {{--<div class="col-md-12">--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="exampleInputEmail1">Ключевые слова</label>--}}
+                            {{--<input type="text" class="form-control" id="exampleInputEmail1" placeholder="">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+                    {{--<div class="col-md-12">--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="exampleInputEmail1">Мета описание для поисковых роботов</label>--}}
+                            {{--<form>--}}
+                                {{--<textarea id="" name="meta_desc" rows="10" cols="80">--}}
+                                                        {{--Описание для поисковых роботов.--}}
+                                {{--</textarea>--}}
+                            {{--</form>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
             </div>
-            <!-- /.box-body -->
             <div class="box-footer">
-                <button class="btn btn-default">Назад</button>
+                <a href="{{route('video_collections.index')}}" class="btn btn-default">Назад</a>
                 <button class="btn btn-success pull-right">Добавить</button>
             </div>
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-
+        {!! Form::close() !!}
     </section>
     <!-- /.content -->
 </div>

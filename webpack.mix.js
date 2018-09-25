@@ -13,60 +13,66 @@ let webpack = require('webpack');
  */
 
 mix
-    // .setPublicPath('public/build')
     .setPublicPath('public')
-    // .setResourceRoot('/build/')
-    .setResourceRoot('/')
-    .js('resources/assets/js/app.js', 'js')
-    // .scripts(['resources/assets/admin/**/*.js'], 'js/admin.js')
-    .styles([
-        'resources/assets/admin/bower_components/bootstrap/dist/css/bootstrap.min.css',
-        'resources/assets/admin/bower_components/font-awesome/css/font-awesome.min.css',
-        'resources/assets/admin/bower_components/Ionicons/css/ionicons.min.css',
-        'resources/assets/admin/dist/css/AdminLTE.min.css',
-        'resources/assets/admin/dist/css/skins/_all-skins.min.css',
-        'resources/assets/admin/bower_components/morris.js/morris.css',
-        'resources/assets/admin/bower_components/jvectormap/jquery-jvectormap.css',
-        // 'resources/assets/admin/bower_components/jvectormap/lib/vector-map/jqvmap.min.css',
-        'resources/assets/admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
-        'resources/assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.css',
-        'resources/assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
-    ], 'public/css/admin.css')
-    // .styles(['resources/assets/admin/**/*.css'], 'public/build/css/admin.css')
-    .scripts([
-        'resources/assets/admin/bower_components/jquery/dist/jquery.min.js',
-        'resources/assets/admin/bower_components/jquery-ui/jquery-ui.min.js',
-        'resources/assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js',
-        'resources/assets/admin/bower_components/raphael/raphael.min.js',
-        'resources/assets/admin/bower_components/morris.js/morris.min.js',
-        'resources/assets/admin/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js',
-        'resources/assets/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js',
-        'resources/assets/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
-        // 'resources/assets/admin/bower_components/jvectormap/lib/vector-map/jquery.vmap.js',
-        // 'resources/assets/admin/bower_components/jvectormap/lib/vector-map/jquery.vmap.min.js',
-        // 'resources/assets/admin/bower_components/jvectormap/lib/vector-map/jquery.vmap.sampledata.js',
-        // 'resources/assets/admin/bower_components/jvectormap/lib/vector-map/country/jquery.vmap.world.js',
-        'resources/assets/admin/bower_components/jquery-knob/dist/jquery.knob.min.js',
-        'resources/assets/admin/bower_components/moment/min/moment.min.js',
-        'resources/assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.js',
-        'resources/assets/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
-        'resources/assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js',
-        'resources/assets/admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js',
-        'resources/assets/admin/bower_components/fastclick/lib/fastclick.js',
-        'resources/assets/admin/dist/js/adminlte.min.js',
-        'resources/assets/admin/dist/js/pages/dashboard.js',
-        'resources/assets/admin/dist/js/demo.js'
-    ], 'public/js/admin.js')
-    .sass('resources/assets/sass/app.scss', 'public/css');
+    .setResourceRoot('/');
 
-    mix.copy('resources/assets/admin/bower_components/bootstrap/fonts', 'public/fonts');
-    mix.copy('resources/assets/admin/bower_components/font-awesome/fonts', 'public/fonts');
-    mix.copy('resources/assets/admin/bower_components/Ionicons/fonts', 'public/fonts');
-    mix.copy('resources/assets/admin/dist/img', 'public/img');
-    // mix.copy('resources/assets/admin/plugins/iCheck/minimal/blue.png', 'public/css');
-    mix.sourceMaps();
-    mix.version();
-    // .version();
+mix.styles([
+    'resources/assets/admin/bootstrap/css/bootstrap.min.css',
+    'resources/assets/admin/font-awesome/4.5.0/css/font-awesome.min.css',
+    'resources/assets/admin/ionicons/2.0.1/css/ionicons.min.css',
+    'resources/assets/admin/plugins/iCheck/minimal/_all.css',
+    'resources/assets/admin/plugins/datepicker/datepicker3.css',
+    'resources/assets/admin/plugins/select2/select2.min.css',
+    'resources/assets/admin/plugins/datatables/dataTables.bootstrap.css',
+    'resources/assets/admin/dist/css/AdminLTE.min.css',
+    'resources/assets/admin/dist/css/skins/_all-skins.min.css'
+], 'public/css/admin.css');
+
+mix.scripts([
+    'resources/assets/admin/plugins/jQuery/jquery-2.2.3.min.js',
+    'resources/assets/admin/bootstrap/js/bootstrap.min.js',
+    'resources/assets/admin/plugins/select2/select2.full.min.js',
+    'resources/assets/admin/plugins/datepicker/bootstrap-datepicker.js',
+    'resources/assets/admin/plugins/datatables/jquery.dataTables.min.js',
+    'resources/assets/admin/plugins/datatables/dataTables.bootstrap.min.js',
+    'resources/assets/admin/plugins/slimScroll/jquery.slimscroll.min.js',
+    'resources/assets/admin/plugins/fastclick/fastclick.js',
+    'resources/assets/admin/plugins/iCheck/icheck.min.js',
+    'resources/assets/admin/dist/js/app.min.js',
+    'resources/assets/admin/dist/js/demo.js',
+    'resources/assets/admin/dist/js/scripts.js'
+], 'public/js/admin.js');
+
+mix.copy('resources/assets/admin/bootstrap/fonts', 'public/fonts');
+mix.copy('resources/assets/admin/dist/fonts', 'public/fonts');
+mix.copy('resources/assets/admin/dist/img', 'public/img');
+mix.copy('resources/assets/admin/plugins/iCheck/minimal/blue.png', 'public/css');
+
+mix.styles([
+    'resources/assets/front/css/bootstrap.min.css',
+    'resources/assets/front/css/font-awesome.min.css',
+    'resources/assets/front/css/animate.min.css',
+    'resources/assets/front/css/owl.carousel.css',
+    'resources/assets/front/css/owl.theme.css',
+    'resources/assets/front/css/owl.transitions.css',
+    'resources/assets/front/css/style.css',
+    'resources/assets/front/css/responsive.css'
+],'public/css/front.css');
+
+mix.scripts([
+    'resources/assets/front/js/jquery-1.11.3.min.js',
+    'resources/assets/front/js/bootstrap.min.js',
+    'resources/assets/front/js/owl.carousel.min.js',
+    'resources/assets/front/js/jquery.stickit.min.js',
+    'resources/assets/front/js/menu.js',
+    'resources/assets/front/js/scripts.js'
+], 'public/js/front.js');
+
+mix.copy('resources/assets/front/fonts', 'public/fonts');
+mix.copy('resources/assets/front/images', 'public/images');
+
+mix.sourceMaps();
+mix.version();
 
 mix.webpackConfig({
     plugins: [

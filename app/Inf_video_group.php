@@ -9,6 +9,14 @@ class Inf_video_group extends Model
 {
     use Sluggable;
 
+    protected $fillable = [
+        'title', 'description', 'keywords', 'meta_desc', 'meta_id', 'language_id'
+    ];
+
+    protected $hidden = [
+        'slug'
+    ];
+
     public function sluggable()
     {
         return [

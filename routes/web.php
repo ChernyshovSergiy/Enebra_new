@@ -35,10 +35,9 @@ Route::group([
     Route::get('/', function () { return view('welcome');});
         Route::group([
             'prefix'    => 'admin',
-            'namespace' => 'Admin',
-            'as'        => 'admin'
+            'namespace' => 'Admin'
         ], function (){
-            Route::get('/', 'DashboardController@index');
+            Route::get('/', 'DashboardController@index')->name('admin');
             Route::resource('/video_collections', 'VideoCollectionsController');
         });
 });
