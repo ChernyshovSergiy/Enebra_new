@@ -3,7 +3,7 @@ $(document).ready(function (){
     $(".select2").select2();
     //Date picker
     $('#datepicker').datepicker({
-        autoclose: false,
+        autoclose: true,
         format: 'dd/mm/yyyy'
     });
     //iCheck for checkbox and radio inputs

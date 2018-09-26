@@ -8,11 +8,11 @@ class CreateInfSocialNetworkLinksTable extends Migration
 {
     public function up()
     {
-        Schema::create('inf_social_network_link', function (Blueprint $table) {
+        Schema::create('inf_social_network_links', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('link');
-            $table->string('img_id');
+            $table->text('link');
+            $table->string('image_id');
             $table->integer('sort');
             $table->timestamps();
         });
@@ -20,6 +20,6 @@ class CreateInfSocialNetworkLinksTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('inf_social_network_link');
+        Schema::dropIfExists('inf_social_network_links');
     }
 }

@@ -17,11 +17,16 @@
 
     <!-- Main content -->
     <section class="content">
+    {{ Form::open([
+        'route' => 'video_collections.store',
+        'files' => true
+    ])}}
 
         <!-- Default box -->
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Листинг Видео Коллекций</h3>
+                @include('admin.error')
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -30,20 +35,21 @@
                 </div>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Название</th>
-                        <th>Описание</th>
-                        <th>Ключевые Слова</th>
-                        <th>Мета Описание</th>
-                        <th>Мета ID</th>
-                        <th>Language</th>
-                    </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Ключевые Слова</th>
+                            <th>Мета Описание</th>
+                            <th>Мета ID</th>
+                            <th>Language</th>
+                            <th>Действия</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($inf_video_groups as $inf_video_group)
+                    @foreach($inf_video_groups as $key => $inf_video_group)
                         <tr>
-                            <td>{{$inf_video_group->id}}</td>
+                            <td>{{$key + 1}}</td>
                             <td>{{$inf_video_group->title}}</td>
                             <td>{!! str_limit($inf_video_group->description, 200) !!}</td>
                             <td>{{$inf_video_group->keywords}}</td>
@@ -68,7 +74,7 @@
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
-
+    {{ Form::close() }}
     </section>
     <!-- /.content -->
 </div>

@@ -10,8 +10,8 @@ class CreateInfPlanSectionPointsTable extends Migration
     {
         Schema::create('inf_plan_section_points', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('point');
-            $table->string('description');
+            $table->text('point');
+            $table->text('description')->nullable();
             $table->integer('phase_id');
             $table->integer('section_id');
             $table->integer('sort');

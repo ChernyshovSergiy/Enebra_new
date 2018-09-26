@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('parent_referral_id')->nullable();
             $table->integer('citizen_country_id');
-            $table->string('biometric_photo_id');
+            $table->integer('biometric_photo_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('first_name_en');
@@ -28,15 +28,15 @@ class CreateUsersTable extends Migration
             $table->string('document_number');
             $table->integer('birth_day');
             $table->integer('birth_month');
-            $table->integer('birth_year');
+            $table->year('birth_year');
             $table->string('phone');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('login')->nullable();
             $table->string('password');
-            $table->string('avatar');
+            $table->integer('avatar_id');
             $table->rememberToken();
             $table->integer('role_id');
-            $table->integer('status')->default(0);
+            $table->integer('status_id')->default(0);
             $table->string('referral_id')->unique();
             $table->integer('language_id')->default(0);
             $table->timestamps();
