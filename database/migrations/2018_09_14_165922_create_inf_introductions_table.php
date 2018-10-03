@@ -16,7 +16,7 @@ class CreateInfIntroductionsTable extends Migration
             $table->string('text');
             $table->string('replica');
             $table->string('conclusion');
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

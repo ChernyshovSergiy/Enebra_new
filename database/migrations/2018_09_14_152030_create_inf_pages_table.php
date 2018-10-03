@@ -28,7 +28,7 @@ class CreateInfPagesTable extends Migration
             $table->string('keywords')->nullable();
             $table->text('meta_desc')->nullable();
             $table->integer('meta_id')->nullable();
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

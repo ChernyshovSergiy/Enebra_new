@@ -15,7 +15,7 @@ class CreateInfPlanSectionPointsTable extends Migration
             $table->integer('phase_id');
             $table->integer('section_id');
             $table->integer('sort');
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

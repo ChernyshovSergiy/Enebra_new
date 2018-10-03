@@ -13,7 +13,7 @@ class CreateInfIntroductionPointsTable extends Migration
             $table->string('point');
             $table->string('link');
             $table->integer('sort');
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

@@ -4,20 +4,21 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignImagesTable extends Migration
+class AddImagesColumnCategoryIdTable extends Migration
 {
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->unsignedInteger('user_id')->change();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('image_categories');
         });
     }
 
     public function down()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
+            $table->dropForeign(['category_id']);
+            $table->dropColumn('category_id');
         });
     }
 }

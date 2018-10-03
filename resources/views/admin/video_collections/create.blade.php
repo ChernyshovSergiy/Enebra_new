@@ -41,23 +41,23 @@
                         </div>
                     </div>
 
-                    {{--<div class="col-md-12">--}}
-                        {{--<div class="form-group">--}}
-                            {{--<label for="exampleInputEmail1">Ключевые слова</label>--}}
-                            {{--<input type="text" class="form-control" id="exampleInputEmail1" placeholder="">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ключевые слова</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" name="keywords">
+                        </div>
+                    </div>
 
-                    {{--<div class="col-md-12">--}}
-                        {{--<div class="form-group">--}}
-                            {{--<label for="exampleInputEmail1">Мета описание для поисковых роботов</label>--}}
-                            {{--<form>--}}
-                                {{--<textarea id="" name="meta_desc" rows="10" cols="80">--}}
-                                                        {{--Описание для поисковых роботов.--}}
-                                {{--</textarea>--}}
-                            {{--</form>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Мета описание для поисковых роботов</label>
+                            <form>
+                                <textarea id="" name="meta_desc" rows="10" cols="80">{{old('meta_desc')}}
+                                                        Описание для поисковых роботов.
+                                </textarea>
+                            </form>
+                        </div>
+                    </div>
             </div>
             <div class="box-footer">
                 <a href="{{route('video_collections.index')}}" class="btn btn-default">Назад</a>

@@ -11,7 +11,7 @@ class CreateInfStatusMessagesTable extends Migration
         Schema::create('inf_status_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

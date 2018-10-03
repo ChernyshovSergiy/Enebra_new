@@ -14,7 +14,7 @@ class CreateInfContactMessagesTable extends Migration
             $table->string('email');
             $table->string('message');
             $table->integer('status_id');
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

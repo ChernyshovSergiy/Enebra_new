@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Kiev',
 
     /*
     |--------------------------------------------------------------------------
@@ -79,7 +79,7 @@ return [
     */
 
     'locale' => 'en',
-    'locales' => ['en' => 'English', 'ru' => 'Russian', 'uk' => 'Ukraine'],
+    'locales' => ['en' => 'English', 'ru' => 'Russian', 'ua' => 'Ukraine'],
 
     /*
     |--------------------------------------------------------------------------

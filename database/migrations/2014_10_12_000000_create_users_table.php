@@ -33,12 +33,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('login')->nullable();
             $table->string('password');
-            $table->integer('avatar_id');
+            $table->integer('avatar_id')->nullable();
             $table->rememberToken();
             $table->integer('role_id');
-            $table->integer('status_id')->default(0);
+            $table->integer('status_id')->default(1);
             $table->string('referral_id')->unique();
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

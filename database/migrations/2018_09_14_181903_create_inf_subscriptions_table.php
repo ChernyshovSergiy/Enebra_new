@@ -12,7 +12,7 @@ class CreateInfSubscriptionsTable extends Migration
             $table->increments('id');
             $table->string('email');
             $table->string('token')->nullable();
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

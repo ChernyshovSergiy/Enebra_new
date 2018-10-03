@@ -12,7 +12,7 @@ class CreateInfVideoGroupSectionsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('video_group_id');
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }

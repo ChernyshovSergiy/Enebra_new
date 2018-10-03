@@ -11,7 +11,7 @@ class CreateInfPlanPhaseSectionsTable extends Migration
         Schema::create('inf_plan_phase_sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sub_title');
-            $table->integer('language_id')->default(0);
+            $table->integer('language_id')->default(1);
             $table->timestamps();
         });
     }
