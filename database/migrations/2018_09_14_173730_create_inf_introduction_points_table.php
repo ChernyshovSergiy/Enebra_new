@@ -10,8 +10,8 @@ class CreateInfIntroductionPointsTable extends Migration
     {
         Schema::create('inf_introduction_points', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('point');
-            $table->string('link');
+            $table->text('point');
+            $table->string('link')->nullable();
             $table->integer('sort');
             $table->integer('language_id')->default(1);
             $table->timestamps();

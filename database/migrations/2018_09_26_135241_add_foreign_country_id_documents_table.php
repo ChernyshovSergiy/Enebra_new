@@ -10,10 +10,10 @@ class AddForeignCountryIdDocumentsTable extends Migration
     {
         Schema::table('country_id_documents', function (Blueprint $table) {
             $table->unsignedInteger('country_id')->change();
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
 
             $table->unsignedInteger('document_id')->change();
-            $table->foreign('document_id')->references('id')->on('inf_id_documents');
+            $table->foreign('document_id')->references('id')->on('inf_id_documents')->onDelete('cascade');
         });
     }
 

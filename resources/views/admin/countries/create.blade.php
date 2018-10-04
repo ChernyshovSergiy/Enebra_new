@@ -52,6 +52,14 @@
                             }}
                         </div>
 
+                        <div class="form-group">
+                            <label>Документы</label>
+                            {{ Form::select('id_documents[]',
+                                $id_documents,
+                                null,
+                                ['class' => 'form-control select2', 'multiple'=>"multiple", 'data-placeholder'=>'Выберите документы подтверждающие личность'])
+                            }}
+                        </div>
                     </div>
                 </div>
                 <!-- /.box-body -->

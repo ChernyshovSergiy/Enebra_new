@@ -40,6 +40,7 @@
                             <th>Название</th>
                             <th>Язык</th>
                             <th>Флаг</th>
+                            <th>Документы</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
@@ -51,6 +52,9 @@
                                 <td>{{ $country->getLanguage()}}</td>
                                 <td>
                                     <img src="{{ $country->getFlagImage() }}" alt="" width="30">
+                                </td>
+                                {{--<td>{{ $country->getDocument()}}</td>--}}
+                                <td>{{ $country->getIdDocumentsNames() }}</td>
                                 <td>
                                     <a href="{{route('countries.show', $country->id)}}" class="fa fa-eye"></a>
                                     <a href="{{route('countries.edit', $country->id)}}" class="fa fa-pencil"></a>

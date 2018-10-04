@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Country
  *
  * @property-read \App\Language $language
+ * * @property-read \Illuminate\Database\Eloquent\Collection|\App\Inf_id_document[] $id_documents
  * @property-read \App\Image $image
  * @mixin \Eloquent
  */
@@ -29,7 +30,7 @@ class Country extends Model
         return self::select('id')->where($language_id)->get();
     }
 
-    public function idDocuments()
+    public function id_documents()
     {
         return $this->belongsToMany(
             Inf_id_document::class,
@@ -46,7 +47,20 @@ class Country extends Model
 //        'language_id'
     ];
 
+    public static function add($fields)
+    {
+        $county = new static;
+        $county->fill($fields);
+        $county->save();
 
+        return $county;
+    }
+
+    public function edit($fields) //edit(change) post
+    {
+        $this->fill($fields);
+        $this->save();
+    }
 
     public function getLanguage()
     {
@@ -98,6 +112,22 @@ class Country extends Model
         }
         $this->language_id = $id;
         $this->save();
+    }
+
+    public function setIdDocuments($ids)
+    {
+        if ($ids == null) {
+            return;
+        }
+
+        $this->id_documents()->sync($ids);
+    }
+
+    public function getIdDocumentsNames()
+    {
+        return (!$this->id_documents->isEmpty())
+            ?   implode(', ', $this->id_documents->pluck('name')->all())
+            :   'Теги отсутствуют';
     }
 
 }

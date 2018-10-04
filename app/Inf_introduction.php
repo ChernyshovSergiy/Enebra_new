@@ -10,4 +10,29 @@ class Inf_introduction extends Model
     {
         return $this->hasOne(Language::class, 'id', 'language_id');
     }
+
+    protected $fillable = [
+        'title',
+        'sub_title',
+        'text',
+        'replica',
+        'conclusion',
+        'language_id'
+    ];
+
+    public function getLanguage()
+    {
+        return ($this->language != null)
+            ? $this->language->title
+            : 'don`t have language';
+    }
+
+    public function setLanguage($id)
+    {
+        if ($id == null){
+            return;
+        }
+        $this->language_id = $id;
+        $this->save();
+    }
 }

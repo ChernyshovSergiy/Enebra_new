@@ -43,5 +43,8 @@ Route::group([
             Route::resource('/images', 'ImagesController');
             Route::resource('/languages', 'LanguagesController');
             Route::resource('/countries', 'CountriesController');
+            Route::resource('/id_documents', 'InfIdDocumentsController');
+            Route::resource('/introduction_points', 'InfIntroductionPointsController');
+            Route::resource('/introductions', 'InfIntroductionsController');
         });
 });

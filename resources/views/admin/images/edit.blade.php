@@ -37,7 +37,7 @@
                             <label>Категория</label>
                             {{ Form::select('category_id',
                                 $image_categories,
-                                $image->getCategoryIdTitle(),
+                                $image->category_id,
                                 ['class' => 'form-control select2'])
                             }}
                         </div>

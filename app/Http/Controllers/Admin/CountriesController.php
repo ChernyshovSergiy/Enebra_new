@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Country;
 use App\Image;
+use App\Inf_id_document;
 use App\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,19 +21,23 @@ class CountriesController extends Controller
     {
         $language = Language::pluck('title', 'id')->all();
         $flag_image = Image::pluck('title', 'id')->all();
-        return view('admin.countries.create', compact('language', 'flag_image'));
+        $id_documents = Inf_id_document::pluck('name', 'id')->all();
+        return view('admin.countries.create', compact('language', 'flag_image', 'id_documents'));
     }
 
     public function store(Request $request)
     {
+//        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'language_id' => 'required',
-            'image_id' => 'required'
+            'image_id' => 'required',
+            'id_documents' => 'nullable'
         ]);
-        $country = Country::create($request->all());
+        $country = Country::add($request->all());
         $country->setLanguage($request->get('language_id'));
         $country->setFlagImage($request->get('image_id'));
+        $country->setIdDocuments($request->get('id_documents'));
 
         return redirect()->route('countries.index');
     }
@@ -47,7 +52,8 @@ class CountriesController extends Controller
         $country = Country::find($id);
         $language = Language::pluck('title', 'id')->all();
         $flag_image = Image::pluck('title', 'id')->all();
-        return view('admin.countries.edit', compact('country','language', 'flag_image'));
+        $id_documents = Inf_id_document::pluck('name', 'id')->all();
+        return view('admin.countries.edit', compact('country','language', 'flag_image', 'id_documents'));
     }
 
     /**
@@ -60,11 +66,13 @@ class CountriesController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'language_id' => 'required',
-            'image_id' => 'required'
+            'image_id' => 'required',
+            'id_documents' => 'nullable'
         ]);
         $country = Country::find($id);
         $country ->setLanguage($request->get('language_id'));
         $country->setFlagImage($request->get('image_id'));
+        $country->setIdDocuments($request->get('id_documents'));
         $country->update($request->all());
 
         return redirect()->route('countries.index');

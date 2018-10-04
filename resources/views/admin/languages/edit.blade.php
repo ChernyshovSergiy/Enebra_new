@@ -50,7 +50,7 @@
                             <label>Флаг</label>
                             {{ Form::select('flag_image_id',
                                 $flag_image,
-                                $language->getFlagImageIdTitle(),
+                                $language->flag_image_id,
                                 ['class' => 'form-control select2'])
                             }}
                         </div>

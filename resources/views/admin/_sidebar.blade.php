@@ -1,35 +1,60 @@
 
 <ul class="sidebar-menu" data-widget="tree">
     <li class="header">MAIN NAVIGATION</li>
-    <li class="active treeview">
+    <li>
         <a href="{{route('admin')}}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-    </span>
-        </a>
-        <ul class="treeview-menu">
-            <li class="active"><a href="{{route('admin')}}"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-            {{--<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>--}}
-        </ul>
-    </li>
-    <li>
-        <a href="{{route('languages.index')}}">
-            <i class="fa fa-language"></i> <span>Languages</span>
-            <span class="pull-right-container">
-      {{--<small class="label pull-right bg-red">3</small>--}}
-      {{--<small class="label pull-right bg-blue">17</small>--}}
-    </span>
-        </a>
-    </li>
-    <li>
-        <a href="{{route('countries.index')}}">
-            <i class="fa fa-flag"></i> <span>Countries</span>
             <span class="pull-right-container">
       {{--<small class="label pull-right bg-red">3</small>--}}
                 {{--<small class="label pull-right bg-blue">17</small>--}}
     </span>
         </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-image"></i>
+            <span>Images</span>
+            <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+    </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ route('image_categories.index') }}"><i class="fa fa-list-alt"></i> Image categories</a></li>
+            <li><a href="{{ route('images.index') }}"><i class="fa fa-image"></i> Images</a></li>
+            {{--<li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>--}}
+            {{--<li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>--}}
+        </ul>
+    </li>
+    {{--<li class="active treeview">--}}
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-pie-chart"></i> <span>Components</span>
+            <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+    </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{route('languages.index')}}"><i class="fa fa-language"></i> Languages</a></li>
+            <li><a href="{{route('id_documents.index')}}"><i class="fa fa-newspaper-o"></i> ID Documents</a></li>
+            <li><a href="{{route('countries.index')}}"><i class="fa fa-flag"></i> Countries</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-home"></i>
+            <span>Home Page</span>
+            {{--<span class="pull-right-container">--}}
+      {{--<span class="label label-primary pull-right">4</span>--}}
+    {{--</span>--}}
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{route('introduction_points.index')}}"><i class="fa fa-map-marker"></i> Introduction Points</a></li>
+            <li><a href="{{route('introductions.index')}}"><i class="fa fa-file-text"></i> Introduction</a></li>
+            {{--<li><a href="#"><i class="fa fa-info-circle"></i> INFORMATIVE PART</a></li>--}}
+            {{--<li><a href="#"><i class="fa fa-wrench"></i> TECHNOLOGY PART</a></li>--}}
+            {{--<li><a href="#"><i class="fa fa-heart"></i> ENEBRA VIDEOS PART</a></li>--}}
+            {{--<li><a href="#"><i class="fa  fa-rocket"></i> MOTIVATION PART</a></li>--}}
+        </ul>
     </li>
     <li class="treeview">
         <a href="{{route('video_collections.index')}}">
@@ -55,22 +80,7 @@
     {{--</span>--}}
         {{--</a>--}}
     {{--</li>--}}
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-image"></i>
-            <span>Images</span>
-            <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-    </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="{{ route('images.index') }}"><i class="fa fa-image"></i> Images</a></li>
-            <li><a href="{{ route('image_categories.index') }}"><i class="fa fa-list-alt"></i> Image categories</a></li>
 
-            {{--<li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>--}}
-            {{--<li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>--}}
-        </ul>
-    </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-laptop"></i>
