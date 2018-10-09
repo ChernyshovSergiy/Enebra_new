@@ -3,31 +3,31 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 class Inf_video_group extends Model
 {
-    use Sluggable;
-
     protected $fillable = [
-        'title', 'description', 'keywords', 'meta_desc', 'meta_id', 'language_id'
+        'title', 'slug', 'description', 'keywords', 'meta_desc', 'language_id'
     ];
-
-    protected $hidden = [
-        'slug'
-    ];
-
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
 
     public function language()
     {
-        return $this->belongsTo(Language::class, 'id', 'language_id');
+        return $this->belongsTo(Language::class, 'language_id', 'id');
+    }
+
+    public function getLanguage()
+    {
+        return ($this->language != null)
+            ? $this->language->title
+            : 'don`t have language';
+    }
+
+    public function setLanguage($id)
+    {
+        if ($id == null){
+            return;
+        }
+        $this->language_id = $id;
+        $this->save();
     }
 }

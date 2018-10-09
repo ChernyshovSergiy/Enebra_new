@@ -46,5 +46,11 @@ Route::group([
             Route::resource('/id_documents', 'InfIdDocumentsController');
             Route::resource('/introduction_points', 'InfIntroductionPointsController');
             Route::resource('/introductions', 'InfIntroductionsController');
+            Route::resource('/inf_plan_phases', 'InfPlanPhasesController');
+            Route::resource('/inf_plan_phase_sections', 'InfPlanPhaseSectionsController');
+            Route::resource('/inf_plan_phase_section_points', 'InfPlanPhaseSectionPointsController');
+            Route::resource('/inf_video_groups', 'InfVideoGroupsController');
+            Route::resource('/inf_video_group_sections', 'InfVideoGroupSectionsController');
+            Route::resource('/inf_videos', 'InfVideosController');
         });
 });

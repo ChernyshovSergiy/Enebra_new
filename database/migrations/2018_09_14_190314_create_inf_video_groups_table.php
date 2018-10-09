@@ -15,7 +15,6 @@ class CreateInfVideoGroupsTable extends Migration
             $table->text('description')->nullable();
             $table->string('keywords')->nullable();
             $table->text('meta_desc')->nullable();
-            $table->integer('meta_id')->nullable();
             $table->integer('language_id')->default(1);
             $table->timestamps();
         });

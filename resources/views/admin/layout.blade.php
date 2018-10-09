@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Blank Page</title>
+    <title>@lang('admin.admin_lte')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <style>
         table.table form
         {
@@ -27,7 +27,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -131,8 +131,8 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Sergiy Chernishov</span>
+                            <img src="{{ asset('img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">@lang('admin.author')</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -140,7 +140,7 @@
                                 <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Sergiy Chernishov - Web Developer
+                                    @lang('admin.author') - Web Developer
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -170,6 +170,21 @@
                             </li>
                         </ul>
                     </li>
+
+                    <!-- Languages: style can be found in dropdown.less -->
+                    <li class="bfh-selectbox bfh-languages" data-language="en_US" data-available="en_US,fr_CA,es_MX" data-flags="true">
+                        <input type="hidden" value="">
+                        <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
+                            <span class="bfh-selectbox-option input-medium" data-option=""></span>
+                            <b class="caret"></b>
+                        </a>
+                        <div class="bfh-selectbox-options">
+                            <div role="listbox">
+                                <ul role="option">
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -191,8 +206,8 @@
                     <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Sergiy Chernishov</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>@lang('admin.author')</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> @lang('admin.online')</a>
                 </div>
             </div>
             <!-- search form -->
