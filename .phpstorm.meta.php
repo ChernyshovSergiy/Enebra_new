@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-09-26 13:11:04.
+    * Generated on 2018-10-09 13:21:18.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -42,6 +42,9 @@ namespace PHPSTORM_META {
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
+        'laravellocalizationroutecache.cache' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsCacheCommand::class,
+        'laravellocalizationroutecache.clear' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsClearCommand::class,
+        'laravellocalizationroutecache.list' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsListCommand::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -183,6 +186,9 @@ namespace PHPSTORM_META {
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
+        'laravellocalizationroutecache.cache' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsCacheCommand::class,
+        'laravellocalizationroutecache.clear' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsClearCommand::class,
+        'laravellocalizationroutecache.list' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsListCommand::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -324,6 +330,9 @@ namespace PHPSTORM_META {
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
+        'laravellocalizationroutecache.cache' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsCacheCommand::class,
+        'laravellocalizationroutecache.clear' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsClearCommand::class,
+        'laravellocalizationroutecache.list' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsListCommand::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -465,6 +474,9 @@ namespace PHPSTORM_META {
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
+        'laravellocalizationroutecache.cache' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsCacheCommand::class,
+        'laravellocalizationroutecache.clear' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsClearCommand::class,
+        'laravellocalizationroutecache.list' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsListCommand::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -606,6 +618,9 @@ namespace PHPSTORM_META {
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
+        'laravellocalizationroutecache.cache' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsCacheCommand::class,
+        'laravellocalizationroutecache.clear' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsClearCommand::class,
+        'laravellocalizationroutecache.list' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsListCommand::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -747,6 +762,9 @@ namespace PHPSTORM_META {
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
+        'laravellocalizationroutecache.cache' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsCacheCommand::class,
+        'laravellocalizationroutecache.clear' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsClearCommand::class,
+        'laravellocalizationroutecache.list' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsListCommand::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -888,6 +906,9 @@ namespace PHPSTORM_META {
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
+        'laravellocalizationroutecache.cache' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsCacheCommand::class,
+        'laravellocalizationroutecache.clear' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsClearCommand::class,
+        'laravellocalizationroutecache.list' => \Mcamara\LaravelLocalization\Commands\RouteTranslationsListCommand::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,

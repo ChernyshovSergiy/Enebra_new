@@ -7,12 +7,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Listing Images
-                <small>it all images here</small>
+                @lang('admin.listing_images')
+                <small>@lang('admin.it_all_images_here')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Images</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li class="active">@lang('admin.images')</li>
             </ol>
         </section>
 
@@ -25,23 +25,23 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Листинг картинок</h3>
+                    <h3 class="box-title">@lang('admin.listing_images')</h3>
                     @include('admin.error')
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{ route('images.create') }}" class="btn btn-success">Добавить</a>
+                        <a href="{{ route('images.create') }}" class="btn btn-success">@lang('button.add')</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Название</th>
-                                <th>Категория</th>
-                                <th>Автор</th>
-                                <th>Картинка</th>
-                                <th>Действия</th>
+                                <th>@lang('column.id')</th>
+                                <th>@lang('column.name')</th>
+                                <th>@lang('column.category')</th>
+                                <th>@lang('column.author')</th>
+                                <th>@lang('column.image')</th>
+                                <th>@lang('column.action')</th>
                             </tr>
                         </thead>
                         <tbody>

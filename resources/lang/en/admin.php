@@ -34,5 +34,7 @@ return[
 
     'listing_videos'            => 'Listing Videos',
     'it_all_videos_here'	    => 'it all videos here',
+    'listing_images'	        => 'Listing Images',
+    'it_all_images_here'	    => 'it all images here',
 
 ];

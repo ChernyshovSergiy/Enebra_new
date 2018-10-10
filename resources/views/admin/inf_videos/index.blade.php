@@ -67,7 +67,7 @@
                                 <td>{{ $video->sort }}</td>
                                 <td>{{ $video->getLanguage()}}</td>
                                 <td>
-                                    <a href="{{route('inf_videos.show', $video->id)}}" class="fa fa-eye"></a>
+                                    {{--<a href="{{route('inf_videos.show', $video->id)}}" class="fa fa-eye"></a>--}}
                                     <a href="{{route('inf_videos.edit', $video->id)}}" class="fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['inf_videos.destroy', $video->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('Are you sure?') " type="submit" class="delete">
@@ -88,5 +88,4 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
 @endsection

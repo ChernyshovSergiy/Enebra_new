@@ -9,6 +9,7 @@ return[
     'text'                  => 'Text',
     'replica'               => 'Replica',
     'about_author'          => 'About author',
+    'author'                => 'Author',
     'duration_time'         => 'Duration time',
     'localization'          => 'Localization',
     'flag'                  => 'Flag',

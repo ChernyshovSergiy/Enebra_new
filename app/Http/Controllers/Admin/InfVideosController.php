@@ -8,13 +8,15 @@ use App\Inf_video;
 use App\Inf_video_group;
 use App\Inf_video_group_section;
 use App\Http\Controllers\Controller;
+use App\Language;
 
 class InfVideosController extends Controller
 {
     public function index()
     {
         $videos = Inf_video::all();
-        return view('admin.inf_videos.index',compact('videos'));
+        $languages = Language::all();
+        return view('admin.inf_videos.index',compact('videos', 'languages'));
     }
 
     public function create()

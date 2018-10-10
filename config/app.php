@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'ru',
+    'locale' => 'en',
     'locales' => ['en' => 'English', 'ru' => 'Russian', 'ua' => 'Ukraine'],
 
     /*
@@ -154,6 +154,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -195,6 +196,7 @@ return [
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,

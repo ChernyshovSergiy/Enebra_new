@@ -11,6 +11,9 @@
 |
 */
 
+
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,9 +32,16 @@ Route::get('/', function () {
 //    Route::resource('/subscribers', 'SubscribersController');
 //});
 
+//Route::get('locale/{locale?}', function ($locale){
+//    Session::put('locale', $locale);
+//    return redirect()->back();
+//});
+
 Route::group([
-    'prefix' => Config::set('routeLang')
-    ], function (){
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+], function()
+{
     Route::get('/', function () { return view('welcome');});
         Route::group([
             'prefix'    => 'admin',

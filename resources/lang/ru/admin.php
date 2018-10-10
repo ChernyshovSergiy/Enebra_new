@@ -34,5 +34,7 @@ return[
 
     'listing_videos'            => 'Список Видео',
     'it_all_videos_here'	    => 'здесь собраны все видео',
+    'listing_images'	        => 'Список Картинок',
+    'it_all_images_here'	    => 'здесь собраны все картинки',
 
 ];

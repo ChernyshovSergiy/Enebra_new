@@ -9,6 +9,7 @@ return[
     'text'                  => 'Текст',
     'replica'               => 'Цитата',
     'about_author'          => 'О Авторе',
+    'author'                => 'Автор',
     'duration_time'         => 'Длительность',
     'localization'          => 'Локализация',
     'flag'                  => 'Флаг',

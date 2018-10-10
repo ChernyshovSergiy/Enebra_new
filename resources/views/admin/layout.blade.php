@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">--}}
     <style>
         table.table form
         {
@@ -172,19 +173,24 @@
                     </li>
 
                     <!-- Languages: style can be found in dropdown.less -->
-                    <li class="bfh-selectbox bfh-languages" data-language="en_US" data-available="en_US,fr_CA,es_MX" data-flags="true">
-                        <input type="hidden" value="">
-                        <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-                            <span class="bfh-selectbox-option input-medium" data-option=""></span>
-                            <b class="caret"></b>
-                        </a>
-                        <div class="bfh-selectbox-options">
-                            <div role="listbox">
-                                <ul role="option">
+
+                    <li class="dropdown lang">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">@lang('nav.language'):
+                            <img src="{{ asset('uploads/flags_svg/'.LaravelLocalization::getCurrentLocale().'.svg') }}" alt="" width="20">  {{ LaravelLocalization::getCurrentLocaleNative() }}</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown" >
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                @if(LaravelLocalization::getCurrentLocale() != $localeCode)
+                                <ul>
+                                    <a class="img-lg" style="height: 35px; width: 110px;" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        <img src="{{ asset('uploads/flags_svg/'.$localeCode.'.svg') }}" alt="" width="30">
+                                        {{ $properties['native'] }}
+                                    </a>
                                 </ul>
-                            </div>
+                                @endif
+                            @endforeach
                         </div>
                     </li>
+
                     <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -237,7 +243,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.3.7
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com/">Almsaeed Studio</a>.</strong> All rights
+        <strong>Copyright &copy; 2014-2018 <a href="http://almsaeedstudio.com/">Almsaeed Studio</a>.</strong> All rights
         reserved.
     </footer>
 
@@ -438,6 +444,8 @@
 </div>
 <!-- ./wrapper -->
 
+
+
 <script src="{{asset('js/admin.js')}}"></script>
 <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('/plugins/ckfinder/ckfinder.js') }}"></script>
@@ -447,6 +455,16 @@
         CKFinder.setupCKEditor( editor);
     })
 </script>
+{{--<script>--}}
+    {{--$(document).ready(function() {--}}
+        {{--$('#example1').DataTable( {--}}
+            {{--"language": {--}}
+                {{--"url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Russian.json"--}}
+            {{--}--}}
+        {{--} );--}}
+    {{--} );--}}
+{{--</script>--}}
+
 
 </body>
 
