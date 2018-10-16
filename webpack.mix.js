@@ -40,7 +40,7 @@ mix.scripts([
     'resources/assets/admin/plugins/iCheck/icheck.min.js',
     'resources/assets/admin/dist/js/app.min.js',
     'resources/assets/admin/dist/js/demo.js',
-    'resources/assets/admin/dist/js/scripts.js',
+    'resources/assets/admin/dist/js/scripts.js'
 ], 'public/js/admin.js');
 
 mix.copy('resources/assets/admin/bootstrap/fonts', 'public/fonts');
@@ -49,27 +49,61 @@ mix.copy('resources/assets/admin/dist/img', 'public/img');
 mix.copy('resources/assets/admin/plugins/iCheck/minimal/blue.png', 'public/css');
 
 mix.styles([
-    'resources/assets/front/css/bootstrap.min.css',
-    'resources/assets/front/css/font-awesome.min.css',
-    'resources/assets/front/css/animate.min.css',
-    'resources/assets/front/css/owl.carousel.css',
-    'resources/assets/front/css/owl.theme.css',
-    'resources/assets/front/css/owl.transitions.css',
-    'resources/assets/front/css/style.css',
-    'resources/assets/front/css/responsive.css'
-],'public/css/front.css');
+    'resources/assets/frontend/css/bootstrap.css',
+    'resources/assets/frontend/css/jquery.kwicks.css',
+    'resources/assets/frontend/css/hover-min.css',
+    'resources/assets/frontend/css/owl.carousel.css',
+    'resources/assets/frontend/css/toastr.min.css',
+    'resources/assets/frontend/css/style.css',
+    'node_modules/vegas/dist/vegas.css'
+],'public/css/frontend.css');
+
+// mix.styles([
+//     'resources/assets/front/css/bootstrap.min.css',
+//     'resources/assets/front/css/font-awesome.min.css',
+//     'resources/assets/front/css/animate.min.css',
+//     'resources/assets/front/css/owl.carousel.css',
+//     'resources/assets/front/css/owl.theme.css',
+//     'resources/assets/front/css/owl.transitions.css',
+//     'resources/assets/front/css/style.css',
+//     'resources/assets/front/css/responsive.css'
+// ],'public/css/front.css');
 
 mix.scripts([
-    'resources/assets/front/js/jquery-1.11.3.min.js',
-    'resources/assets/front/js/bootstrap.min.js',
-    'resources/assets/front/js/owl.carousel.min.js',
-    'resources/assets/front/js/jquery.stickit.min.js',
-    'resources/assets/front/js/menu.js',
-    'resources/assets/front/js/scripts.js'
-], 'public/js/front.js');
+    'resources/assets/frontend/js/jquery-ui.js',
+    'resources/assets/frontend/js/jquery.backstretch.js',
+    'resources/assets/frontend/js/parallax.min.js',
+    'resources/assets/frontend/js/jquery.kwicks.min.js',
+    'resources/assets/frontend/js/bootstrap.min.js',
+    'resources/assets/frontend/js/owl.carousel.min.js',
+    'resources/assets/frontend/js/tinymce.min.js',
+    'resources/assets/frontend/js/toastr.min.js',
+    'resources/assets/frontend/js/script.js',
+    'resources/assets/frontend/js/functions.js',
+    'resources/assets/frontend/js/scripts.js',
+    'resources/assets/frontend/js/shared.js',
+    'resources/assets/frontend/js/signup.js',
+    'node_modules/vegas/dist/vegas.js'
+], 'public/js/frontend.js');
 
+
+// mix.scripts([
+//     'resources/assets/front/js/jquery-1.11.3.min.js',
+//     'resources/assets/front/js/bootstrap.min.js',
+//     'resources/assets/front/js/owl.carousel.min.js',
+//     'resources/assets/front/js/jquery.stickit.min.js',
+//     'resources/assets/front/js/menu.js',
+//     'resources/assets/front/js/scripts.js'
+// ], 'public/js/front.js');
+
+mix.copy('resources/assets/frontend/fonts', 'public/fonts');
 mix.copy('resources/assets/front/fonts', 'public/fonts');
+mix.copy('resources/assets/frontend/img', 'public/img');
 mix.copy('resources/assets/front/images', 'public/images');
+mix.copy('resources/assets/frontend/favicon.ico', 'public/favicon.ico');
+mix.copy('resources/assets/frontend/robots.txt', 'public/robots.txt');
+mix.copy('node_modules/vegas/dist/overlays', 'public/overlays');
+// mix.copy('resources/assets/frontend/js/functions.js', 'public/js/functions.js');
 
 mix.sourceMaps();
 mix.version();

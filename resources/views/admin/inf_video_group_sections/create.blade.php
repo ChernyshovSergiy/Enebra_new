@@ -7,13 +7,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Add new Video Group Section
-                <small>it add video group section here</small>
+                @lang('admin.add_video_group_section')
+                <small>@lang('admin.it_add_video_group_section_here')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{route('inf_video_group_sections.index')}}"><i class="fa fa-file-text"></i> Listing Video Groups</a></li>
-                <li class="active">Add Video Group Section</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li><a href="{{route('inf_video_group_sections.index')}}"><i class="fa fa-file-text"></i> @lang('admin.listing_video_group_sections')</a></li>
+                <li class="active">@lang('admin.add_video_group_section')</li>
             </ol>
         </section>
 
@@ -23,18 +23,17 @@
         <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Добавляем секцию в видео группу</h3>
+                    <h3 class="box-title">@lang('admin.add_video_group_section')</h3>
                     @include('admin.error')
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Название</label>
+                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
                             <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title') }}">
-                            {{--<p class="help-block">Name format!!! -> Паспорт</p>--}}
                         </div>
                         <div class="form-group">
-                            <label>Видео группа</label>
+                            <label>@lang('column.video_group')</label>
                             {{ Form::select('video_group_id',
                                 $video_group,
                                 null,
@@ -45,8 +44,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{route('inf_video_group_sections.index')}}" class="btn btn-default">Назад</a>
-                    <button class="btn btn-success pull-right">Добавить</button>
+                    <a href="{{route('inf_video_group_sections.index')}}" class="btn btn-default">@lang('button.back')</a>
+                    <button class="btn btn-success pull-right">@lang('button.add')</button>
                 </div>
                 <!-- /.box-footer-->
             </div>

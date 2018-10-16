@@ -14,35 +14,18 @@
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
-//Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware' => 'admin'], function (){
-//    Route::get('/', 'DashboardController@index');
-//    Route::resource('/categories', 'CategoriesController');
-//    Route::resource('/tags', 'TagsController');
-//    Route::resource('/users', 'UsersController');
-//    Route::resource('/posts', 'PostsController');
-//    Route::get('/comments', 'CommentsController@index');
-//    Route::get('/comments/toggle/{id}', 'CommentsController@toggle');
-//    Route::delete('/comments/{id}/destroy', 'CommentsController@destroy')->name('comments.destroy');
-//    Route::resource('/subscribers', 'SubscribersController');
-//});
-
-//Route::get('locale/{locale?}', function ($locale){
-//    Session::put('locale', $locale);
-//    return redirect()->back();
-//});
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function()
 {
-    Route::get('/', function () { return view('welcome');});
+        Route::group([
+            'namespace' => 'Information'
+        ], function (){
+            Route::get('/', 'HomeController@index');
+        });
+
         Route::group([
             'prefix'    => 'admin',
             'namespace' => 'Admin'
@@ -62,5 +45,7 @@ Route::group([
             Route::resource('/inf_video_groups', 'InfVideoGroupsController');
             Route::resource('/inf_video_group_sections', 'InfVideoGroupSectionsController');
             Route::resource('/inf_videos', 'InfVideosController');
+            Route::resource('/inf_menus', 'MenusController');
+            Route::get('/inf_menus/toggle/{id}', 'MenusController@toggle');
         });
 });

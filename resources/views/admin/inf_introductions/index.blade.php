@@ -7,12 +7,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Listing Introduction
-                <small>the introduction here</small>
+                @lang('admin.listing_introduction')
+                <small>@lang('admin.the_introduction_here')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Introduction</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li class="active">@lang('admin.introduction')</li>
             </ol>
         </section>
 
@@ -24,25 +24,25 @@
         <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Раздел Ведение для домашней страницы</h3>
+                    <h3 class="box-title">@lang('admin.introduction')</h3>
                     @include('admin.error')
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{ route('introductions.create') }}" class="btn btn-success">Добавить</a>
+                        <a href="{{ route('introductions.create') }}" class="btn btn-success">@lang('button.add')</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Заголовок</th>
-                            <th>Подзаголовок</th>
-                            <th>Основной текст</th>
-                            <th>Цитата</th>
-                            <th>Заключение</th>
-                            <th>Язык</th>
-                            <th>Действия</th>
+                            <th>@lang('column.id')</th>
+                            <th>@lang('column.title')</th>
+                            <th>@lang('column.sub_title')</th>
+                            <th>@lang('column.text')</th>
+                            <th>@lang('column.replica')</th>
+                            <th>@lang('column.conclusion')</th>
+                            <th>@lang('column.language')</th>
+                            <th>@lang('column.action')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -56,7 +56,7 @@
                                 <td>{!! $introduction->conclusion !!}</td>
                                 <td>{{ $introduction->getLanguage()}}</td>
                                 <td>
-                                    <a href="{{route('introductions.show', $introduction->id)}}" class="fa fa-eye"></a>
+                                    {{--<a href="{{route('introductions.show', $introduction->id)}}" class="fa fa-eye"></a>--}}
                                     <a href="{{route('introductions.edit', $introduction->id)}}" class="fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['introductions.destroy', $introduction->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">

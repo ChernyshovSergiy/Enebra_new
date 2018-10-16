@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $phase_id
  * @property int|null $language_id
  * @property int|null $section_id
+ * @property int $is_done
  * @property-read \App\Inf_plan_phase $phase
  * @property-read \App\Language $language
  * @property-read \App\Inf_plan_phase_section $section
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereIsDone($value)
  */
 class Inf_plan_section_point extends Model
 {
+    const IS_NOT_DONE = 0;
+    const IS_DONE = 1;
+
     public function language()
     {
         return $this->belongsTo(Language::class, 'language_id', 'id');
@@ -85,5 +90,27 @@ class Inf_plan_section_point extends Model
         }
         $this->section_id = $id;
         $this->save();
+    }
+
+    public function setDone()
+    {
+        $this->is_done = Inf_plan_section_point::IS_DONE;
+        $this->save();
+    }
+
+    public function setNotDone()
+    {
+        $this->is_done = Inf_plan_section_point::IS_NOT_DONE;
+        $this->save();
+    }
+
+    public function toggleDone($value)
+    {
+        if ($value == null)
+        {
+            return $this->setNotDone();
+        }
+
+        return $this->setDone();
     }
 }

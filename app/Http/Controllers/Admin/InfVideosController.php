@@ -23,7 +23,7 @@ class InfVideosController extends Controller
     {
         $video_group = Inf_video_group::pluck('title', 'id')->all();
         $video_group_section = Inf_video_group_section::pluck('title', 'id')->all();
-        $image = Image::pluck('title', 'id')->all();
+        $image = Image::where( 'category_id','=', 2 )->pluck('title', 'id');
 
         return view('admin.inf_videos.create', compact('video_group', 'video_group_section', 'image'));
     }
@@ -49,7 +49,7 @@ class InfVideosController extends Controller
         $video = Inf_video::find($id);
         $video_group = Inf_video_group::pluck('title', 'id')->all();
         $video_group_section = Inf_video_group_section::pluck('title', 'id')->all();
-        $image = Image::pluck('title', 'id')->all();
+        $image = Image::where( 'category_id','=', 2 )->pluck('title', 'id')->all();
 
         return view('admin.inf_videos.edit', compact('video','video_group_section', 'video_group', 'image'));
     }

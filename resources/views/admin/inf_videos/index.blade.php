@@ -37,7 +37,7 @@
                         <thead>
                         <tr>
                             <th>@lang('column.id')</th>
-                            <th>@lang('column.title')</th>
+                            <th>@lang('column.object_name')</th>
                             <th>@lang('column.description')</th>
                             <th>@lang('column.about_author')</th>
                             <th>@lang('column.link')</th>

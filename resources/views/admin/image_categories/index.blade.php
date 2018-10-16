@@ -7,12 +7,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Listing Image Category
-                <small>it all image categories</small>
+                @lang('admin.listing_image_category')
+                <small>@lang('admin.it_all_image_categories')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Image Categories</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li class="active">@lang('admin.image_categories')</li>
             </ol>
         </section>
 
@@ -22,19 +22,19 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Listing Image Categories</h3>
+                    <h3 class="box-title">@lang('admin.listing_image_category')</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{ route('image_categories.create') }}" class="btn btn-success">Добавить</a>
+                        <a href="{{ route('image_categories.create') }}" class="btn btn-success">@lang('button.add')</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Название</th>
-                            <th>Действия</th>
+                            <th>@lang('column.id')</th>
+                            <th>@lang('column.name')</th>
+                            <th>@lang('column.action')</th>
                         </tr>
                         </thead>
                         <tbody>

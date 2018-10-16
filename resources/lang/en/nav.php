@@ -9,7 +9,7 @@
 
 			'community'				=> 'Community',
 
-			'participiants'			=> 'Participants',
+			'participants'			=> 'Participants',
 
 			'publications'			=> 'Publications',
 

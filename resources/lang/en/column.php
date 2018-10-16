@@ -47,8 +47,10 @@ return[
     'birth_year'            => 'Birth year',
     'phone'                 => 'Phone',
     'document_id'           => 'Document ID',
+    'id_documents'          => 'Name of Documents',
     'login'                 => 'Login',
     'password'              => 'Password',
+    'done'                  => 'Done',
     'avatar'                => 'Avatar',
     'avatar_id'             => 'Avatar ID',
     'document_number'       => '№ Document',
@@ -59,6 +61,7 @@ return[
     'if_desc'               => 'If_desc',
     'sub_title'             => 'Sub_title',
     'name'                  => 'Name',
+    'object_name'           => 'Name',
     'first_name'            => 'First name',
     'first_name_en'         => 'First name EN',
     'last_name'             => 'Last name',
@@ -81,5 +84,8 @@ return[
     'user_id'	            => 'User_id',
     'category'	            => 'Category',
     'category_id'	        => 'Category_id',
+    'is_active'	            => 'Active',
+    'url'	                => 'Url',
+    'parent'	            => 'Parent',
 
 ];

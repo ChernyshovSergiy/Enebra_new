@@ -9,7 +9,7 @@
 
 			'community'				=> 'Сообщество',
 
-			'participiants'			=> 'Участники',
+			'participants'			=> 'Участники',
 
 			'publications'			=> 'Публикации',
 

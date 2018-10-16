@@ -7,13 +7,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Add Video
-                <small>it add video here</small>
+                @lang('admin.add_video')
+                <small>@lang('admin.it_add_video_here')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{route('inf_videos.index')}}"><i class="fa fa-file-text"></i> Listing Videos</a></li>
-                <li class="active">Add Video</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li><a href="{{route('inf_videos.index')}}"><i class="fa fa-file-text"></i> @lang('admin.listing_videos')</a></li>
+                <li class="active">@lang('admin.add_video')</li>
             </ol>
         </section>
 
@@ -23,39 +23,38 @@
         <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Добавляем видео</h3>
+                    <h3 class="box-title">@lang('admin.add_video')</h3>
                     @include('admin.error')
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Название</label>
+                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
                             <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title') }}">
-                            <p class="help-block">Name format!!! -> Home</p>
+                            <p class="help-block">@lang('admin.format_video_name')</p>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Описание</label>
+                            <label for="exampleInputEmail1">@lang('column.description')</label>
                             <textarea name="description" id="" cols="80" rows="10" class="form-control">{{old('description')}}</textarea>
-                            <p class="help-block">Name format!!! -> text</p>
+                            <p class="help-block">@lang('admin.introduction_text_format')</p>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Об Авторах</label>
+                            <label for="exampleInputEmail1">@lang('column.about_author')</label>
                             <textarea name="about_author" id="" cols="80" rows="10" class="form-control">{{old('about_author')}}</textarea>
-                            <p class="help-block">Name format!!! -> text</p>
+                            <p class="help-block">@lang('admin.introduction_text_format')</p>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Ссылка</label>
+                            <label for="exampleInputEmail1">@lang('column.link')</label>
                             <input type="text" name="link" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('link') }}">
-                            {{--<textarea name="link" id="" cols="80" rows="10" class="form-control">{{old('link')}}</textarea>--}}
-                            <p class="help-block">Name format!!! -> text</p>
+                            <p class="help-block">@lang('admin.introduction_text_format')</p>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Продолжительность</label>
+                            <label for="exampleInputEmail1">@lang('column.duration_time')</label>
                             <input type="text" name="duration_time" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('duration_time') }}">
-                            <p class="help-block">Name format!!! -> Home</p>
+                            <p class="help-block">@lang('admin.format_video_duration')</p>
                         </div>
                         <div class="form-group">
-                            <label>Видео Группа</label>
+                            <label>@lang('column.video_group')</label>
                             {{ Form::select('video_group_id',
                                 $video_group,
                                 null,
@@ -63,7 +62,7 @@
                             }}
                         </div>
                         <div class="form-group">
-                            <label>Секция</label>
+                            <label>@lang('column.section')</label>
                             {{ Form::select('video_group_section_id',
                                 $video_group_section,
                                 null,
@@ -71,7 +70,7 @@
                             }}
                         </div>
                         <div class="form-group">
-                            <label>Картинка</label>
+                            <label>@lang('column.image')</label>
                             {{ Form::select('image_id',
                                 $image,
                                 null,
@@ -79,9 +78,9 @@
                             }}
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Сортировки</label>
+                            <label for="exampleInputEmail1">@lang('column.sort')</label>
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('sort') }}">
-                            <p class="help-block">Name format!!! -> 1</p>
+                            <p class="help-block">@lang('admin.introduction_sort_format')</p>
                         </div>
                         {{--<div class="form-group">--}}
                             {{--<label>Язык</label>--}}
@@ -95,8 +94,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{route('inf_videos.index')}}" class="btn btn-default">Назад</a>
-                    <button class="btn btn-success pull-right">Добавить</button>
+                    <a href="{{route('inf_videos.index')}}" class="btn btn-default">@lang('button.back')</a>
+                    <button class="btn btn-success pull-right">@lang('button.add')</button>
                 </div>
                 <!-- /.box-footer-->
             </div>

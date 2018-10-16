@@ -6,12 +6,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Video Collections Pages
-            <small>it all pages with video information's</small>
+            @lang('admin.video_collection_pages')
+            <small>@lang('admin.it_all_video_pages_here')</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Video Collections</li>
+            <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+            <li class="active">@lang('admin.video_collection_pages')</li>
         </ol>
     </section>
 
@@ -25,25 +25,25 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Листинг Видео Коллекций</h3>
+                <h3 class="box-title">@lang('admin.video_collection_pages')</h3>
                 @include('admin.error')
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="form-group">
-                    <a href="{{route('video_collections.create')}}" class="btn btn-success">Добавить коллекцию</a>
+                    <a href="{{route('video_collections.create')}}" class="btn btn-success">@lang('button.add')</a>
                 </div>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Название</th>
-                            <th>Описание</th>
-                            <th>Ключевые Слова</th>
-                            <th>Мета Описание</th>
-                            <th>Мета ID</th>
-                            <th>Language</th>
-                            <th>Действия</th>
+                            <th>@lang('column.id')</th>
+                            <th>@lang('column.object_name')</th>
+                            <th>@lang('column.description')</th>
+                            <th>@lang('column.keywords')</th>
+                            <th>@lang('column.meta_desc')</th>
+                            <th>@lang('column.meta_id')</th>
+                            <th>@lang('column.language')</th>
+                            <th>@lang('column.action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +53,7 @@
                             <td>{{$inf_video_group->title}}</td>
                             <td>{!! str_limit($inf_video_group->description, 200) !!}</td>
                             <td>{{$inf_video_group->keywords}}</td>
-                            <td>{{ str_limit($inf_video_group->meta_desc, 20) }} </td>
+                            <td>{!! str_limit($inf_video_group->meta_desc, 20) !!} </td>
                             <td>{{$inf_video_group->meta_id}}</td>
                             <td>{{isset($inf_video_group->language_id->title) ? $inf_video_group->language_id->title : '' }}</td>
 

@@ -7,13 +7,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Add Images
-            <small>it add image here</small>
+            @lang('admin.add_image')
+            <small>@lang('admin.it_add_image_here')</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="{{route('images.index')}}"><i class="fa fa-image"></i> Listing Images</a></li>
-            <li class="active">Add Images</li>
+            <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+            <li><a href="{{route('images.index')}}"><i class="fa fa-image"></i> @lang('admin.listing_images')</a></li>
+            <li class="active">@lang('admin.add_image')</li>
         </ol>
     </section>
 
@@ -23,18 +23,18 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Добавляем картинку</h3>
+                <h3 class="box-title">@lang('admin.add_image')</h3>
                 @include('admin.error')
             </div>
             <div class="box-body">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Название</label>
+                        <label for="exampleInputEmail1">@lang('column.name')</label>
                         <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title') }}">
                     </div>
 
                     <div class="form-group">
-                        <label>Категория</label>
+                        <label>@lang('column.category')</label>
                         {{ Form::select('category_id',
                             $image_categories,
                             null,
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Автор</label>
+                        <label>@lang('column.author')</label>
                         {{ Form::select('user_id',
                             $users,
                             null,
@@ -52,11 +52,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputFile">Картинка</label>
+                        <label for="exampleInputFile">@lang('column.image')</label>
                         <input type="file" name="image" id="exampleInputFile">
 
-                        <p class="help-block">Image format!!! ('jpg', 'jpeg', 'png', 'gif', 'bmp', or 'svg')
-                            <br>Warning svg format mast be have specific header: <br>
+                        <p class="help-block">@lang('admin.image_format')
+                            <br>@lang('admin.warning_svg')<br>
                             {{ "<".'?xml version="1.0" encoding="UTF-8" standalone="no"?'.">" }}
                         </p>
                     </div>
@@ -64,8 +64,8 @@
             </div>
              <!-- /.box-body -->
             <div class="box-footer">
-                <a href="{{route('images.index')}}" class="btn btn-default">Назад</a>
-                <button class="btn btn-success pull-right">Добавить</button>
+                <a href="{{route('images.index')}}" class="btn btn-default">@lang('button.back')</a>
+                <button class="btn btn-success pull-right">@lang('button.add')</button>
             </div>
             <!-- /.box-footer-->
         </div>

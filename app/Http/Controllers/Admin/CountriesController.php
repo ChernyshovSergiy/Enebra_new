@@ -20,14 +20,13 @@ class CountriesController extends Controller
     public function create()
     {
         $language = Language::pluck('title', 'id')->all();
-        $flag_image = Image::pluck('title', 'id')->all();
+        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
         $id_documents = Inf_id_document::pluck('name', 'id')->all();
         return view('admin.countries.create', compact('language', 'flag_image', 'id_documents'));
     }
 
     public function store(Request $request)
     {
-//        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'language_id' => 'required',
@@ -51,7 +50,7 @@ class CountriesController extends Controller
     {
         $country = Country::find($id);
         $language = Language::pluck('title', 'id')->all();
-        $flag_image = Image::pluck('title', 'id')->all();
+        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
         $id_documents = Inf_id_document::pluck('name', 'id')->all();
         return view('admin.countries.edit', compact('country','language', 'flag_image', 'id_documents'));
     }

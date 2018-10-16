@@ -7,12 +7,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Listing Video Group Sections
-                <small>it all video group sections here</small>
+                @lang('admin.listing_video_group_sections')
+                <small>@lang('admin.it_all_video_group_sections_here')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Video Group Sections</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li class="active">@lang('admin.listing_video_group_sections')</li>
             </ol>
         </section>
 
@@ -24,22 +24,22 @@
         <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Листинг секций для видео групп</h3>
+                    <h3 class="box-title">@lang('admin.listing_video_group_sections')</h3>
                     @include('admin.error')
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{ route('inf_video_group_sections.create') }}" class="btn btn-success">Добавить</a>
+                        <a href="{{ route('inf_video_group_sections.create') }}" class="btn btn-success">@lang('button.add')</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Название</th>
-                            <th>Видео группа</th>
-                            <th>Язык</th>
-                            <th>Действия</th>
+                            <th>@lang('column.id')</th>
+                            <th>@lang('column.object_name')</th>
+                            <th>@lang('column.video_group')</th>
+                            <th>@lang('column.language')</th>
+                            <th>@lang('column.action')</th>
                         </tr>
                         </thead>
                         <tbody>

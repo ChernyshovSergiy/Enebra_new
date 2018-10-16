@@ -32,6 +32,7 @@ class InfPlanPhaseSectionPointsController extends Controller
         $plan_phase_section_points->setPhase($request->get('language_id'));
         $plan_phase_section_points->setSection($request->get('phase_id'));
         $plan_phase_section_points->setLanguage($request->get('section_id'));
+        $plan_phase_section_points->toggleDone($request->get('is_done'));
 
         return redirect()->route('inf_plan_phase_section_points.index');
     }
@@ -58,6 +59,7 @@ class InfPlanPhaseSectionPointsController extends Controller
         $plan_phase_section_point->setPhase($request->get('phase_id'));
         $plan_phase_section_point->setSection($request->get('section_id'));
         $plan_phase_section_point->setLanguage($request->get('language_id'));
+        $plan_phase_section_point->toggleDone($request->get('is_done'));
         $plan_phase_section_point->update($request->all());
 
         return redirect()->route('inf_plan_phase_section_points.index');

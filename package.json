@@ -26,6 +26,7 @@
         "ajv-keywords": "^3.2.0",
         "datatables": "^1.10.18",
         "imagemin": "^5.3.1",
-        "pngquant-bin": "^5.0.0"
+        "pngquant-bin": "^5.0.0",
+        "vegas": "^2.4.3"
     }
 }

@@ -7,13 +7,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Edit Phase Section in the Plan
-                <small>it edit phase section in active plan here</small>
+                @lang('admin.edit_plan_phase_sec')
+                <small>@lang('admin.the_edit_plan_phase_sec_here')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{route('inf_plan_phase_sections.index')}}"><i class="fa fa-map-signs"></i> Listing Plan Phases</a></li>
-                <li class="active">Edit Phase Section in the Plan</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li><a href="{{route('inf_plan_phase_sections.index')}}"><i class="fa fa-map-signs"></i> @lang('admin.listing_plan_phases_sec')</a></li>
+                <li class="active">@lang('admin.edit_plan_phase_sec')</li>
             </ol>
         </section>
 
@@ -23,20 +23,19 @@
         <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Изменяем направление в этапе плана действий</h3>
+                    <h3 class="box-title">@lang('admin.edit_plan_phase_sec')</h3>
                     @include('admin.error')
                 </div>
                 <div class="box-body">
                     <div class="col-md-6">
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Название</label>
+                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
                             <input type="text" name="sub_title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $plan_phase_section->sub_title }}">
-                            {{--<p class="help-block">Name format!!! -> Україна</p>--}}
                         </div>
 
                         <div class="form-group">
-                            <label>Язык</label>
+                            <label>@lang('column.language')</label>
                             {{ Form::select('language_id',
                                 $language,
                                 $plan_phase_section->language_id,
@@ -47,8 +46,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{route('inf_plan_phase_sections.index')}}" class="btn btn-default">Назад</a>
-                    <button class="btn btn-warning pull-right">Изменить</button>
+                    <a href="{{route('inf_plan_phase_sections.index')}}" class="btn btn-default">@lang('button.back')</a>
+                    <button class="btn btn-warning pull-right">@lang('button.edit')</button>
                 </div>
                 <!-- /.box-footer-->
             </div>

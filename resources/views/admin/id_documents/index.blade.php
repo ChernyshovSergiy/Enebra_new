@@ -7,12 +7,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Listing ID Documents
-                <small>it all documents here</small>
+                @lang('admin.listing_id_documents')
+                <small>@lang('admin.it_all_documents_here')</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">ID Documents</li>
+                <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> @lang('admin.home')</a></li>
+                <li class="active">@lang('admin.id_documents')</li>
             </ol>
         </section>
 
@@ -25,21 +25,21 @@
         <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Листинг документов удостоверяющих личность</h3>
+                    <h3 class="box-title">@lang('admin.listing_id_documents')</h3>
                     @include('admin.error')
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{ route('id_documents.create') }}" class="btn btn-success">Добавить</a>
+                        <a href="{{ route('id_documents.create') }}" class="btn btn-success">@lang('button.add')</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Название</th>
-                            <th>Язык</th>
-                            <th>Действия</th>
+                            <th>@lang('column.id')</th>
+                            <th>@lang('column.object_name')</th>
+                            <th>@lang('column.language')</th>
+                            <th>@lang('column.action')</th>
                         </tr>
                         </thead>
                         <tbody>

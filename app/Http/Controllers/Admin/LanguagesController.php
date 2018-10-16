@@ -17,7 +17,7 @@ class LanguagesController extends Controller
 
     public function create()
     {
-        $flag_image = Image::pluck('title', 'id')->all();
+        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
         return view('admin.languages.create', compact('flag_image'));
     }
 
@@ -43,7 +43,7 @@ class LanguagesController extends Controller
     public function edit($id)
     {
         $language = Language::find($id);
-        $flag_image = Image::pluck('title', 'id')->all();
+        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
         return view('admin.languages.edit', compact('language', 'flag_image'));
     }
 
