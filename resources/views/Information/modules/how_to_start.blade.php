@@ -7,7 +7,7 @@
 
         <a class="navbar-brand hidden-1920 show-820" href="/">
 
-            <img class="img-responsive" src="{{ asset( 'img/logo.png') }}"/>
+            <img class="img-responsive" src="{{ asset( 'img/logo-f.png') }}"/>
 
             <div class="logo-text">
 

@@ -8,7 +8,7 @@
 
                 <a class="navbar-brand hidden-820" href="/">
 
-                    <img class="img-responsive" src="{{asset( 'img/logo.png' ) }}"/>
+                    <img class="img-responsive" src="{{asset( 'img/logo-f.png' ) }}"/>
 
                     <div class="logo-text">
 
@@ -36,6 +36,7 @@
 
             </div>
 
+        <!-- Navigation menu -->
             @if($myNav)
 
                 <div class="navbar-collapse collapse col-sm-4">
@@ -45,84 +46,7 @@
                 </div>
 
             @endif
-
-            {{--<div class="navbar-collapse collapse col-sm-4">--}}
-
-                {{--<ul class="nav navbar-nav custom-menu">--}}
-
-                    {{--<li class="home hidden-820 "><a href="{{asset( '/' ) }}"><span></span></a></li>--}}
-
-                    {{--<li class="dropdown">--}}
-                        {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-chevron-down"></span>--}}
-                        {{--</a>--}}
-                        {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">@lang('nav.about') <span class="glyphicon glyphicon-chevron-down"></span>--}}
-                        {{--</a>--}}
-
-                        {{--<ul class="dropdown-menu">--}}
-                        {{----}}
-
-                            {{--<li><a href="/#scroll-introduction" onclick="scroll_to('scroll-introduction')">@lang('app.introduction')</a>--}}
-
-                            {{--@foreach( $locale -> pages as $page )--}}
-
-                                {{--<li><a href="{{ asset( 'information/' . $page -> slug ) }}">{{ $page -> title}}</a></li>--}}
-
-                            {{--@endforeach--}}
-
-                            {{--<li class = "dropdown-submenu"><a tabindex="-1" href="/#scroll-video" onclick="scroll_to('scroll-video')">@lang('nav.video') <span class="glyphicon glyphicon-chevron-right"></span></a>--}}
-
-                                {{--<ul class="dropdown-menu" role = "menu">--}}
-
-                                    {{--@foreach( $locale -> videogroups as $group )--}}
-
-                                        {{--<li><a tabindex="-1" href="{{ asset('video/' . $group -> slug ) }}">{{ $group -> title }}</a></li>--}}
-
-                                    {{--@endforeach--}}
-
-                                {{--</ul>--}}
-
-                                {{--<!----}}
-
-                                    {{--<li class = "dropdown-submenu"><a tabindex="-1" href="#">Documents   <span class="glyphicon glyphicon-chevron-right"></span></a>--}}
-                                                    {{--<ul class="dropdown-menu" role = "menu">--}}
-                                                        {{--<li><a tabindex="-1" href="/">The Draft of the Constitution</a></li>--}}
-                                                        {{--<li><a tabindex="-1" href="/">The Draft of the Laws</a></li>--}}
-                                                        {{--<li><a tabindex="-1" href="/">Open Letters</a></li>--}}
-                                                         {{--<li class = "dropdown-submenu"><a tabindex="-1" href="#">Decisions   <span class="glyphicon glyphicon-chevron-right"></span></a>--}}
-                                                            {{--<ul class="dropdown-menu" role = "menu">--}}
-                                                                {{--<li><a tabindex="-1" href="/">Archive of taken decisions </a></li>--}}
-                                                                {{--<li><a tabindex="-1" href="/">Archive of denied (cancelled) decisions</a></li>--}}
-                                                            {{--</ul>--}}
-                                                        {{--</li>--}}
-                                                    {{--</ul>--}}
-                                                {{--</li>--}}
-                                {{---->--}}
-                        {{--</ul>--}}
-
-                    {{--</li>--}}
-
-
-                    {{--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">@lang('nav.community') <span class="glyphicon glyphicon-chevron-down"></span></a>--}}
-
-                        {{--<ul class="dropdown-menu">--}}
-
-                            {{--<li><a href="{{ asset('participants') }}">@lang('nav.participants')</a></li>--}}
-
-                            {{--<li><a href="{{ asset('publications') }}">@lang('nav.publications')</a></li>--}}
-
-                            {{--<li><a href="{{ asset('forum') }}">@lang('nav.forum')</a></li>--}}
-
-                            {{--<li><a href="{{ asset('news') }}">@lang('nav.news')</a></li>--}}
-
-                            {{--<li><a href="{{ asset('information/faq') }}">@lang('nav.faq')</a></li>--}}
-
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
-
-            {{--</div>--}}
-
-
+        <!-- ./Navigation menu -->
 
             <div class="nav-right-menu-full col-sm-3">
 
@@ -148,19 +72,19 @@
 
                                 <div class="hidden-820">
 
-                                    {{--@if( $auth === true)--}}
+                                    @if(Auth::check())
 
                                         <span role="button" onclick="window.location.href='{{asset('account/feed')}}'">@lang('nav.profile')</span>
 
                                         <span role="button" onclick="auth.logout()">@lang('nav.logout')</span>
 
-                                    {{--@else--}}
+                                    @else
 
                                         <span class="signbutton">@lang('nav.signin')</span> @lang('nav.or')
 
                                         <span class="regbutton">@lang('nav.signup')</span>
 
-                                    {{--@endif--}}
+                                    @endif
 
                                 </div>
 
@@ -171,53 +95,45 @@
 
                     <ul class="nav navbar-nav custom-menu mobile">
 
-                        {{--@if( $auth === true)--}}
+                        @if(Auth::check())
 
-                        {{--@else--}}
+                        @else
                             <li class="dropdown lang">
 
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">@lang('nav.language')
-                                    {{--<img class="flag" src="{{ asset('img/flags/' . $locale['slug'] . '.png')}}"/>--}}
-                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                    <img class="flag" src="{{ asset('uploads/flags_svg/'.LaravelLocalization::getCurrentLocale().'.svg') }}" alt="">  {{ LaravelLocalization::getCurrentLocaleNative() }}
+
+                                <span class="glyphicon glyphicon-chevron-down"></span>
                                 </a>
 
-                                <ul class="dropdown-menu">
-
-                                    {{--@foreach( $languages as $language )--}}
-
-                                        {{--<li>--}}
-
-                                            {{--<a href="#" onclick="change_language('{{$language -> slug}}')">--}}
-                                                {{--<img src='{{asset( "img/flags/" . $language -> slug . ".png" ) }}'/>--}}
-                                            {{--</a>--}}
-
-                                        {{--</li>--}}
-
-                                    {{--@endforeach--}}
+                                <ul class="dropdown-menu" style="background: 40px 35px;">
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        @if(LaravelLocalization::getCurrentLocale() != $localeCode)
+                                            <ul>
+                                                <a  hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                    <img src="{{ asset('uploads/flags_svg/'.$localeCode.'.svg') }}" alt="">
+                                                </a>
+                                            </ul>
+                                        @endif
+                                    @endforeach
                                 </ul>
 
                                 <div class="languages">
 
                                     <div id="owl-example" class="owl-carousel">
 
-
-                                        {{--@foreach( $languages as $language )--}}
-
-                                            {{--<div>--}}
-
-                                                {{--<a href="#" onclick="change_language('{{$language -> slug}}')">--}}
-                                                    {{--<img src='{{asset( "img/flags/" . $language -> slug . ".png" ) }}'/>--}}
-                                                {{--</a>--}}
-
-                                            {{--</div>--}}
-
-                                        {{--@endforeach--}}
-
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            @if(LaravelLocalization::getCurrentLocale() != $localeCode)
+                                                <ul>
+                                                    <a  hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                        <img src="{{ asset('uploads/flags_svg/'.$localeCode.'.svg') }}" alt="">
+                                                    </a>
+                                                </ul>
+                                            @endif
+                                        @endforeach
                                     </div>
-
                                 </div>
                             </li>
-
 
                             <li class="dropdown sign-button hidden-1920 show-820">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -225,10 +141,8 @@
                                 </a>
                             </li>
 
-                        {{--@endif--}}
+                        @endif
                     </ul>
-
-
 
                     <div class="clearfix"></div>
 
