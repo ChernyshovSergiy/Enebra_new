@@ -14,7 +14,7 @@
 
 					'email'				=> 'E-mail',
 
-					'phone'				=> 'Phone'
+					'phone'				=> 'Mobil Phone Number'
 
 
 

@@ -185,6 +185,8 @@ header .img-wrap{height: 44px;}
     padding-right: 0px;
 }
 
+
+
 /*header dropdowns*/
 .headdrop .dropdown-menu{    border-radius: 0;width: 565px;    color: #2d4854;    font-size: 15px;    right: -25px;}
 .headdrop .dropdown-menu:before{    content: '';position: absolute;border: 10px solid transparent;border-bottom: 10px solid #fff;right: 30px;top: -18px;}

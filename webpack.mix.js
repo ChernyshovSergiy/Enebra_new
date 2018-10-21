@@ -53,6 +53,7 @@ mix.styles([
     'resources/assets/frontend/css/jquery.kwicks.css',
     'resources/assets/frontend/css/hover-min.css',
     'resources/assets/frontend/css/owl.carousel.css',
+    'node_modules/vegas/dist/vegas.min.css',
     'resources/assets/frontend/css/toastr.min.css',
     'resources/assets/frontend/css/style.css',
     'node_modules/vegas/dist/vegas.css'
@@ -76,14 +77,15 @@ mix.scripts([
     'resources/assets/frontend/js/jquery.kwicks.min.js',
     'resources/assets/frontend/js/bootstrap.min.js',
     'resources/assets/frontend/js/owl.carousel.min.js',
+    'node_modules/vegas/dist/vegas.min.js',
     'resources/assets/frontend/js/tinymce.min.js',
     'resources/assets/frontend/js/toastr.min.js',
     'resources/assets/frontend/js/script.js',
-    'resources/assets/frontend/js/functions.js',
     'resources/assets/frontend/js/scripts.js',
     'resources/assets/frontend/js/shared.js',
     'resources/assets/frontend/js/signup.js',
-    'node_modules/vegas/dist/vegas.js'
+    // 'resources/views/Information/build/js/functions.js',
+    'resources/assets/frontend/js/functions.js',
 ], 'public/js/frontend.js');
 
 

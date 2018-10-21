@@ -8,28 +8,30 @@
 
             <h1 class="into-h1">
 
-                {{--<span class="big">{{$locale -> introduction -> title}}</span>--}}
 
-                {{--<span class="zagolovok">{{$locale -> introduction -> title}}</span>--}}
+                <span class="big">{{$introduction -> title}}</span>
+
+                <span class="zagolovok">{{$introduction -> title}}</span>
 
             </h1>
 
-            {{--<h2>{!! htmlspecialchars_decode( $locale -> introduction -> question ) !!}</h2>--}}
+            <h2><span style='padding-left:60px;'> </span>{!! substr($introduction -> sub_title, 3, -4) !!}</h2>
 
-            {{--<p class="col-md-9 col-sm-12 col-xs-12 light-text">{!! htmlspecialchars_decode( $locale -> introduction -> description ) !!}</p>--}}
-
+            {{--<p class="col-md-9 col-sm-12 col-xs-12 light-text" style="font-family: RobotoThin, sans-serif;">{!! htmlspecialchars_decode( $introduction -> text ) !!}</p>--}}
+            <p class="col-md-9 col-sm-12 col-xs-12 light-text">{!!  substr($introduction -> text, 3, -4)  !!}
+            </p>
             <br/><br/>
 
             <div class="clearfix"></div>
 
-            {{--<div class="italic-text col-md-9  col-sm-12 col-xs-12">{!! htmlspecialchars_decode( $locale -> introduction -> afterdescription ) !!}</div>--}}
+            <div class="italic-text col-md-9  col-sm-12 col-xs-12">{!! htmlspecialchars_decode( $introduction -> replica ) !!}</div>
         </div>
     </div>
 </div>
 <div class="container-fluid auth">
     <div class="col-md-3 col-sm-3 auth photo">
         <div class="author">
-            <img class="img-responsive" src="{{asset('img/author.png')}}"/>
+            <img class="img-responsive" src="{{asset('img/author.png')}}" style="border-radius: 500px; box-shadow: 10px 10px 30px -11px rgba(0,0,0,0.75); width: 90%;"/>
             <span>@lang('app.sergey')<br />@lang('app.author')</span>
         </div>
     </div>
@@ -38,13 +40,13 @@
         <div class="intro-list">
             <ul>
 
-                {{--@foreach( $locale -> introduction -> rules as $rule )--}}
+                @foreach( $introduction_points  as $point )
 
-                    {{--<li><a href="{{$rule -> link}}">{{$rule -> rule}}</a></li>--}}
+                    <li><a href="{{$point -> link}}">{!! substr($point -> point, 3, -4 ) !!}</a></li>
 
-                {{--@endforeach--}}
+                @endforeach
             </ul>
-            {{--<p>{!! htmlspecialchars_decode( $locale -> introduction -> afterrules ) !!}</p>--}}
+            <p>{!! substr( $introduction -> conclusion, 3, -4 ) !!}</p>
 
         </div>
     </div>

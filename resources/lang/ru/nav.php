@@ -1,8 +1,6 @@
 <?php 
 
 		return [
-
-
 			'about' 				=> 'О Проекте',
 			'video'					=> 'Видео',
 			'community'				=> 'Сообщество',
@@ -35,5 +33,6 @@
 			'decisions'             => 'Решения',
 			'decision_done_archive' => 'Архив принятых решений',
 			'not_access_decision'   => 'Архив не принятых решений',
+            'admin'                 => 'Админка',
 
 		];

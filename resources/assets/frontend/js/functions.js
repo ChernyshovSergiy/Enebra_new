@@ -13,11 +13,55 @@ $( document ).ready(function() {
     
  }
         
-      if ($(window).width() > 820 ) { 
-    $('.main').backstretch('/img/bg.png');
+    //   if ($(window).width() > 820 ) {
+    // $('.main').backstretch('/img/bg.png');
 
-} 
-            $('.kwicks').kwicks({
+// }
+
+    if ($(window).width() > 820 ) {
+        $(".img-block.main").vegas({
+            delay: 10000,
+            timer: false,
+            shuffle: true,
+            firstTransition: 'fade',
+            firstTransitionDuration: 7000,
+            transitionDuration: 4000,
+            animationDuration:5000,
+            slides: [
+                { src: "img/bgHd/bg.png" },
+                { src: "img/bgHd/city2.jpg" },
+                { src: "img/bgHd/nice.jpg" },
+                { src: "img/bgHd/spinner.jpg" },
+                { src: "img/bgHd/technology.jpg" },
+                { src: "img/bgHd/nature3.jpg" },
+                // { src: "img/bgHd/technology2.jpg" },
+                // { src: "img/bgHd/nature2.jpg" },
+                { src: "img/bgHd/city1.jpg" },
+                // { src: "img/bgHd/pawn.jpg" },
+                // { src: "img/bgHd/thinks1.jpg" },
+                // { src: "img/bgHd/city3.jpg" },
+                { src: "img/bgHd/technology1.jpg" },
+                { src: "img/bgHd/city4.jpg" },
+                // { src: "img/bgHd/road.jpg" },
+                // { src: "img/bgHd/sea.jpg" },
+                // { src: "img/bgHd/street.jpg" },
+                { src: "img/bgHd/thinks.jpg" },
+                // { src: "img/bgHd/nature.jpg" }
+                // { src: "img/bgHd/thinks1.jpg" },
+                // { src: "img/bgHd/town.jpg" }
+            ],
+            transition: [ 'fade', 'zoomOut', 'blur' ],
+            overlay: '/js/overlays/05.png',
+            animation: 'random'
+        });
+        $(".f-block").addClass("vegas_f_block");
+        var bl1 = $(".img-block.main").height();
+        var bl2 = $(".f-block.vegas_f_block").height();
+        var bl3 = bl1/2 - bl2/2;
+        $(".f-block.vegas_f_block").css("top", bl3);
+    }
+
+    $('.kwicks').kwicks({
                     maxSize : '65%',
                     behavior: 'menu'
            });

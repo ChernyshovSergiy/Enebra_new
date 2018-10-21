@@ -1,4 +1,3 @@
-
 <div class="f-block">
 
     @include( 'Information.modules.timer')

@@ -5,7 +5,7 @@
     {{--@if( $locale -> slug == 'ru' )--}}
 
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css.map">
+        {{--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css.map">--}}
 
         <div class="col-lg-8 col-lg-offset-2 col-xs-12" style="color: #c0dafe; text-align: center;">
             @if(LaravelLocalization::getCurrentLocale() == 'ru')

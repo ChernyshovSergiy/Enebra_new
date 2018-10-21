@@ -1,47 +1,38 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 
-<head>
+    <head>
+        @include( 'Information.common.head' )
+    </head>
 
-    @include( 'Information.common.head' )
+    <body class="{{$status}}" id="body">
+        {{--<div id="app">--}}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            {{--<elevator-component></elevator-component>--}}
 
-    {{--<script src="{{ asset( 'js/jquery-ui.js' ) }}"></script>--}}
+            {{--@include('vendor.loader')--}}
+            {{--<div href="#" id="go-to-top" onclick="scroll_to('body')" ></div>--}}
 
-</head>
+            <div class="wrapper">
 
-<body class="{{$status}}" id="body">
+                @yield('content')
 
-    @include('vendor.loader')
-    <div href="#" id="go-to-top" onclick="scroll_to('body')" ></div>
-
-    <div class="wrapper">
-
-        @yield('content')
-
-
-    </div>
+            </div>
+        {{--</div>--}}
 
 
-    {{--@include( 'Information.common.footer' )--}}
+        {{--@include( 'Information.common.footer' )--}}
 
-    {{--@include( 'Information.modals.answer' )--}}
+        {{--@include( 'Information.modals.answer' )--}}
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        {{--<script src="{{ asset( 'js/app.js' ) }}"></script>--}}
+        <script src="{{ asset( 'js/frontend.js' ) }}"></script>
 
-<script src="{{ asset( 'js/frontend.js' ) }}"></script>
-<script>
-    $(function() {
-        $('body').vegas({
-            slides: [
-                { src: '/img/bgint.png' },
-                { src: '/img/bg.png' },
-                { src: 'img3.jpg' }
-            ],
-            // overlay: '/overlays/03.png'
-        });
-    });
-</script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-</body>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.21&key=AIzaSyDuobmu5uxO3e-AsgdFVa2LoDA32fPagks&language=en" type="text/javascript"></script>
+
+    </body>
 </html>

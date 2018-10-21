@@ -21,9 +21,9 @@
             @else
                 <li class = "dropdown-submenu">
                     @if(substr($item->url(),1,8) != '/#scroll')
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ env('THEME').LaravelLocalization::getCurrentLocale().substr($item->url(),1) }}">{{ $item->title }}
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ env('THEME').LaravelLocalization::getCurrentLocale().substr($item->url(),1) }}">@lang('nav.'.$item->title)
                     @else
-                        <a tabindex="-1" href="{{substr($item->url(),1)}}" onclick="scroll_to({{substr($item->url(),3)}})">{{ $item->title }}
+                        <a tabindex="-1" href="{{substr($item->url(),1)}}" onclick="scroll_to({{substr($item->url(),3)}})">@lang('nav.'.$item->title)
                     @endif
                         <span class="glyphicon glyphicon-chevron-right"></span></a>
             @endif
@@ -33,9 +33,9 @@
         @else
             <li class="dropdown">
                 @if(substr($item->url(),1,8) != '/#scroll')
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ env('THEME').LaravelLocalization::getCurrentLocale().substr($item->url(),1) }}">{{ $item->title }}</a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ env('THEME').LaravelLocalization::getCurrentLocale().substr($item->url(),1) }}">@lang('nav.'.$item->title)</a>
                 @else
-                    <a tabindex="-1" href="{{substr($item->url(),1)}}" onclick="scroll_to({{substr($item->url(),3)}})">{{ $item->title }} </a>
+                    <a tabindex="-1" href="{{substr($item->url(),1)}}" onclick="scroll_to({{substr($item->url(),3)}})">@lang('nav.'.$item->title) </a>
                 @endif
             </li>
         @endif

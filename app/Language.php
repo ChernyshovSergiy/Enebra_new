@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Language extends Model
 {

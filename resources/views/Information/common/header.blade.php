@@ -1,5 +1,4 @@
 <header>
-
     <nav class="navbar" id="head-nav">
 
         <div class="container-fluid">
@@ -8,7 +7,7 @@
 
                 <a class="navbar-brand hidden-820" href="/">
 
-                    <img class="img-responsive" src="{{asset( 'img/logo-f.png' ) }}"/>
+                    <img class="img-responsive" src="{{asset( 'img/logo-f.png' ) }}" width="70"/>
 
                     <div class="logo-text">
 
@@ -95,25 +94,25 @@
 
                     <ul class="nav navbar-nav custom-menu mobile">
 
-                        @if(Auth::check())
+                        {{--@if(Auth::check())--}}
 
-                        @else
+                        {{--@else--}}
                             <li class="dropdown lang">
 
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">@lang('nav.language')
-                                    <img class="flag" src="{{ asset('uploads/flags_svg/'.LaravelLocalization::getCurrentLocale().'.svg') }}" alt="">  {{ LaravelLocalization::getCurrentLocaleNative() }}
-
-                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                    <img class="flag" src="{{ asset('uploads/flags_svg/'.LaravelLocalization::getCurrentLocale().'.svg') }}" alt="">
+                                    {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" style="background: 40px 35px;">
+                                <ul class="dropdown-menu"  style="background: 37px 30px; padding: 0px 0;">
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                         @if(LaravelLocalization::getCurrentLocale() != $localeCode)
-                                            <ul>
-                                                <a  hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            <li>
+                                                <a style="padding: 0px 0px;" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                                     <img src="{{ asset('uploads/flags_svg/'.$localeCode.'.svg') }}" alt="">
                                                 </a>
-                                            </ul>
+                                            </li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -124,11 +123,11 @@
 
                                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                             @if(LaravelLocalization::getCurrentLocale() != $localeCode)
-                                                <ul>
+                                                <div>
                                                     <a  hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                                         <img src="{{ asset('uploads/flags_svg/'.$localeCode.'.svg') }}" alt="">
                                                     </a>
-                                                </ul>
+                                                </div>
                                             @endif
                                         @endforeach
                                     </div>
@@ -141,7 +140,7 @@
                                 </a>
                             </li>
 
-                        @endif
+                        {{--@endif--}}
                     </ul>
 
                     <div class="clearfix"></div>

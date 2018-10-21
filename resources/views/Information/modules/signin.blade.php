@@ -8,11 +8,12 @@
 
         <div class="form-group col-xs-12 no-pad">
 
-            <label for="inputlogin" class="col-sm-3 form-control-label">@lang('auth.login')</label>
+            <label for="inputEmail" class="col-sm-3 form-control-label">E-mail</label>
 
             <div class="col-sm-9">
 
-                <input type="text" class="form-control signin-field" id="login" name="login" />
+                {{--<input type="text" class="form-control signin-field" id="login" name="login" />--}}
+                <input type="text" id="inputEmail" class="form-control signin-field" name="email" placeholder="@lang('signup.email')"/>
 
             </div>
 
@@ -24,7 +25,8 @@
 
             <div class="col-sm-9">
 
-                <input type="password" class="form-control signin-field" id="password" name="password" />
+                {{--<input type="password" class="form-control signin-field" id="password" name="password" />--}}
+                <input type="password" id="inputpass" class="form-control signin-field" name="password" placeholder="@lang('signup.password')"/>
 
             </div>
 
@@ -38,11 +40,11 @@
 
         <div class="form-group col-xs-12 no-pad">
 
-            <label for="inputemail" class="col-sm-3 form-control-label">@lang('auth.email')</label>
+            <label for="inputemail" class="col-sm-1 form-control-label glyphicon glyphicon-envelope" ></label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-11">
 
-                <input type="text" class="form-control" id="inputemail"/>
+                <input type="text" class="form-control" id="inputemail" placeholder="@lang('auth.email')" />
 
             </div>
 
@@ -50,11 +52,11 @@
 
         <div class="form-group col-xs-12 no-pad">
 
-            <label for="inputphone" class="col-sm-3 form-control-label">@lang('auth.phone')</label>
+            <label for="inputphone" class="col-sm-1 form-control-label glyphicon glyphicon-phone"></label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-11">
 
-                <input type="text" class="form-control" id="inputphone"/>
+                <input type="text" class="form-control" id="inputphone" placeholder="@lang('auth.phone')"/>
 
             </div>
 
