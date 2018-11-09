@@ -20,7 +20,14 @@
             color: #337ab7;
             padding: 0;
         }
+        .container-fluid {
+            overflow-x: auto;
+        }
+        .box{
+            width: auto;
+        }
     </style>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->

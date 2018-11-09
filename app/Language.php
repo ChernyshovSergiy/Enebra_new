@@ -57,4 +57,25 @@ class Language extends Model
         $this->save();
     }
 
+    public function active()
+    {
+        $this->is_active = 1;
+        $this->save();
+    }
+
+    public function notActive()
+    {
+        $this->is_active = 0;
+        $this->save();
+    }
+
+    public function toggleActive()
+    {
+        if ($this->is_active == 0)
+        {
+            return $this->active();
+        }
+        return $this->notActive();
+    }
+
 }

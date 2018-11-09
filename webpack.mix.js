@@ -55,7 +55,8 @@ mix.styles([
     'resources/assets/frontend/css/owl.carousel.css',
     'node_modules/vegas/dist/vegas.min.css',
     'resources/assets/frontend/css/toastr.min.css',
-    'resources/assets/frontend/css/style.css',
+    // 'resources/assets/frontend/css/style.css',
+    'resources/assets/frontend/temp/style.css',
     'node_modules/vegas/dist/vegas.css'
 ],'public/css/frontend.css');
 

@@ -5,5 +5,6 @@ return[
     'delete'        => 'Delete',
     'back'	        => 'Back',
     'edit'	        => 'Edit',
+    'add_translate'	=> 'Add Translate',
 
 ];

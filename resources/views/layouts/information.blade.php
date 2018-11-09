@@ -21,7 +21,7 @@
         {{--</div>--}}
 
 
-        {{--@include( 'Information.common.footer' )--}}
+        @include( 'Information.common.footer' )
 
         {{--@include( 'Information.modals.answer' )--}}
 

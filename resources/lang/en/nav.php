@@ -34,5 +34,6 @@
             'decision_done_archive' => 'Archive done decisions',
             'not_access_decision'   => 'Archive not access decisions',
             'admin'                 => 'Admin',
+            'home'                  => 'Home',
 
 		];

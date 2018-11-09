@@ -13,6 +13,12 @@
             <span class="pull-right-container"></span>
         </a>
     </li>
+     <li>
+        <a href="{{route('inf_pages.index')}}">
+            <i class="fa fa-newspaper-o"></i> <span>@lang('admin.pages')</span>
+            <span class="pull-right-container"></span>
+        </a>
+    </li>
 
     <li class="treeview">
         <a href="#">
@@ -38,6 +44,7 @@
             <li><a href="{{route('languages.index')}}"><i class="fa fa-language"></i> @lang('admin.languages')</a></li>
             <li><a href="{{route('id_documents.index')}}"><i class="fa fa-newspaper-o"></i> @lang('admin.documents_id')</a></li>
             <li><a href="{{route('countries.index')}}"><i class="fa fa-flag"></i> @lang('admin.countries')</a></li>
+            <li><a href="{{route('social_links.index')}}"><i class="fa fa-share-alt"></i> @lang('admin.social_links')</a></li>
         </ul>
     </li>
     <li class="treeview">

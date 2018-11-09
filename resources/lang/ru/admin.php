@@ -32,6 +32,7 @@ return[
     'enebra_videos_part'	    => 'ЭНЕБРА видео часть',
     'motivation_part'	        => 'Мотивационная часть',
     'menu'	                    => 'Пункты Меню',
+    'social_links'	            => 'Ссылки на Соц.Сети',
 
     'dashboard_main'            => 'Статистика',
     'listing_image_category'    => 'Список Категорий Картинок',
@@ -156,4 +157,15 @@ return[
     'it_add_menu_point_here'     => 'создайте новый пункт меню',
     'edit_menu_point'            => 'Изменить Пункт Меню',
     'it_edit_menu_point_here'    => 'изменитье пункт меню',
+
+    'pages'                      => 'Страницы',
+    'listing_pages'              => 'Список Страниц',
+    'it_all_pages_here'          => 'здесь все страницы',
+
+    'listing_social_links'       => 'Список Соц.Ссылок',
+    'it_all_social_links_here'   => 'здесь все соц.ссылки',
+    'add_social_link'            => 'Добавить Соц.Ссылку',
+    'it_add_social_link_here'    => 'создайте новую соц.ссылку',
+    'edit_social_link'           => 'Изменить Соц.Ссылку',
+    'it_edit_social_link_here'   => 'измените соц.ссылку',
 ];

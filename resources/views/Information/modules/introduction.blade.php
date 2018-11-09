@@ -17,14 +17,13 @@
 
             <h2><span style='padding-left:60px;'> </span>{!! substr($introduction -> sub_title, 3, -4) !!}</h2>
 
-            {{--<p class="col-md-9 col-sm-12 col-xs-12 light-text" style="font-family: RobotoThin, sans-serif;">{!! htmlspecialchars_decode( $introduction -> text ) !!}</p>--}}
             <p class="col-md-9 col-sm-12 col-xs-12 light-text">{!!  substr($introduction -> text, 3, -4)  !!}
             </p>
-            <br/><br/>
+            {{--<br/><br/>--}}
 
             <div class="clearfix"></div>
 
-            <div class="italic-text col-md-9  col-sm-12 col-xs-12">{!! htmlspecialchars_decode( $introduction -> replica ) !!}</div>
+            <div class="italic-text col-md-9  col-sm-12 col-xs-12">{!! substr($introduction -> replica, 3, -4) !!}</div>
         </div>
     </div>
 </div>

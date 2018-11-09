@@ -32,6 +32,7 @@ return[
     'enebra_videos_part'	    => 'ENEBRA VIDEOS PART',
     'motivation_part'	        => 'MOTIVATION PART',
     'menu'	                    => 'Menu Points',
+    'social_links'	            => 'Social Links',
 
     'dashboard_main'            => 'Dashboard',
 
@@ -157,4 +158,15 @@ return[
     'it_add_menu_point_here'     => 'it add menu point here',
     'edit_menu_point'            => 'Edit Menu Point',
     'it_edit_menu_point_here'    => 'it edit menu point here',
+
+    'pages'                      => 'Pages',
+    'listing_pages'              => 'Listing Pages',
+    'it_all_pages_here'          => 'it all pages here',
+
+    'listing_social_links'       => 'Listing Social Links',
+    'it_all_social_links_here'   => 'it all social links here',
+    'add_social_link'            => 'Add Social Link',
+    'it_add_social_link_here'    => 'it add social link here',
+    'edit_social_link'           => 'Edit Social Link',
+    'it_edit_social_link_here'   => 'it edit social link here',
 ];

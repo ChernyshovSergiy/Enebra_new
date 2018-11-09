@@ -25,6 +25,11 @@ class Image extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function socialLink()
+    {
+        return $this->hasOne(SocialLink::class, 'image_id', 'id');
+    }
+
     protected $fillable = [
         'title',
         'image', 'category_id', 'user_id'

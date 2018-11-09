@@ -72,4 +72,12 @@ class LanguagesController extends Controller
         Language::find($id)->delete();
         return redirect()->route('languages.index');
     }
+
+    public function toggle($id)
+    {
+        $point = Language::find($id);
+        $point->toggleActive();
+
+        return redirect()->back();
+    }
 }

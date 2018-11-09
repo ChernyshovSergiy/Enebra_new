@@ -1398,16 +1398,16 @@ div.italic-text span{
         margin:0;  
 }
 .video-block.inf{
-    background: url('../img/shutterstock_395_795x1200-min.png')no-repeat center center;
+    background: url('/img/shutterstock_395_795x1200-min.png')no-repeat center center;
 }
 .video-block.tech{
-    background: url('../img/shutterstock.png')no-repeat center center;
+    background: url('/img/shutterstock.png')no-repeat center center;
 }
 .video-block.mater{
-    background: url('../img/rtt-min.jpg')no-repeat center center;
+    background: url('/img/rtt-min.jpg')no-repeat center center;
 }
 .video-block.motiv{
-    background: url('../img/shutterstock_14.png')no-repeat center center;
+    background: url('/img/shutterstock_14.png')no-repeat center center;
 }
 .video-block .title{
     position: absolute;
@@ -2274,7 +2274,7 @@ footer{
 }
 .footer-contactus label{
    color:#cecece; 
-   font-family: 'WorkSansLight', sans-serif;
+   font-family: 'RobotoLight', sans-serif;
    font-weight: inherit;
        font-size: 15px;
     padding-top: 3px;

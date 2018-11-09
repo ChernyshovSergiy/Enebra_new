@@ -20,10 +20,12 @@ Route::group([
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function()
 {
+        Route::post('/', 'Auth\AuthController@register');
         Route::group([
             'namespace' => 'Information'
         ], function (){
             Route::get('/', 'HomeController@index');
+
         });
 
         Route::group([
@@ -35,6 +37,7 @@ Route::group([
             Route::resource('/image_categories', 'ImageCategoriesController');
             Route::resource('/images', 'ImagesController');
             Route::resource('/languages', 'LanguagesController');
+            Route::get('/languages/toggle/{id}', 'LanguagesController@toggle');
             Route::resource('/countries', 'CountriesController');
             Route::resource('/id_documents', 'InfIdDocumentsController');
             Route::resource('/introduction_points', 'InfIntroductionPointsController');
@@ -45,7 +48,11 @@ Route::group([
             Route::resource('/inf_video_groups', 'InfVideoGroupsController');
             Route::resource('/inf_video_group_sections', 'InfVideoGroupSectionsController');
             Route::resource('/inf_videos', 'InfVideosController');
+            Route::resource('/inf_pages', 'InfPagesController');
+            Route::get('/inf_pages/translate/{id}', 'InfPagesController@translate')->name('translate');
             Route::resource('/inf_menus', 'MenusController');
             Route::get('/inf_menus/toggle/{id}', 'MenusController@toggle');
+            Route::resource('/social_links', 'SocialLinkController');
+            Route::get('/social_links/toggle/{id}', 'SocialLinkController@toggle');
         });
 });

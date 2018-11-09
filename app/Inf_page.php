@@ -3,20 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\Types\Self_;
+
 
 /**
  * @property  int img_id
  * @property int menu
+ * @property mixed language
  */
 class Inf_page extends Model
 {
-    use Sluggable;
+//    use Sluggable;
 
     protected $fillable = [
-        'title', 'sub_title',
+        'title_id','user_id', 'sub_title',
         'description', 'top_textarea',
         'left_textarea', 'right_textarea',
         'img_id', 'menu', 'if_desc',
@@ -25,23 +25,40 @@ class Inf_page extends Model
         'meta_id', 'language_id'
     ];
 
-    public function sluggable() //https://packagist.org/packages/cviebrock/eloquent-sluggable
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ]; // поле автоматически будет приведено в латиницу привет - privet и не будет дубликации привет - privet-1
-    }
+    protected $casts = [
+        'id' => 'int',
+        'text' => 'array'
+    ];
+
+
+
 
     public function images()
     {
-        return $this->hasMany(Image::class,'id', 'img_id');
+        return $this->hasMany(Image::class,'id', 'image_id');
     }
 
     public function language()
     {
-        return $this->belongsTo(Language::class, 'id', 'language_id');
+        return $this->belongsTo(Language::class, 'original', 'id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function title()
+    {
+        return $this->hasOne(Menu::class, 'id', 'title_id');
+    }
+
+    public function getUser($id){
+        if ($id ==null){
+            return;
+        }
+        $this->user_id = $id;
+        $this->save();
     }
 
     public static function addPage( $fields) //add new page
@@ -96,26 +113,74 @@ class Inf_page extends Model
         }
     }
 
-    public function setOriginal()
+    public function getImageCategoryId()
     {
-        $this->original = 1;
+        return ($this->image != null)
+            ? $this->image->category_id
+            : 'don`t have category';
+    }
+
+    public function getImageIdTitle()
+    {
+        $category = ImageCategory::find($this->getImageCategoryId());
+        return ($category != null)
+            ? $category->title
+            : 'don`t have category';
+    }
+
+    public function getImage()
+    {
+        $image = Image::find($this->image_id);
+        if ($image == null){
+            return '/img/no-image.png';
+        }
+        return '/uploads/'. $this->getImageIdTitle() .'/'. $this->image->image;
+    }
+
+    public function setImage($id)
+    {
+        if ($id == null){
+            return;
+        }
+        $this->image_id = $id;
         $this->save();
     }
 
-    public function setTranslate()
+
+    public function getLanguage()
     {
-        $this->original = 0;
+        return ($this->language != null)
+            ? $this->language->title
+            : 'don`t have language';
+    }
+
+    public function setLanguage($id)
+    {
+        if ($id == null){
+            return;
+        }
+        $this->original = $id;
         $this->save();
     }
 
-    public function toggleOriginal($value)
+    public function getTitle()
     {
-        if ($value == null){
-            return $this->setTranslate();
-        }
-        else
-        {
-            return $this->setOriginal();
-        }
+        return ($this->title != null)
+            ? $this->title->title
+            : 'don`t have language';
     }
+
+    public function setTitle($id)
+    {
+        if ($id == null){
+            return;
+        }
+        $this->title_id = $id;
+        $this->save();
+    }
+
+//    public function getDescription(){
+//        $desc = Inf_page::where('text', 'description')->get();
+//        dd($desc);
+//    }
 }

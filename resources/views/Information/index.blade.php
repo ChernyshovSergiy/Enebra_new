@@ -6,10 +6,10 @@
 
     @include( 'Information.modules.introduction' )
 
-    {{--@include( 'Information.modules.video' )--}}
+    @include( 'Information.modules.video' )
 
-    {{--@include( 'Information.modules.pages' )--}}
+    @include( 'Information.modules.pages' )
 
-    {{--@include( 'Information.modules.news' )--}}
+    @include( 'Information.modules.news' )
 
 @endsection

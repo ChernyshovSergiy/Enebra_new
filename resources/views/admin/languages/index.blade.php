@@ -37,6 +37,7 @@
                         <thead>
                         <tr>
                             <th>@lang('column.id')</th>
+                            <th>@lang('column.is_active')</th>
                             <th>@lang('column.slug')</th>
                             <th>@lang('column.object_name')</th>
                             <th>@lang('column.localization')</th>
@@ -48,17 +49,24 @@
                         @foreach($languages as $language)
                             <tr>
                                 <td>{{ $language->id }}</td>
+                                <td>
+                                    @if($language->is_active == 1)
+                                        <a href="/admin/languages/toggle/{{ $language->id }}" class="text-green fa fa-thumbs-o-up"></a>
+                                    @else
+                                        <a href="/admin/languages/toggle/{{ $language->id }}" class="text-muted fa fa-lock"></a>
+                                    @endif
+                                </td>
                                 <td>{{ $language->slug }}</td>
                                 <td>{{ $language->title }}</td>
                                 <td>{{ $language->localization }}</td>
                                 <td>
                                     <img src="{{ $language->getFlagImage() }}" alt="" width="30">
                                 <td>
-                                    <a href="{{route('languages.show', $language->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('languages.edit', $language->id)}}" class="fa fa-pencil"></a>
+                                    {{--<a href="{{route('languages.show', $language->id)}}" class="fa fa-eye"></a>--}}
+                                    <a href="{{route('languages.edit', $language->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['languages.destroy', $language->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

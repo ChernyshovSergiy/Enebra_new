@@ -11,9 +11,13 @@ class Menu extends Model
         return $this->belongsTo(Language::class, 'language_id', 'id');
     }
 
+    public function title()
+    {
+        return $this->hasOne(Inf_page::class, 'id', 'title_id');
+    }
+
     protected $fillable = [
         'title',
-//        'is_active',
         'url',
         'parent',
         'sort',
