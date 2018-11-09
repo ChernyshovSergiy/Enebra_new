@@ -19,7 +19,8 @@
         <!-- Main content -->
         <section class="content">
         {{ Form::open([
-            'route' => 'social_links.store'
+            'route' => 'social_links.store',
+            'files' => true
         ]) }}
         <!-- Default box -->
             <div class="box">
@@ -46,6 +47,7 @@
                         </thead>
                         <tbody>
                             @foreach($social_links as $social_link)
+                                {{--{{dd($social_link)}}--}}
                                 <tr>
                                     <td>{{ $social_link->id }}</td>
                                     <td>{{ $social_link->name }}</td>
@@ -56,12 +58,13 @@
                                             <a href="/admin/social_links/toggle/{{ $social_link->id }}" class="text-muted fa fa-lock"></a>
                                         @endif
                                     </td>
-                                    {{--@if($social_link->url)--}}
-                                        {{--<td>{{ $social_link->url }}</td>--}}
-                                    {{--@endif--}}
-                                    <td>{{ $social_link->parent }}</td>
+                                    @if($social_link)
+                                        <td>{{ $social_link->url->$locale }}</td>
+                                    @endif
                                     <td>{{ $social_link->sort }}</td>
-                                    <td>{{ $social_link->getImage()}}</td>
+                                    <td>
+                                        <img src="{{ $social_link->getImage() }}" alt="" width="30">
+                                    </td>
                                     <td>
                                         <a href="{{route('social_links.edit', $social_link->id)}}" class="text-yellow fa fa-pencil"></a>
                                         {{ Form::open(['route'=>['social_links.destroy', $social_link->id], 'method'=>'delete']) }}

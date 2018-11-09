@@ -8,7 +8,8 @@ class socialLink extends Model
 {
     public function image()
     {
-        return $this->hasOne(Image::class,'id', 'image_id');
+//        return $this->hasOne(Image::class,'id', 'image_id');
+        return $this->belongsTo(Image::class,'image_id', 'id');
     }
 
     protected $fillable = [
@@ -18,10 +19,10 @@ class socialLink extends Model
         'image_id'
     ];
 
-    protected $casts = [
-        'id' => 'int',
-        'url' => 'array'
-    ];
+//    protected $casts = [
+//        'id' => 'int',
+//        'url' => 'array'
+//    ];
 
     public static function add($fields)
     {
