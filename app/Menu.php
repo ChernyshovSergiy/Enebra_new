@@ -4,6 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Menu
+ *
+ * @property int $id
+ * @property \App\Inf_page $title
+ * @property int $is_active
+ * @property string $url
+ * @property int $parent
+ * @property int $sort
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property int $language_id
+ * @property-read \App\Language $language
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereLanguageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereParent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereUrl($value)
+ * @mixin \Eloquent
+ */
 class Menu extends Model
 {
     public function language()

@@ -2161,7 +2161,7 @@ footer{
 }
 .find-us img{
         width: 27px;
-            vertical-align: inherit;
+            vertical-align: middle;
 }
 .subscribe{color:#e3e3e3; margin-top: 55px;}
 .subscribe p{    font-size: 16px;font-family: 'RobotoLightItalic', sans-serif;}

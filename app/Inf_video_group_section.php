@@ -4,10 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 /**
+ * App\Inf_video_group_section
+ *
  * @property int|null $video_group_id
  * @property int|null $language_id
  * @property-read \App\Inf_video_group $video_group
  * @property-read \App\Language $language
+ * @property int $id
+ * @property string $title
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereLanguageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereVideoGroupId($value)
+ * @mixin \Eloquent
  */
 class Inf_video_group_section extends Model
 {

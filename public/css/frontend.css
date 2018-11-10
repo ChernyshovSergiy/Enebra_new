@@ -7107,7 +7107,7 @@ a:focus{text-decoration: none;}
     z-index: 25;
     width: 400px;
     padding: 20px 15px;
-     font-family: 'RobotoRegular', sans-serif;
+    font-family: 'RobotoRegular', sans-serif;
 }
 
 .img-block.pages .signin, .img-block.pages .register{
@@ -9050,7 +9050,7 @@ footer{
 }
 .find-us img{
         width: 27px;
-            vertical-align: inherit;
+            vertical-align: middle;
 }
 .subscribe{color:#e3e3e3; margin-top: 55px;}
 .subscribe p{    font-size: 16px;font-family: 'RobotoLightItalic', sans-serif;}
@@ -11516,6 +11516,7 @@ box-shadow: -2px 3px 25px -7px rgba(0,0,0,0.75);
 }
 .foot-auth img{width:initial;}
 .find-us a {
+    margin-left: 10px;
     font-size: 17px;
 }
 .foot-auth{font-family: 'RobotoMediumItalic', sans-serif; font-size: 21px;}

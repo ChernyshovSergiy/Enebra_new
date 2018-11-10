@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * App\Inf_plan_section_point
+ *
  * @property int|null $phase_id
  * @property int|null $language_id
  * @property int|null $section_id
@@ -13,6 +15,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Language $language
  * @property-read \App\Inf_plan_phase_section $section
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereIsDone($value)
+ * @property int $id
+ * @property string $point
+ * @property string|null $description
+ * @property int $sort
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereLanguageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point wherePhaseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point wherePoint($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Inf_plan_section_point extends Model
 {

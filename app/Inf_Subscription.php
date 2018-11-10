@@ -5,8 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property  string email
+ * App\Inf_Subscription
+ *
+ * @property string email
  * @property string token
+ * @property-read \App\Language $language
+ * @mixin \Eloquent
  */
 class Inf_Subscription extends Model
 {

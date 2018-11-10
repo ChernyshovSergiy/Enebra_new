@@ -22,7 +22,6 @@ class SocialLinkController extends Controller
     public function index()
     {
         $social_links = $this->getSocialLinks();
-//        dd($social_links);
         $locale = LaravelLocalization::getCurrentLocale();
 
         return view('admin.Social_link.index', compact('social_links', 'locale'));
@@ -62,8 +61,6 @@ class SocialLinkController extends Controller
             }
         };
         $social_link->url = json_encode($urls);
-//        $social_link->url = $urls;
-//        dd($social_link->url);
         $social_link->save();
 
         return redirect()->route('social_links.index');
@@ -71,22 +68,52 @@ class SocialLinkController extends Controller
 
     public function show(SocialLink $socialLink)
     {
-        //
+
     }
 
-    public function edit(SocialLink $socialLink)
+    public function edit($id)
     {
-        //
+        $social_link = $this->getSocialLinks()->find($id);
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+        $foot_icon_image = Image::where( 'category_id','=', 6 )->pluck('title', 'id');
+        return view('admin.Social_link.edit', compact('social_link','languages', 'foot_icon_image'));
     }
 
-    public function update(Request $request, SocialLink $socialLink)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'sort' => 'required',
+            'image_id' => 'required'
+        ]);
+        $social_link = SocialLink::find($id);
+        $social_link -> setImage($request->get('image_id'));
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+
+        foreach ($languages as $key => $language){
+            if ($key == 1){
+                $urls = [$language => $request->get('url'.':'.$language)];
+            }else{
+                $urls[$language] = $request->get('url'.':'.$language);
+            }
+        };
+
+        $social_link->url = json_encode($urls);
+        $social_link->update($request->all());
+        return redirect()->route('social_links.index');
     }
 
-    public function destroy(SocialLink $socialLink)
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
     {
-        //
+        SocialLink::find($id)->delete();
+        return redirect()->route('social_links.index');
     }
 
     public function toggle($id)

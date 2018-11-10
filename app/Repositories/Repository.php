@@ -30,7 +30,8 @@ abstract class Repository
     protected function check($result)
     {
         if ($result->isEmpty()){
-            return socialLink::all();
+            return $this->model->all();
+//            return [];
         }
         $result->transform(function ($item, $key){
             if (is_string($item->url) && is_object(json_decode($item->url)) && json_last_error() == JSON_ERROR_NONE){

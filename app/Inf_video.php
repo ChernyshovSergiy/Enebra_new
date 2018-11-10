@@ -4,6 +4,41 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Inf_video
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $description
+ * @property string $about_author
+ * @property string $link
+ * @property string $duration_time
+ * @property int $video_group_id
+ * @property int $video_group_section_id
+ * @property int $image_id
+ * @property int $language_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property int $sort
+ * @property-read \App\Image $image
+ * @property-read \App\Language $language
+ * @property-read \App\Inf_video_group $video_group
+ * @property-read \App\Inf_video_group_section $video_group_section
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereAboutAuthor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereDurationTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereImageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereLanguageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereVideoGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video whereVideoGroupSectionId($value)
+ * @mixin \Eloquent
+ */
 class Inf_video extends Model
 {
     public function video_group()
