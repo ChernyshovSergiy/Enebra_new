@@ -28,14 +28,12 @@ class HomeController extends Controller
         $introduction = Inf_introduction::where('language_id', $id)->firstOrFail();
         $introduction_points = Inf_introduction_point::where('language_id', $id)->get()->sortBy('sort');
         $video_groups = Inf_video_group::where('language_id', $id)->get();
-//        $footer_social_icons = $this->getSocialLinks()->where('is_active', '=', 1)->get()->sortBy('sort');
         $socials = $this->getSocialLinks();
-//        dd($socials);
         return view('Information.index', compact('status', 'introduction', 'introduction_points', 'video_groups', 'socials', 'cur_lang'));
     }
 
     protected function getSocialLinks(){
-        $social_links = $this->s_rep->get('*', Config::get('settings.social_links_count'));
+        $social_links = $this->s_rep->get('*', Config::get('settings.social_links_count'))->sortBy('sort');
         return $social_links;
     }
 }

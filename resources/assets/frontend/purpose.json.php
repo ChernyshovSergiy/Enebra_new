@@ -1,7 +1,6 @@
 <?php
 
 return[
-    'text' => [
         'sub_title' => [
             'en' => '',
             'ru' => ''
@@ -42,6 +41,5 @@ return[
         'meta_desc' => [
             'en' => '',
             'ru' => ''
-        ],
-    ]
+        ]
 ];

@@ -8,6 +8,8 @@ use Config;
 abstract class Repository
 {
     protected $model = false;
+    public $json_column_name;
+
 
     public function get($select = '*', $take = false, $pagination = false, $where = false)
     {
@@ -34,12 +36,12 @@ abstract class Repository
 //            return [];
         }
         $result->transform(function ($item, $key){
-            if (is_string($item->url) && is_object(json_decode($item->url)) && json_last_error() == JSON_ERROR_NONE){
-                $item->url = json_decode($item->url);
+            $column = $this->json_column_name;
+            if (is_string($item->$column) && is_object(json_decode($item->$column)) && json_last_error() == JSON_ERROR_NONE){
+                $item->$column = json_decode($item->$column);
             }
             return $item;
         });
-//        dd($result);
         return $result;
     }
 

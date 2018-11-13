@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $updated_at
  * @property int $image_id
  * @property-read \App\Image $flag_image
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Inf_id_document[] $id_documents
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Inf_id_document[]
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Country whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Country whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Country whereImageId($value)

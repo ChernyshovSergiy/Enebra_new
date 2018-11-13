@@ -33,6 +33,7 @@ return[
     'motivation_part'	        => 'MOTIVATION PART',
     'menu'	                    => 'Menu Points',
     'social_links'	            => 'Social Links',
+    'select_image'	            => 'Select image',
 
     'dashboard_main'            => 'Dashboard',
 

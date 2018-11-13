@@ -54,14 +54,12 @@
                         @endforeach
                         <div class="form-group">
                             <label>@lang('column.image')</label>
-                            {{ Form::select('image_id[]',
+                            {{ Form::select('image_id',
                                 $images,
                                 null,
-                                [
-                                'class' => 'form-control select2',
-                                    'multiple' => 'multiple',
-                                    'data-placeholder' => 'Выберите картинки'
-                                ])}}
+                                [ 'class' => 'form-control select2',
+                                    'data-placeholder' => Lang::get('admin.select_image')])
+                            }}
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">@lang('column.menu')</label>
@@ -94,7 +92,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{route('inf_menus.index')}}" class="btn btn-default">@lang('button.back')</a>
+                    <a href="{{route('inf_pages.index')}}" class="btn btn-default">@lang('button.back')</a>
                     <button class="btn btn-success pull-right">@lang('button.add')</button>
                 </div>
                 <!-- /.box-footer-->

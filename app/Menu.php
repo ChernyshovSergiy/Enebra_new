@@ -37,10 +37,11 @@ class Menu extends Model
 
     public function title()
     {
-        return $this->hasOne(Inf_page::class, 'id', 'title_id');
+        return $this->hasMany(Inf_page::class, 'title_id', 'id');
     }
 
     protected $fillable = [
+        'id',
         'title',
         'url',
         'parent',

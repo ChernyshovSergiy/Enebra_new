@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Lang;
 
 
 /**
@@ -23,7 +24,6 @@ use Illuminate\Support\Facades\Storage;
  * @property string|null $right_textarea
  * @property int $views_count
  * @property int|null $image_id
- * @property int $menu
  * @property int $if_desc
  * @property string|null $text_description
  * @property int|null $sort
@@ -34,7 +34,6 @@ use Illuminate\Support\Facades\Storage;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $images
- * @property-read \App\Language $language
  * @property-read \App\Menu $title
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereCreatedAt($value)
@@ -64,27 +63,19 @@ class Inf_page extends Model
 {
 //    use Sluggable;
 
+//
+
     protected $fillable = [
-        'title_id','user_id', 'sub_title',
-        'description', 'top_textarea',
-        'left_textarea', 'right_textarea',
-        'img_id', 'menu', 'if_desc',
-        'text_description', 'sort',
-        'original', 'keywords', 'meta_desc',
-        'meta_id', 'language_id'
+        'title_id','user_id',
+        'image_id', 'menu', 'if_desc',
+        'sort', 'original',
+        'meta_id', 'text'
     ];
-
-    protected $casts = [
-        'id' => 'int',
-        'text' => 'array'
-    ];
-
-
 
 
     public function images()
     {
-        return $this->hasMany(Image::class,'id', 'image_id');
+        return $this->hasOne(Image::class,'id', 'image_id');
     }
 
     public function language()
@@ -114,7 +105,7 @@ class Inf_page extends Model
     {
         $page = new static;
         $page->fill($fields);
-        $page->save();
+        $page->make();
 
         return $page;
     }
@@ -128,15 +119,6 @@ class Inf_page extends Model
     public function removePage() //delete page
     {
         $this->delete();
-    }
-
-    public function setImg_id($ids)
-    {
-        if($ids == null){
-            return;
-        }
-
-        $this->images()->sync($ids);
     }
 
     public function setInMenu()
@@ -162,16 +144,9 @@ class Inf_page extends Model
         }
     }
 
-    public function getImageCategoryId()
+    public function getImageCategoryTitle($id)
     {
-        return ($this->image != null)
-            ? $this->image->category_id
-            : 'don`t have category';
-    }
-
-    public function getImageIdTitle()
-    {
-        $category = ImageCategory::find($this->getImageCategoryId());
+        $category = ImageCategory::find($id);
         return ($category != null)
             ? $category->title
             : 'don`t have category';
@@ -183,7 +158,8 @@ class Inf_page extends Model
         if ($image == null){
             return '/img/no-image.png';
         }
-        return '/uploads/'. $this->getImageIdTitle() .'/'. $this->image->image;
+
+        return '/uploads/'. $this->getImageCategoryTitle($image->category_id) .'/'. $image->image;
     }
 
     public function setImage($id)
@@ -215,7 +191,7 @@ class Inf_page extends Model
     public function getTitle()
     {
         return ($this->title != null)
-            ? $this->title->title
+            ? Lang::get('nav.'.$this->title->title)
             : 'don`t have language';
     }
 
@@ -228,8 +204,40 @@ class Inf_page extends Model
         $this->save();
     }
 
-//    public function getDescription(){
-//        $desc = Inf_page::where('text', 'description')->get();
-//        dd($desc);
+
+    public static function build()
+    {
+        $result = Inf_page::all();
+        if ($result->isEmpty()){
+            return [];
+        }
+        $result->transform(function ($item, $key){
+            $column = 'text';
+            if (is_string($item->$column) && is_object(json_decode($item->$column)) && json_last_error() == JSON_ERROR_NONE){
+                $item->$column = json_decode($item->$column);
+            }
+            return $item;
+        });
+        return $result;
+    }
+
+//    public function setJson($request){
+//        $languages = Language::where('is_active', '=','1')
+//            ->pluck( 'slug', 'id')->all();
+//        $text_blocks = $this->text_blocks;
+//        $text = array();
+//        $lang = array();
+//        foreach ($text_blocks as $block) {
+//            foreach ($languages as $key => $language) {
+//                if ($key == 1) {
+//                    $lang = [$language => $request->get($block . ':' . $language)];
+//                } else {
+//                    $lang[$language] = $request->get($block . ':' . $language);
+//                }
+//            }
+//            $text = array_add($text, $block, $lang);
+//        }
+//        $text = json_encode($text);
+//        return $text;
 //    }
 }

@@ -33,6 +33,7 @@ return[
     'motivation_part'	        => 'Мотивационная часть',
     'menu'	                    => 'Пункты Меню',
     'social_links'	            => 'Ссылки на Соц.Сети',
+    'select_image'	            => 'Выберите картинку',
 
     'dashboard_main'            => 'Статистика',
     'listing_image_category'    => 'Список Категорий Картинок',

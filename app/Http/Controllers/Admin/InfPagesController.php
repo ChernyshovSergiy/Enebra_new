@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Lang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfPagesController extends Controller
 {
@@ -26,21 +27,9 @@ class InfPagesController extends Controller
 
     public function index()
     {
-        $pages = Inf_page::all();
-//        $pages->transform(function ($item, $key){
-//            $item->text = json_encode($item->text);
-//            return $item;
-//        });
-//        return $pages;
-//        $pages->toArray();
-//        dd($pages);
-//        $text = Inf_page::where('text')->get();
-//        $text->toArray();
-//        dd($text);
-//        $pages->text->description->toArray();
-
-        $languages = Language::all();
-        return view('admin.inf_pages.index',compact('pages', 'languages'));
+        $pages = Inf_page::build();
+        $locale = LaravelLocalization::getCurrentLocale();
+        return view('admin.inf_pages.index',compact('pages', 'locale'));
     }
 
     public function create()
@@ -49,10 +38,10 @@ class InfPagesController extends Controller
         $titles = Menu::where('is_active', '=','1')->get()
             ->sortBy('sort')->pluck( 'title', 'id')->all();
 
-        foreach($titles as $title){
-            $page_names[] = Lang::get('nav'.'.'.$title);
-        };
+        foreach($titles as $key => $title){
+            $page_names[$key] = Lang::get('nav'.'.'.$title);
 
+        };
         $languages = Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();
 
@@ -69,19 +58,13 @@ class InfPagesController extends Controller
         ));
     }
 
-    public function translate($id)
-    {
-        return view('admin.inf_pages.translate');
-
-    }
-
     public function store(Request $request)
     {
         $this->validate($request, [
             'user_id' => 'required',
             'title_id' => 'required',
             'text' => 'nullable',
-            'image_id' => 'nullable|image',
+            'image_id' => 'nullable',
             'menu' => 'required|min:0|max:1',
             'if_desc' => 'required|min:0|max:1',
             'sort' => 'required',
@@ -89,8 +72,25 @@ class InfPagesController extends Controller
         ]);
 
         $page = Inf_page::addPage($request->all());
-        $page->setImg_id($request->file('image_id'));
-
+        $page->setImage($request->get('image_id'));
+//        $page->setJson($request->all());
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+        $text_blocks = $this->text_blocks;
+        $text = array();
+        $lang = array();
+        foreach ($text_blocks as $block) {
+            foreach ($languages as $key => $language) {
+                if ($key == 1) {
+                    $lang = [$language => $request->get($block . ':' . $language)];
+                } else {
+                    $lang[$language] = $request->get($block . ':' . $language);
+                }
+            }
+            $text = array_add($text, $block, $lang);
+        }
+        $page->text = json_encode($text);
+        $page->save();
         return redirect()->route('inf_pages.index');
 
     }
@@ -100,9 +100,25 @@ class InfPagesController extends Controller
         //
     }
 
-    public function edit(Inf_page $inf_page)
+    public function edit($id)
     {
-        //
+        $page = Inf_page::build()->find($id);
+        $users = User::pluck( 'last_name', 'id')->all();
+        $titles = Menu::where('is_active', '=','1')->get()
+            ->sortBy('sort')->pluck( 'title', 'id')->all();
+
+        foreach($titles as $key => $title){
+            $page_names[$key] = Lang::get('nav'.'.'.$title);
+
+        };
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+
+        $text_blocks = $this->text_blocks;
+
+        $images = Image::where( 'category_id','=', 5 )->pluck('title', 'id');
+
+        return view('admin.inf_pages.edit', compact('page','users','page_names','languages', 'text_blocks', 'images'));
     }
 
     public function update(Request $request, Inf_page $inf_page)

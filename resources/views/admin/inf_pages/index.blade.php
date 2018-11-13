@@ -59,28 +59,31 @@
                         </thead>
                         <tbody>
                         @foreach($pages as $page)
+                            @if($page->title->is_active != 0)
                             <tr>
                                 <td>{{ $page->id }}</td>
                                 <td>{{ $page->user->last_name }}</td>
                                 <td>{{ $page->getTitle() }}</td>
-                                <td>{!! $page->sub_title !!}</td>
-                                <td>{!! $page->text !!}</td>
-                                <td>{!! $page->top_textarea !!}</td>
-                                <td>{!! $page->left_textarea !!}</td>
-                                <td>{!! $page->right_textarea !!}</td>
+                                <td>{!! str_limit($page->text->sub_title->$locale, 20 ) !!}</td>
+                                <td>{!! str_limit($page->text->description->$locale, 20, ' &raquo') !!}</td>
+                                <td>{!! str_limit($page->text->top_textarea->$locale, 20 ) !!}</td>
+                                <td>{!! str_limit($page->text->left_textarea->$locale, 20 ) !!}</td>
+                                <td>{!! str_limit($page->text->right_textarea->$locale, 20 ) !!}</td>
                                 <td>{{ $page->views_count }}</td>
-                                <td>{{ $page->getImage() }}</td>
+                                <td>
+                                    <img src="{{ $page->getImage() }}" alt="" width="70">
+                                </td>
                                 <td>{{ $page->menu }}</td>
                                 <td>{{ $page->if_desc }}</td>
-                                <td>{!! $page->text_description !!}</td>
+                                <td>{!! str_limit($page->text->text_description->$locale, 20) !!}</td>
                                 <td>{{ $page->sort }}</td>
                                 <td>{{ $page->original }}</td>
-                                <td>{{ $page->keywords }}</td>
-                                <td>{!! $page->meta_desc !!}</td>
+                                <td>{!! str_limit($page->text->keywords->$locale, 20 ) !!}</td>
+                                <td>{!! str_limit($page->text->meta_desc->$locale, 20 ) !!}</td>
                                 <td>{{ $page->meta_id }}</td>
                                 <td>
                                     <a href="{{route('inf_pages.edit', $page->id)}}" class="text-yellow fa fa-pencil"></a>
-                                    <a href="{{ route('translate', $page->id)}}" class="text-blue fa fa-language"></a>
+                                    {{--<a href="{{ route('translate', $page->id)}}" class="text-blue fa fa-language"></a>--}}
                                     {{ Form::open(['route'=>['inf_pages.destroy', $page->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
                                         <i class="text-red fa fa-remove"></i>
@@ -88,6 +91,7 @@
                                     {{ Form::close() }}
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>
