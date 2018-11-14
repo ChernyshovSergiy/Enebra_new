@@ -19,7 +19,7 @@ class CreateInfPagesTable extends Migration
             $table->boolean('if_desc')->default(0);
             $table->integer('sort')->nullable();
             $table->unsignedInteger('original')->default(0);
-            $table->boolean('meta_id')->default(0);
+            $table->integer('meta_id')->default(0);
             $table->timestamps();
         });
 

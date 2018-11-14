@@ -77,7 +77,7 @@
                                 <td>{{ $page->if_desc }}</td>
                                 <td>{!! str_limit($page->text->text_description->$locale, 20) !!}</td>
                                 <td>{{ $page->sort }}</td>
-                                <td>{{ $page->original }}</td>
+                                <td>{{ $page->language->title }}</td>
                                 <td>{!! str_limit($page->text->keywords->$locale, 20 ) !!}</td>
                                 <td>{!! str_limit($page->text->meta_desc->$locale, 20 ) !!}</td>
                                 <td>{{ $page->meta_id }}</td>

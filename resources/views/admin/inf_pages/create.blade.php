@@ -58,7 +58,7 @@
                                 $images,
                                 null,
                                 [ 'class' => 'form-control select2',
-                                    'data-placeholder' => Lang::get('admin.select_image')])
+                                    'placeholder' => Lang::get('admin.select_image')])
                             }}
                         </div>
                         <div class="form-group">
