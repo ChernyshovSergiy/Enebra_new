@@ -163,6 +163,10 @@ return[
     'pages'                      => 'Pages',
     'listing_pages'              => 'Listing Pages',
     'it_all_pages_here'          => 'it all pages here',
+    'add_page'                   => 'Add Pages',
+    'it_add_page_here'           => 'it add page here',
+    'edit_page'                   => 'Edit Pages',
+    'it_edit_page_here'           => 'it edit page here',
 
     'listing_social_links'       => 'Listing Social Links',
     'it_all_social_links_here'   => 'it all social links here',

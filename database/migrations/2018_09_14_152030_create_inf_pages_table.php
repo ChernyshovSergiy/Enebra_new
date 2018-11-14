@@ -10,31 +10,36 @@ class CreateInfPagesTable extends Migration
     {
         Schema::create('inf_pages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->default(0);
-            $table->string('title');
-            $table->string('slug');
-            $table->text('sub_title')->nullable();
-            $table->text('description')->nullable();
-            $table->text('top_textarea')->nullable();
-            $table->text('left_textarea')->nullable();
-            $table->text('right_textarea')->nullable();
+            $table->unsignedInteger('user_id')->default(1);
+            $table->unsignedInteger('title_id');
+            $table->json('text')->nullable();
             $table->integer('views_count')->default(0);
-            $table->integer('image_id')->nullable();
-            $table->integer('menu')->default(0);
-            $table->integer('if_desc')->default(0);
-            $table->text('text_description')->nullable();
+            $table->unsignedInteger('image_id')->nullable();
+            $table->boolean('menu')->default(1);
+            $table->boolean('if_desc')->default(0);
             $table->integer('sort')->nullable();
-            $table->integer('original')->default(0);
-            $table->string('keywords')->nullable();
-            $table->text('meta_desc')->nullable();
-            $table->integer('meta_id')->nullable();
-            $table->integer('language_id')->default(1);
+            $table->unsignedInteger('original')->default(0);
+            $table->boolean('meta_id')->default(0);
             $table->timestamps();
+        });
+
+        Schema::table('inf_pages', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('title_id')->references('id')
+                ->on('menus')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('images');
+            $table->foreign('original')->references('id')->on('languages');
         });
     }
 
     public function down()
     {
+        Schema::table('inf_pages', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['title_id']);
+            $table->dropForeign(['image_id']);
+            $table->dropForeign(['original']);
+        });
         Schema::dropIfExists('inf_pages');
     }
 }

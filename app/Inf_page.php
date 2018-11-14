@@ -113,7 +113,7 @@ class Inf_page extends Model
     public function editPage($fields) //edit(change) page
     {
         $this->fill($fields);
-        $this->save();
+        $this->make();
     }
 
     public function removePage() //delete page

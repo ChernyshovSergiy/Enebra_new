@@ -57,7 +57,9 @@
                             {{ Form::select('id_documents[]',
                                 $id_documents,
                                 null,
-                                ['class' => 'form-control select2', 'multiple'=>"multiple", 'data-placeholder'=>'Выберите документы подтверждающие личность'])
+                                ['class' => 'form-control select2',
+                                'multiple'=>"multiple",
+                                'placeholder'=>'Выберите документы подтверждающие личность'])
                             }}
                         </div>
                     </div>

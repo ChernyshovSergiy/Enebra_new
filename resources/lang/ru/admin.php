@@ -162,6 +162,10 @@ return[
     'pages'                      => 'Страницы',
     'listing_pages'              => 'Список Страниц',
     'it_all_pages_here'          => 'здесь все страницы',
+    'add_page'                   => 'Добавить Страницу',
+    'it_add_page_here'           => 'добавте страницу',
+    'edit_page'                  => 'Изменить Страницу',
+    'it_edit_page_here'          => 'измените страницу',
 
     'listing_social_links'       => 'Список Соц.Ссылок',
     'it_all_social_links_here'   => 'здесь все соц.ссылки',

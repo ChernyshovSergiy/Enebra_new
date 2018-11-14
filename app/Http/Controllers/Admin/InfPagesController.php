@@ -121,13 +121,49 @@ class InfPagesController extends Controller
         return view('admin.inf_pages.edit', compact('page','users','page_names','languages', 'text_blocks', 'images'));
     }
 
-    public function update(Request $request, Inf_page $inf_page)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'title_id' => 'required',
+            'text' => 'nullable',
+            'image_id' => 'nullable',
+            'menu' => 'required|min:0|max:1',
+            'if_desc' => 'required|min:0|max:1',
+            'sort' => 'required',
+            'original' => 'nullable'
+        ]);
+        $page = Inf_page::find($id);
+        $page->editPage($request->all());
+        $page->setImage($request->get('image_id'));
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+        $text_blocks = $this->text_blocks;
+        $text = array();
+        $lang = array();
+        foreach ($text_blocks as $block) {
+            foreach ($languages as $key => $language) {
+                if ($key == 1) {
+                    $lang = [$language => $request->get($block . ':' . $language)];
+                } else {
+                    $lang[$language] = $request->get($block . ':' . $language);
+                }
+            }
+            $text = array_add($text, $block, $lang);
+        }
+        $page->text = json_encode($text);
+        $page->update($request->all());
+        return redirect()->route('inf_pages.index');
     }
 
-    public function destroy(Inf_page $inf_page)
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
     {
-        //
+        Inf_page::find($id)->delete();
+        return redirect()->route('inf_pages.index');
     }
 }
