@@ -25,6 +25,8 @@ Route::group([
             'namespace' => 'Information'
         ], function (){
             Route::get('/', 'HomeController@index');
+            Route::post('/subscribe', 'InfSubscribersController@subscribe')->name('subscribe');
+            Route::get('/verify/{token}', 'InfSubscribersController@verify')->name('subscribe.verify');
 
         });
 

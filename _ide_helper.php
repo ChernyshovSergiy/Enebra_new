@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.33 on 2018-10-16 13:53:11.
+ * Generated for Laravel 5.6.33 on 2018-11-15 18:20:05.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -12982,6 +12982,98 @@ namespace Mcamara\LaravelLocalization\Facades {
  
 }
 
+namespace Lavary\Menu { 
+
+    class Facade {
+        
+        /**
+         * Check if a menu exists.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function exists($name)
+        {
+            return \Lavary\Menu\Menu::exists($name);
+        }
+        
+        /**
+         * Create a new menu instance.
+         *
+         * @param string $name
+         * @param callable $callback
+         * @return \Menu 
+         * @static 
+         */ 
+        public static function makeOnce($name, $callback)
+        {
+            return \Lavary\Menu\Menu::makeOnce($name, $callback);
+        }
+        
+        /**
+         * Create a new menu instance.
+         *
+         * @param string $name
+         * @param callable $callback
+         * @return \Menu 
+         * @static 
+         */ 
+        public static function make($name, $callback)
+        {
+            return \Lavary\Menu\Menu::make($name, $callback);
+        }
+        
+        /**
+         * Loads and merges configuration data.
+         *
+         * @param string $name
+         * @return array 
+         * @static 
+         */ 
+        public static function loadConf($name)
+        {
+            return \Lavary\Menu\Menu::loadConf($name);
+        }
+        
+        /**
+         * Return Menu instance from the collection by key.
+         *
+         * @param string $key
+         * @return \Lavary\Menu\Item 
+         * @static 
+         */ 
+        public static function get($key)
+        {
+            return \Lavary\Menu\Menu::get($key);
+        }
+        
+        /**
+         * Return Menu collection.
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function getCollection()
+        {
+            return \Lavary\Menu\Menu::getCollection();
+        }
+        
+        /**
+         * Alias for getCollection.
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function all()
+        {
+            return \Lavary\Menu\Menu::all();
+        }
+         
+    }
+ 
+}
+
 namespace Collective\Html { 
 
     class FormFacade {
@@ -14616,98 +14708,6 @@ namespace Barryvdh\Debugbar {
         {
             //Method inherited from \DebugBar\DebugBar            
             return \Barryvdh\Debugbar\LaravelDebugbar::offsetUnset($key);
-        }
-         
-    }
- 
-}
-
-namespace Lavary\Menu { 
-
-    class Facade {
-        
-        /**
-         * Check if a menu exists.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */ 
-        public static function exists($name)
-        {
-            return \Lavary\Menu\Menu::exists($name);
-        }
-        
-        /**
-         * Create a new menu instance.
-         *
-         * @param string $name
-         * @param callable $callback
-         * @return \Menu 
-         * @static 
-         */ 
-        public static function makeOnce($name, $callback)
-        {
-            return \Lavary\Menu\Menu::makeOnce($name, $callback);
-        }
-        
-        /**
-         * Create a new menu instance.
-         *
-         * @param string $name
-         * @param callable $callback
-         * @return \Menu 
-         * @static 
-         */ 
-        public static function make($name, $callback)
-        {
-            return \Lavary\Menu\Menu::make($name, $callback);
-        }
-        
-        /**
-         * Loads and merges configuration data.
-         *
-         * @param string $name
-         * @return array 
-         * @static 
-         */ 
-        public static function loadConf($name)
-        {
-            return \Lavary\Menu\Menu::loadConf($name);
-        }
-        
-        /**
-         * Return Menu instance from the collection by key.
-         *
-         * @param string $key
-         * @return \Lavary\Menu\Item 
-         * @static 
-         */ 
-        public static function get($key)
-        {
-            return \Lavary\Menu\Menu::get($key);
-        }
-        
-        /**
-         * Return Menu collection.
-         *
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function getCollection()
-        {
-            return \Lavary\Menu\Menu::getCollection();
-        }
-        
-        /**
-         * Alias for getCollection.
-         *
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function all()
-        {
-            return \Lavary\Menu\Menu::all();
         }
          
     }
@@ -17034,6 +17034,8 @@ namespace  {
 
     class Mail extends \Illuminate\Support\Facades\Mail {}
 
+    class Menu extends \Lavary\Menu\Facade {}
+
     class Notification extends \Illuminate\Support\Facades\Notification {}
 
     class Password extends \Illuminate\Support\Facades\Password {}
@@ -17067,8 +17069,6 @@ namespace  {
     class Html extends \Collective\Html\HtmlFacade {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
-
-    class Menu extends \Lavary\Menu\Facade {}
  
 }
 

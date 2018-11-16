@@ -156,14 +156,9 @@ class InfPagesController extends Controller
         return redirect()->route('inf_pages.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Inf_page::find($id)->delete();
+        Inf_page::find($id)->removePage();
         return redirect()->route('inf_pages.index');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Information;
 
 use App\Inf_introduction;
 use App\Inf_introduction_point;
+use App\Inf_page;
 use App\Inf_video_group;
 use App\Language;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,15 @@ class HomeController extends Controller
         $introduction_points = Inf_introduction_point::where('language_id', $id)->get()->sortBy('sort');
         $video_groups = Inf_video_group::where('language_id', $id)->get();
         $socials = $this->getSocialLinks();
-        return view('Information.index', compact('status', 'introduction', 'introduction_points', 'video_groups', 'socials', 'cur_lang'));
+        $pages = Inf_page::build()->sortBy('sort');
+        return view('Information.index',
+            compact('status',
+                'introduction',
+                'introduction_points',
+                'video_groups',
+                'socials',
+                'cur_lang',
+                'pages'));
     }
 
     protected function getSocialLinks(){

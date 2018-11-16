@@ -64,17 +64,49 @@
                 <!--MOBILE FORM-->
                 <div class="subscribe col-lg-push-0 col-md-push-0 col-md-8 col-sm-10 col-sm-push-2">
                     <p>@lang('app.to_learn')</p>
-                    <form method="post" action="">
+
+                    {{--<form method="post" action="">--}}
+                        {{--{{ csrf_field() }}--}}
+                        {{--<div class="input-group">--}}
+                            {{--<input type="text" name="sub-email" class="sub-email form-control" placeholder="@lang('app.your_address')"/>--}}
+                            {{--<span class="input-group-btn  hvr-radial-out">--}}
+                                {{--<button class="btn btn-secondary" onclick="subscribe()" type="button">@lang('app.subscribe')</button>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
+                    {{ Form::open(['route'=>'subscribe', 'method'=>'post']) }}
                         <div class="input-group">
-                            <input type="text" name="sub-email" class="sub-email form-control" placeholder="@lang('app.your_address')"/>
+                            <input type="text" name="email" class="sub-email form-control" placeholder="@lang('app.your_address')"/>
                             <span class="input-group-btn  hvr-radial-out">
-                                <button class="btn btn-secondary" onclick="subscribe()" type="button">@lang('app.subscribe')</button>
-                            </span>
+                                <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#ModalCenter">@lang('app.subscribe')</button>
+                              </span>
                         </div>
-                    </form>
-                    <a href="mailto:"><img src="{{ asset( 'img/mail.png') }}"/> info@enebra.org</a>
+                <!-- .modal-content -->
+                    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLongTitle">@lang('app.subscribe')</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ session('status') }} @include('admin.error')
+                                </div>
+                                <div class="modal-footer">
+                                    {{--<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>--}}
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Ok</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                    {{ Form::close() }}
+                    <a href="mailto:"><img src="{{ asset( 'uploads/footer_icon/mail.svg') }}"/> info@enebra.org</a>
                     <a data-toggle="modal" data-target="#myModal3" onclick="increment_term()" href="#">
-                        <img src="{{asset( 'img/terms.png')}}"/>@lang('app.terms')
+                        <img src="{{asset( 'uploads/footer_icon/terms.svg')}}"/>@lang('app.terms')
                     </a>
                     <p class="rights-txt hidden-sm hidden-xs">@lang('app.use_materials')
                         <br/>

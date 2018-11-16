@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Country whereLanguageId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Country whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Country whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Inf_id_document[]
  */
 class Country extends Model
 {
