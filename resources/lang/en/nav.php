@@ -35,5 +35,6 @@
             'not_access_decision'   => 'Archive not access decisions',
             'admin'                 => 'Admin',
             'home'                  => 'Home',
+            'root'                  => 'Root',
 
 		];

@@ -43,11 +43,11 @@
                                 <td>{{ $image_category->id }}</td>
                                 <td>{{ $image_category->title }}</td>
                                 <td>
-                                    <a href="{{route('image_categories.show', $image_category->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('image_categories.edit', $image_category->id)}}" class="fa fa-pencil"></a>
+                                    {{--<a href="{{route('image_categories.show', $image_category->id)}}" class="fa fa-eye"></a>--}}
+                                    <a href="{{route('image_categories.edit', $image_category->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['image_categories.destroy', $image_category->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

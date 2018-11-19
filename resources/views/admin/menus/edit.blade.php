@@ -39,22 +39,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.parent')</label>
-                            <input type="text" name="parent" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $inf_menu_point->parent }}">
+                            <label>@lang('column.parent')</label>
+                            {{ Form::select('parent',
+                                $page_names,
+                                $inf_menu_point->parent,
+                                ['class' => 'form-control select2'])
+                            }}
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">@lang('column.sort')</label>
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $inf_menu_point->sort }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                $inf_menu_point->language_id,
-                                ['class' => 'form-control select2'])
-                            }}
                         </div>
                     </div>
                 </div>

@@ -53,6 +53,12 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <!--Link to home page-->
+                    <li class="home hidden-820">
+                        <a href="/" class="home" >
+                            <i class="fa fa-home" style="font-size: 20px"></i>
+                        </a>
+                    </li>
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

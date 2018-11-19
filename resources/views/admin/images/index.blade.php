@@ -54,11 +54,11 @@
                                 <td>
                                     <img src="{{ $image->getImage() }}" alt="" width="30">
                                 <td>
-                                    <a href="{{route('images.show', $image->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('images.edit', $image->id)}}" class="fa fa-pencil"></a>
+                                    {{--<a href="{{route('images.show', $image->id)}}" class="fa fa-eye"></a>--}}
+                                    <a href="{{route('images.edit', $image->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['images.destroy', $image->id], 'method'=>'delete']) }}
                                         <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                            <i class="fa fa-remove"></i>
+                                            <i class="text-red fa fa-remove"></i>
                                         </button>
                                     {{ Form::close() }}
                                 </td>

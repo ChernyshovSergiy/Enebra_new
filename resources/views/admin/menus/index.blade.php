@@ -41,7 +41,7 @@
                                 <th>@lang('column.url')</th>
                                 <th>@lang('column.parent')</th>
                                 <th>@lang('column.sort')</th>
-                                <th>@lang('column.language')</th>
+                                {{--<th>@lang('column.language')</th>--}}
                                 <th>@lang('column.action')</th>
                             </tr>
                         </thead>
@@ -58,9 +58,10 @@
                                         @endif
                                     </td>
                                     <td>{{ $point->url }}</td>
-                                    <td>{{ $point->parent }}</td>
+                                    {{--<td>{{ $point->parent }}</td>--}}
+                                    <td>{{ $point->getParent() }}</td>
                                     <td>{{ $point->sort }}</td>
-                                    <td>{{ $point->getLanguage()}}</td>
+                                    {{--<td>{{ $point->getLanguage()}}</td>--}}
                                     <td>
                                         <a href="{{route('inf_menus.edit', $point->id)}}" class="text-yellow fa fa-pencil"></a>
                                         {{ Form::open(['route'=>['inf_menus.destroy', $point->id], 'method'=>'delete']) }}

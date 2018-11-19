@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Lang;
 
 /**
  * App\Menu
@@ -49,21 +50,35 @@ class Menu extends Model
         'language_id'
     ];
 
-    public function getLanguage()
+    public static function getMenuPointName()
     {
-        return ($this->language != null)
-            ? $this->language->title
-            : 'don`t have language';
+        $titles = Menu::pluck( 'title', 'id')->all();
+        foreach($titles as $key => $title){
+            $page_names[$key] = Lang::get('nav'.'.'.$title);
+        };
+        array_unshift($page_names, Lang::get('nav.root'));
+
+        return $page_names;
     }
 
-    public function setLanguage($id)
+    public function getParent()
     {
-        if ($id == null){
-            return;
+        if ($this->parent == 0){
+            return '';
+//            return Lang::get('nav.root');
         }
-        $this->language_id = $id;
-        $this->save();
+        $title = $this->where('id', $this->parent)->first();
+        return Lang::get('nav.'. $title->title);
     }
+
+//    public function setLanguage($id)
+//    {
+//        if ($id == null){
+//            return;
+//        }
+//        $this->language_id = $id;
+//        $this->save();
+//    }
 
     public function active()
     {

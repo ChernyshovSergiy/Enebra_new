@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <img src="{{ $image->getImage() }}" alt="" width="200" class="img-responsive">
                             <label for="exampleInputFile">@lang('column.image')</label>
-                            <input type="file" name="image" id="exampleInputFile">
+                            <input type="file" name="image" id="exampleInputFile" value="{{ $image->image }}">
 
                             <p class="help-block">@lang('admin.image_format')
                                 <br>@lang('admin.warning_svg')<br>

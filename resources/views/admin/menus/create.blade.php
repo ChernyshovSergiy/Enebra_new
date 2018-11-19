@@ -39,8 +39,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.parent')</label>
-                            <input type="text" name="parent" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('parent') }}">
+                            <label>@lang('column.parent')</label>
+                            {{ Form::select('parent',
+                                $page_names,
+                                null,
+                                ['class' => 'form-control select2',
+                                'placeholder' => Lang::get('admin.select_parent_menu_point')])
+                            }}
                         </div>
 
                         <div class="form-group">
@@ -48,14 +53,6 @@
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('sort') }}">
                         </div>
 
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                null,
-                                ['class' => 'form-control select2'])
-                            }}
-                        </div>
                     </div>
                 </div>
                 <!-- /.box-body -->

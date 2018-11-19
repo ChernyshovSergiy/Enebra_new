@@ -161,6 +161,7 @@ return[
     'it_add_menu_point_here'     => 'it add menu point here',
     'edit_menu_point'            => 'Edit Menu Point',
     'it_edit_menu_point_here'    => 'it edit menu point here',
+    'select_parent_menu_point'   => 'Select parent menu point',
 
     'pages'                      => 'Pages',
     'listing_pages'              => 'Listing Pages',

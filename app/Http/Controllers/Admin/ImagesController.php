@@ -21,6 +21,7 @@ class ImagesController extends Controller
     {
         $image_categories = ImageCategory::pluck('title', 'id')->all();
         $users = User::pluck('last_name', 'id')->all();
+//        dd($users);
         return view('admin.images.create', compact('image_categories', 'users'));
     }
 

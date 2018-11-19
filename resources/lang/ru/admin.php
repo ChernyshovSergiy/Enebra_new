@@ -160,6 +160,7 @@ return[
     'it_add_menu_point_here'     => 'создайте новый пункт меню',
     'edit_menu_point'            => 'Изменить Пункт Меню',
     'it_edit_menu_point_here'    => 'изменитье пункт меню',
+    'select_parent_menu_point'   => 'Выберите родительский пункт меню',
 
     'pages'                      => 'Страницы',
     'listing_pages'              => 'Список Страниц',
