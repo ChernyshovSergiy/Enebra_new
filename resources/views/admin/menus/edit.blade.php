@@ -60,7 +60,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{route('introduction_points.index')}}" class="btn btn-default">@lang('button.back')</a>
+                    <a href="{{route('inf_menus.index')}}" class="btn btn-default">@lang('button.back')</a>
                     <button class="btn btn-warning pull-right">@lang('button.edit')</button>
                 </div>
                 <!-- /.box-footer-->

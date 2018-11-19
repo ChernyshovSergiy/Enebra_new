@@ -34,6 +34,8 @@ return[
     'menu'	                    => 'Пункты Меню',
     'social_links'	            => 'Ссылки на Соц.Сети',
     'select_image'	            => 'Выберите картинку',
+    'subscribers'	            => 'Подписчики',
+    'anonymous'	                => 'Ананим',
 
     'dashboard_main'            => 'Статистика',
     'listing_image_category'    => 'Список Категорий Картинок',
@@ -173,4 +175,9 @@ return[
     'it_add_social_link_here'    => 'создайте новую соц.ссылку',
     'edit_social_link'           => 'Изменить Соц.Ссылку',
     'it_edit_social_link_here'   => 'измените соц.ссылку',
+
+    'listing_subscribers'        => 'Список Подписчиков',
+    'it_all_subscribers_here'    => 'сдесь все подписчики',
+    'add_subscriber'             => 'Добавить Подписчика',
+    'it_add_subscriber_here'     => 'добавьте подписчика',
 ];

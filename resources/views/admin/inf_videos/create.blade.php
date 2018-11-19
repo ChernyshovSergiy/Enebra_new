@@ -82,14 +82,6 @@
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('sort') }}">
                             <p class="help-block">@lang('admin.introduction_sort_format')</p>
                         </div>
-                        {{--<div class="form-group">--}}
-                            {{--<label>Язык</label>--}}
-                            {{--{{ Form::select('language_id',--}}
-                                {{--$language,--}}
-                                {{--null,--}}
-                                {{--['class' => 'form-control select2'])--}}
-                            {{--}}--}}
-                        {{--</div>--}}
                     </div>
                 </div>
                 <!-- /.box-body -->

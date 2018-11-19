@@ -142,7 +142,7 @@ class Country extends Model
     {
         return (!$this->id_documents->isEmpty())
             ?   implode(', ', $this->id_documents->pluck('name')->all())
-            :   'Теги отсутствуют';
+            :   'Документы отсутствуют';
     }
 
 }

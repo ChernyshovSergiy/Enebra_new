@@ -87,5 +87,6 @@ return[
     'is_active'	            => 'Active',
     'url'	                => 'Url',
     'parent'	            => 'Parent',
+    'regData'	            => 'Date of Registration',
 
 ];

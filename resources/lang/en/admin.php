@@ -34,6 +34,8 @@ return[
     'menu'	                    => 'Menu Points',
     'social_links'	            => 'Social Links',
     'select_image'	            => 'Select image',
+    'subscribers'	            => 'Subscribers',
+    'anonymous'	                => 'Anonymous',
 
     'dashboard_main'            => 'Dashboard',
 
@@ -174,4 +176,9 @@ return[
     'it_add_social_link_here'    => 'it add social link here',
     'edit_social_link'           => 'Edit Social Link',
     'it_edit_social_link_here'   => 'it edit social link here',
+
+    'listing_subscribers'        => 'Listing Subscribers',
+    'it_all_subscribers_here'    => 'it all subscribers here',
+    'add_subscriber'             => 'Add Subscriber',
+    'it_add_subscriber_here'     => 'it add subscriber here',
 ];

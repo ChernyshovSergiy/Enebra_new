@@ -10,7 +10,10 @@
      <li>
         <a href="{{route('inf_menus.index')}}">
             <i class="fa fa-bars"></i> <span>@lang('admin.menu')</span>
-            <span class="pull-right-container"></span>
+            <span class="pull-right-container">
+                  <small class="label pull-right bg-red-gradient">{{ $not_active }}</small>
+                  <small class="label pull-right bg-green">{{ $is_active }}</small>
+            </span>
         </a>
     </li>
      <li>
@@ -103,6 +106,15 @@
             <li><a href="#"><i class="fa fa-heart"></i> @lang('admin.enebra_videos_part')</a></li>
             <li><a href="#"><i class="fa  fa-rocket"></i> @lang('admin.motivation_part')</a></li>
         </ul>
+    </li>
+    <li>
+        <a href="{{route('subscribers.index')}}">
+            <i class="fa fa-user-plus"></i> <span>@lang('admin.subscribers')</span>
+            <span class="pull-right-container">
+                  <small class="label pull-right bg-yellow">{{ $newSubs }}</small>
+                  <small class="label pull-right bg-green">{{ $allSubs }}</small>
+            </span>
+        </a>
     </li>
     {{--<li class="treeview">--}}
         {{--<a href="#">--}}

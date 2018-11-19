@@ -12,14 +12,11 @@ use Mail;
 class InfSubscribersController extends Controller
 {
     public  function subscribe(Request $request){
-//        dd($request->all());
         $this->validate($request, [
             'email' => 'required|email|unique:inf_subscribers'
         ]);
-//         echo 'Ok';
-//        dd($request->all());
+
         $subs = Inf_subscriber::add($request->get('email'));
-        // dd($request->all());
         $subs -> generateToken();
         $subs -> setLanguage();
 

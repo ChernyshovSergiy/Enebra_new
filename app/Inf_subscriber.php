@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
@@ -36,6 +37,28 @@ class Inf_subscriber extends Model
         return $this->hasOne(Language::class, 'id', 'language_id');
     }
 
+
+    public function getName()
+    {
+        if ($this->email != null){
+            $name = User::whereEmail($this->email)->first();
+            if ($name != null){
+                return $name->first_name . ' '. $name->last_name;
+            }
+            return Lang::get('admin.anonymous');
+        }
+
+        return redirect()->back()->with('status', 'Почта не указанна');
+    }
+
+    public function getStatus()
+    {
+        if ($this->token == null){
+            return Lang::get('status.active');
+        }
+        return Lang::get('status.wait');
+    }
+
     public static function add($email)
     {
         $sub = new static;
@@ -58,8 +81,24 @@ class Inf_subscriber extends Model
         $this->save();
     }
 
+    public function setUserLanguage($id)
+    {
+        if ($id == null){
+            return;
+        }
+        $this->language_id = $id;
+        $this->save();
+    }
+
+    public static function setSlugLanguage($id)
+    {
+        $slugLang = Language::find($id);
+        return $slugLang->slug;
+    }
+
     public function remove()
     {
         $this->delete();
     }
+
 }
