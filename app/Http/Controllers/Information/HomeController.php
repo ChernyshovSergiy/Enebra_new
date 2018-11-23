@@ -8,18 +8,11 @@ use App\Inf_page;
 use App\Inf_video_group;
 use App\Language;
 use App\Http\Controllers\Controller;
-use App\Repositories\SocialLinksRepository;
-use Config;
+use App\socialLink;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class HomeController extends Controller
 {
-    protected $s_rep;
-    public function __construct(SocialLinksRepository $s_rep)
-    {
-        $this->s_rep = $s_rep;
-    }
-
     public function index()
     {
         $status = ' ';
@@ -29,7 +22,7 @@ class HomeController extends Controller
         $introduction = Inf_introduction::where('language_id', $id)->firstOrFail();
         $introduction_points = Inf_introduction_point::where('language_id', $id)->get()->sortBy('sort');
         $video_groups = Inf_video_group::where('language_id', $id)->get();
-        $socials = $this->getSocialLinks();
+        $socials = SocialLink::build()->sortBy('sort');
         $pages = Inf_page::build()->sortBy('sort');
         return view('Information.index',
             compact('status',
@@ -41,8 +34,4 @@ class HomeController extends Controller
                 'pages'));
     }
 
-    protected function getSocialLinks(){
-        $social_links = $this->s_rep->get('*', Config::get('settings.social_links_count'))->sortBy('sort');
-        return $social_links;
-    }
 }

@@ -31,11 +31,6 @@ use Lang;
  */
 class Menu extends Model
 {
-    public function language()
-    {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
-    }
-
     public function title()
     {
         return $this->hasMany(Inf_page::class, 'title_id', 'id');
@@ -46,8 +41,7 @@ class Menu extends Model
         'title',
         'url',
         'parent',
-        'sort',
-        'language_id'
+        'sort'
     ];
 
     public static function getMenuPointName()
@@ -70,15 +64,6 @@ class Menu extends Model
         $title = $this->where('id', $this->parent)->first();
         return Lang::get('nav.'. $title->title);
     }
-
-//    public function setLanguage($id)
-//    {
-//        if ($id == null){
-//            return;
-//        }
-//        $this->language_id = $id;
-//        $this->save();
-//    }
 
     public function active()
     {

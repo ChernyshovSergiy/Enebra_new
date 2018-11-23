@@ -20,7 +20,8 @@ class InfSubscribersController extends Controller
         $subs -> generateToken();
         $subs -> setLanguage();
 
-        Mail::to($subs)->send(new VerifySubscriberMail($subs));
+//        Mail::to($subs)->send(new VerifySubscriberMail($subs));
+        Mail::to($subs)->queue(new VerifySubscriberMail($subs));
 
         return redirect()->back()->with('status', Lang::get('mail.check_your_email'));
     }

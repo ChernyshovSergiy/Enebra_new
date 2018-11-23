@@ -4,32 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Image;
 use App\Language;
-use App\Repositories\SocialLinksRepository;
 use App\SocialLink;
-use Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class SocialLinkController extends Controller
 {
-    protected $s_rep;
-    public function __construct(SocialLinksRepository $s_rep)
-    {
-        $this->s_rep = $s_rep;
-    }
-
     public function index()
     {
-        $social_links = $this->getSocialLinks();
+        $social_links = SocialLink::build();
         $locale = LaravelLocalization::getCurrentLocale();
 
         return view('admin.Social_link.index', compact('social_links', 'locale'));
-    }
-
-    protected function getSocialLinks(){
-        $social_links = $this->s_rep->get('*', Config::get('settings.social_links_count'));
-        return $social_links;
     }
 
     public function create()
@@ -68,12 +55,12 @@ class SocialLinkController extends Controller
 
     public function show(SocialLink $socialLink)
     {
-
+        //
     }
 
     public function edit($id)
     {
-        $social_link = $this->getSocialLinks()->find($id);
+        $social_link = SocialLink::build()->find($id);
         $languages = Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();
         $foot_icon_image = Image::where( 'category_id','=', 6 )->pluck('title', 'id');

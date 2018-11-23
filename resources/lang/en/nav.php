@@ -1,8 +1,6 @@
 <?php 
 
 		return [
-
-
 			'about' 				=> 'About Project',
 			'video'					=> 'Video',
 			'community'				=> 'Community',
@@ -36,5 +34,4 @@
             'admin'                 => 'Admin',
             'home'                  => 'Home',
             'root'                  => 'Root',
-
 		];

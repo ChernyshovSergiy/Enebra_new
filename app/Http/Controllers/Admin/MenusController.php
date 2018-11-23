@@ -18,7 +18,6 @@ class MenusController extends Controller
     public function create()
     {
         $page_names = Menu::getMenuPointName();
-
         return view('admin.menus.create', compact('page_names'));
     }
 
@@ -34,7 +33,16 @@ class MenusController extends Controller
         $inf_menu_point = Menu::find($id);
         $page_names = Menu::getMenuPointName();
 
-//        $var = Lang::get('nav.root',[],'ru');
+////        $var = Lang::get('nav.root',[],'ru');
+//        $var = Lang::get('nav',[],'en');
+//////        $test = ['test'=>'English Test'];
+////        if (!Lang::has('nav.test')){
+////
+////            $test = ['nav.test'=>'English Test'];
+////            Lang::addLines($test, 'en');
+////        }
+//////        Lang::addLines($test, 'nav');
+////        $var = Lang::get('nav');
 //        dd($var);
 
         return view('admin.menus.edit', compact('inf_menu_point', 'page_names'));

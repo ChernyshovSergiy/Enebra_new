@@ -104,4 +104,20 @@ class socialLink extends Model
         return $this->notActive();
     }
 
+    public static function build()
+    {
+        $result = socialLink::all();
+        if ($result->isEmpty()){
+            return [];
+        }
+        $result->transform(function ($item, $key){
+            $column = 'url';
+            if (is_string($item->$column) && is_object(json_decode($item->$column)) && json_last_error() == JSON_ERROR_NONE){
+                $item->$column = json_decode($item->$column);
+            }
+            return $item;
+        });
+        return $result;
+    }
+
 }
