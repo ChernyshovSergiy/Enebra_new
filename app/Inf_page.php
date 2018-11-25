@@ -72,6 +72,17 @@ class Inf_page extends Model
         'meta_id', 'text'
     ];
 
+    public $text_blocks = [
+        'sub_title',
+        'description',
+        'top_textarea',
+        'left_textarea',
+        'right_textarea',
+        'text_description',
+        'keywords',
+        'meta_desc',
+    ];
+
 
     public function images()
     {
@@ -211,9 +222,12 @@ class Inf_page extends Model
         if ($result->isEmpty()){
             return [];
         }
-        $result->transform(function ($item, $key){
+        $result->transform(function ($item){
             $column = 'text';
-            if (is_string($item->$column) && is_object(json_decode($item->$column)) && json_last_error() == JSON_ERROR_NONE){
+            if (is_string($item->$column) &&
+                is_object(json_decode($item->$column)) &&
+                json_last_error() == JSON_ERROR_NONE){
+
                 $item->$column = json_decode($item->$column);
             }
             return $item;
@@ -221,23 +235,25 @@ class Inf_page extends Model
         return $result;
     }
 
-//    public function setJson($request){
-//        $languages = Language::where('is_active', '=','1')
-//            ->pluck( 'slug', 'id')->all();
-//        $text_blocks = $this->text_blocks;
-//        $text = array();
-//        $lang = array();
-//        foreach ($text_blocks as $block) {
-//            foreach ($languages as $key => $language) {
-//                if ($key == 1) {
-//                    $lang = [$language => $request->get($block . ':' . $language)];
-//                } else {
-//                    $lang[$language] = $request->get($block . ':' . $language);
-//                }
-//            }
-//            $text = array_add($text, $block, $lang);
-//        }
-//        $text = json_encode($text);
-//        return $text;
-//    }
+
+    public function setJson($request){
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+
+        $text_blocks = $this->text_blocks;
+        $text = array();
+        $lang = array();
+        foreach ($text_blocks as $block) {
+            foreach ($languages as $key => $language) {
+                if ($key == 1) {
+                    $lang = [$language => $request->get($block . ':' . $language)];
+                } else {
+                    $lang[$language] = $request->get($block . ':' . $language);
+                }
+            }
+            $text = array_add($text, $block, $lang);
+        }
+        $text = json_encode($text);
+        return $text;
+    }
 }

@@ -110,7 +110,7 @@ class socialLink extends Model
         if ($result->isEmpty()){
             return [];
         }
-        $result->transform(function ($item, $key){
+        $result->transform(function ($item){
             $column = 'url';
             if (is_string($item->$column) && is_object(json_decode($item->$column)) && json_last_error() == JSON_ERROR_NONE){
                 $item->$column = json_decode($item->$column);
