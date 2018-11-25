@@ -14,21 +14,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfPagesController extends Controller
 {
-//    public $text_blocks = [
-//        'sub_title',
-//        'description',
-//        'top_textarea',
-//        'left_textarea',
-//        'right_textarea',
-//        'text_description',
-//        'keywords',
-//        'meta_desc',
-//    ];
 
     public function index()
     {
-        $text_blocks = Inf_page::first()->text_blocks;
-        dd($text_blocks);
         $pages = Inf_page::build();
         $locale = LaravelLocalization::getCurrentLocale();
         return view('admin.inf_pages.index',compact('pages', 'locale'));
@@ -47,7 +35,7 @@ class InfPagesController extends Controller
         $languages = Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();
 
-        $text_blocks = $this->text_blocks;
+        $text_blocks = Inf_page::first()->text_blocks;
 
         $images = Image::where( 'category_id','=', 5 )->pluck('title', 'id');
 
@@ -116,7 +104,7 @@ class InfPagesController extends Controller
         $languages = Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();
 
-        $text_blocks = $this->text_blocks;
+        $text_blocks = Inf_page::first()->text_blocks;
 
         $images = Image::where( 'category_id','=', 5 )->pluck('title', 'id');
 
@@ -140,7 +128,7 @@ class InfPagesController extends Controller
         $page->setImage($request->get('image_id'));
         $languages = Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();
-        $text_blocks = $this->text_blocks;
+        $text_blocks = Inf_page::first()->text_blocks;
         $text = array();
         $lang = array();
         foreach ($text_blocks as $block) {

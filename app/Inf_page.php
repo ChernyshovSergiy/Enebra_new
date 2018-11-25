@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\Traits\Relations\BelongsTo\Languages;
+use App\Traits\Relations\HasOne\Images;
+use App\Traits\Relations\HasOne\Titles;
+use App\Traits\Relations\HasOne\Users;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Lang;
@@ -61,9 +65,7 @@ use Lang;
  */
 class Inf_page extends Model
 {
-//    use Sluggable;
-
-//
+    use Images, Languages, Users, Titles;
 
     protected $fillable = [
         'title_id','user_id',
@@ -82,27 +84,6 @@ class Inf_page extends Model
         'keywords',
         'meta_desc',
     ];
-
-
-    public function images()
-    {
-        return $this->hasOne(Image::class,'id', 'image_id');
-    }
-
-    public function language()
-    {
-        return $this->belongsTo(Language::class, 'original', 'id');
-    }
-
-    public function user()
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
-    }
-
-    public function title()
-    {
-        return $this->hasOne(Menu::class, 'id', 'title_id');
-    }
 
     public function getUser($id){
         if ($id ==null){
