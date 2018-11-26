@@ -67,6 +67,18 @@ class Inf_page extends Model
 {
     use Images, Languages, Users, Titles;
 
+
+//    public $model = false;
+//    public $column;
+//    public $select;
+//
+//    public function __construct(Inf_page $page, $column = 'text', $select = '*')
+//    {
+//        $this->model = $page;
+//        $this->column = $column;
+//        $this->select = $select;
+//    }
+
     protected $fillable = [
         'title_id','user_id',
         'image_id', 'menu', 'if_desc',
@@ -74,7 +86,7 @@ class Inf_page extends Model
         'meta_id', 'text'
     ];
 
-    public $text_blocks = [
+    protected $text_blocks = [
         'sub_title',
         'description',
         'top_textarea',
@@ -84,6 +96,18 @@ class Inf_page extends Model
         'keywords',
         'meta_desc',
     ];
+
+    public static function getTextColumnsForTranslite()
+    {
+        $page = new static;
+        $page->text_blocks;
+        return $page->text_blocks;
+    }
+
+    public static function getImageNameByCategory()
+    {
+        return Image::where( 'category_id','=', 5 )->pluck('title', 'id');
+    }
 
     public function getUser($id){
         if ($id ==null){
@@ -96,16 +120,20 @@ class Inf_page extends Model
     public static function addPage( $fields) //add new page
     {
         $page = new static;
-        $page->fill($fields);
-        $page->make();
+        $page->fill($fields->all());
+        $page->setImage($fields->get('image_id'));
+        $page->text = $page->setJson($fields);
+        $page->save();
 
         return $page;
     }
 
     public function editPage($fields) //edit(change) page
     {
-        $this->fill($fields);
-        $this->make();
+        $this->fill($fields->all());
+        $this->setImage($fields->get('image_id'));
+        $this->text = $this->setJson($fields);
+        $this->update($fields->all());
     }
 
     public function removePage() //delete page
@@ -194,6 +222,28 @@ class Inf_page extends Model
         }
         $this->title_id = $id;
         $this->save();
+    }
+
+    public static function getUsers()
+    {
+        return User::pluck( 'last_name', 'id')->all();
+    }
+
+    public static function getActiveLanguages()
+    {
+        return Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+    }
+
+    public static function getActivePagesName()
+    {
+        $titles = Menu::where('is_active', '=','1')->get()
+            ->sortBy('sort')->pluck( 'title', 'id')->all();
+
+        foreach($titles as $key => $title){
+            $page_names[$key] = Lang::get('nav'.'.'.$title);
+        };
+        return $page_names;
     }
 
 
