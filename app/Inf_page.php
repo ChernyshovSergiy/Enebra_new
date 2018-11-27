@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\LanguagesService;
 use App\Traits\Relations\BelongsTo\Languages;
 use App\Traits\Relations\HasOne\Images;
 use App\Traits\Relations\HasOne\Titles;
@@ -10,61 +11,16 @@ use Illuminate\Database\Eloquent\Model;
 use Lang;
 
 
-/**
- * App\Inf_page
- *
- * @property int img_id
- * @property int menu
- * @property mixed language
- * @property int $id
- * @property int $user_id
- * @property int $title_id
- * @property array $text
- * @property string|null $sub_title
- * @property string|null $description
- * @property string|null $top_textarea
- * @property string|null $left_textarea
- * @property string|null $right_textarea
- * @property int $views_count
- * @property int|null $image_id
- * @property int $if_desc
- * @property string|null $text_description
- * @property int|null $sort
- * @property int $original
- * @property string|null $keywords
- * @property string|null $meta_desc
- * @property int|null $meta_id
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $images
- * @property-read \App\Menu $title
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereIfDesc($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereImageId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereKeywords($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereLeftTextarea($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereMenu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereMetaDesc($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereMetaId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereOriginal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereRightTextarea($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereSort($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereSubTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereText($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereTextDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereTitleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereTopTextarea($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereViewsCount($value)
- * @mixin \Eloquent
- */
 class Inf_page extends Model
 {
     use Images, Languages, Users, Titles;
+
+    public $languages;
+
+    public function __construct(LanguagesService $languagesService)
+    {
+        $this->languages = $languagesService;
+    }
 
 
     protected $fillable = [
@@ -85,17 +41,15 @@ class Inf_page extends Model
         'meta_desc',
     ];
 
-    public static function getTextColumnsForTranslite()
+    /**
+     * @return array
+     */
+    public static function getTextColumnsForTranslate()
     {
         $page = new static;
         $page->text_blocks;
         return $page->text_blocks;
     }
-
-//    public static function getImageNameByCategory()
-//    {
-//        return Image::where( 'category_id','=', 5 )->pluck('title', 'id');
-//    }
 
     public function getUser($id){
         if ($id ==null){
@@ -212,29 +166,6 @@ class Inf_page extends Model
         $this->save();
     }
 
-//    public static function getUsers()
-//    {
-//        return User::pluck( 'last_name', 'id')->all();
-//    }
-//
-//    public static function getActiveLanguages()
-//    {
-//        return Language::where('is_active', '=','1')
-//            ->pluck( 'slug', 'id')->all();
-//    }
-//
-//    public static function getActivePagesName()
-//    {
-//        $titles = Menu::where('is_active', '=','1')->get()
-//            ->sortBy('sort')->pluck( 'title', 'id')->all();
-//
-//        foreach($titles as $key => $title){
-//            $page_names[$key] = Lang::get('nav'.'.'.$title);
-//        };
-//        return $page_names;
-//    }
-
-
     public static function build()
     {
         $result = Inf_page::all();
@@ -255,9 +186,12 @@ class Inf_page extends Model
     }
 
 
-    public function setJson($request){
-        $languages = Language::where('is_active', '=','1')
-            ->pluck( 'slug', 'id')->all();
+    public function setJson($request)
+    {
+        $languages = $this->languages->getActiveLanguages();
+
+//        $languages = Language::where('is_active', '=','1')
+//            ->pluck( 'slug', 'id')->all();
 
         $text_blocks = $this->text_blocks;
         $text = array();

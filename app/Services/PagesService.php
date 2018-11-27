@@ -14,10 +14,17 @@ use Lang;
 
 class PagesService
 {
+    public $menus;
+    public function __construct(MenusService $menusService)
+    {
+        $this->menus = $menusService;
+    }
+
     public function getActivePagesName()
     {
-        $titles = Menu::where('is_active', '=','1')->get()
-            ->sortBy('sort')->pluck( 'title', 'id')->all();
+        $titles = $this->menus->getTitleMenuPoints();
+//        $titles = Menu::where('is_active', '=','1')->get()
+//            ->sortBy('sort')->pluck( 'title', 'id')->all();
 
         foreach($titles as $key => $title){
             $page_names[$key] = Lang::get('nav'.'.'.$title);

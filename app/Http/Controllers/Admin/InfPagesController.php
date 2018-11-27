@@ -43,7 +43,7 @@ class InfPagesController extends Controller
         $users = $this->users->getUsers();
         $page_names = $this->pages->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();
-        $text_blocks = Inf_page::getTextColumnsForTranslite();
+        $text_blocks = Inf_page::getTextColumnsForTranslate();
         $images = $this->images->getImageNameByCategory(5);
 
         return view('admin.inf_pages.create', compact(
@@ -69,7 +69,7 @@ class InfPagesController extends Controller
         $users = $this->users->getUsers();
         $page_names = $this->pages->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();
-        $text_blocks = Inf_page::getTextColumnsForTranslite();
+        $text_blocks = Inf_page::getTextColumnsForTranslate();
         $images = $this->images->getImageNameByCategory(5);
 
         return view('admin.inf_pages.edit', compact('page','users','page_names','languages', 'text_blocks', 'images'));
