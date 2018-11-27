@@ -7,7 +7,6 @@ use App\Traits\Relations\HasOne\Images;
 use App\Traits\Relations\HasOne\Titles;
 use App\Traits\Relations\HasOne\Users;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Lang;
 
 
@@ -68,17 +67,6 @@ class Inf_page extends Model
     use Images, Languages, Users, Titles;
 
 
-//    public $model = false;
-//    public $column;
-//    public $select;
-//
-//    public function __construct(Inf_page $page, $column = 'text', $select = '*')
-//    {
-//        $this->model = $page;
-//        $this->column = $column;
-//        $this->select = $select;
-//    }
-
     protected $fillable = [
         'title_id','user_id',
         'image_id', 'menu', 'if_desc',
@@ -104,10 +92,10 @@ class Inf_page extends Model
         return $page->text_blocks;
     }
 
-    public static function getImageNameByCategory()
-    {
-        return Image::where( 'category_id','=', 5 )->pluck('title', 'id');
-    }
+//    public static function getImageNameByCategory()
+//    {
+//        return Image::where( 'category_id','=', 5 )->pluck('title', 'id');
+//    }
 
     public function getUser($id){
         if ($id ==null){
@@ -224,27 +212,27 @@ class Inf_page extends Model
         $this->save();
     }
 
-    public static function getUsers()
-    {
-        return User::pluck( 'last_name', 'id')->all();
-    }
-
-    public static function getActiveLanguages()
-    {
-        return Language::where('is_active', '=','1')
-            ->pluck( 'slug', 'id')->all();
-    }
-
-    public static function getActivePagesName()
-    {
-        $titles = Menu::where('is_active', '=','1')->get()
-            ->sortBy('sort')->pluck( 'title', 'id')->all();
-
-        foreach($titles as $key => $title){
-            $page_names[$key] = Lang::get('nav'.'.'.$title);
-        };
-        return $page_names;
-    }
+//    public static function getUsers()
+//    {
+//        return User::pluck( 'last_name', 'id')->all();
+//    }
+//
+//    public static function getActiveLanguages()
+//    {
+//        return Language::where('is_active', '=','1')
+//            ->pluck( 'slug', 'id')->all();
+//    }
+//
+//    public static function getActivePagesName()
+//    {
+//        $titles = Menu::where('is_active', '=','1')->get()
+//            ->sortBy('sort')->pluck( 'title', 'id')->all();
+//
+//        foreach($titles as $key => $title){
+//            $page_names[$key] = Lang::get('nav'.'.'.$title);
+//        };
+//        return $page_names;
+//    }
 
 
     public static function build()

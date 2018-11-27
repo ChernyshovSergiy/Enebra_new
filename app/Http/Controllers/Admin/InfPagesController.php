@@ -5,10 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\InfPages\ValidateRequest;
 use App\Inf_page;
 use App\Http\Controllers\Controller;
+use App\Services\ImagesService;
+use App\Services\LanguagesService;
+use App\Services\PagesService;
+use App\Services\UsersService;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfPagesController extends Controller
 {
+    public $users;
+    public $pages;
+    public $languages;
+    public $images;
+
+    public function __construct(UsersService $userService, PagesService $pagesService, LanguagesService $languagesService, ImagesService $imagesService)
+    {
+        $this->users = $userService;
+        $this->pages = $pagesService;
+        $this->languages = $languagesService;
+        $this->images = $imagesService;
+    }
 
     public function index()
     {
@@ -20,11 +36,15 @@ class InfPagesController extends Controller
 
     public function create()
     {
-        $users = Inf_page::getUsers();
-        $page_names = Inf_page::getActivePagesName();
-        $languages = Inf_page::getActiveLanguages();
+//        $users = Inf_page::getUsers();
+//        $page_names = Inf_page::getActivePagesName();
+//        $languages = Inf_page::getActiveLanguages();
+//        $images = Inf_page::getImageNameByCategory();
+        $users = $this->users->getUsers();
+        $page_names = $this->pages->getActivePagesName();
+        $languages = $this->languages->getActiveLanguages();
         $text_blocks = Inf_page::getTextColumnsForTranslite();
-        $images = Inf_page::getImageNameByCategory();
+        $images = $this->images->getImageNameByCategory(5);
 
         return view('admin.inf_pages.create', compact(
             'users',
@@ -46,11 +66,11 @@ class InfPagesController extends Controller
     public function edit($id)
     {
         $page = Inf_page::build()->find($id);
-        $users = Inf_page::getUsers();
-        $page_names = Inf_page::getActivePagesName();
-        $languages = Inf_page::getActiveLanguages();
+        $users = $this->users->getUsers();
+        $page_names = $this->pages->getActivePagesName();
+        $languages = $this->languages->getActiveLanguages();
         $text_blocks = Inf_page::getTextColumnsForTranslite();
-        $images = Inf_page::getImageNameByCategory();
+        $images = $this->images->getImageNameByCategory(5);
 
         return view('admin.inf_pages.edit', compact('page','users','page_names','languages', 'text_blocks', 'images'));
     }
