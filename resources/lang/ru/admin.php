@@ -36,6 +36,7 @@ return[
     'select_image'	            => 'Выберите картинку',
     'subscribers'	            => 'Подписчики',
     'anonymous'	                => 'Ананим',
+    'select_id_docs'	        => 'Выберите документы подтверждающие личность',
 
     'dashboard_main'            => 'Статистика',
     'listing_image_category'    => 'Список Категорий Картинок',

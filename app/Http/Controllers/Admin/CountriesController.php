@@ -6,14 +6,29 @@ use App\Country;
 use App\Image;
 use App\Inf_id_document;
 use App\Language;
+use App\Services\JsonService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CountriesController extends Controller
 {
+
+    public $json;
+    public $model;
+
+    public function __construct( JsonService $jsonService, Inf_id_document $id_document)
+    {
+
+        $this->json = $jsonService;
+        $this->model = $id_document;
+
+    }
+
     public function index()
     {
         $countries = Country::all();
+
         return view('admin.countries.index', compact('countries'));
     }
 
@@ -21,7 +36,11 @@ class CountriesController extends Controller
     {
         $language = Language::pluck('title', 'id')->all();
         $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
-        $id_documents = Inf_id_document::pluck('name', 'id')->all();
+        $locale = LaravelLocalization::getCurrentLocale();
+        $doc_names = $this->json->build($this->model, 'name')->pluck('name', 'id');
+        foreach($doc_names as $key => $title){
+            $id_documents[$key] = $title->$locale;
+        };
         return view('admin.countries.create', compact('language', 'flag_image', 'id_documents'));
     }
 
@@ -51,7 +70,11 @@ class CountriesController extends Controller
         $country = Country::find($id);
         $language = Language::pluck('title', 'id')->all();
         $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
-        $id_documents = Inf_id_document::pluck('name', 'id')->all();
+        $locale = LaravelLocalization::getCurrentLocale();
+        $doc_names = $this->json->build($this->model, 'name')->pluck('name', 'id');
+        foreach($doc_names as $key => $title){
+            $id_documents[$key] = $title->$locale;
+        };
         return view('admin.countries.edit', compact('country','language', 'flag_image', 'id_documents'));
     }
 

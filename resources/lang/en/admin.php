@@ -36,6 +36,7 @@ return[
     'select_image'	            => 'Select image',
     'subscribers'	            => 'Subscribers',
     'anonymous'	                => 'Anonymous',
+    'select_id_docs'	        => 'Select identity documents',
 
     'dashboard_main'            => 'Dashboard',
 

@@ -4,51 +4,59 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\IdDocument\ValidateRequest;
 use App\Inf_id_document;
-use App\Language;
 use App\Http\Controllers\Controller;
+use App\Services\JsonService;
+use App\Services\LanguagesService;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfIdDocumentsController extends Controller
 {
+    public $model;
+    public $json;
+    public $languages;
+
+    public function __construct(Inf_id_document $id_document, JsonService $jsonService, LanguagesService $languagesService)
+    {
+        $this->model = $id_document;
+        $this->json = $jsonService;
+        $this->languages = $languagesService;
+    }
+
     public function index()
     {
-        $id_documents = Inf_id_document::all();
+        $id_documents = $this->json->build($this->model, 'name');
+        $locale = LaravelLocalization::getCurrentLocale();
 
-        return view('admin.id_documents.index', compact('id_documents'));
+        return view('admin.id_documents.index', compact('id_documents', 'locale'));
     }
 
     public function create()
     {
-        $language = Language::pluck('title', 'id')->all();
+        $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.id_documents.create', compact('language'));
+        return view('admin.id_documents.create', compact('languages'));
     }
 
     public function store(ValidateRequest $request)
     {
-        $id_documents = Inf_id_document::create($request->all());
-        $id_documents->setLanguage($request->get('language_id'));
+        $model = $this->json->createLangString($request, 'name', $this->model);
+        $model->save();
 
         return redirect()->route('id_documents.index');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
-        $id_document = Inf_id_document::find($id);
-        $language = Language::pluck('title', 'id')->all();
+        $id_document = $this->json->build($this->model, 'name')->find($id);
+        $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.id_documents.edit', compact('id_document','language'));
+        return view('admin.id_documents.edit', compact('id_document','languages'));
     }
 
     public function update(ValidateRequest $request, $id)
     {
-        $id_document = Inf_id_document::find($id);
-        $id_document ->setLanguage($request->get('language_id'));
-        $id_document->update($request->all());
+        $model = Inf_id_document::find($id);
+        $model->editDoc($request, $model);
 
         return redirect()->route('id_documents.index');
     }

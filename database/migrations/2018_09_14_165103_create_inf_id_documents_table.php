@@ -15,8 +15,7 @@ class CreateInfIdDocumentsTable extends Migration
     {
         Schema::create('inf_id_documents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('language_id')->default(1);
+            $table->json('name')->nullable();
             $table->timestamps();
         });
     }

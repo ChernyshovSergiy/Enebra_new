@@ -14,8 +14,8 @@ class ValidateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'language_id' => 'required'
+//            'name:en' => 'required'
+            'name:en' => 'nullable'
         ];
     }
 }

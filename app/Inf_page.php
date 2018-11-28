@@ -15,12 +15,12 @@ class Inf_page extends Model
 {
     use Images, Languages, Users, Titles;
 
-    public $languages;
-
-    public function __construct(LanguagesService $languagesService)
-    {
-        $this->languages = $languagesService;
-    }
+//    public $languages;
+//
+//    public function __construct(LanguagesService $languagesService)
+//    {
+//        $this->languages = $languagesService;
+//    }
 
 
     protected $fillable = [
@@ -188,10 +188,10 @@ class Inf_page extends Model
 
     public function setJson($request)
     {
-        $languages = $this->languages->getActiveLanguages();
+//        $languages = $this->languages->getActiveLanguages();
 
-//        $languages = Language::where('is_active', '=','1')
-//            ->pluck( 'slug', 'id')->all();
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
 
         $text_blocks = $this->text_blocks;
         $text = array();

@@ -28,21 +28,16 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-6">
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
-                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $id_document->name }}">
-                            <p class="help-block">@lang('admin.doc_format')</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                $id_document->language_id,
-                                ['class' => 'form-control select2'])
-                            }}
-                        </div>
+                        @foreach($languages as $language)
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">@lang('column.object_name'): {{$language}}</label>
+                                <input type="text" name="{{'name'.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder=""
+                                   @if (isset($id_document->name->$language))
+                                        value="{{ $id_document->name->$language }}"
+                                   @endif
+                                >
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <!-- /.box-body -->

@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Traits\Methods\BuildJson;
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * App\Country
@@ -29,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model
 {
+    use BuildJson;
 
     public function language()
     {
@@ -140,9 +143,19 @@ class Country extends Model
 
     public function getIdDocumentsNames()
     {
-        return (!$this->id_documents->isEmpty())
-            ?   implode(', ', $this->id_documents->pluck('name')->all())
-            :   'Документы отсутствуют';
+        $locale = LaravelLocalization::getCurrentLocale();
+        if (!$this->id_documents->isEmpty()){
+            $id_docs = Inf_id_document::getModel();
+            $id_docs = $this->build($id_docs, 'name')
+                ->whereIn('id', $this->id_documents->pluck('id')->all())
+                ->pluck('name')->pluck($locale);
+            foreach($id_docs as $key => $title){
+                $doc_names[$key] = $title;
+            };
+            $doc_names = implode(', ', $doc_names);
+            return $doc_names;
+        }
+        return '';
     }
 
 }

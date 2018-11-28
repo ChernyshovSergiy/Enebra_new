@@ -59,7 +59,7 @@
                                 null,
                                 ['class' => 'form-control select2',
                                 'multiple'=>"multiple",
-                                'placeholder'=>'Выберите документы подтверждающие личность'])
+                                'placeholder'=> Lang::get('admin.select_id_docs')])
                             }}
                         </div>
                     </div>

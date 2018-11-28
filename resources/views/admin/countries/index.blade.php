@@ -55,11 +55,11 @@
                                 </td>
                                 <td>{{ $country->getIdDocumentsNames() }}</td>
                                 <td>
-                                    <a href="{{route('countries.show', $country->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('countries.edit', $country->id)}}" class="fa fa-pencil"></a>
+                                    {{--<a href="{{route('countries.show', $country->id)}}" class="fa fa-eye"></a>--}}
+                                    <a href="{{route('countries.edit', $country->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['countries.destroy', $country->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

@@ -57,7 +57,7 @@
                             <label>@lang('column.id_documents')</label>
                             {{ Form::select('id_documents[]',
                                 $id_documents,
-                                $country->image_id,
+                                $country->id_documents,
                                 ['class' => 'form-control select2', 'multiple'=>"multiple", 'data-placeholder'=>'Выберите документы подтверждающие личность'])
                             }}
                         </div>
