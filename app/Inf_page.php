@@ -11,6 +11,41 @@ use Illuminate\Database\Eloquent\Model;
 use Lang;
 
 
+/**
+ * App\Inf_page
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $title_id
+ * @property mixed|null $text
+ * @property int $views_count
+ * @property int|null $image_id
+ * @property int $menu
+ * @property int $if_desc
+ * @property int|null $sort
+ * @property int $original
+ * @property int $meta_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Image $images
+ * @property-read \App\Language $language
+ * @property-read \App\Menu $title
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereIfDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereImageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereMenu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereMetaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereOriginal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereTitleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_page whereViewsCount($value)
+ * @mixin \Eloquent
+ */
 class Inf_page extends Model
 {
     use Images, Languages, Users, Titles;

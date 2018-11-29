@@ -58,8 +58,7 @@
                                 $id_documents,
                                 null,
                                 ['class' => 'form-control select2',
-                                'multiple'=>"multiple",
-                                'placeholder'=> Lang::get('admin.select_id_docs')])
+                                'multiple'=>"multiple"])
                             }}
                         </div>
                     </div>

@@ -18,7 +18,11 @@ class InfPagesController extends Controller
     public $languages;
     public $images;
 
-    public function __construct(UsersService $userService, PagesService $pagesService, LanguagesService $languagesService, ImagesService $imagesService)
+    public function __construct(
+        UsersService $userService,
+        PagesService $pagesService,
+        LanguagesService $languagesService,
+        ImagesService $imagesService)
     {
         $this->users = $userService;
         $this->pages = $pagesService;
@@ -36,10 +40,6 @@ class InfPagesController extends Controller
 
     public function create()
     {
-//        $users = Inf_page::getUsers();
-//        $page_names = Inf_page::getActivePagesName();
-//        $languages = Inf_page::getActiveLanguages();
-//        $images = Inf_page::getImageNameByCategory();
         $users = $this->users->getUsers();
         $page_names = $this->pages->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();
@@ -72,7 +72,10 @@ class InfPagesController extends Controller
         $text_blocks = Inf_page::getTextColumnsForTranslate();
         $images = $this->images->getImageNameByCategory(5);
 
-        return view('admin.inf_pages.edit', compact('page','users','page_names','languages', 'text_blocks', 'images'));
+        return view('admin.inf_pages.edit', compact(
+            'page','users','page_names',
+            'languages', 'text_blocks', 'images')
+        );
     }
 
     public function update(ValidateRequest $request, $id)

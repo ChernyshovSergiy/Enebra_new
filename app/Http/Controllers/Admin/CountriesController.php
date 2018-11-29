@@ -3,26 +3,32 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Country;
-use App\Image;
+use App\Http\Requests\Admin\Countries\ValidateRequest;
 use App\Inf_id_document;
-use App\Language;
+use App\Services\ImagesService;
 use App\Services\JsonService;
-use Illuminate\Http\Request;
+use App\Services\LanguagesService;
 use App\Http\Controllers\Controller;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CountriesController extends Controller
 {
 
     public $json;
     public $model;
+    public $language;
+    public $images;
 
-    public function __construct( JsonService $jsonService, Inf_id_document $id_document)
+    public function __construct(
+        JsonService $jsonService,
+        Inf_id_document $id_document,
+        LanguagesService $language,
+        ImagesService $imagesService
+    )
     {
-
         $this->json = $jsonService;
         $this->model = $id_document;
-
+        $this->language = $language;
+        $this->images = $imagesService;
     }
 
     public function index()
@@ -34,80 +40,43 @@ class CountriesController extends Controller
 
     public function create()
     {
-        $language = Language::pluck('title', 'id')->all();
-        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
-        $locale = LaravelLocalization::getCurrentLocale();
-        $doc_names = $this->json->build($this->model, 'name')->pluck('name', 'id');
-        foreach($doc_names as $key => $title){
-            $id_documents[$key] = $title->$locale;
-        };
-        return view('admin.countries.create', compact('language', 'flag_image', 'id_documents'));
+        $language = $this->language->getLanguages();
+        $flag_image = $this->images->getImageNameByCategory(1);
+        $id_documents = (new \App\Country)->getIdDocNameByCurrentLocale();
+
+        return view('admin.countries.create', compact(
+            'language', 'flag_image', 'id_documents'));
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'language_id' => 'required',
-            'image_id' => 'required',
-            'id_documents' => 'nullable'
-        ]);
-        $country = Country::add($request->all());
-        $country->setLanguage($request->get('language_id'));
-        $country->setFlagImage($request->get('image_id'));
-        $country->setIdDocuments($request->get('id_documents'));
+        Country::addCountry($request);
 
         return redirect()->route('countries.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
     {
         $country = Country::find($id);
-        $language = Language::pluck('title', 'id')->all();
-        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
-        $locale = LaravelLocalization::getCurrentLocale();
-        $doc_names = $this->json->build($this->model, 'name')->pluck('name', 'id');
-        foreach($doc_names as $key => $title){
-            $id_documents[$key] = $title->$locale;
-        };
-        return view('admin.countries.edit', compact('country','language', 'flag_image', 'id_documents'));
+        $language = $this->language->getLanguages();
+        $flag_image = $this->images->getImageNameByCategory(1);
+        $id_documents = (new \App\Country)->getIdDocNameByCurrentLocale();
+
+        return view('admin.countries.edit', compact(
+            'country','language', 'flag_image', 'id_documents'));
     }
 
-    /**
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $id)
+    public function update(ValidateRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'language_id' => 'required',
-            'image_id' => 'required',
-            'id_documents' => 'nullable'
-        ]);
         $country = Country::find($id);
-        $country ->setLanguage($request->get('language_id'));
-        $country->setFlagImage($request->get('image_id'));
-        $country->setIdDocuments($request->get('id_documents'));
-        $country->update($request->all());
+        $country ->editCountry($request);
 
         return redirect()->route('countries.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Country::find($id)->delete();
+        Country::find($id)->removeCountry();
         return redirect()->route('countries.index');
     }
 }

@@ -18,4 +18,9 @@ class LanguagesService
         return Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();
     }
+
+    public function getLanguages()
+    {
+        return Language::pluck('title', 'id')->all();
+    }
 }
