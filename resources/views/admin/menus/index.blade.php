@@ -49,7 +49,7 @@
                             @foreach($inf_menu_points as $point)
                                 <tr>
                                     <td>{{ $point->id }}</td>
-                                    <td>{{ Lang::get('nav.'.$point->title) }}</td>
+                                    <td>{!! $point->title->$locale !!}</td>
                                     <td>
                                         @if($point->is_active == 1)
                                             <a href="/admin/inf_menus/toggle/{{ $point->id }}" class="text-green fa fa-thumbs-o-up"></a>

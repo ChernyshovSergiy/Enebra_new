@@ -14,7 +14,7 @@ class ValidateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title:en' => 'required',
             'is_active' => 'nullable',
             'url' => 'required',
             'parent' => 'required',

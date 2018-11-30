@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Traits\Methods\PrepareLangStrForJsonMethods;
 use Illuminate\Database\Eloquent\Model;
 use Lang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * App\Menu
@@ -31,6 +33,8 @@ use Lang;
  */
 class Menu extends Model
 {
+    use PrepareLangStrForJsonMethods;
+
     public function title()
     {
         return $this->hasMany(Inf_page::class, 'title_id', 'id');
@@ -46,9 +50,15 @@ class Menu extends Model
 
     public static function getMenuPointName()
     {
+        $locale = LaravelLocalization::getCurrentLocale();
         $titles = Menu::pluck( 'title', 'id')->all();
+
         foreach($titles as $key => $title){
-            $page_names[$key] = Lang::get('nav'.'.'.$title);
+            $page_names[$key] = json_decode($title)->$locale;
+//            if (($key = array_search('home', $page_names)) !== false){
+//                unset($page_names[$key]);
+//            };
+
         };
         array_unshift($page_names, Lang::get('nav.root'));
 
@@ -57,12 +67,13 @@ class Menu extends Model
 
     public function getParent()
     {
+        $locale = LaravelLocalization::getCurrentLocale();
         if ($this->parent == 0){
             return '';
-//            return Lang::get('nav.root');
         }
         $title = $this->where('id', $this->parent)->first();
-        return Lang::get('nav.'. $title->title);
+//        dd($title);
+        return json_decode($title->title)->$locale;
     }
 
     public function active()
@@ -86,4 +97,27 @@ class Menu extends Model
         return $this->notActive();
     }
 
+    public static function addMenuPoint($request) :void//add new page
+    {
+        $menu = new static;
+        $menu->fill($request->all());
+        $menu->title = json_encode($menu->createLangString($request, 'title'));
+        $menu->save();
+
+    }
+
+    public static function editMenuPoint($request, $id) :void //add new page
+    {
+        $menu = Menu::find($id);
+        $menu->fill($request->all());
+        $menu->title = json_encode($menu->createLangString($request, 'title'));
+        $menu->update($request->all());
+    }
+
+    public static function removeMenuPoint($id) :void
+    {
+        Menu::where('parent', $id)->update(array('parent' => 0));
+
+        Menu::find($id)->delete();
+    }
 }
