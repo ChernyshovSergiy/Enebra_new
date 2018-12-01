@@ -9,6 +9,7 @@ use App\Traits\Relations\HasOne\Titles;
 use App\Traits\Relations\HasOne\Users;
 use Illuminate\Database\Eloquent\Model;
 use Lang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 /**
@@ -187,8 +188,9 @@ class Inf_page extends Model
 
     public function getTitle()
     {
+        $locale = LaravelLocalization::getCurrentLocale();
         return ($this->title != null)
-            ? Lang::get('nav.'.$this->title->title)
+            ? json_decode($this->title->title)->$locale
             : 'don`t have language';
     }
 
