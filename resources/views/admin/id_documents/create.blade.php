@@ -35,7 +35,6 @@
                                 {{--<p class="help-block">@lang('admin.doc_format')</p>--}}
                             </div>
                         @endforeach
-                        </div>
                     </div>
                 </div>
                 <!-- /.box-body -->

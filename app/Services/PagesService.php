@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Menu;
 use Lang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class PagesService
 {
@@ -22,12 +23,11 @@ class PagesService
 
     public function getActivePagesName()
     {
+        $locale = LaravelLocalization::getCurrentLocale();
         $titles = $this->menus->getTitleMenuPoints();
-//        $titles = Menu::where('is_active', '=','1')->get()
-//            ->sortBy('sort')->pluck( 'title', 'id')->all();
 
         foreach($titles as $key => $title){
-            $page_names[$key] = Lang::get('nav'.'.'.$title);
+            $page_names[$key] = json_decode($title)->$locale;
         };
         return $page_names;
     }

@@ -41,7 +41,7 @@
 
                 @foreach( $introduction_points  as $point )
 
-                    <li><a href="{{$point -> link}}">{!! substr($point -> point, 3, -4 ) !!}</a></li>
+                    <li><a href="{{$point->menu->url}}">{!! substr($point->point->$cur_lang, 3, -4 ) !!}</a></li>
 
                 @endforeach
             </ul>

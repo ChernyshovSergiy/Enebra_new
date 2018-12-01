@@ -103,7 +103,6 @@ class Menu extends Model
         $menu->fill($request->all());
         $menu->title = json_encode($menu->createLangString($request, 'title'));
         $menu->save();
-
     }
 
     public static function editMenuPoint($request, $id) :void //add new page

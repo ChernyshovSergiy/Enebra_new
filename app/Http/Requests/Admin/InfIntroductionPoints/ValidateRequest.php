@@ -14,10 +14,9 @@ class ValidateRequest extends FormRequest
     public function rules()
     {
         return [
-            'point' => 'required',
-            'link' => 'required',
-            'sort' => 'required|numeric',
-            'language_id' => 'required'
+            'point:en' => 'required',
+            'link_id' => 'required|numeric',
+            'sort' => 'required|numeric'
         ];
     }
 }

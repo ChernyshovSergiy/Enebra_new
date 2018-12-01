@@ -20,7 +20,7 @@ class HomeController extends Controller
         $langId = Language::where('slug', $cur_lang)->firstOrFail();
         $id = $langId->id;
         $introduction = Inf_introduction::where('language_id', $id)->firstOrFail();
-        $introduction_points = Inf_introduction_point::where('language_id', $id)->get()->sortBy('sort');
+        $introduction_points = Inf_introduction_point::build()->sortBy('sort');
         $video_groups = Inf_video_group::where('language_id', $id)->get();
         $socials = SocialLink::build()->sortBy('sort');
         $pages = Inf_page::build()->sortBy('sort');

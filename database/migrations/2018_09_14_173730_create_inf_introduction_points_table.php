@@ -10,16 +10,22 @@ class CreateInfIntroductionPointsTable extends Migration
     {
         Schema::create('inf_introduction_points', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('point');
-            $table->string('link')->nullable();
+            $table->json('point')->nullable();
+            $table->unsignedInteger('link_id');
             $table->integer('sort');
-            $table->integer('language_id')->default(1);
             $table->timestamps();
+        });
+        Schema::table('inf_introduction_points', function (Blueprint $table) {
+            $table->foreign('link_id')->references('id')
+                ->on('menus')->onUpdate('cascade');
         });
     }
 
     public function down()
     {
+        Schema::table('inf_pages', function (Blueprint $table) {
+            $table->dropForeign(['link_id']);
+        });
         Schema::dropIfExists('inf_introduction_points');
     }
 }

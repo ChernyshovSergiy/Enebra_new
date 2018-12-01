@@ -39,7 +39,6 @@
                             <th>@lang('column.point')</th>
                             <th>@lang('column.link')</th>
                             <th>@lang('column.sort')</th>
-                            <th>@lang('column.language')</th>
                             <th>@lang('column.action')</th>
                         </tr>
                         </thead>
@@ -47,16 +46,15 @@
                         @foreach($inf_intr_points as $inf_intr_point)
                             <tr>
                                 <td>{{ $inf_intr_point->id }}</td>
-                                <td>{!! $inf_intr_point->point !!}</td>
-                                <td>{{ $inf_intr_point->link }}</td>
+                                <td>{!! $inf_intr_point->point->$locale !!}</td>
+                                <td>{{ $inf_intr_point->getLinkPageTitle() }}</td>
                                 <td>{{ $inf_intr_point->sort }}</td>
-                                <td>{{ $inf_intr_point->getLanguage()}}</td>
                                 <td>
                                     {{--<a href="{{route('introduction_points.show', $inf_intr_point->id)}}" class="fa fa-eye"></a>--}}
-                                    <a href="{{route('introduction_points.edit', $inf_intr_point->id)}}" class="fa fa-pencil"></a>
+                                    <a href="{{route('introduction_points.edit', $inf_intr_point->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['introduction_points.destroy', $inf_intr_point->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

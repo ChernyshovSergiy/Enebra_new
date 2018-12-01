@@ -28,31 +28,27 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.point')</label>
-                            <textarea name="point" id="" cols="80" rows="10" class="form-control">{{$inf_intr_point->point}}</textarea>
-                            <p class="help-block">@lang('admin.introduction_point_format')</p>
-                        </div>
-
+                        @foreach($languages as $language)
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">@lang('column.point'): {{$language}}</label>
+                                <textarea name="{{'point'.':'.$language}}" id="" cols="80" rows="10" class="form-control">
+                                    {{$inf_intr_point->point->$language}}</textarea>
+                                <p class="help-block">@lang('admin.introduction_point_format')</p>
+                            </div>
+                        @endforeach
                         <div class="form-group">
                             <label for="exampleInputEmail1">@lang('column.link')</label>
-                            <input type="text" name="link" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $inf_intr_point->link }}">
-                            <p class="help-block">@lang('admin.introduction_link_format')</p>
+                            {{ Form::select('link_id',
+                              $page_names,
+                              $inf_intr_point->link_id,
+                              ['class' => 'form-control select2'])
+                          }}
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">@lang('column.sort')</label>
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $inf_intr_point->sort }}">
                             <p class="help-block">@lang('admin.introduction_sort_format') </p>
-                        </div>
-
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                $inf_intr_point->language_id,
-                                ['class' => 'form-control select2'])
-                            }}
                         </div>
                     </div>
                 </div>
