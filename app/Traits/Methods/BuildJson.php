@@ -8,6 +8,7 @@
 
 namespace App\Traits\Methods;
 
+use App\Language;
 
 trait BuildJson
 {
@@ -27,5 +28,26 @@ trait BuildJson
             return $item;
         });
         return $result;
+    }
+
+    public function setJson($request, $text_blocks) :string
+    {
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+
+        $text = array();
+        $lang = array();
+        foreach ($text_blocks as $block) {
+            foreach ($languages as $key => $language) {
+                if ($key == 1) {
+                    $lang = [$language => $request->get($block.':'.$language)];
+                } else {
+                    $lang[$language] = $request->get($block.':'.$language);
+                }
+            }
+            $text = array_add($text, $block, $lang);
+        }
+        $json = json_encode($text);
+        return $json;
     }
 }

@@ -9,21 +9,21 @@
             <h1 class="into-h1">
 
 
-                <span class="big">{{$introduction -> title}}</span>
+                <span class="big">{{$introduction->getTitleFromMenu()}}</span>
 
-                <span class="zagolovok">{{$introduction -> title}}</span>
+                <span class="zagolovok">{{$introduction->getTitleFromMenu()}}</span>
 
             </h1>
 
-            <h2><span style='padding-left:60px;'> </span>{!! substr($introduction -> sub_title, 3, -4) !!}</h2>
+            <h2><span style='padding-left:60px;'> </span>{!! substr($introduction->content->sub_title->$cur_lang, 3, -4) !!}</h2>
 
-            <p class="col-md-9 col-sm-12 col-xs-12 light-text">{!!  substr($introduction -> text, 3, -4)  !!}
+            <p class="col-md-9 col-sm-12 col-xs-12 light-text">{!!  substr($introduction->content->text->$cur_lang, 3, -4)  !!}
             </p>
             {{--<br/><br/>--}}
 
             <div class="clearfix"></div>
 
-            <div class="italic-text col-md-9  col-sm-12 col-xs-12">{!! substr($introduction -> replica, 3, -4) !!}</div>
+            <div class="italic-text col-md-9  col-sm-12 col-xs-12">{!! substr($introduction->content->replica->$cur_lang, 3, -4) !!}</div>
         </div>
     </div>
 </div>
@@ -45,7 +45,7 @@
 
                 @endforeach
             </ul>
-            <p>{!! substr( $introduction -> conclusion, 3, -4 ) !!}</p>
+            <p>{!! substr( $introduction->content->conclusion->$cur_lang, 3, -4 ) !!}</p>
 
         </div>
     </div>

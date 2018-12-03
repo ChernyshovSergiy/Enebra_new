@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\InfPages\ValidateRequest;
 use App\Inf_page;
 use App\Http\Controllers\Controller;
 use App\Services\ImagesService;
+use App\Services\JsonService;
 use App\Services\LanguagesService;
 use App\Services\PagesService;
 use App\Services\UsersService;
@@ -13,26 +14,32 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfPagesController extends Controller
 {
+    public $model;
     public $users;
     public $pages;
     public $languages;
+    public $json;
     public $images;
 
     public function __construct(
+        Inf_page $inf_page,
         UsersService $userService,
         PagesService $pagesService,
         LanguagesService $languagesService,
+        JsonService $jsonService,
         ImagesService $imagesService)
     {
+        $this->model = $inf_page;
         $this->users = $userService;
         $this->pages = $pagesService;
         $this->languages = $languagesService;
+        $this->json = $jsonService;
         $this->images = $imagesService;
     }
 
     public function index()
     {
-        $pages = Inf_page::build();
+        $pages = $this->json->build($this->model ,'text');
         $locale = LaravelLocalization::getCurrentLocale();
 
         return view('admin.inf_pages.index',compact('pages', 'locale'));
@@ -65,7 +72,7 @@ class InfPagesController extends Controller
 
     public function edit($id)
     {
-        $page = Inf_page::build()->find($id);
+        $page = $this->json->build($this->model ,'text')->find($id);
         $users = $this->users->getUsers();
         $page_names = $this->pages->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();

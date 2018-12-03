@@ -9,8 +9,12 @@
 namespace App\Services;
 
 
+use App\Traits\Methods\BuildJson;
+
 class JsonService
 {
+    use BuildJson;
+
     public $column;
     public $languages;
 
@@ -18,24 +22,8 @@ class JsonService
     {
         $this->languages = $languagesService;
     }
-    public function build($model, $column)
-    {
-        $this->column = $column;
-        $result = $model->get();
-        if ($result->isEmpty()){
-            return [];
-        }
-        $result->transform(function ($item){
-            $column = $this->column;
-            if (is_string($item->$column) && is_object(json_decode($item->$column)) && json_last_error() == JSON_ERROR_NONE){
-                $item->$column = json_decode($item->$column);
-            }
-            return $item;
-        });
-        return $result;
-    }
 
-    public function createLangString($request, $column, $model)
+    public function createLangString($request, $column, $model) :string
     {
         $languages = $this->languages->getActiveLanguages();
 

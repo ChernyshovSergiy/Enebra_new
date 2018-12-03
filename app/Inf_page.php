@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Services\LanguagesService;
+use App\Traits\Methods\BuildJson;
 use App\Traits\Relations\BelongsTo\Languages;
 use App\Traits\Relations\HasOne\Images;
 use App\Traits\Relations\HasOne\Titles;
@@ -49,15 +50,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Inf_page extends Model
 {
-    use Images, Languages, Users, Titles;
-
-//    public $languages;
-//
-//    public function __construct(LanguagesService $languagesService)
-//    {
-//        $this->languages = $languagesService;
-//    }
-
+    use Images, Languages, Users, Titles, BuildJson;
 
     protected $fillable = [
         'title_id','user_id',
@@ -77,13 +70,9 @@ class Inf_page extends Model
         'meta_desc',
     ];
 
-    /**
-     * @return array
-     */
-    public static function getTextColumnsForTranslate()
+    public static function getTextColumnsForTranslate() :array
     {
         $page = new static;
-        $page->text_blocks;
         return $page->text_blocks;
     }
 
@@ -95,26 +84,24 @@ class Inf_page extends Model
         $this->save();
     }
 
-    public static function addPage( $fields) //add new page
+    public static function addPage( $fields) :void //add new page
     {
         $page = new static;
         $page->fill($fields->all());
         $page->setImage($fields->get('image_id'));
-        $page->text = $page->setJson($fields);
+        $page->text = $page->setJson($fields, $page->text_blocks);
         $page->save();
-
-        return $page;
     }
 
-    public function editPage($fields) //edit(change) page
+    public function editPage($fields) :void //edit(change) page
     {
         $this->fill($fields->all());
         $this->setImage($fields->get('image_id'));
-        $this->text = $this->setJson($fields);
+        $this->text = $this->setJson($fields, $this->text_blocks);
         $this->update($fields->all());
     }
 
-    public function removePage() //delete page
+    public function removePage() :void //delete page
     {
         $this->delete();
     }
@@ -169,7 +156,6 @@ class Inf_page extends Model
         $this->save();
     }
 
-
     public function getLanguage()
     {
         return ($this->language != null)
@@ -203,47 +189,4 @@ class Inf_page extends Model
         $this->save();
     }
 
-    public static function build()
-    {
-        $result = Inf_page::all();
-        if ($result->isEmpty()){
-            return [];
-        }
-        $result->transform(function ($item){
-            $column = 'text';
-            if (is_string($item->$column) &&
-                is_object(json_decode($item->$column)) &&
-                json_last_error() == JSON_ERROR_NONE){
-
-                $item->$column = json_decode($item->$column);
-            }
-            return $item;
-        });
-        return $result;
-    }
-
-
-    public function setJson($request)
-    {
-//        $languages = $this->languages->getActiveLanguages();
-
-        $languages = Language::where('is_active', '=','1')
-            ->pluck( 'slug', 'id')->all();
-
-        $text_blocks = $this->text_blocks;
-        $text = array();
-        $lang = array();
-        foreach ($text_blocks as $block) {
-            foreach ($languages as $key => $language) {
-                if ($key == 1) {
-                    $lang = [$language => $request->get($block . ':' . $language)];
-                } else {
-                    $lang[$language] = $request->get($block . ':' . $language);
-                }
-            }
-            $text = array_add($text, $block, $lang);
-        }
-        $text = json_encode($text);
-        return $text;
-    }
 }
