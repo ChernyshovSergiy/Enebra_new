@@ -1,17 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: enebra
- * Date: 11/28/18
- * Time: 4:59 PM
- */
 
 namespace App\Traits\Methods;
 
+use App\Language;
 
 trait BuildJson
 {
     public $column;
+
     public function build($model, $column)
     {
         $this->column = $column;
@@ -27,5 +23,25 @@ trait BuildJson
             return $item;
         });
         return $result;
+    }
+
+    public function setJson($request, $text_blocks) :string
+    {
+        $languages = Language::where('is_active', '=','1')
+            ->pluck( 'slug', 'id')->all();
+        $text = array();
+        $lang = array();
+        foreach ($text_blocks as $block) {
+            foreach ($languages as $key => $language) {
+                if ($key == 1) {
+                    $lang = [$language => $request->get($block.':'.$language)];
+                } else {
+                    $lang[$language] = $request->get($block.':'.$language);
+                }
+            }
+            $text = array_add($text, $block, $lang);
+        }
+        $json = json_encode($text);
+        return $json;
     }
 }

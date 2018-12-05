@@ -25,7 +25,7 @@ class PagesService
     {
         $locale = LaravelLocalization::getCurrentLocale();
         $titles = $this->menus->getTitleMenuPoints();
-
+        $page_names = [];
         foreach($titles as $key => $title){
             $page_names[$key] = json_decode($title)->$locale;
         };

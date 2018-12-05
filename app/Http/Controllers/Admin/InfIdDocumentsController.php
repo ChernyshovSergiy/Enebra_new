@@ -15,7 +15,11 @@ class InfIdDocumentsController extends Controller
     public $json;
     public $languages;
 
-    public function __construct(Inf_id_document $id_document, JsonService $jsonService, LanguagesService $languagesService)
+    public function __construct(
+        Inf_id_document $id_document,
+        JsonService $jsonService,
+        LanguagesService $languagesService
+    )
     {
         $this->model = $id_document;
         $this->json = $jsonService;

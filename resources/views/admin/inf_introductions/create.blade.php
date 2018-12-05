@@ -30,37 +30,21 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">@lang('column.title')</label>
-                            <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title') }}">
+                            {{ Form::select('title_id',
+                             $titles,
+                             null,
+                             ['class' => 'form-control select2'])
+                            }}
                             <p class="help-block">@lang('admin.introduction_format')</p>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.sub_title')</label>
-                            <textarea name="sub_title" id="" cols="80" rows="10" class="form-control">{{old('sub_title')}}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.text')</label>
-                            <textarea name="text" id="" cols="80" rows="10" class="form-control">{{old('text')}}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.replica')</label>
-                            <textarea name="replica" id="" cols="80" rows="10" class="form-control">{{old('replica')}}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.conclusion')</label>
-                            <textarea name="conclusion" id="" cols="80" rows="10" class="form-control">{{old('conclusion')}}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                null,
-                                ['class' => 'form-control select2'])
-                            }}
-                        </div>
+                        @foreach($text_blocks as $block)
+                            @foreach($languages as $language)
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                    <textarea name="{{ $block.':'.$language}}" id="{{ $block.':'.$language}}" cols="80" rows="10" class="form-control" title="{{ $block.':'.$language}}">{{old( $block.':'.$language)}}</textarea>
+                                </div>
+                            @endforeach
+                        @endforeach
                     </div>
                 </div>
                 <!-- /.box-body -->

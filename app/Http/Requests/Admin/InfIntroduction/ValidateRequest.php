@@ -14,12 +14,7 @@ class ValidateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required',
-            'sub_title'=>'required',
-            'text'=>'required',
-            'replica'=>'required',
-            'conclusion'=>'required',
-            'language_id'=>'required'
+            'title_id'=>'required'
         ];
     }
 }

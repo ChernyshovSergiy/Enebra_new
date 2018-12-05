@@ -65,14 +65,13 @@ class Menu extends Model
         return $page_names;
     }
 
-    public function getParent()
+    public function getParent() :string
     {
         $locale = LaravelLocalization::getCurrentLocale();
         if ($this->parent == 0){
             return '';
         }
         $title = $this->where('id', $this->parent)->first();
-//        dd($title);
         return json_decode($title->title)->$locale;
     }
 

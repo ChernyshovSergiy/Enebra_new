@@ -11,18 +11,21 @@ class CreateInfIntroductionsTable extends Migration
     {
         Schema::create('inf_introductions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('sub_title');
-            $table->string('text');
-            $table->string('replica');
-            $table->string('conclusion');
-            $table->integer('language_id')->default(1);
+            $table->unsignedInteger('title_id');
+            $table->json('content')->nullable();
             $table->timestamps();
+        });
+        Schema::table('inf_introductions', function (Blueprint $table) {
+            $table->foreign('title_id')->references('id')
+                ->on('menus')->onUpdate('cascade');
         });
     }
 
     public function down()
     {
+        Schema::table('inf_introductions', function (Blueprint $table) {
+            $table->dropForeign(['title_id']);
+        });
         Schema::dropIfExists('inf_introductions');
     }
 }

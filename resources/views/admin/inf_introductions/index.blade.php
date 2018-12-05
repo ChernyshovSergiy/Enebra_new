@@ -41,7 +41,6 @@
                             <th>@lang('column.text')</th>
                             <th>@lang('column.replica')</th>
                             <th>@lang('column.conclusion')</th>
-                            <th>@lang('column.language')</th>
                             <th>@lang('column.action')</th>
                         </tr>
                         </thead>
@@ -49,18 +48,17 @@
                         @foreach($introductions as $introduction)
                             <tr>
                                 <td>{{ $introduction->id }}</td>
-                                <td>{{ $introduction->title }}</td>
-                                <td>{!! $introduction->sub_title !!}</td>
-                                <td>{!! $introduction->text !!}</td>
-                                <td>{!! $introduction->replica !!}</td>
-                                <td>{!! $introduction->conclusion !!}</td>
-                                <td>{{ $introduction->getLanguage()}}</td>
+                                <td>{{ $introduction->getTitleFromMenu() }}</td>
+                                <td>{!! $introduction->content->sub_title->$locale !!}</td>
+                                <td>{!! $introduction->content->text->$locale !!}</td>
+                                <td>{!! $introduction->content->replica->$locale !!}</td>
+                                <td>{!! $introduction->content->conclusion->$locale !!}</td>
                                 <td>
                                     {{--<a href="{{route('introductions.show', $introduction->id)}}" class="fa fa-eye"></a>--}}
-                                    <a href="{{route('introductions.edit', $introduction->id)}}" class="fa fa-pencil"></a>
+                                    <a href="{{route('introductions.edit', $introduction->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['introductions.destroy', $introduction->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

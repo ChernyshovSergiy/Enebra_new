@@ -42,7 +42,7 @@ class CountriesController extends Controller
     {
         $language = $this->language->getLanguages();
         $flag_image = $this->images->getImageNameByCategory(1);
-        $id_documents = (new \App\Country)->getIdDocNameByCurrentLocale();
+        $id_documents = (new Country)->getIdDocNameByCurrentLocale();
 
         return view('admin.countries.create', compact(
             'language', 'flag_image', 'id_documents'));
@@ -60,7 +60,7 @@ class CountriesController extends Controller
         $country = Country::find($id);
         $language = $this->language->getLanguages();
         $flag_image = $this->images->getImageNameByCategory(1);
-        $id_documents = (new \App\Country)->getIdDocNameByCurrentLocale();
+        $id_documents = (new Country)->getIdDocNameByCurrentLocale();
 
         return view('admin.countries.edit', compact(
             'country','language', 'flag_image', 'id_documents'));
@@ -68,8 +68,7 @@ class CountriesController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        $country = Country::find($id);
-        $country ->editCountry($request);
+        Country::find($id)->editCountry($request);
 
         return redirect()->route('countries.index');
     }

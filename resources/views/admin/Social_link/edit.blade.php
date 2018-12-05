@@ -37,10 +37,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">@lang('column.url'): {{$language}}</label>
                                 <input type="text" name="{{'url'.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder=""
-                                   @if (isset($social_link->url->$language))
-                                       value="{{ $social_link->url->$language }}"
-                                   @endif
-                                >
+                                       value="{{ $social_link->url ? $social_link->url->$language : ''}}">
                             </div>
                         @endforeach
 

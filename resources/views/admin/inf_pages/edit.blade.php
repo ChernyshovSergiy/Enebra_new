@@ -49,7 +49,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
                                     <textarea name="{{ $block.':'.$language}}" id="{{ $block.':'.$language}}" cols="80" rows="10" class="form-control" title="{{ $block.':'.$language}}"
-                                    >{!! $page->text->$block->$language !!}</textarea>
+                                    >{!! $page->text ? $page->text->$block->$language : '' !!}</textarea>
                                 </div>
                             @endforeach
                         @endforeach

@@ -8,11 +8,11 @@ use App\Language;
 trait PrepareLangStrForJsonMethods
 {
 
-    public function createLangString($request, $column)
+    public function createLangString($request, $column) :array
     {
         $languages = Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();
-
+        $items = [];
         foreach ($languages as $key => $language) {
             if ($key == 1) {
                 $items = [$language => $request->get($column . ':' . $language)];

@@ -2,18 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Image;
-use App\Language;
+use App\Http\Requests\Admin\SocialLink\ValidateRequest;
+use App\Services\ImagesService;
+use App\Services\JsonService;
+use App\Services\LanguagesService;
 use App\SocialLink;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class SocialLinkController extends Controller
 {
+    public $model;
+    public $languages;
+    public $json;
+    public $images;
+
+    public function __construct(
+        SocialLink $socialLink,
+        LanguagesService $languagesService,
+        JsonService $jsonService,
+        ImagesService $imagesService)
+    {
+        $this->model = $socialLink;
+        $this->languages = $languagesService;
+        $this->json = $jsonService;
+        $this->images = $imagesService;
+    }
     public function index()
     {
-        $social_links = SocialLink::build();
+        $social_links = $this->json->build($this->model ,'url');
         $locale = LaravelLocalization::getCurrentLocale();
 
         return view('admin.Social_link.index', compact('social_links', 'locale'));
@@ -21,92 +38,45 @@ class SocialLinkController extends Controller
 
     public function create()
     {
-        $languages = Language::where('is_active', '=','1')
-            ->pluck( 'slug', 'id')->all();
-        $foot_icon_image = Image::where( 'category_id','=', 6 )->pluck('title', 'id');
+        $languages = $this->languages->getActiveLanguages();
+        $foot_icon_image = $this->images->getImageNameByCategory(6);
+
         return view('admin.Social_link.create', compact('languages', 'foot_icon_image'));
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'sort' => 'required',
-            'image_id' => 'required'
-        ]);
-        $social_link = SocialLink::add($request->all());
-        $social_link -> setImage($request->get('image_id'));
-
-        $languages = Language::where('is_active', '=','1')
-            ->pluck( 'slug', 'id')->all();
-
-        foreach ($languages as $key => $language){
-            if ($key == 1){
-                $urls = [$language => $request->get('url'.':'.$language)];
-            }else{
-                $urls[$language] = $request->get('url'.':'.$language);
-            }
-        };
-        $social_link->url = json_encode($urls);
-        $social_link->save();
+        SocialLink::addSocialLink($request);
 
         return redirect()->route('social_links.index');
-    }
-
-    public function show(SocialLink $socialLink)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $social_link = SocialLink::build()->find($id);
-        $languages = Language::where('is_active', '=','1')
-            ->pluck( 'slug', 'id')->all();
-        $foot_icon_image = Image::where( 'category_id','=', 6 )->pluck('title', 'id');
+        $social_link = $this->json->build($this->model ,'url')->find($id);
+        $languages = $this->languages->getActiveLanguages();
+        $foot_icon_image = $this->images->getImageNameByCategory(6);
+
         return view('admin.Social_link.edit', compact('social_link','languages', 'foot_icon_image'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'sort' => 'required',
-            'image_id' => 'required'
-        ]);
-        $social_link = SocialLink::find($id);
-        $social_link -> setImage($request->get('image_id'));
-        $languages = Language::where('is_active', '=','1')
-            ->pluck( 'slug', 'id')->all();
+        SocialLink::find($id)->editLink($request);
 
-        foreach ($languages as $key => $language){
-            if ($key == 1){
-                $urls = [$language => $request->get('url'.':'.$language)];
-            }else{
-                $urls[$language] = $request->get('url'.':'.$language);
-            }
-        };
-
-        $social_link->url = json_encode($urls);
-        $social_link->update($request->all());
         return redirect()->route('social_links.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        SocialLink::find($id)->delete();
+        SocialLink::find($id)->removeSocialLink();
+
         return redirect()->route('social_links.index');
     }
 
     public function toggle($id)
     {
-        $point = SocialLink::find($id);
-        $point->toggleActive();
+        SocialLink::find($id)->toggleActive();
 
         return redirect()->back();
     }

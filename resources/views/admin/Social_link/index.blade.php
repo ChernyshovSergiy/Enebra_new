@@ -47,7 +47,6 @@
                         </thead>
                         <tbody>
                             @foreach($social_links as $social_link)
-                                {{--{{dd($social_link)}}--}}
                                 <tr>
                                     <td>{{ $social_link->id }}</td>
                                     <td>{{ $social_link->name }}</td>
@@ -58,9 +57,7 @@
                                             <a href="/admin/social_links/toggle/{{ $social_link->id }}" class="text-muted fa fa-lock"></a>
                                         @endif
                                     </td>
-                                    @if($social_link)
-                                        <td>{{ $social_link->url->$locale }}</td>
-                                    @endif
+                                        <td>{{ $social_link ? $social_link->url->$locale : '' }}</td>
                                     <td>{{ $social_link->sort }}</td>
                                     <td>
                                         <img src="{{ $social_link->getImage() }}" alt="" width="30">
