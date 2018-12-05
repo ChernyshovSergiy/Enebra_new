@@ -7,6 +7,8 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/nginx/ssl:/etc/nginx/ssl
+            - ./docker/logs/nginx:/logs/nginx
+            - ./docker/xdebug:/etc/nginx/xdebug
         ports:
             - "8080:443"
         links:
@@ -20,39 +22,39 @@ services:
         links:
             - mysql
             - redis
-#            - elasticsearch
         environment:
             - "DB_PORT=3306"
             - "DB_HOST=mysql"
             - "REDIS_PORT=6379"
             - "REDIS_HOST=redis"
-#            - "ELASTICSEARCH_HOSTS=elasticsearch:9200"
     php-cli:
         build:
             context: ./
             dockerfile: docker/php-cli.docker
         volumes:
             - ./:/var/www
+            - ./docker/logs/xdebug:/logs/xdebug
+            - ./docker/php/custom.conf:/usr/local/etc/php-fpm.d/zz-custom.conf
+            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/zz-xdebug.ini
+            - ./docker/logs/php-cli/:/tmp/xdebug_log
         links:
             - mysql
             - redis
-#            - elasticsearch
         environment:
             - "DB_PORT=3306"
             - "DB_HOST=mysql"
             - "REDIS_PORT=6379"
             - "REDIS_HOST=redis"
-#            - "ELASTICSEARCH_HOSTS=elasticsearch:9200"
         tty: true
     mysql:
         image: mysql:5.7
         volumes:
             - ./storage/docker/mysql:/var/lib/mysql
         environment:
-            - "MYSQL_ROOT_PASSWORD=secret"
-            - "MYSQL_USER=enebra"
-            - "MYSQL_PASSWORD=vegas1vegas"
-            - "MYSQL_DATABASE=enebra_new"
+            - "MYSQL_ROOT_PASSWORD=secretForAll"
+            - "MYSQL_USER=author"
+            - "MYSQL_PASSWORD=secretForAll"
+            - "MYSQL_DATABASE=enebra"
         ports:
             - "33061:3306"
     redis:
@@ -60,21 +62,9 @@ services:
         ports:
             - "63791:6379"
     node:
-        image: node:8.6-alpine
+        build:
+            context: ./
+            dockerfile: docker/node.docker
         volumes:
             - ./:/var/www
-        working_dir: /var/www
         tty: true
-#    elasticsearch:
-#        image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
-#        environment:
-#            - bootstrap.memory_lock=true
-#            - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
-#        ulimits:
-#            memlock:
-#                soft: -1
-#                hard: -1
-#        volumes:
-#            - ./storage/docker/elasticsearch:/usr/share/elasticsearch/data
-#        ports:
-#            - "9201:9200"
