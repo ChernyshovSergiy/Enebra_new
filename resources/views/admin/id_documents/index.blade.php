@@ -45,7 +45,7 @@
                         @foreach($id_documents as $id_document)
                             <tr>
                                 <td>{{ $id_document->id }}</td>
-                                <td>{!! $id_document->name->$locale !!}</td>
+                                <td>{!! $id_document->name ? $id_document->name->$locale : '' !!}</td>
                                 <td>
                                     <a href="{{route('id_documents.edit', $id_document->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['id_documents.destroy', $id_document->id], 'method'=>'delete']) }}

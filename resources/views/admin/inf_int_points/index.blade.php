@@ -46,7 +46,7 @@
                         @foreach($inf_intr_points as $inf_intr_point)
                             <tr>
                                 <td>{{ $inf_intr_point->id }}</td>
-                                <td>{!! $inf_intr_point->point->$locale !!}</td>
+                                <td>{!! $inf_intr_point->point ? $inf_intr_point->point->$locale : '' !!}</td>
                                 <td>{{ $inf_intr_point->getLinkPageTitle() }}</td>
                                 <td>{{ $inf_intr_point->sort }}</td>
                                 <td>

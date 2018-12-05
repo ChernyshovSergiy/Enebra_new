@@ -51,7 +51,7 @@
                                 <td>{{ $sub->getName() }}</td>
                                 <td>{{ $sub->email }}</td>
                                 <td>{{ $sub->getStatus() }}</td>
-                                <td>{{ $sub->language->title }}</td>
+                                <td>{{ $sub->language_id ? $sub->language->title : '' }}</td>
                                 <td>{{ $sub->updated_at }}</td>
                                 <td>
                                     {{ Form::open(['route'=>['subscribers.destroy', $sub->id], 'method'=>'delete']) }}

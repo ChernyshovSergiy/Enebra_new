@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">@lang('column.point'): {{$language}}</label>
                                 <textarea name="{{'point'.':'.$language}}" id="" cols="80" rows="10" class="form-control">
-                                    {{$inf_intr_point->point->$language}}</textarea>
+                                    {{ $inf_intr_point->point ? $inf_intr_point->point->$language : ''}}</textarea>
                                 <p class="help-block">@lang('admin.introduction_point_format')</p>
                             </div>
                         @endforeach

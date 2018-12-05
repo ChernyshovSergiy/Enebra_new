@@ -49,10 +49,10 @@
                             <tr>
                                 <td>{{ $introduction->id }}</td>
                                 <td>{{ $introduction->getTitleFromMenu() }}</td>
-                                <td>{!! $introduction->content->sub_title->$locale !!}</td>
-                                <td>{!! $introduction->content->text->$locale !!}</td>
-                                <td>{!! $introduction->content->replica->$locale !!}</td>
-                                <td>{!! $introduction->content->conclusion->$locale !!}</td>
+                                <td>{!! $introduction->content ? $introduction->content->sub_title->$locale : '' !!}</td>
+                                <td>{!! $introduction->content ? $introduction->content->text->$locale : '' !!}</td>
+                                <td>{!! $introduction->content ? $introduction->content->replica->$locale : '' !!}</td>
+                                <td>{!! $introduction->content ? $introduction->content->conclusion->$locale : '' !!}</td>
                                 <td>
                                     {{--<a href="{{route('introductions.show', $introduction->id)}}" class="fa fa-eye"></a>--}}
                                     <a href="{{route('introductions.edit', $introduction->id)}}" class="text-yellow fa fa-pencil"></a>

@@ -41,7 +41,6 @@
                                 <th>@lang('column.url')</th>
                                 <th>@lang('column.parent')</th>
                                 <th>@lang('column.sort')</th>
-                                {{--<th>@lang('column.language')</th>--}}
                                 <th>@lang('column.action')</th>
                             </tr>
                         </thead>
@@ -49,7 +48,7 @@
                             @foreach($inf_menu_points as $point)
                                 <tr>
                                     <td>{{ $point->id }}</td>
-                                    <td>{!! $point->title->$locale !!}</td>
+                                    <td>{!! $point->title ? $point->title->$locale : '' !!}</td>
                                     <td>
                                         @if($point->is_active == 1)
                                             <a href="/admin/inf_menus/toggle/{{ $point->id }}" class="text-green fa fa-thumbs-o-up"></a>
@@ -58,10 +57,8 @@
                                         @endif
                                     </td>
                                     <td>{{ $point->url }}</td>
-                                    {{--<td>{{ $point->parent }}</td>--}}
                                     <td>{{ $point->getParent() }}</td>
                                     <td>{{ $point->sort }}</td>
-                                    {{--<td>{{ $point->getLanguage()}}</td>--}}
                                     <td>
                                         <a href="{{route('inf_menus.edit', $point->id)}}" class="text-yellow fa fa-pencil"></a>
                                         {{ Form::open(['route'=>['inf_menus.destroy', $point->id], 'method'=>'delete']) }}

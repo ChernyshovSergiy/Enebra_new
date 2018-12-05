@@ -32,10 +32,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">@lang('column.title'): {{$language}}</label>
                                 <input type="text" name="{{'title'.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder=""
-                                       @if (isset($inf_menu_point->title->$language))
-                                       value="{{ $inf_menu_point->title->$language }}"
-                                        @endif
-                                >
+                                       value="{{ $inf_menu_point->title ? $inf_menu_point->title->$language : '' }}">
                             </div>
                         @endforeach
 

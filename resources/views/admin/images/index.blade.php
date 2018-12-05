@@ -50,7 +50,7 @@
                                 <td>{{ $image->id }}</td>
                                 <td>{{ $image->title }}</td>
                                 <td>{{ $image->getCategoryIdTitle() }}</td>
-                                <td>{{isset($image->user_id) ? $image->user_id : ''}}</td>
+                                <td>{{ $image->user_id ? $image->user_id : '' }}</td>
                                 <td>
                                     <img src="{{ $image->getImage() }}" alt="" width="30">
                                 <td>
