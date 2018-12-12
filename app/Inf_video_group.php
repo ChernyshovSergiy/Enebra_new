@@ -2,56 +2,73 @@
 
 namespace App;
 
+use App\Traits\Methods\BuildJson;
+use App\Traits\Relations\HasOne\MenuId;
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 /**
  * App\Inf_video_group
  *
  * @property int $id
- * @property string $slug
- * @property string $title
- * @property string|null $description
- * @property string|null $keywords
- * @property string|null $meta_desc
- * @property int $language_id
+ * @property int|null $menu_id
+ * @property mixed|null $content
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\Language $language
+ * @property-read \App\Menu $menu
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereContent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereKeywords($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereLanguageId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereMetaDesc($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereMenuId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Inf_video_group extends Model
 {
+    use MenuId, BuildJson;
+
     protected $fillable = [
-        'title', 'slug', 'description', 'keywords', 'meta_desc', 'language_id'
+        'menu_id',
+        'content'
     ];
 
-    public function language()
+    public $text_blocks = [
+        'description',
+        'keywords',
+        'meta_desc'
+    ];
+
+    public function getTextColumnsForTranslate() :array
     {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
+        return (new static)->text_blocks;
     }
 
-    public function getLanguage()
+    public function getTitle() :string
     {
-        return ($this->language != null)
-            ? $this->language->title
-            : 'don`t have language';
+        $locale = LaravelLocalization::getCurrentLocale();
+        return ($this->menu_id !== null)
+            ? json_decode($this->menu->title)->$locale
+            : '';
     }
 
-    public function setLanguage($id)
+    public function addInfVideoGroup($request): void
     {
-        if ($id == null){
-            return;
-        }
-        $this->language_id = $id;
-        $this->save();
+        $video_group = new static;
+        $video_group->fill($request->all());
+        $video_group->content = $video_group->setJson($request, $video_group->text_blocks);
+        $video_group->save();
+    }
+
+    public function editInfVideoGroup($request): void
+    {
+        $this->fill($request->all());
+        $this->content = $this->setJson($request, $this->text_blocks);
+        $this->update($request->all());
+    }
+
+    public function removeInfVideoGroup() :void
+    {
+        $this->delete();
     }
 }

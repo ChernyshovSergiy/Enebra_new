@@ -5,62 +5,77 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\InfVideoGroup\ValidateRequest;
 use App\Inf_video_group;
 use App\Language;
-use Illuminate\Http\Request;
+use App\Menu;
+use App\Services\JsonService;
+use App\Services\LanguagesService;
 use App\Http\Controllers\Controller;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfVideoGroupsController extends Controller
 {
+    public $model;
+    public $menus;
+    public $languages;
+    public $json;
+
+    public function __construct(
+        Inf_video_group $inf_video_group,
+        Menu $menus,
+        LanguagesService $languagesService,
+        JsonService $jsonService)
+    {
+        $this->model = $inf_video_group;
+        $this->menus = $menus;
+        $this->languages = $languagesService;
+        $this->json = $jsonService;
+    }
     public function index()
     {
-        $video_groups = Inf_video_group::all();
-        return view('admin.inf_video_groups.index',compact('video_groups'));
+        $video_groups = $this->json->build($this->model ,'content');
+        $locale = LaravelLocalization::getCurrentLocale();
+        return view('admin.inf_video_groups.index',
+            compact('video_groups', 'locale'));
     }
 
     public function create()
     {
-        $language = Language::pluck('title', 'id')->all();
+        $languages = $this->languages->getActiveLanguages();
+        $menus = $this->menus::getMenuPointName();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
 
-        return view('admin.inf_video_groups.create', compact('language'));
+        return view('admin.inf_video_groups.create',
+            compact('languages', 'menus', 'text_blocks'));
     }
 
     public function store(ValidateRequest $request)
     {
-        $video_groups = Inf_video_group::create($request->all());
-        $video_groups->setLanguage($request->get('language_id'));
+        $this->model->addInfVideoGroup($request);
 
         return redirect()->route('inf_video_groups.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $video_group = Inf_video_group::find($id);
-        $language = Language::pluck('title', 'id')->all();
+        $video_group = $this->json->build($this->model ,'content')->find($id);
+        $languages = $this->languages->getActiveLanguages();
+        $menus = $this->menus::getMenuPointName();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
 
-        return view('admin.inf_video_groups.edit', compact('video_group', 'language'));
+        return view('admin.inf_video_groups.edit',
+            compact('video_group', 'languages', 'menus', 'text_blocks'));
     }
 
     public function update(ValidateRequest $request, $id)
     {
-        $video_group = Inf_video_group::find($id);
-        $video_group->setLanguage($request->get('language_id'));
-        $video_group->update($request->all());
+        $this->model::find($id)->editInfVideoGroup($request);
 
         return redirect()->route('inf_video_groups.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Inf_video_group::find($id)->delete();
+        $this->model::find($id)->removeInfVideoGroup();
+
         return redirect()->route('inf_video_groups.index');
     }
 }
