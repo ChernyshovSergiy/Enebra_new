@@ -15,7 +15,11 @@ class MenusController extends Controller
     public $json;
     public $languages;
 
-    public function __construct(Menu $menu, JsonService $jsonService, LanguagesService $languagesService)
+    public function __construct(
+        Menu $menu,
+        JsonService $jsonService,
+        LanguagesService $languagesService
+    )
     {
         $this->model = $menu;
         $this->json = $jsonService;
@@ -50,7 +54,9 @@ class MenusController extends Controller
         $inf_menu_point = $this->json->build($this->model, 'title')->find($id);
         $page_names = Menu::getMenuPointName();
 
-        return view('admin.menus.edit', compact('inf_menu_point', 'page_names', 'languages'));
+        return view('admin.menus.edit', compact(
+            'inf_menu_point',
+            'page_names', 'languages'));
     }
 
     public function update(ValidateRequest $request, $id)
@@ -69,8 +75,7 @@ class MenusController extends Controller
 
     public function toggle($id)
     {
-        $point = Menu::find($id);
-        $point->toggleActive();
+        Menu::find($id)->toggleActive();
 
         return redirect()->back();
     }

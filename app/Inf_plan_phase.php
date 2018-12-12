@@ -2,49 +2,64 @@
 
 namespace App;
 
+use App\Traits\Methods\PrepareLangStrForJsonMethods;
+use App\Traits\Relations\BelongsToMany\Countries;
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 /**
  * App\Inf_plan_phase
  *
  * @property int $id
- * @property string $title
- * @property int $language_id
+ * @property mixed|null $title
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\Language $language
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Country[] $Countries
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase whereLanguageId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Inf_plan_phase extends Model
 {
-    public function language()
-    {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
-    }
+    use Countries, PrepareLangStrForJsonMethods;
 
     protected $fillable = [
-        'title',
-        'language_id'
+        'title'
     ];
 
-    public function getLanguage()
+    public function createPlanPhase($request) :void
     {
-        return ($this->language != null)
-            ? $this->language->title
-            : 'don`t have language';
+        $planPhase = new static;
+        $planPhase->fill($request->all());
+        $items = $this->createLangString($request, 'title');
+        $planPhase->title = json_encode($items);
+        $planPhase->save();
     }
 
-    public function setLanguage($id)
+    public function editPlanPhase($request, $model) :void
     {
-        if ($id == null){
-            return;
-        }
-        $this->language_id = $id;
-        $this->save();
+        $items = $this->createLangString($request, 'title');
+        $model->title = json_encode($items);
+        $model->update($request->all());
     }
+
+    public function getPhaseNames() :array
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        $titles = self::pluck( 'title', 'id')->all();
+        $phase_names = [];
+        foreach($titles as $key => $title){
+            $phase_names[$key] = json_decode($title)->$locale;
+        }
+        return $phase_names;
+    }
+
+    public function removePlanPhase():void
+    {
+        $this->delete();
+    }
+
 }

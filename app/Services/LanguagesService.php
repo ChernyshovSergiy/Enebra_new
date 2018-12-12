@@ -13,7 +13,7 @@ use App\Language;
 
 class LanguagesService
 {
-    public static function getActiveLanguages()
+    public function getActiveLanguages()
     {
         return Language::where('is_active', '=','1')
             ->pluck( 'slug', 'id')->all();

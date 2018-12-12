@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
+use App\Traits\Relations\HasMany\Titles;
 use Illuminate\Database\Eloquent\Model;
 use Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -33,12 +34,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Menu extends Model
 {
-    use PrepareLangStrForJsonMethods;
-
-    public function title()
-    {
-        return $this->hasMany(Inf_page::class, 'title_id', 'id');
-    }
+    use PrepareLangStrForJsonMethods, Titles;
 
     protected $fillable = [
         'id',
@@ -48,10 +44,10 @@ class Menu extends Model
         'sort'
     ];
 
-    public static function getMenuPointName()
+    public static function getMenuPointName() :array
     {
         $locale = LaravelLocalization::getCurrentLocale();
-        $titles = Menu::pluck( 'title', 'id')->all();
+        $titles = self::pluck( 'title', 'id')->all();
 
         foreach($titles as $key => $title){
             $page_names[$key] = json_decode($title)->$locale;
@@ -59,7 +55,7 @@ class Menu extends Model
 //                unset($page_names[$key]);
 //            };
 
-        };
+        }
         array_unshift($page_names, Lang::get('nav.root'));
 
         return $page_names;
@@ -68,20 +64,22 @@ class Menu extends Model
     public function getParent() :string
     {
         $locale = LaravelLocalization::getCurrentLocale();
-        if ($this->parent == 0){
+        if ($this->parent === 0){
             return '';
         }
-        $title = $this->where('id', $this->parent)->first();
-        return json_decode($title->title)->$locale;
+        $title = self::where('id', $this->parent)->first();
+        if (!empty($title)) {
+            return json_decode($title->title)->$locale;
+        }
     }
 
-    public function active()
+    public function active() :void
     {
         $this->is_active = 1;
         $this->save();
     }
 
-    public function notActive()
+    public function notActive() :void
     {
         $this->is_active = 0;
         $this->save();
@@ -89,7 +87,7 @@ class Menu extends Model
 
     public function toggleActive()
     {
-        if ($this->is_active == 0)
+        if ($this->is_active === 0)
         {
             return $this->active();
         }
@@ -106,7 +104,7 @@ class Menu extends Model
 
     public static function editMenuPoint($request, $id) :void //add new page
     {
-        $menu = Menu::find($id);
+        $menu = self::find($id);
         $menu->fill($request->all());
         $menu->title = json_encode($menu->createLangString($request, 'title'));
         $menu->update($request->all());
@@ -114,8 +112,8 @@ class Menu extends Model
 
     public static function removeMenuPoint($id) :void
     {
-        Menu::where('parent', $id)->update(array('parent' => 0));
+        self::where('parent', $id)->update(array('parent' => 0));
 
-        Menu::find($id)->delete();
+        self::find($id)->delete();
     }
 }

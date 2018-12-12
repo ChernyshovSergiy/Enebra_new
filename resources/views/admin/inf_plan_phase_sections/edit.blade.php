@@ -27,21 +27,14 @@
                     @include('admin.error')
                 </div>
                 <div class="box-body">
-                    <div class="col-md-6">
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
-                            <input type="text" name="sub_title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $plan_phase_section->sub_title }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                $plan_phase_section->language_id,
-                                ['class' => 'form-control select2'])
-                            }}
-                        </div>
+                    <div class="col-md-12">
+                        @foreach($languages as $language)
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">@lang('column.object_name'): {{$language}}</label>
+                                <input type="text" name="{{'sub_title'.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder=""
+                                       value="{{ $plan_phase_section->sub_title ? $plan_phase_section->sub_title->$language : '' }}" >
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <!-- /.box-body -->

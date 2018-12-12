@@ -50,7 +50,7 @@
                                     <td>{{ $point->id }}</td>
                                     <td>{!! $point->title ? $point->title->$locale : '' !!}</td>
                                     <td>
-                                        @if($point->is_active == 1)
+                                        @if($point->is_active === 1)
                                             <a href="/admin/inf_menus/toggle/{{ $point->id }}" class="text-green fa fa-thumbs-o-up"></a>
                                         @else
                                             <a href="/admin/inf_menus/toggle/{{ $point->id }}" class="text-muted fa fa-lock"></a>

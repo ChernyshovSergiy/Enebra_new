@@ -28,7 +28,7 @@ class Inf_id_document extends Model
     protected $fillable = [
         'name'
     ];
-    public function editDoc($request, $model)
+    public function editDoc($request, $model) :void
     {
         $items = $this->createLangString($request, 'name');
         $model->name = json_encode($items);

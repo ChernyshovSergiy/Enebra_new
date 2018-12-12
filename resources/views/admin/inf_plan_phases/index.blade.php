@@ -37,7 +37,6 @@
                         <tr>
                             <th>@lang('column.id')</th>
                             <th>@lang('column.object_name')</th>
-                            <th>@lang('column.language')</th>
                             <th>@lang('column.action')</th>
                         </tr>
                         </thead>
@@ -45,14 +44,13 @@
                         @foreach($plan_phases as $plan_phase)
                             <tr>
                                 <td>{{ $plan_phase->id }}</td>
-                                <td>{{ $plan_phase->title }}</td>
-                                <td>{{ $plan_phase->getLanguage()}}</td>
+                                <td>{{ $plan_phase->title ? $plan_phase->title->$locale : '' }}</td>
                                 <td>
-                                    <a href="{{route('inf_plan_phases.show', $plan_phase->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('inf_plan_phases.edit', $plan_phase->id)}}" class="fa fa-pencil"></a>
+                                    {{--<a href="{{route('inf_plan_phases.show', $plan_phase->id)}}" class="fa fa-eye"></a>--}}
+                                    <a href="{{route('inf_plan_phases.edit', $plan_phase->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['inf_plan_phases.destroy', $plan_phase->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

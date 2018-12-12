@@ -85,6 +85,7 @@ return[
     'category'	            => 'Category',
     'category_id'	        => 'Category ID',
     'is_active'	            => 'Active',
+    'is_done'	            => 'Done',
     'url'	                => 'Url',
     'parent'	            => 'Parent',
     'regData'	            => 'Date of Registration',

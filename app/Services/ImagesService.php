@@ -13,7 +13,7 @@ use App\Image;
 
 class ImagesService
 {
-    public static function getImageNameByCategory($category_id)
+    public function getImageNameByCategory($category_id)
     {
         return Image::where( 'category_id','=', $category_id )->pluck('title', 'id');
     }

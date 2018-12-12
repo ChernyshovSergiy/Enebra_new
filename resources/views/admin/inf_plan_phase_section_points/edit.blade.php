@@ -28,16 +28,32 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
+                        <!-- checkbox -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.point')</label>
-                            <input type="text" name="point" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $plan_phase_section_point->point }}">
-                            <p class="help-block">@lang('admin.format_plan_phase_point')</p>
+                            <label>
+                                {{ Form::checkbox('is_done', '1', $plan_phase_section_point->is_done, ['class'=>'minimal']) }}
+                            </label>
+                            <label>
+                                @lang('column.done')
+                            </label>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.description')</label>
-                            <textarea name="description" id="" cols="80" rows="10" class="form-control">{{ $plan_phase_section_point->description }}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
+                        @foreach($text_blocks as $block)
+                            @foreach($languages as $language)
+                                @if($block === 'point')
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                        <input type="text" name="{{ $block.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder=""
+                                               value="{{ $plan_phase_section_point->entry ? $plan_phase_section_point->entry->$block->$language : '' }}">
+                                    </div>
+                                @else
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                        <textarea name="{{ $block.':'.$language}}" id="{{ $block.':'.$language}}" cols="80" rows="10" class="form-control" title="{{ $block.':'.$language}}">
+                                            {!! $plan_phase_section_point->entry ? $plan_phase_section_point->entry->$block->$language : '' !!}</textarea>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endforeach
                         <div class="form-group">
                             <label>@lang('column.phase')</label>
                             {{ Form::select('phase_id',
@@ -58,23 +74,6 @@
                             <label for="exampleInputEmail1">@lang('column.sort')</label>
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $plan_phase_section_point->sort }}">
                             <p class="help-block">@lang('admin.introduction_sort_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                $plan_phase_section_point->language_id,
-                                ['class' => 'form-control select2'])
-                            }}
-                        </div>
-                        <!-- checkbox -->
-                        <div class="form-group">
-                            <label>
-                                {{ Form::checkbox('is_done', '1', $plan_phase_section_point->is_done, ['class'=>'minimal']) }}
-                            </label>
-                            <label>
-                                @lang('column.done')
-                            </label>
                         </div>
                     </div>
                 </div>

@@ -10,8 +10,7 @@ class CreateInfPlanPhasesTable extends Migration
     {
         Schema::create('inf_plan_phases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->integer('language_id')->default(1);
+            $table->json('title')->nullable();
             $table->timestamps();
         });
     }

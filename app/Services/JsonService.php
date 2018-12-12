@@ -19,7 +19,7 @@ class JsonService
         $languages = $this->languages->getActiveLanguages();
         $items = [];
         foreach ($languages as $key => $language){
-            if ($key == 1){
+            if ($key === 1){
                 $items = [$language => $request->get($column.':'.$language)];
             }else{
                 $items[$language] = $request->get($column.':'.$language);

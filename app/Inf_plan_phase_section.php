@@ -2,49 +2,64 @@
 
 namespace App;
 
+use App\Traits\Methods\PrepareLangStrForJsonMethods;
+use App\Traits\Relations\BelongsToMany\Countries;
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * App\Inf_plan_phase_section
  *
  * @property int $id
- * @property string $sub_title
- * @property int $language_id
+ * @property mixed $sub_title
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\Language $language
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Country[] $Countries
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase_section whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase_section whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase_section whereLanguageId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase_section whereSubTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase_section whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Inf_plan_phase_section extends Model
 {
-    public function language()
-    {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
-    }
+    use Countries, PrepareLangStrForJsonMethods;
 
     protected $fillable = [
-        'sub_title',
-        'language_id'
+        'sub_title'
     ];
 
-    public function getLanguage()
+    public function createNewPhaseSection($request) :void
     {
-        return ($this->language != null)
-            ? $this->language->title
-            : 'don`t have language';
+        $plan_phase_section = new static;
+        $plan_phase_section->fill($request->all());
+        $items = $plan_phase_section->createLangString($request, 'sub_title');
+        $plan_phase_section->sub_title = json_encode($items);
+        $plan_phase_section->save();
     }
 
-    public function setLanguage($id)
+    public function editPhaseSection($request, $id) :void
     {
-        if ($id == null){
-            return;
+        $plan_phase_section = self::find($id);
+        $plan_phase_section->fill($request->all());
+        $items = $plan_phase_section->createLangString($request, 'sub_title');
+        $plan_phase_section->sub_title = json_encode($items);
+        $plan_phase_section->update($request->all());
+    }
+
+    public function getSectionNames(): array
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        $titles = self::pluck( 'sub_title', 'id')->all();
+        $section_names = [];
+        foreach($titles as $key => $title){
+            $section_names[$key] = json_decode($title)->$locale;
         }
-        $this->language_id = $id;
-        $this->save();
+        return $section_names;
+    }
+
+    public function removePhaseSection() :void
+    {
+        $this->delete();
     }
 }

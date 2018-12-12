@@ -47,6 +47,7 @@ Route::group([
             Route::resource('/inf_plan_phases', 'InfPlanPhasesController');
             Route::resource('/inf_plan_phase_sections', 'InfPlanPhaseSectionsController');
             Route::resource('/inf_plan_phase_section_points', 'InfPlanPhaseSectionPointsController');
+            Route::get('/inf_plan_phase_section_points/toggle/{id}', 'InfPlanPhaseSectionPointsController@toggle');
             Route::resource('/inf_video_groups', 'InfVideoGroupsController');
             Route::resource('/inf_video_group_sections', 'InfVideoGroupSectionsController');
             Route::resource('/inf_videos', 'InfVideosController');

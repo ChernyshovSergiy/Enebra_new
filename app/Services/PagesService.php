@@ -21,7 +21,7 @@ class PagesService
         $this->menus = $menusService;
     }
 
-    public function getActivePagesName()
+    public function getActivePagesName(): array
     {
         $locale = LaravelLocalization::getCurrentLocale();
         $titles = $this->menus->getTitleMenuPoints();

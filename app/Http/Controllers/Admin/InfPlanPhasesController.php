@@ -2,72 +2,73 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\InfPlanPhases\ValidateRequest;
 use App\Inf_plan_phase;
 use App\Language;
+use App\Services\JsonService;
+use App\Services\LanguagesService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfPlanPhasesController extends Controller
 {
+    public $model;
+    public $json;
+    public $languages;
+
+    public function __construct(
+        Inf_plan_phase $inf_plan_phase,
+        JsonService $jsonService,
+        LanguagesService $languagesService
+    )
+    {
+        $this->model = $inf_plan_phase;
+        $this->json = $jsonService;
+        $this->languages = $languagesService;
+    }
     public function index()
     {
-        $plan_phases = Inf_plan_phase::all();
-        return view('admin.inf_plan_phases.index',compact('plan_phases'));
+        $plan_phases = $this->json->build($this->model, 'title');
+        $locale = LaravelLocalization::getCurrentLocale();
+        return view('admin.inf_plan_phases.index',compact(
+            'plan_phases', 'locale'));
     }
 
     public function create()
     {
-        $language = Language::pluck('title', 'id')->all();
+        $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.inf_plan_phases.create', compact('language'));
+        return view('admin.inf_plan_phases.create', compact('languages'));
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'language_id' => 'required'
-        ]);
-        $plan_phases = Inf_plan_phase::create($request->all());
-        $plan_phases->setLanguage($request->get('language_id'));
+        $this->model->createPlanPhase($request);
 
         return redirect()->route('inf_plan_phases.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $plan_phase = Inf_plan_phase::find($id);
-        $language = Language::pluck('title', 'id')->all();
+        $plan_phase = $this->json->build($this->model, 'title')->find($id);
+        $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.inf_plan_phases.edit', compact('plan_phase', 'language'));
+        return view('admin.inf_plan_phases.edit', compact(
+            'plan_phase', 'languages'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateRequest $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'language_id' => 'required'
-        ]);
         $plan_phase = Inf_plan_phase::find($id);
-        $plan_phase->setLanguage($request->get('language_id'));
-        $plan_phase->update($request->all());
+        $plan_phase->editPlanPhase($request, $plan_phase);
 
         return redirect()->route('inf_plan_phases.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Inf_plan_phase::find($id)->delete();
+        Inf_plan_phase::find($id)->removePlanPhase();
         return redirect()->route('inf_plan_phases.index');
     }
 }

@@ -2,7 +2,11 @@
 
 namespace App;
 
+use App\Traits\Methods\BuildJson;
+use App\Traits\Relations\HasOne\Phases;
+use App\Traits\Relations\HasOne\Sections;
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * App\Inf_plan_section_point
@@ -31,104 +35,90 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereSort($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property mixed|null $entry
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_section_point whereEntry($value)
  */
 class Inf_plan_section_point extends Model
 {
-    const IS_NOT_DONE = 0;
-    const IS_DONE = 1;
+    use Phases, Sections, BuildJson;
 
-    public function language()
-    {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
-    }
-
-    public function phase()
-    {
-        return $this->hasOne(Inf_plan_phase::class, 'id', 'phase_id');
-    }
-
-    public function section()
-    {
-        return $this->hasOne(Inf_plan_phase_section::class, 'id', 'section_id');
-    }
-
+    public const IS_NOT_DONE = 0;
+    public const IS_DONE = 1;
 
     protected $fillable = [
-        'point',
-        'description',
+        'is_done',
+        'entry',
         'phase_id',
         'section_id',
-        'sort',
-        'language_id'
+        'sort'
     ];
 
-    public function getLanguage()
+    protected $text_blocks = [
+        'point',
+        'description'
+    ];
+
+    public function getTextColumnsForTranslate() :array
     {
-        return ($this->language != null)
-            ? $this->language->title
-            : 'don`t have language';
+        return (new static)->text_blocks;
     }
 
-    public function setLanguage($id)
+    public function addPlanPoint($request): void
     {
-        if ($id == null){
-            return;
-        }
-        $this->language_id = $id;
+        $plan_point = new static;
+        $plan_point->fill($request->all());
+        $plan_point->is_done = $request->get('is_done') ? self::IS_DONE : self::IS_NOT_DONE;
+        $plan_point->entry = $plan_point->setJson($request, $plan_point->text_blocks);
+        $plan_point->save();
+    }
+
+    public function editPlanPoint($request): void
+    {
+        $this->fill($request->all());
+        $this->is_done = $request->get('is_done') ? self::IS_DONE : self::IS_NOT_DONE;
+        $this->entry = $this->setJson($request, $this->text_blocks);
+        $this->update($request->all());
+    }
+
+    public function getPhase() :string
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        return ($this->phase !== null)
+            ? json_decode($this->phase->title)->$locale
+            : '';
+    }
+
+    public function getSection() :string
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        return ($this->section !== null)
+            ? json_decode($this->section->sub_title)->$locale
+            : '';
+    }
+
+    public function setDone(): void
+    {
+        $this->is_done = self::IS_DONE;
         $this->save();
     }
 
-    public function getPhase()
+    public function setNotDone(): void
     {
-        return ($this->phase != null)
-            ? $this->phase->title
-            : 'don`t have phase';
-    }
-
-    public function setPhase($id)
-    {
-        if ($id == null){
-            return;
-        }
-        $this->phase_id = $id;
+        $this->is_done = self::IS_NOT_DONE;
         $this->save();
     }
 
-    public function getSection()
+    public function toggleDone()
     {
-        return ($this->section != null)
-            ? $this->section->sub_title
-            : 'don`t have section';
-    }
-
-    public function setSection($id)
-    {
-        if ($id == null){
-            return;
-        }
-        $this->section_id = $id;
-        $this->save();
-    }
-
-    public function setDone()
-    {
-        $this->is_done = Inf_plan_section_point::IS_DONE;
-        $this->save();
-    }
-
-    public function setNotDone()
-    {
-        $this->is_done = Inf_plan_section_point::IS_NOT_DONE;
-        $this->save();
-    }
-
-    public function toggleDone($value)
-    {
-        if ($value == null)
+        if ($this->is_done === 0)
         {
-            return $this->setNotDone();
+            return $this->setDone();
         }
+        return $this->setNotDone();
+    }
 
-        return $this->setDone();
+    public function removePlanPoint() :void
+    {
+        $this->delete();
     }
 }

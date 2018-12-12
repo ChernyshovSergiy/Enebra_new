@@ -15,17 +15,20 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class HomeController extends Controller
 {
     public $IntroductionModel;
+    public $IntroductionPointModel;
     public $PageModel;
     public $SocialLinkModel;
     public $json;
 
     public function __construct(
         Inf_introduction $introduction,
+        Inf_introduction_point $introduction_point,
         Inf_page $inf_page,
         SocialLink $socialLink,
         JsonService $jsonService)
     {
         $this->IntroductionModel = $introduction;
+        $this->IntroductionPointModel = $introduction_point;
         $this->PageModel = $inf_page;
         $this->SocialLinkModel = $socialLink;
         $this->json = $jsonService;
@@ -37,14 +40,15 @@ class HomeController extends Controller
         $cur_lang = LaravelLocalization::getCurrentLocale();
         $langId = Language::where('slug', $cur_lang)->firstOrFail();
         $id = $langId->id;
-        $introduction = ($this->json
-            ->build($this->IntroductionModel ,'content'))->first();
-        $introduction_points = Inf_introduction_point::build()->sortBy('sort');
+        $introduction = $this->json
+            ->build($this->IntroductionModel ,'content')->first();
+        $introduction_points = $this->json
+            ->build($this->IntroductionPointModel, 'point')->sortBy('sort');
         $video_groups = Inf_video_group::where('language_id', $id)->get();
-        $socials = ($this->json
-            ->build($this->SocialLinkModel ,'url'))->sortBy('sort');
-        $pages = ($this->json
-            ->build($this->PageModel ,'text'))->sortBy('sort');
+        $socials = $this->json
+            ->build($this->SocialLinkModel ,'url')->sortBy('sort');
+        $pages = $this->json
+            ->build($this->PageModel ,'text')->sortBy('sort');
 
         return view('Information.index',
             compact('status',

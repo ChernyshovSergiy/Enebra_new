@@ -2,72 +2,70 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\InfPlanPhaseSections\ValidateRequest;
 use App\Inf_plan_phase_section;
-use App\Language;
-use Illuminate\Http\Request;
+use App\Services\JsonService;
+use App\Services\LanguagesService;
 use App\Http\Controllers\Controller;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfPlanPhaseSectionsController extends Controller
 {
+    public $model;
+    public $json;
+    public $languages;
+
+    public function __construct(
+        Inf_plan_phase_section $inf_plan_phase_section,
+        JsonService $jsonService,
+        LanguagesService $languagesService
+    )
+    {
+        $this->model = $inf_plan_phase_section;
+        $this->json = $jsonService;
+        $this->languages = $languagesService;
+    }
     public function index()
     {
-        $plan_phase_sections = Inf_plan_phase_section::all();
-        return view('admin.inf_plan_phase_sections.index',compact('plan_phase_sections'));
+        $plan_phase_sections = $this->json->build($this->model, 'sub_title');
+        $locale = LaravelLocalization::getCurrentLocale();
+        return view('admin.inf_plan_phase_sections.index',
+            compact('plan_phase_sections', 'locale'));
     }
 
     public function create()
     {
-        $language = Language::pluck('title', 'id')->all();
+        $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.inf_plan_phase_sections.create', compact('language'));
+        return view('admin.inf_plan_phase_sections.create', compact('languages'));
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'sub_title' => 'required',
-            'language_id' => 'required'
-        ]);
-        $plan_phase_sections = Inf_plan_phase_section::create($request->all());
-        $plan_phase_sections->setLanguage($request->get('language_id'));
+        $this->model->createNewPhaseSection($request);
 
         return redirect()->route('inf_plan_phase_sections.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $plan_phase_section = Inf_plan_phase_section::find($id);
-        $language = Language::pluck('title', 'id')->all();
+        $plan_phase_section = $this->json->build($this->model, 'sub_title')->find($id);
+        $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.inf_plan_phase_sections.edit', compact('plan_phase_section', 'language'));
+        return view('admin.inf_plan_phase_sections.edit',
+            compact('plan_phase_section', 'languages'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateRequest $request, $id)
     {
-        $this->validate($request, [
-            'sub_title' => 'required',
-            'language_id' => 'required'
-        ]);
-        $plan_phase_section = Inf_plan_phase_section::find($id);
-        $plan_phase_section->setLanguage($request->get('language_id'));
-        $plan_phase_section->update($request->all());
+        $this->model->editPhaseSection($request, $id);
 
         return redirect()->route('inf_plan_phase_sections.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Inf_plan_phase_section::find($id)->delete();
+        $this->model::find($id)->removePhaseSection();
         return redirect()->route('inf_plan_phase_sections.index');
     }
 }

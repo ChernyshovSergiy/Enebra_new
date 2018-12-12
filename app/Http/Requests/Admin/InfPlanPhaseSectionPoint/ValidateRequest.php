@@ -14,12 +14,10 @@ class ValidateRequest extends FormRequest
     public function rules()
     {
         return [
-            'point' => 'required',
-            'description' => 'nullable',
+            'entry' => 'nullable',
             'phase_id' => 'required',
             'section_id' => 'required',
-            'sort' => 'required',
-            'language_id' => 'required'
+            'sort' => 'required'
         ];
     }
 }

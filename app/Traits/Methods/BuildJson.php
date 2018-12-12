@@ -41,7 +41,6 @@ trait BuildJson
             }
             $text = array_add($text, $block, $lang);
         }
-        $json = json_encode($text);
-        return $json;
+        return json_encode($text);
     }
 }

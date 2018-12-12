@@ -36,12 +36,12 @@
                         <thead>
                         <tr>
                             <th>@lang('column.id')</th>
+                            <th>@lang('column.is_done')</th>
                             <th>@lang('column.point')</th>
                             <th>@lang('column.description')</th>
                             <th>@lang('column.phase')</th>
                             <th>@lang('column.section')</th>
                             <th>@lang('column.sort')</th>
-                            <th>@lang('column.language')</th>
                             <th>@lang('column.action')</th>
                         </tr>
                         </thead>
@@ -49,18 +49,23 @@
                         @foreach($plan_phase_section_points as $plan_phase_section_point)
                             <tr>
                                 <td>{{ $plan_phase_section_point->id }}</td>
-                                <td>{{ $plan_phase_section_point->point }}</td>
-                                <td>{!! $plan_phase_section_point->description !!}</td>
+                                <td>
+                                    @if($plan_phase_section_point->is_done === 1)
+                                        <a href="/admin/inf_plan_phase_section_points/toggle/{{ $plan_phase_section_point->id }}" class="text-green fa fa-check-circle"></a>
+                                    @else
+                                        <a href="/admin/inf_plan_phase_section_points/toggle/{{ $plan_phase_section_point->id }}" class="text-muted fa fa-circle"></a>
+                                    @endif
+                                </td>
+                                <td>{!! $plan_phase_section_point->entry ? $plan_phase_section_point->entry->point->$locale : ''  !!}</td>
+                                <td>{!! $plan_phase_section_point->entry ? str_limit($plan_phase_section_point->entry->description->$locale, 100 ) : ''  !!}</td>
                                 <td>{{ $plan_phase_section_point->getPhase()}}</td>
                                 <td>{{ $plan_phase_section_point->getSection()}}</td>
                                 <td>{{ $plan_phase_section_point->sort }}</td>
-                                <td>{{ $plan_phase_section_point->getLanguage()}}</td>
                                 <td>
-                                    <a href="{{route('inf_plan_phase_section_points.show', $plan_phase_section_point->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('inf_plan_phase_section_points.edit', $plan_phase_section_point->id)}}" class="fa fa-pencil"></a>
+                                    <a href="{{route('inf_plan_phase_section_points.edit', $plan_phase_section_point->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['inf_plan_phase_section_points.destroy', $plan_phase_section_point->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     <!-- Button trigger modal -->
                                     {{--<button type="button" class="delete" data-toggle="modal" data-target="#modal-default">--}}

@@ -6,73 +6,88 @@ use App\Http\Requests\Admin\InfPlanPhaseSectionPoint\ValidateRequest;
 use App\Inf_plan_phase;
 use App\Inf_plan_phase_section;
 use App\Inf_plan_section_point;
-use App\Language;
 use App\Http\Controllers\Controller;
+use App\Services\JsonService;
+use App\Services\LanguagesService;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfPlanPhaseSectionPointsController extends Controller
 {
+    public $model;
+    public $phases;
+    public $sections;
+    public $languages;
+    public $json;
+
+    public function __construct(
+        Inf_plan_section_point $inf_plan_section_point,
+        Inf_plan_phase $inf_plan_phase,
+        Inf_plan_phase_section $inf_plan_phase_section,
+        LanguagesService $languagesService,
+        JsonService $jsonService)
+    {
+        $this->model = $inf_plan_section_point;
+        $this->phases = $inf_plan_phase;
+        $this->sections = $inf_plan_phase_section;
+        $this->languages = $languagesService;
+        $this->json = $jsonService;
+    }
     public function index()
     {
-        $plan_phase_section_points = Inf_plan_section_point::all();
-        return view('admin.inf_plan_phase_section_points.index',compact('plan_phase_section_points'));
+        $plan_phase_section_points = $this->json->build($this->model ,'entry');
+        $locale = LaravelLocalization::getCurrentLocale();
+        return view('admin.inf_plan_phase_section_points.index',
+            compact('plan_phase_section_points', 'locale'));
     }
 
     public function create()
     {
-        $language = Language::pluck('title', 'id')->all();
-        $phase = Inf_plan_phase::pluck('title', 'id')->all();
-        $section = Inf_plan_phase_section::pluck('sub_title', 'id')->all();
+        $languages = $this->languages->getActiveLanguages();
+        $phase = $this->phases->getPhaseNames();
+        $section = $this->sections->getSectionNames();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
 
-        return view('admin.inf_plan_phase_section_points.create', compact('language', 'phase', 'section'));
+        return view('admin.inf_plan_phase_section_points.create',
+            compact('languages', 'phase', 'section', 'text_blocks'));
     }
 
     public function store(ValidateRequest $request)
     {
-        $plan_phase_section_points = Inf_plan_section_point::create($request->all());
-        $plan_phase_section_points->setPhase($request->get('language_id'));
-        $plan_phase_section_points->setSection($request->get('phase_id'));
-        $plan_phase_section_points->setLanguage($request->get('section_id'));
-        $plan_phase_section_points->toggleDone($request->get('is_done'));
+        $this->model->addPlanPoint($request);
 
         return redirect()->route('inf_plan_phase_section_points.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $plan_phase_section_point = Inf_plan_section_point::find($id);
-        $phase = Inf_plan_phase::pluck('title', 'id')->all();
-        $section = Inf_plan_phase_section::pluck('sub_title', 'id')->all();
-        $language = Language::pluck('title', 'id')->all();
+        $plan_phase_section_point = $this->json->build($this->model ,'entry')->find($id);
+        $languages = $this->languages->getActiveLanguages();
+        $phase = $this->phases->getPhaseNames();
+        $section = $this->sections->getSectionNames();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
 
-        return view('admin.inf_plan_phase_section_points.edit', compact('plan_phase_section_point', 'phase', 'section', 'language'));
+        return view('admin.inf_plan_phase_section_points.edit',
+            compact('plan_phase_section_point', 'phase', 'section', 'languages', 'text_blocks'));
     }
 
     public function update(ValidateRequest $request, $id)
     {
-
-        $plan_phase_section_point = Inf_plan_section_point::find($id);
-        $plan_phase_section_point->setPhase($request->get('phase_id'));
-        $plan_phase_section_point->setSection($request->get('section_id'));
-        $plan_phase_section_point->setLanguage($request->get('language_id'));
-        $plan_phase_section_point->toggleDone($request->get('is_done'));
-        $plan_phase_section_point->update($request->all());
+        $this->model::find($id)->editPlanPoint($request);
 
         return redirect()->route('inf_plan_phase_section_points.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Inf_plan_section_point::find($id)->delete();
+        $this->model::find($id)->removePlanPoint();
+
         return redirect()->route('inf_plan_phase_section_points.index');
+    }
+
+    public function toggle($id)
+    {
+        $this->model::find($id)->toggleDone();
+
+        return redirect()->back();
     }
 }

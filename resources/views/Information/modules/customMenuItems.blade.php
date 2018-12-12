@@ -1,6 +1,6 @@
 @foreach($items as $item)
-    @if($item->title == 'home')
-        @if(LaravelLocalization::getCurrentLocale() != 'en')
+    @if($item->title === 'home')
+        @if(LaravelLocalization::getCurrentLocale() !== 'en')
              <li
                 class="home hidden-820 {{(URL::current() == env('THEME').'/'.LaravelLocalization::getCurrentLocale().substr($item->url(),2) ? 'active': '')}}">
         @else
@@ -21,7 +21,7 @@
                     </a>
             @else
                 <li class = "dropdown-submenu">
-                    @if(substr($item->url(),1,8) != '/#scroll')
+                    @if(substr($item->url(),1,8) !== '/#scroll')
                         {{--<a class="dropdown-toggle" data-toggle="dropdown" href="{{ env('THEME').LaravelLocalization::getCurrentLocale().substr($item->url(),1) }}">@lang('nav.'.$item->title)--}}
                         <a class="dropdown-toggle" data-toggle="dropdown" href ="{{ $item->url }}">{{$item->title}}
                     @else
@@ -34,7 +34,7 @@
             </ul>
         @else
             <li class="dropdown" onclick="window.location.href ='{{ substr($item->url(),1) }}'">
-                @if(substr($item->url(),1,8) != '/#scroll')
+                @if(substr($item->url(),1,8) !== '/#scroll')
                     {{--<a class="dropdown-toggle" data-toggle="dropdown" href="{{ env('THEME').LaravelLocalization::getCurrentLocale().substr($item->url(),1) }}">@lang('nav.'.$item->title)</a>--}}
                     <a class="dropdown-toggle" data-toggle="dropdown" href ="{{ $item->url }}">{{$item->title}}</a>
                 @else

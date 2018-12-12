@@ -3,10 +3,8 @@
 namespace App;
 
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
-use DB;
 use Illuminate\Database\Eloquent\Model;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
 
 /**
  * App\Inf_introduction_point
@@ -29,7 +27,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class Inf_introduction_point extends Model
 {
     use PrepareLangStrForJsonMethods;
-    public function menu()
+    public function menu(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Menu::class, 'id', 'link_id');
     }
@@ -43,18 +41,9 @@ class Inf_introduction_point extends Model
     public function getLinkPageTitle()
     {
         $locale = LaravelLocalization::getCurrentLocale();
-        return ($this->link_id != null)
+        return ($this->link_id !== null)
             ? json_decode($this->menu->title)->$locale
-            : 'don`t have language';
-    }
-
-    public function setLinkIDPageTitle($id)
-    {
-        if ($id == null){
-            return;
-        }
-        $this->link_id = $id;
-        $this->save();
+            : '';
     }
 
     public static function addPoint($request) :void //add new point
@@ -67,7 +56,7 @@ class Inf_introduction_point extends Model
 
     public static function editPoint($request, $id) :void
     {
-        $intro_point = Inf_introduction_point::find($id);
+        $intro_point = self::find($id);
         $intro_point->fill($request->all());
         $intro_point->point = json_encode($intro_point->createLangString($request, 'point'));
         $intro_point->update($request->all());
@@ -75,26 +64,6 @@ class Inf_introduction_point extends Model
 
     public static function removePoint($id) :void
     {
-        Inf_introduction_point::find($id)->delete();
+        self::find($id)->delete();
     }
-
-    public static function build()
-    {
-        $result = Inf_introduction_point::all();
-        if ($result->isEmpty()){
-            return [];
-        }
-        $result->transform(function ($item){
-            $column = 'point';
-            if (is_string($item->$column) &&
-                is_object(json_decode($item->$column)) &&
-                json_last_error() == JSON_ERROR_NONE){
-
-                $item->$column = json_decode($item->$column);
-            }
-            return $item;
-        });
-        return $result;
-    }
-
 }

@@ -2,14 +2,12 @@
 
 namespace App;
 
-use App\Services\LanguagesService;
 use App\Traits\Methods\BuildJson;
 use App\Traits\Relations\BelongsTo\Languages;
 use App\Traits\Relations\HasOne\Images;
 use App\Traits\Relations\HasOne\Titles;
 use App\Traits\Relations\HasOne\Users;
 use Illuminate\Database\Eloquent\Model;
-use Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -72,12 +70,12 @@ class Inf_page extends Model
 
     public static function getTextColumnsForTranslate() :array
     {
-        $page = new static;
-        return $page->text_blocks;
+        return (new static)->text_blocks;
     }
 
-    public function getUser($id){
-        if ($id ==null){
+    public function getUser($id): void
+    {
+        if ($id === null){
             return;
         }
         $this->user_id = $id;
@@ -120,51 +118,49 @@ class Inf_page extends Model
 
     public function toggleMenuPoint($value)
     {
-        if ($value == null){
+        if ($value === null){
             return $this->delFromMenu();
         }
-        else
-        {
-            return $this->setInMenu();
-        }
+
+        return $this->setInMenu();
     }
 
     public function getImageCategoryTitle($id)
     {
         $category = ImageCategory::find($id);
-        return ($category != null)
+        return ($category !== null)
             ? $category->title
             : 'don`t have category';
     }
 
-    public function getImage()
+    public function getImage(): string
     {
         $image = Image::find($this->image_id);
-        if ($image == null){
+        if ($image === null){
             return '/img/no-image.png';
         }
         return '/uploads/'. $this->getImageCategoryTitle($image->category_id) .'/'. $image->image;
     }
 
-    public function setImage($id)
+    public function setImage($id): void
     {
-        if ($id == null){
+        if ($id === null){
             return;
         }
         $this->image_id = $id;
         $this->save();
     }
 
-    public function getLanguage()
+    public function getLanguage(): string
     {
-        return ($this->language != null)
+        return ($this->language !== null)
             ? $this->language->title
             : 'don`t have language';
     }
 
-    public function setLanguage($id)
+    public function setLanguage($id): void
     {
-        if ($id == null){
+        if ($id === null){
             return;
         }
         $this->original = $id;
@@ -174,14 +170,14 @@ class Inf_page extends Model
     public function getTitle()
     {
         $locale = LaravelLocalization::getCurrentLocale();
-        return ($this->title != null)
+        return ($this->title !== null)
             ? json_decode($this->title->title)->$locale
-            : 'don`t have language';
+            : '';
     }
 
-    public function setTitle($id)
+    public function setTitle($id): void
     {
-        if ($id == null){
+        if ($id === null){
             return;
         }
         $this->title_id = $id;

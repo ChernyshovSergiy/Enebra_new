@@ -6,12 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateInfIdDocumentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         Schema::create('inf_id_documents', function (Blueprint $table) {
             $table->increments('id');
@@ -20,12 +15,7 @@ class CreateInfIdDocumentsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('inf_id_documents');
     }

@@ -41,8 +41,7 @@ class Inf_introduction extends Model
 
     public static function getTextColumnsForTranslate(): array
     {
-        $introduction = new static;
-        return $introduction->text_blocks;
+        return (new static)->text_blocks;
     }
 
     public static function addContent($request): void
@@ -56,7 +55,7 @@ class Inf_introduction extends Model
 
     public static function editContent($request, $id): void
     {
-        $introduction = Inf_introduction::find($id);
+        $introduction = self::find($id);
         $introduction->fill($request->all());
         $introduction->setContent($request, $id);
         $introduction->update($request->all());
@@ -64,7 +63,7 @@ class Inf_introduction extends Model
 
     public function setContent($request, $id): void
     {
-        if ($id == null) {
+        if ($id === null) {
             return;
         }
         $this->content = $this->setJson($request, $this->text_blocks);
@@ -74,12 +73,12 @@ class Inf_introduction extends Model
     public function getTitleFromMenu(): string
     {
         $locale = LaravelLocalization::getCurrentLocale();
-        return ($this->title_id != null)
+        return ($this->title_id !== null)
             ? json_decode($this->menu->title)->$locale
             : 'don`t have language';
     }
 
-    public function removeContent()
+    public function removeContent(): void
     {
         $this->delete();
     }
