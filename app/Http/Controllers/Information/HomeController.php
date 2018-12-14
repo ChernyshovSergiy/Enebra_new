@@ -16,6 +16,7 @@ class HomeController extends Controller
 {
     public $IntroductionModel;
     public $IntroductionPointModel;
+    public $InfVideoGroupModel;
     public $PageModel;
     public $SocialLinkModel;
     public $json;
@@ -23,12 +24,14 @@ class HomeController extends Controller
     public function __construct(
         Inf_introduction $introduction,
         Inf_introduction_point $introduction_point,
+        Inf_video_group $inf_video_group,
         Inf_page $inf_page,
         SocialLink $socialLink,
         JsonService $jsonService)
     {
         $this->IntroductionModel = $introduction;
         $this->IntroductionPointModel = $introduction_point;
+        $this->InfVideoGroupModel = $inf_video_group;
         $this->PageModel = $inf_page;
         $this->SocialLinkModel = $socialLink;
         $this->json = $jsonService;
@@ -44,7 +47,9 @@ class HomeController extends Controller
             ->build($this->IntroductionModel ,'content')->first();
         $introduction_points = $this->json
             ->build($this->IntroductionPointModel, 'point')->sortBy('sort');
-        $video_groups = Inf_video_group::where('language_id', $id)->get();
+        $video_groups = $this->json
+            ->build($this->InfVideoGroupModel ,'content');
+//        dd($video_groups);
         $socials = $this->json
             ->build($this->SocialLinkModel ,'url')->sortBy('sort');
         $pages = $this->json

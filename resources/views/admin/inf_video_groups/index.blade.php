@@ -37,11 +37,9 @@
                         <tr>
                             <th>@lang('column.id')</th>
                             <th>@lang('column.object_name')</th>
-                            <th>@lang('column.slug')</th>
                             <th>@lang('column.description')</th>
                             <th>@lang('column.keywords')</th>
                             <th>@lang('column.meta_desc')</th>
-                            <th>@lang('column.language')</th>
                             <th>@lang('column.action')</th>
                         </tr>
                         </thead>
@@ -49,18 +47,16 @@
                         @foreach($video_groups as $video_group)
                             <tr>
                                 <td>{{ $video_group->id }}</td>
-                                <td>{{ $video_group->title }}</td>
-                                <td>{{ $video_group->slug }}</td>
-                                <td>{!! $video_group->description !!}</td>
-                                <td>{{ $video_group->keywords }}</td>
-                                <td>{!! $video_group->meta_desc !!}</td>
-                                <td>{{ $video_group->getLanguage()}}</td>
+                                <td>{{ $video_group->getTitle() }}</td>
+                                <td>{!! $video_group->content ? $video_group->content->description->$locale : '' !!}</td>
+                                <td>{!! $video_group->content ? $video_group->content->keywords->$locale : '' !!}</td>
+                                <td>{!! $video_group->content ? $video_group->content->meta_desc->$locale : '' !!}</td>
                                 <td>
-                                    <a href="{{route('inf_video_groups.show', $video_group->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('inf_video_groups.edit', $video_group->id)}}" class="fa fa-pencil"></a>
+                                    {{--<a href="{{route('inf_video_groups.show', $video_group->id)}}" class="fa fa-eye"></a>--}}
+                                    <a href="{{route('inf_video_groups.edit', $video_group->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['inf_video_groups.destroy', $video_group->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

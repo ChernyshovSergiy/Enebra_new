@@ -10,25 +10,28 @@ namespace App\Services;
 
 
 use App\Menu;
+use App\Traits\Methods\GetTitleFromMenu;
 use Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class PagesService
 {
-    public $menus;
-    public function __construct(MenusService $menusService)
-    {
-        $this->menus = $menusService;
-    }
+    use GetTitleFromMenu;
+//    public $menus;
+//    public function __construct(MenusService $menusService)
+//    {
+//        $this->menus = $menusService;
+//    }
 
     public function getActivePagesName(): array
     {
         $locale = LaravelLocalization::getCurrentLocale();
-        $titles = $this->menus->getTitleMenuPoints();
+//        $titles = $this->menus->getTitleMenuPoints();
+        $titles = $this->getActiveTitleMenuPoints();
         $page_names = [];
         foreach($titles as $key => $title){
             $page_names[$key] = json_decode($title)->$locale;
-        };
+        }
         return $page_names;
     }
 }

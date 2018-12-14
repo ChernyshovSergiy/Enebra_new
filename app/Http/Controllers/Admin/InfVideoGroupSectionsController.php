@@ -2,74 +2,78 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\InfVideoGroupSections\ValidateRequest;
 use App\Inf_video_group;
 use App\Inf_video_group_section;
-use Illuminate\Http\Request;
+use App\Services\JsonService;
+use App\Services\LanguagesService;
 use App\Http\Controllers\Controller;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class InfVideoGroupSectionsController extends Controller
 {
+    public $model;
+    public $videoGroupModel;
+    public $json;
+    public $languages;
+
+    public function __construct(
+        Inf_video_group_section $inf_video_group_section,
+        Inf_video_group $inf_video_group,
+        JsonService $jsonService,
+        LanguagesService $languagesService
+    )
+    {
+        $this->model = $inf_video_group_section;
+        $this->videoGroupModel = $inf_video_group;
+        $this->json = $jsonService;
+        $this->languages = $languagesService;
+    }
     public function index()
     {
-        $video_group_sections = Inf_video_group_section::all();
-        return view('admin.inf_video_group_sections.index',compact('video_group_sections'));
+        $video_group_sections = $this->json->build($this->model, 'title');
+        $locale = LaravelLocalization::getCurrentLocale();
+        return view('admin.inf_video_group_sections.index',
+            compact('video_group_sections', 'locale'));
     }
 
     public function create()
     {
-        $video_group = Inf_video_group::pluck('title', 'id')->all();
+        $video_group = $this->videoGroupModel->getVideoGroupNames();
+        $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.inf_video_group_sections.create', compact('video_group'));
+        return view('admin.inf_video_group_sections.create',
+            compact('video_group', 'languages'));
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'video_group_id' => 'required'
-        ]);
-        $video_group_sections = Inf_video_group_section::create($request->all());
-        $video_group_sections->setVideoGroup($request->get('video_group_id'));
-        $video_group_sections->setLanguage();
+        $this->model->createNewVideoGroupSection($request);
 
         return redirect()->route('inf_video_group_sections.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $video_group_section = Inf_video_group_section::find($id);
-        $video_group = Inf_video_group::pluck('title', 'id')->all();
+        $video_group_section = $this->json->build($this->model, 'title')->find($id);
+        $video_group = $this->videoGroupModel->getVideoGroupNames();
+        $languages = $this->languages->getActiveLanguages();
+        $locale = LaravelLocalization::getCurrentLocale();
 
-        return view('admin.inf_video_group_sections.edit', compact('video_group_section', 'video_group'));
+        return view('admin.inf_video_group_sections.edit',
+            compact('video_group_section', 'video_group', 'languages', 'locale'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateRequest $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'video_group_id' => 'required'
-        ]);
-        $video_group_section = Inf_video_group_section::find($id);
-        $video_group_section->setVideoGroup($request->get('video_group_id'));
-        $video_group_section->setLanguage();
-        $video_group_section->update($request->all());
+        $this->model->editVideoGroupSection($request, $id);
 
         return redirect()->route('inf_video_group_sections.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Inf_video_group_section::find($id)->delete();
+        $this->model::find($id)->removeVideoGroupSection();
         return redirect()->route('inf_video_group_sections.index');
     }
 }

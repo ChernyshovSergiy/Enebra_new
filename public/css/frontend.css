@@ -8251,10 +8251,10 @@ div.italic-text span{
 .video-block.informative-part{
     background: url('../img/shutterstock_395_795x1200-min.png')no-repeat center center;
 }
-.video-block.technology{
+.video-block.technology-part{
     background: url('../img/shutterstock.png')no-repeat center center;
 }
-.video-block.materials-of-the-enebra-project{
+.video-block.enebra-materials-part{
     background: url('../img/rtt-min.jpg')no-repeat center center;
 }
 .video-block.motivation-part{
@@ -11516,7 +11516,6 @@ box-shadow: -2px 3px 25px -7px rgba(0,0,0,0.75);
 }
 .foot-auth img{width:initial;}
 .find-us a {
-    margin-left: 10px;
     font-size: 17px;
 }
 .foot-auth{font-family: 'RobotoMediumItalic', sans-serif; font-size: 21px;}

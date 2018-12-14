@@ -33,7 +33,7 @@ trait BuildJson
         $lang = array();
         foreach ($text_blocks as $block) {
             foreach ($languages as $key => $language) {
-                if ($key == 1) {
+                if ($key === 1) {
                     $lang = [$language => $request->get($block.':'.$language)];
                 } else {
                     $lang[$language] = $request->get($block.':'.$language);

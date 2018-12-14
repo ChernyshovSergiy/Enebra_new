@@ -2,21 +2,22 @@
 
 namespace App;
 
+use App\Traits\Methods\PrepareLangStrForJsonMethods;
+use App\Traits\Relations\BelongsTo\VideoGroups;
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 /**
  * App\Inf_video_group_section
  *
- * @property int|null $video_group_id
- * @property int|null $language_id
- * @property-read \App\Inf_video_group $video_group
- * @property-read \App\Language $language
  * @property int $id
- * @property string $title
+ * @property mixed|null $title
+ * @property int $video_group_id
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Inf_video_group $video_group
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereLanguageId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group_section whereVideoGroupId($value)
@@ -24,53 +25,42 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Inf_video_group_section extends Model
 {
+    use PrepareLangStrForJsonMethods, VideoGroups;
+
     protected $fillable = [
-        'title', 'video_group_id'
+        'title',
+        'video_group_id'
     ];
 
-    public function video_group()
+    public function createNewVideoGroupSection($request) :void
     {
-        return $this->belongsTo(Inf_video_group::class, 'video_group_id', 'id');
+        $video_group_section = new static;
+        $video_group_section->fill($request->all());
+        $items = $video_group_section->createLangString($request, 'title');
+        $video_group_section->title = json_encode($items);
+        $video_group_section->save();
     }
 
-    public function language()
+    public function editVideoGroupSection($request, $id) :void
     {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
+        $video_group_section = self::find($id);
+        $video_group_section->fill($request->all());
+        $items = $video_group_section->createLangString($request, 'title');
+        $video_group_section->title = json_encode($items);
+        $video_group_section->update($request->all());
     }
 
     public function getVideoGroup()
     {
-        return ($this->video_group != null)
-            ? $this->video_group->title
+        $locale = LaravelLocalization::getCurrentLocale();
+        return ($this->video_group_id !== null)
+            ? json_decode($this->video_group->menu->title)->$locale
             : 'don`t have video group';
     }
 
-    public function getVideoGroupLanguageId()
+    public function removeVideoGroupSection() :void
     {
-        return ($this->video_group != null)
-            ? $this->video_group->language_id
-            : 'don`t have language';
+        $this->delete();
     }
 
-    public function setVideoGroup($id)
-    {
-        if ($id == null){
-            return;
-        }
-        $this->video_group_id = $id;
-        $this->save();
-    }
-
-    public function getLanguage()
-    {
-        return ($this->language != null)
-            ? $this->language->title
-            : 'don`t have language';
-    }
-
-    public function setLanguage()
-    {
-        $this->language_id = $this->getVideoGroupLanguageId();
-        $this->save();
-    }
 }

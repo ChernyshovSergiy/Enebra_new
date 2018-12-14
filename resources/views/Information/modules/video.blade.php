@@ -11,13 +11,15 @@
             @foreach( $video_groups -> chunk( 2 ) as $key => $groups )
                 <div class="kw-block kwicks kwicks-horizontal kwicks-processed">
                     @foreach( $groups as $k => $group)
-                        <div class="video-block col-md-3 {{$group -> slug}}">
-                            <div class="title">{{$group -> title}}</div>
+                        {{--{{ dd($group->getBG()) }}--}}
+                        <div class="video-block col-md-3 {{ $group->getBG() }}">
+                            {{--<div class="title">{{ json_decode($group->menu->title)->$cur_lang }}</div>--}}
+                            <div class="title">{{ $group->getTitle() }}</div>
                             <div class="block-on-hover">
-                                <a href="{{asset('video/' . $group -> slug )}}">
-                                    <h2>{{$group -> title}}</h2>
+                                <a href="{{$group->menu->url }}">
+                                    <h2>{{ $group->getTitle() }}</h2>
                                 </a>
-                                <p>{!! htmlspecialchars_decode( $group -> description ) !!}</p>
+                                <p>{!! htmlspecialchars_decode( $group->content->description->$cur_lang ) !!}</p>
                             </div>
                         </div>
                     @endforeach

@@ -28,10 +28,12 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
-                            <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title') }}">
-                        </div>
+                        @foreach($languages as $language)
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">@lang('column.object_name'): {{$language}}</label>
+                                <input type="text" name="{{'title'.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title'.':'.$language) }}">
+                            </div>
+                        @endforeach
                         <div class="form-group">
                             <label>@lang('column.video_group')</label>
                             {{ Form::select('video_group_id',

@@ -29,36 +29,30 @@
                 <div class="box-body">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
-                            <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $video_group->title }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.slug')</label>
-                            <input type="text" name="slug" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $video_group->slug }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.description')</label>
-                            <textarea name="description" id="" cols="80" rows="10" class="form-control">{{ $video_group->description }}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.keywords')</label>
-                            <input type="text" name="keywords" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $video_group->keywords }}">
-                            <p class="help-block">@lang('admin.format_keywords')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.meta_desc')</label>
-                            <textarea name="meta_desc" id="" cols="80" rows="10" class="form-control">{{ $video_group->meta_desc }}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label>@lang('column.language')</label>
-                            {{ Form::select('language_id',
-                                $language,
-                                $video_group->language_id,
+                            <label>@lang('column.object_name')</label>
+                            {{ Form::select('menu_id',
+                                $menus,
+                                $video_group->menu_id,
                                 ['class' => 'form-control select2'])
                             }}
                         </div>
+                        @foreach($text_blocks as $block)
+                            @foreach($languages as $language)
+                                @if($block === 'keywords')
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                        <input type="text" name="{{ $block.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder=""
+                                               value="{!! $video_group->content ? $video_group->content->$block->$language : '' !!}">
+                                    </div>
+                                @else
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                        <textarea name="{{ $block.':'.$language}}" id="{{ $block.':'.$language}}" cols="80" rows="10" class="form-control" title="{{ $block.':'.$language}}">
+                                            {!! $video_group->content ? $video_group->content->$block->$language : '' !!}</textarea>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endforeach
                     </div>
                 </div>
                 <!-- /.box-body -->

@@ -38,7 +38,6 @@
                             <th>@lang('column.id')</th>
                             <th>@lang('column.object_name')</th>
                             <th>@lang('column.video_group')</th>
-                            <th>@lang('column.language')</th>
                             <th>@lang('column.action')</th>
                         </tr>
                         </thead>
@@ -46,15 +45,14 @@
                         @foreach($video_group_sections as $video_group_section)
                             <tr>
                                 <td>{{ $video_group_section->id }}</td>
-                                <td>{{ $video_group_section->title }}</td>
+                                <td>{{ $video_group_section->title ? $video_group_section->title->$locale : '' }}</td>
                                 <td>{{ $video_group_section->getVideoGroup() }}</td>
-                                <td>{{ $video_group_section->getLanguage()}}</td>
                                 <td>
-                                    <a href="{{route('inf_video_group_sections.show', $video_group_section->id)}}" class="fa fa-eye"></a>
-                                    <a href="{{route('inf_video_group_sections.edit', $video_group_section->id)}}" class="fa fa-pencil"></a>
+                                    {{--<a href="{{route('inf_video_group_sections.show', $video_group_section->id)}}" class="fa fa-eye"></a>--}}
+                                    <a href="{{route('inf_video_group_sections.edit', $video_group_section->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['inf_video_group_sections.destroy', $video_group_section->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

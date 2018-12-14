@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\Methods\BuildJson;
+use App\Traits\Methods\GetTitleFromMenu;
 use App\Traits\Relations\HasOne\MenuId;
 use Illuminate\Database\Eloquent\Model;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -26,7 +27,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Inf_video_group extends Model
 {
-    use MenuId, BuildJson;
+    use MenuId, BuildJson, GetTitleFromMenu;
 
     protected $fillable = [
         'menu_id',
@@ -49,6 +50,24 @@ class Inf_video_group extends Model
         $locale = LaravelLocalization::getCurrentLocale();
         return ($this->menu_id !== null)
             ? json_decode($this->menu->title)->$locale
+            : '';
+    }
+
+    public function getVideoGroupNames() :array
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        $titles = self::pluck( 'menu_id', 'id')->all();
+        $video_group_names = [];
+        foreach($titles as $key => $title){
+            $video_group_names[$key] = json_decode(Menu::where('id', $title)->first()->title)->$locale;
+        }
+        return $video_group_names;
+    }
+
+    public function getBG() :string
+    {
+        return ($this->menu_id !== null)
+            ? explode('/', $this->menu->url)[3]
             : '';
     }
 
