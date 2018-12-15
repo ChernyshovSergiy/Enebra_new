@@ -58,6 +58,17 @@ class Inf_video_group_section extends Model
             : 'don`t have video group';
     }
 
+    public function getVideoGroupSectionNames() :array
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        $titles = self::pluck( 'title', 'id')->all();
+        $video_group_section_names = [];
+        foreach($titles as $key => $title){
+            $video_group_section_names[$key] = json_decode($title)->$locale;
+        }
+        return $video_group_section_names;
+    }
+
     public function removeVideoGroupSection() :void
     {
         $this->delete();

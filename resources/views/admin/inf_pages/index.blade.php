@@ -59,7 +59,7 @@
                         </thead>
                         <tbody>
                         @foreach($pages as $page)
-                            @if($page->title->is_active != 0)
+                            @if($page->title->is_active !== 0)
                             <tr>
                                 <td>{{ $page->id }}</td>
                                 <td>{{ $page->user->first_name .' '.$page->user->last_name }}</td>

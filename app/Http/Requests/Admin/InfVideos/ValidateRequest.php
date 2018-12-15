@@ -6,19 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'about_author' => 'required',
-            'link' => 'required',
-            'duration_time' => 'required',
+            'info' => 'nullable',
             'video_group_id' => 'required',
             'video_group_section_id' => 'nullable',
             'image_id' => 'required',

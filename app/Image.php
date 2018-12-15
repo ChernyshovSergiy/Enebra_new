@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Storage;
  * @property string title
  * @property array slug
  * @property int $id
- * @property string $title
- * @property string $slug
- * @property int|null $user_id
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property int $category_id

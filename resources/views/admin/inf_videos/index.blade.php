@@ -46,32 +46,30 @@
                             <th>@lang('column.section')</th>
                             <th>@lang('column.image')</th>
                             <th>@lang('column.sort')</th>
-                            <th>@lang('column.language')</th>
                             <th>@lang('column.action')</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($videos as $video)
+                        @foreach($videos as $video)inf_status_messages
                             <tr>
                                 <td>{{ $video->id }}</td>
-                                <td>{!! $video->title !!}</td>
-                                <td>{!! $video->description !!}</td>
-                                <td>{!! $video->about_author !!}</td>
-                                <td>{{ $video->link }}</td>
-                                <td>{{ $video->duration_time }}</td>
+                                <td>{!! $video->info ? $video->info->title->$locale : '' !!}</td>
+                                <td>{!! $video->info ? str_limit($video->info->description->$locale, 20, ' &raquo') : '' !!}</td>
+                                <td>{!! $video->info ? str_limit($video->info->about_author->$locale, 20, ' &raquo') : '' !!}</td>
+                                <td>{!! $video->info ? $video->info->link->$locale : '' !!}</td>
+                                <td>{!! $video->info ? $video->info->duration_time->$locale : '' !!}</td>
                                 <td>{{ $video->getVideoGroup()}}</td>
                                 <td>{{ $video->getVideoGroupSection()}}</td>
                                 <td>
                                     <img src="{{ $video->getImage() }}" alt="" width="100">
                                 </td>
                                 <td>{{ $video->sort }}</td>
-                                <td>{{ $video->getLanguage()}}</td>
                                 <td>
                                     {{--<a href="{{route('inf_videos.show', $video->id)}}" class="fa fa-eye"></a>--}}
-                                    <a href="{{route('inf_videos.edit', $video->id)}}" class="fa fa-pencil"></a>
+                                    <a href="{{route('inf_videos.edit', $video->id)}}" class="text-yellow fa fa-pencil"></a>
                                     {{ Form::open(['route'=>['inf_videos.destroy', $video->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('Are you sure?') " type="submit" class="delete">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="text-red fa fa-remove"></i>
                                     </button>
                                     {{ Form::close() }}
                                 </td>

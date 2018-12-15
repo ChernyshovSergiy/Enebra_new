@@ -34,6 +34,7 @@ return[
     'menu'	                    => 'Menu Points',
     'social_links'	            => 'Social Links',
     'select_image'	            => 'Select image',
+    'select_section'	        => 'Select section',
     'subscribers'	            => 'Subscribers',
     'anonymous'	                => 'Anonymous',
     'select_id_docs'	        => 'Select identity documents',

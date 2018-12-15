@@ -57,7 +57,7 @@ class Inf_page extends Model
         'meta_id', 'text'
     ];
 
-    protected $text_blocks = [
+    public $text_blocks = [
         'sub_title',
         'description',
         'top_textarea',

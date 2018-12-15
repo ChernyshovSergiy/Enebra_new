@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <label>@lang('column.video_group')</label>
                             {{ Form::select('video_group_id',
-                                $video_group,
+                                $video_groups,
                                 $video->video_group_id,
                                 ['class' => 'form-control select2'])
                             }}
@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <label>@lang('column.section')</label>
                             {{ Form::select('video_group_section_id',
-                                $video_group_section,
+                                $video_group_sections,
                                 $video->video_group_section_id,
                                 ['class' => 'form-control select2'])
                             }}
@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label>@lang('column.image')</label>
                             {{ Form::select('image_id',
-                                $image,
+                                $images,
                                 $video->image_id,
                                 ['class' => 'form-control select2'])
                             }}
