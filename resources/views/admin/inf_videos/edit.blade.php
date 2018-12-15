@@ -28,32 +28,32 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.object_name')</label>
-                            <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $video->title }}">
-                            <p class="help-block">@lang('admin.format_video_name')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.description')</label>
-                            <textarea name="description" id="" cols="80" rows="10" class="form-control">{{ $video->description }}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.about_author')</label>
-                            <textarea name="about_author" id="" cols="80" rows="10" class="form-control">{{ $video->about_author }}</textarea>
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.link')</label>
-                            <input type="text" name="link" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $video->link }}">
-                            {{--<textarea name="link" id="" cols="80" rows="10" class="form-control">{{ $video->link }}</textarea>--}}
-                            <p class="help-block">@lang('admin.introduction_text_format')</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">@lang('column.duration_time')</label>
-                            <input type="text" name="duration_time" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $video->duration_time }}">
-                            <p class="help-block">@lang('admin.format_video_duration')</p>
-                        </div>
+                        @foreach($text_blocks as $block)
+                            @foreach($languages as $language)
+                                @if($block === 'image_id')
+                                    <div class="form-group">
+                                        <label>@lang('column.image'): {{$language}}</label>
+                                        {{ Form::select($block.':'.$language,
+                                            $images,
+                                            $video->getImageId($video->info->$block->$language),
+                                            ['class' => 'form-control select2'])
+                                        }}
+                                    </div>
+                                @elseif( $block === 'description' xor $block === 'about_author')
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                        <textarea name="{{ $block.':'.$language}}" id="{{ $block.':'.$language}}" cols="80" rows="10" class="form-control" title="{{ $block.':'.$language}}">
+                                            {!! $video->info ? $video->info->$block->$language : '' !!}</textarea>
+                                    </div>
+                                @else
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                        <input type="text" name="{{ $block.':'.$language}}" class="form-control" id="exampleInputEmail1" placeholder=""
+                                               value="{!! $video->info ? $video->info->$block->$language : '' !!}">
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endforeach
                         <div class="form-group">
                             <label>@lang('column.video_group')</label>
                             {{ Form::select('video_group_id',
@@ -67,15 +67,8 @@
                             {{ Form::select('video_group_section_id',
                                 $video_group_sections,
                                 $video->video_group_section_id,
-                                ['class' => 'form-control select2'])
-                            }}
-                        </div>
-                        <div class="form-group">
-                            <label>@lang('column.image')</label>
-                            {{ Form::select('image_id',
-                                $images,
-                                $video->image_id,
-                                ['class' => 'form-control select2'])
+                                ['class' => 'form-control select2',
+                                'placeholder' => Lang::get('admin.select_section')])
                             }}
                         </div>
                         <div class="form-group">
@@ -83,14 +76,6 @@
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $video->sort }}">
                             <p class="help-block">@lang('admin.introduction_sort_format')</p>
                         </div>
-                        {{--<div class="form-group">--}}
-                            {{--<label>Язык</label>--}}
-                            {{--{{ Form::select('language_id',--}}
-                                {{--$language,--}}
-                                {{--$video->language_id,--}}
-                                {{--['class' => 'form-control select2'])--}}
-                            {{--}}--}}
-                        {{--</div>--}}
                     </div>
                 </div>
                 <!-- /.box-body -->

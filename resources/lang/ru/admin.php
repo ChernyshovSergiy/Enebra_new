@@ -38,6 +38,9 @@ return[
     'subscribers'	            => 'Подписчики',
     'anonymous'	                => 'Ананим',
     'select_id_docs'	        => 'Выберите документы подтверждающие личность',
+    'not_video_section'         => 'Без раздела',
+    'not_video_group'           => 'Без группы',
+    'not_category'              => 'Без категории',
 
     'dashboard_main'            => 'Статистика',
     'listing_image_category'    => 'Список Категорий Картинок',

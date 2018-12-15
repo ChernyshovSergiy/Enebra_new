@@ -6,7 +6,6 @@ use App\Inf_introduction;
 use App\Inf_introduction_point;
 use App\Inf_page;
 use App\Inf_video_group;
-use App\Language;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
 use App\socialLink;
@@ -41,15 +40,12 @@ class HomeController extends Controller
     {
         $status = ' ';
         $cur_lang = LaravelLocalization::getCurrentLocale();
-        $langId = Language::where('slug', $cur_lang)->firstOrFail();
-        $id = $langId->id;
         $introduction = $this->json
             ->build($this->IntroductionModel ,'content')->first();
         $introduction_points = $this->json
             ->build($this->IntroductionPointModel, 'point')->sortBy('sort');
         $video_groups = $this->json
             ->build($this->InfVideoGroupModel ,'content');
-//        dd($video_groups);
         $socials = $this->json
             ->build($this->SocialLinkModel ,'url')->sortBy('sort');
         $pages = $this->json

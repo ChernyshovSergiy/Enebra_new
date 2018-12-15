@@ -50,7 +50,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($videos as $video)inf_status_messages
+                        @foreach($videos as $video)
                             <tr>
                                 <td>{{ $video->id }}</td>
                                 <td>{!! $video->info ? $video->info->title->$locale : '' !!}</td>
@@ -61,7 +61,7 @@
                                 <td>{{ $video->getVideoGroup()}}</td>
                                 <td>{{ $video->getVideoGroupSection()}}</td>
                                 <td>
-                                    <img src="{{ $video->getImage() }}" alt="" width="100">
+                                    <img src="{!! $video->info ? $video->info->image_id->$locale : '' !!}" alt="" width="100">
                                 </td>
                                 <td>{{ $video->sort }}</td>
                                 <td>

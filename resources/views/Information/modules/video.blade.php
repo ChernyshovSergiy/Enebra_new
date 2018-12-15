@@ -11,9 +11,7 @@
             @foreach( $video_groups -> chunk( 2 ) as $key => $groups )
                 <div class="kw-block kwicks kwicks-horizontal kwicks-processed">
                     @foreach( $groups as $k => $group)
-                        {{--{{ dd($group->getBG()) }}--}}
                         <div class="video-block col-md-3 {{ $group->getBG() }}">
-                            {{--<div class="title">{{ json_decode($group->menu->title)->$cur_lang }}</div>--}}
                             <div class="title">{{ $group->getTitle() }}</div>
                             <div class="block-on-hover">
                                 <a href="{{$group->menu->url }}">

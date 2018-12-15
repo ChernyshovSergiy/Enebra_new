@@ -38,6 +38,9 @@ return[
     'subscribers'	            => 'Subscribers',
     'anonymous'	                => 'Anonymous',
     'select_id_docs'	        => 'Select identity documents',
+    'not_video_section'         => 'don`t have video group section',
+    'not_video_group'           => 'don`t have video group',
+    'not_category'              => 'don`t have category',
 
     'dashboard_main'            => 'Dashboard',
 

@@ -17,7 +17,7 @@ class ValidateRequest extends FormRequest
             'info' => 'nullable',
             'video_group_id' => 'required',
             'video_group_section_id' => 'nullable',
-            'image_id' => 'required',
+            'image_id' => 'nullable',
             'sort' => 'required'
         ];
     }

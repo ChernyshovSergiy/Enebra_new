@@ -2,6 +2,7 @@
 
 namespace App\Traits\Methods;
 
+use App\Image;
 use App\Language;
 
 trait BuildJson
@@ -34,13 +35,30 @@ trait BuildJson
         foreach ($text_blocks as $block) {
             foreach ($languages as $key => $language) {
                 if ($key === 1) {
-                    $lang = [$language => $request->get($block.':'.$language)];
-                } else {
-                    $lang[$language] = $request->get($block.':'.$language);
+                    if ($block === 'image_id'){
+                        $lang = [$language => $this->getImagePath($request->get($block.':'.$language))];
+                    }else {
+                        $lang = [$language => $request->get($block . ':' . $language)];
+                    }
+                } else if ($block === 'image_id'){
+                    $lang[$language] = $this->getImagePath($request->get($block.':'.$language));
+                }else {
+                    $lang[$language] = $request->get($block . ':' . $language);
                 }
             }
             $text = array_add($text, $block, $lang);
         }
         return json_encode($text);
+    }
+
+    public function getImagePath($value):string
+    {
+        if($value === ''){
+            return '/img/no-image.png';
+        }
+        $image = Image::find($value);
+        $categoryName = $image->image_category->title;
+
+        return '/uploads/'. $categoryName .'/'. $image->image;
     }
 }

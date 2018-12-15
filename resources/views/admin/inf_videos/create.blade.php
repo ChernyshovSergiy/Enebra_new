@@ -30,7 +30,16 @@
                     <div class="col-md-12">
                         @foreach($text_blocks as $block)
                             @foreach($languages as $language)
-                                @if( $block === 'description' xor $block === 'about_author')
+                                @if($block === 'image_id')
+                                    <div class="form-group">
+                                        <label>@lang('column.image'): {{$language}}</label>
+                                        {{ Form::select($block.':'.$language,
+                                            $images,
+                                            null,
+                                            ['class' => 'form-control select2'])
+                                        }}
+                                    </div>
+                                @elseif( $block === 'description' xor $block === 'about_author')
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
                                         <textarea name="{{ $block.':'.$language}}" id="{{ $block.':'.$language}}" cols="80" rows="10" class="form-control" title="{{ $block.':'.$language}}">{{old( $block.':'.$language)}}</textarea>
@@ -58,14 +67,6 @@
                                 null,
                                 ['class' => 'form-control select2',
                                 'placeholder' => Lang::get('admin.select_section')])
-                            }}
-                        </div>
-                        <div class="form-group">
-                            <label>@lang('column.image')</label>
-                            {{ Form::select('image_id',
-                                $images,
-                                null,
-                                ['class' => 'form-control select2'])
                             }}
                         </div>
                         <div class="form-group">

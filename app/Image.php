@@ -30,6 +30,9 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereUserId($value)
  * @mixin \Eloquent
+ * @property string $title
+ * @property string $slug
+ * @property int|null $user_id
  */
 class Image extends Model
 {

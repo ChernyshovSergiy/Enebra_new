@@ -13,7 +13,6 @@ class CreateInfVideosTable extends Migration
             $table->json('info')->nullable();
             $table->unsignedInteger('video_group_id');
             $table->unsignedInteger('video_group_section_id')->nullable();
-            $table->unsignedInteger('image_id');
             $table->integer('sort');
             $table->timestamps();
         });
@@ -22,7 +21,6 @@ class CreateInfVideosTable extends Migration
             $table->foreign('video_group_id')->references('id')->on('inf_video_groups');
             $table->foreign('video_group_section_id')->references('id')
                 ->on('inf_video_group_sections')->onDelete('set null');
-            $table->foreign('image_id')->references('id')->on('images');
         });
     }
 
@@ -31,7 +29,6 @@ class CreateInfVideosTable extends Migration
         Schema::table('inf_videos', function (Blueprint $table) {
             $table->dropForeign(['video_group_id']);
             $table->dropForeign(['video_group_section_id']);
-            $table->dropForeign(['image_id']);
         });
         Schema::dropIfExists('inf_videos');
     }
