@@ -56,7 +56,7 @@
                                 <td>{!! $video->info ? $video->info->title->$locale : '' !!}</td>
                                 <td>{!! $video->info ? str_limit($video->info->description->$locale, 20, ' &raquo') : '' !!}</td>
                                 <td>{!! $video->info ? str_limit($video->info->about_author->$locale, 20, ' &raquo') : '' !!}</td>
-                                <td>{!! $video->info ? $video->info->link->$locale : '' !!}</td>
+                                <td>{!! $video->info ? str_limit($video->info->link->$locale, 20, ' &raquo') : '' !!}</td>
                                 <td>{!! $video->info ? $video->info->duration_time->$locale : '' !!}</td>
                                 <td>{{ $video->getVideoGroup()}}</td>
                                 <td>{{ $video->getVideoGroupSection()}}</td>
