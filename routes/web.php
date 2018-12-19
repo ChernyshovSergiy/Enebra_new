@@ -27,7 +27,8 @@ Route::group([
             Route::get('/', 'HomeController@index');
             Route::post('/subscribe', 'InfSubscribersController@subscribe')->name('subscribe');
             Route::get('/verify/{token}', 'InfSubscribersController@verify')->name('subscribe.verify');
-
+            /* videos */
+            Route::get('/information/video/{slug}', 'VideosController@index');
         });
 
         Route::group([

@@ -2,12 +2,12 @@
     @if($item->title === 'home')
         @if(LaravelLocalization::getCurrentLocale() !== 'en')
              <li
-                class="home hidden-820 {{(URL::current() == env('THEME').'/'.LaravelLocalization::getCurrentLocale().substr($item->url(),2) ? 'active': '')}}">
+                class="home hidden-820 {{ URL::current() === env('THEME').'/'.LaravelLocalization::getCurrentLocale().substr($item->url(),2) ? 'active': '' }}">
         @else
              <li
-                class="home hidden-820 {{(URL::current() == env('THEME').substr($item->url(),2) ? 'active': '')}}">
+                class="home hidden-820 {{ URL::current() === env('THEME').substr($item->url(),2) ? 'active': '' }}">
         @endif
-            <a href="{{ substr($item->url(),2) }}">
+            <a href="{{ substr($item->url(),1) }}">
                 <span></span>
             </a>
         </li>

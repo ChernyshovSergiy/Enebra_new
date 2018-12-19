@@ -35,6 +35,11 @@ class Inf_video extends Model
 {
     use VideoGroups, VideoGroupSections, BuildJson;
 
+    public function video_group(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Inf_video_group::class, 'id', 'video_group_id');
+    }
+
     protected $fillable = [
         'info', 'sort',
         'video_group_id',
@@ -97,5 +102,10 @@ class Inf_video extends Model
     public function removeVideo() :void
     {
         $this->delete();
+    }
+
+    public function decode($element): string
+    {
+        return 'ok';
     }
 }

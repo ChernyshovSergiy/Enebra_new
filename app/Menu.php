@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\Methods\BuildJson;
+use App\Traits\Methods\GetTitleFromMenu;
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
 use App\Traits\Relations\HasMany\Titles;
 use Illuminate\Database\Eloquent\Model;
@@ -34,7 +36,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Menu extends Model
 {
-    use PrepareLangStrForJsonMethods, Titles;
+    use BuildJson, PrepareLangStrForJsonMethods, Titles, GetTitleFromMenu;
 
     protected $fillable = [
         'id',
@@ -43,6 +45,11 @@ class Menu extends Model
         'parent',
         'sort'
     ];
+
+    public function getMenuPoint($name)
+    {
+        return $this->getActiveVideoMenuPoint($name);
+    }
 
     public static function getMenuPointName() :array
     {

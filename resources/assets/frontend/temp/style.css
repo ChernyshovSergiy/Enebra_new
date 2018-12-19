@@ -129,7 +129,7 @@ body.page{
     background: url('../img/pat.png')repeat center center;
 }
 
-body.materials-of-the-enebra-project{
+body.enebra-materials-part{
    background: #421c76 url('../img/e.png')no-repeat top right;
 }
 
@@ -2087,10 +2087,10 @@ body.informative-part{
 }
 .vid-block.future .videos-img, .vid-block.douglas .videos-img, .vid-block.eneb .videos-img, .vid-block.endoc .videos-img{float: right;}
 
-body.technology {
+body.technology-part {
     background: #6b2900 url('../img/e.png')no-repeat top right;
 }
-.technology .img-block.pages {
+.technology-part .img-block.pages {
     background: url('../img/tech-bg-head.png')no-repeat;
     background-size: cover;
     background-position: center bottom;
@@ -4104,7 +4104,7 @@ header .logo-text {
     display: inline-block;
 }
 .intro-desc h2{    padding: 0 15px;}
-.rights-txt{text-align: center;    margin-top: 15px;font-family: 'RobotoLightItalic', sans-serif;margin-top:5px;}
+.rights-txt{text-align: center; margin-top: 15px ;font-family: 'RobotoLightItalic', sans-serif;margin-top:5px;}
 .vid-zag .into-h1 .big {
     left: 0;
 }

@@ -4,6 +4,8 @@ namespace App;
 
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
 use App\Traits\Relations\BelongsTo\VideoGroups;
+use App\Traits\Relations\HasMany\Videos;
+use App\Traits\Relations\HasMany\VideoSection;
 use Illuminate\Database\Eloquent\Model;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -25,7 +27,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Inf_video_group_section extends Model
 {
-    use PrepareLangStrForJsonMethods, VideoGroups;
+    use PrepareLangStrForJsonMethods, VideoGroups, VideoSection;
 
     protected $fillable = [
         'title',

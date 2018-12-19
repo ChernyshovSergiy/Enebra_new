@@ -4,6 +4,8 @@ namespace App;
 
 use App\Traits\Methods\BuildJson;
 use App\Traits\Methods\GetTitleFromMenu;
+use App\Traits\Relations\HasMany\VideoGroupSections;
+use App\Traits\Relations\HasMany\Videos;
 use App\Traits\Relations\HasOne\MenuId;
 use Illuminate\Database\Eloquent\Model;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -24,10 +26,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereMenuId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_video_group whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Inf_video_group_section[] $video_group_sections
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Inf_video[] $videos
  */
 class Inf_video_group extends Model
 {
-    use MenuId, BuildJson, GetTitleFromMenu;
+    use Videos, VideoGroupSections, MenuId, BuildJson, GetTitleFromMenu;
 
     protected $fillable = [
         'menu_id',
@@ -62,6 +66,12 @@ class Inf_video_group extends Model
             $video_group_names[$key] = json_decode(Menu::where('id', $title)->first()->title)->$locale;
         }
         return $video_group_names;
+    }
+
+    public function getVideoGroup($slag)
+    {
+        return $this->build(self::getModel(), 'content')
+            ->where('menu_id', '=', $this->getActiveVideoMenuPoint($slag)->id)->first();
     }
 
     public function getBG() :string
