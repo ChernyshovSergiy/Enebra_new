@@ -11,7 +11,8 @@ class ImageCategoriesController extends Controller
     public function index()
     {
         $image_categories = ImageCategory::all();
-        return view('admin.image_categories.index', compact('image_categories'));
+        return view('admin.image_categories.index',
+            compact('image_categories'));
     }
 
     public function create()

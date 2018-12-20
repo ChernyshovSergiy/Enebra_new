@@ -6,34 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Storage;
 
-/**
- * App\Image
- *
- * @property int user_id
- * @property string title
- * @property array slug
- * @property int $id
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property int $category_id
- * @property string $image
- * @property-read \App\User|null $author
- * @property-read \App\ImageCategory $image_category
- * @property-read \App\socialLink $socialLink
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image findSimilarSlugs($attribute, $config, $slug)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereUserId($value)
- * @mixin \Eloquent
- * @property string $title
- * @property string $slug
- * @property int|null $user_id
- */
+
 class Image extends Model
 {
     use Sluggable;

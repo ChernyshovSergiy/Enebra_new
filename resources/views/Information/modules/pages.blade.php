@@ -1,4 +1,4 @@
-<div class="container-fluid full-desc-of-project">
+<div class="container-fluid full-desc-of-project" id="scroll-documents">
     <div class="container-title hidden-md hidden-lg">
         <h3><span>@lang('index.full_description')</span></h3>
     </div>

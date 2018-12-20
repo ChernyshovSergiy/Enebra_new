@@ -1,6 +1,7 @@
-@foreach( $block as $key => $element )
+@foreach( $block as $element )
+    @php($key = $element->sort)
     @php($element = json_decode($element->info))
-    @if( $key % 2  === 0)
+    @if( $key % 2  !== 0)
         <div class="vid-block">
             <div class="col-sm-5 col-xs-12 custom-float padding-left">
                 <h1 class="into-h1 videos-h1">
