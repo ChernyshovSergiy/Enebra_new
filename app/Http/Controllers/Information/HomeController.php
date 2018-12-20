@@ -50,7 +50,6 @@ class HomeController extends Controller
             ->build($this->SocialLinkModel ,'url')->sortBy('sort');
         $pages = $this->json
             ->build($this->PageModel ,'text')->sortBy('sort');
-
         return view('Information.index',
             compact('status',
                 'introduction',

@@ -29,22 +29,22 @@ class VideosController extends Controller
     }
     public function index($slag)
     {
-//        dd($slag);
+        $cur_lang = LaravelLocalization::getCurrentLocale();
         $status = 'page '.$slag;
-//        dd($status);
         $menu = $this->MenuModel->getMenuPoint($slag);
-//        dd($menu);
         $video_group = $this->InfVideoGroupModel->getVideoGroup($slag);
-//        dd($video_group);
+        $keywords = $video_group->content->keywords->$cur_lang;
+        $meta_desc = $video_group->content->meta_desc->$cur_lang;
         $socials = $this->json
             ->build($this->SocialLinkModel ,'url')->sortBy('sort');
-        $cur_lang = LaravelLocalization::getCurrentLocale();
 
         return view('Information..videos.list',
             compact('status',
                 'video_group',
                 'socials',
                 'menu',
+                'keywords',
+                'meta_desc',
                 'cur_lang'
             ));
     }

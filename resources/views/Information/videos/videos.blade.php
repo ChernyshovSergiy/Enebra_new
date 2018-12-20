@@ -30,7 +30,7 @@
                     <span class="big line">{{ $element->title->$cur_lang }}</span>
                     <span class="zagolovok">{{ $element->title->$cur_lang }}</span>
                 </h1>
-                <h3>{!! htmlspecialchars_decode(  $element->description->$cur_lang) !!}</h3>
+                <h3>{!! htmlspecialchars_decode( $element->description->$cur_lang) !!}</h3>
                 <p class="span-med hidden-xs font-16">{!! htmlspecialchars_decode( $element->about_author->$cur_lang ) !!}</p>
             </div>
             <div class="col-sm-7">
