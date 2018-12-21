@@ -89,5 +89,7 @@ return[
     'url'	                => 'Url',
     'parent'	            => 'Parent',
     'regData'	            => 'Date of Registration',
+    'goal'	                => 'Goal',
+    'page'	                => 'Page',
 
 ];

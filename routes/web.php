@@ -59,5 +59,6 @@ Route::group([
             Route::resource('/social_links', 'SocialLinkController');
             Route::get('/social_links/toggle/{id}', 'SocialLinkController@toggle');
             Route::resource('/subscribers', 'SubscribersController');
+            Route::resource('/purposes', 'PurposesController');
         });
 });

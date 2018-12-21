@@ -186,4 +186,12 @@ return[
     'it_all_subscribers_here'    => 'сдесь все подписчики',
     'add_subscriber'             => 'Добавить Подписчика',
     'it_add_subscriber_here'     => 'добавьте подписчика',
+
+    'purposes'                   => 'Цели',
+    'listing_goals'              => 'Список Целей',
+    'it_all_goals_here'          => 'сдесь все цели проекта',
+    'add_goal'                   => 'Добавить Цель',
+    'it_add_goal_here'           => 'создайте новую цель',
+    'edit_goal'                  => 'Изменить Цель',
+    'it_edit_goal_here'          => 'измените цель',
 ];

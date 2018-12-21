@@ -47,7 +47,8 @@ class HomeController extends Controller
         $video_groups = $this->json
             ->build($this->InfVideoGroupModel ,'content');
         $socials = $this->json
-            ->build($this->SocialLinkModel ,'url')->sortBy('sort');
+            ->build($this->SocialLinkModel::where('is_active','=', 1) ,'url')
+            ->sortBy('sort');
         $pages = $this->json
             ->build($this->PageModel ,'text')->sortBy('sort');
         return view('Information.index',

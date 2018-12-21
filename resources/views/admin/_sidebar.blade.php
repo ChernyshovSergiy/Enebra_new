@@ -22,6 +22,12 @@
             <span class="pull-right-container"></span>
         </a>
     </li>
+    <li>
+        <a href="{{route('purposes.index')}}">
+            <i class="fa fa-dot-circle-o" aria-hidden="true"></i> <span>@lang('admin.purposes')</span>
+            <span class="pull-right-container"></span>
+        </a>
+    </li>
 
     <li class="treeview">
         <a href="#">

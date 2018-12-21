@@ -6,6 +6,12 @@ use App\Menu;
 
 trait GetTitleFromMenu
 {
+    public function getActiveDirectTitleMenuPoint($id)
+    {
+        $title = Menu::where('is_active', '=','1')->find($id);
+        return ($title !== null) ? $title->title : '';
+    }
+
     public function getActiveTitleMenuPoints()
     {
         return Menu::where('is_active', '=','1')->get()

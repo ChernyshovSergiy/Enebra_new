@@ -27,6 +27,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class Inf_introduction_point extends Model
 {
     use PrepareLangStrForJsonMethods;
+
     public function menu(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Menu::class, 'id', 'link_id');

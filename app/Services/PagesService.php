@@ -17,16 +17,17 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class PagesService
 {
     use GetTitleFromMenu;
-//    public $menus;
-//    public function __construct(MenusService $menusService)
-//    {
-//        $this->menus = $menusService;
-//    }
+
+    public function getDirectPageName($id): string
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        $title = $this->getActiveDirectTitleMenuPoint($id);
+        return ($title !== '') ? json_decode($title)->$locale :'';
+    }
 
     public function getActivePagesName(): array
     {
         $locale = LaravelLocalization::getCurrentLocale();
-//        $titles = $this->menus->getTitleMenuPoints();
         $titles = $this->getActiveTitleMenuPoints();
         $page_names = [];
         foreach($titles as $key => $title){

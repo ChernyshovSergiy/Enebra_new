@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\Methods\BuildJson;
 use App\Traits\Methods\GetTitleFromMenu;
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
+use App\Traits\Relations\HasMany\Purposes;
 use App\Traits\Relations\HasMany\Titles;
 use Illuminate\Database\Eloquent\Model;
 use Lang;
@@ -33,10 +34,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Menu whereUrl($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Purpose[] $purpose
  */
 class Menu extends Model
 {
-    use BuildJson, PrepareLangStrForJsonMethods, Titles, GetTitleFromMenu;
+    use BuildJson, PrepareLangStrForJsonMethods, Titles, GetTitleFromMenu, Purposes;
 
     protected $fillable = [
         'id',

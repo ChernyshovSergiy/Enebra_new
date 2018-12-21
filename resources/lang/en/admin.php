@@ -187,4 +187,12 @@ return[
     'it_all_subscribers_here'    => 'it all subscribers here',
     'add_subscriber'             => 'Add Subscriber',
     'it_add_subscriber_here'     => 'it add subscriber here',
+
+    'purposes'                   => 'Purposes',
+    'listing_goals'              => 'Listing Purposes',
+    'it_all_goals_here'          => 'it all goals here',
+    'add_goal'                   => 'Add Purpose',
+    'it_add_goal_here'           => 'it add goal here',
+    'edit_goal'                  => 'Edit Purpose',
+    'it_edit_goal_here'          => 'it edit goal here',
 ];
