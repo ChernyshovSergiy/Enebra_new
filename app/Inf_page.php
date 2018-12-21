@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\Methods\BuildJson;
+use App\Traits\Methods\GetTitleFromMenu;
 use App\Traits\Relations\BelongsTo\Languages;
 use App\Traits\Relations\HasOne\Images;
 use App\Traits\Relations\HasOne\Titles;
@@ -48,7 +49,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Inf_page extends Model
 {
-    use Images, Languages, Users, Titles, BuildJson;
+    use Images, Languages, Users, Titles, BuildJson, GetTitleFromMenu;
 
     protected $fillable = [
         'title_id','user_id',
@@ -102,6 +103,12 @@ class Inf_page extends Model
     public function removePage() :void //delete page
     {
         $this->delete();
+    }
+
+    public function getPage($slug)
+    {
+        return $this->build(self::getModel(), 'text')
+            ->where('title_id', '=', $this->getActivePageMenuPoint($slug)->id)->first();
     }
 
     public function setInMenu()

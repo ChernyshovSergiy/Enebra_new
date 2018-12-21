@@ -23,4 +23,10 @@ trait GetTitleFromMenu
             ->where('is_active', '=','1')
             ->firstOrFail();
     }
+
+    public function getActivePageMenuPoint($name){
+        return Menu::where('url', '=', '/information/'. $name)
+            ->where('is_active', '=','1')
+            ->firstOrFail();
+    }
 }

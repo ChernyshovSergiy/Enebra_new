@@ -27,18 +27,19 @@ class VideosController extends Controller
         $this->SocialLinkModel = $socialLink;
         $this->json = $jsonService;
     }
-    public function index($slag)
+    public function index($slug)
     {
         $cur_lang = LaravelLocalization::getCurrentLocale();
-        $status = 'page '.$slag;
-        $menu = $this->MenuModel->getMenuPoint($slag);
-        $video_group = $this->InfVideoGroupModel->getVideoGroup($slag);
+        $status = 'page '.$slug;
+        $menu = $this->MenuModel->getVideoMenuPoint($slug);
+        $video_group = $this->InfVideoGroupModel->getVideoGroup($slug);
+//        dd($video_group);
         $keywords = $video_group->content->keywords->$cur_lang;
         $meta_desc = $video_group->content->meta_desc->$cur_lang;
         $socials = $this->json
             ->build($this->SocialLinkModel ,'url')->sortBy('sort');
 
-        return view('Information..videos.list',
+        return view('Information.videos.list',
             compact('status',
                 'video_group',
                 'socials',

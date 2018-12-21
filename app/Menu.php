@@ -48,9 +48,14 @@ class Menu extends Model
         'sort'
     ];
 
-    public function getMenuPoint($name)
+    public function getVideoMenuPoint($name)
     {
         return $this->getActiveVideoMenuPoint($name);
+    }
+
+    public function getPageMenuPoint($name)
+    {
+        return $this->getActivePageMenuPoint($name);
     }
 
     public static function getMenuPointName() :array

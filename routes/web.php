@@ -29,6 +29,8 @@ Route::group([
             Route::get('/verify/{token}', 'InfSubscribersController@verify')->name('subscribe.verify');
             /* videos */
             Route::get('/information/video/{slug}', 'VideosController@index');
+            /* pages */
+            Route::get('/information/{slug}', 'PagesController@index');
         });
 
         Route::group([

@@ -1,7 +1,7 @@
 @extends('layouts.information')
 @section('content')
-    @include( $information . '.common.nav')
-    @include( $information . '.partials.breadcrumb' )
+    @include( 'Information.common.nav')
+    @include( 'Information.partials.breadcrumb' )
 
     <table class="full-equal purpose">
         <tbody>
@@ -13,7 +13,7 @@
                     {{--@endfor--}}
                 </ul>
                 <div class="next-block">
-                    <a href="#" onclick="scroll_to('scroll-next-block')" class="next">{{Lang::get('app.next')}}</a>
+                    <a href="#" onclick="scroll_to('scroll-next-block')" class="next">@lang('app.next')</a>
                 </div>
             </td>
             <td class="equal-blocks top right-purp" id="scroll-next-block">
@@ -27,6 +27,6 @@
         </tbody>
     </table>
 
-    @include( $information . '.partials.description')
-    @include( $information . '.partials.shared' )
+    @include('Information.partials.description')
+    @include('Information.partials.shared' )
 @endsection
