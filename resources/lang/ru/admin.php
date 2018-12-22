@@ -189,9 +189,17 @@ return[
 
     'purposes'                   => 'Цели',
     'listing_goals'              => 'Список Целей',
-    'it_all_goals_here'          => 'сдесь все цели проекта',
+    'it_all_goals_here'          => 'здесь все цели проекта',
     'add_goal'                   => 'Добавить Цель',
     'it_add_goal_here'           => 'создайте новую цель',
     'edit_goal'                  => 'Изменить Цель',
     'it_edit_goal_here'          => 'измените цель',
+
+    'descriptions'               => 'Описание',
+    'listing_blocks'             => 'Текстовые Блоки Описания',
+    'it_all_text_blocks_here'    => 'здесь полный текст описания',
+    'add_text_block'             => 'Добавить Текстовый Блок',
+    'it_add_text_block_here'     => 'добавте текстовый блок в описании',
+    'edit_text_block'            => 'Изменить Текстовый Блок',
+    'it_edit_text_block_here'    => 'измените текстовый блок в описании',
 ];

@@ -7,6 +7,7 @@ return[
     'token'                 => 'Token',
     'remember_token'        => 'Remember token',
     'text'                  => 'Text',
+    'text_block'            => 'Text Block',
     'replica'               => 'Replica',
     'about_author'          => 'About author',
     'author'                => 'Author',

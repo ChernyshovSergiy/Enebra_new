@@ -7,6 +7,7 @@ return[
     'token'                 => 'Токин',
     'remember_token'        => 'Сохраненный токин',
     'text'                  => 'Текст',
+    'text_block'            => 'Текстовый Блок',
     'replica'               => 'Цитата',
     'about_author'          => 'О Авторе',
     'author'                => 'Автор',

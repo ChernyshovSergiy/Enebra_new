@@ -28,6 +28,12 @@
             <span class="pull-right-container"></span>
         </a>
     </li>
+    <li>
+        <a href="{{route('descriptions.index')}}">
+            <i class="fa fa-th-large" aria-hidden="true"></i> <span>@lang('admin.descriptions')</span>
+            <span class="pull-right-container"></span>
+        </a>
+    </li>
 
     <li class="treeview">
         <a href="#">

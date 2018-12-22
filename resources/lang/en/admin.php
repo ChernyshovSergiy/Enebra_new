@@ -195,4 +195,12 @@ return[
     'it_add_goal_here'           => 'it add goal here',
     'edit_goal'                  => 'Edit Purpose',
     'it_edit_goal_here'          => 'it edit goal here',
+
+    'descriptions'               => 'Descriptions',
+    'listing_blocks'             => 'Listing Text Blocks',
+    'it_all_text_blocks_here'    => 'it all text blocks here',
+    'add_text_block'             => 'Add Text Block',
+    'it_add_text_block_here'     => 'it add text block here',
+    'edit_text_block'            => 'Edit Text Block',
+    'it_edit_text_block_here'    => 'it edit text block here',
 ];
