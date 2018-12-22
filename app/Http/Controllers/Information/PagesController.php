@@ -34,6 +34,8 @@ class PagesController extends Controller
         $status = 'page';
         $menu = $this->MenuModel->getPageMenuPoint($slug);
         $page = $this->InfPageModel->getPage($slug);
+//        dd($page);
+//        dd((int) count($page->title->purpose));
         $keywords = $page->text->keywords->$cur_lang;
         $meta_desc = $page->text->meta_desc->$cur_lang;
         $socials = $this->json
@@ -43,6 +45,7 @@ class PagesController extends Controller
                 'page',
                 'socials',
                 'menu',
+                'slug',
                 'keywords',
                 'meta_desc',
                 'cur_lang'

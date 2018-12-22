@@ -16,7 +16,7 @@ class ValidateRequest extends FormRequest
         return [
             'menu_id' => 'required|numeric',
             'goal:en' => 'required|string',
-            'sort' => 'required|numeric|unique:purposes,sort'
+            'sort' => 'required|numeric'
         ];
     }
 }

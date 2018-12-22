@@ -34,6 +34,7 @@
 		'by'				=> 'By',
 		'next'				=> 'Next',
 		'view'				=> 'View',
+		'tran_from_russian'	=> 'Translated from Russian',
 		'original'			=> 'original',
 		'pdf'				=> 'PDF',
 		'print'				=> 'Print',
