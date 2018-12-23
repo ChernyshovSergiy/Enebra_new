@@ -61,14 +61,14 @@ class Country extends Model
 
     public function getLanguage() :string
     {
-        return ($this->language != null)
+        return ($this->language !== null)
             ? $this->language->title
             : 'don`t have language';
     }
 
     public function getFlagImageCategoryId() :string
     {
-        return ($this->images != null)
+        return ($this->images !== null)
             ? $this->images->category_id
             : 'don`t have category';
     }
@@ -76,7 +76,7 @@ class Country extends Model
     public function getFlagImageIdTitle() :string
     {
         $category = ImageCategory::find($this->getFlagImageCategoryId());
-        return ($category != null)
+        return ($category !== null)
             ? $category->title
             : 'don`t have category';
     }

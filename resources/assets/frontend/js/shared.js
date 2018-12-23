@@ -4,14 +4,17 @@ $(document).ready(function(){
 
 			var link = window.location.href;
 
+			// var image =$('image').href();
+
 			//email
 
 			$('.email').attr('href', 'mailto:?subject=' + title + '&body=' + link );
 
 			//fb 
 
-			$('.fac').attr('href', 'http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[url]=' + link ) ;
-			
+			$('.fac').attr('href', 'http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[url]=' + link) ;
+			// $('.fac').attr('href', 'http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[url]=' + link + '&p[images][0]=' + image) ;
+
 			//tw 
 
 			$('.tw').attr('href', 'http://twitter.com/share?text=' + title + '&url=' + link ) ;
