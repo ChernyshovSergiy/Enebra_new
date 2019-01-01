@@ -1,4 +1,14 @@
 @font-face {
+    font-family: 'cambria-math';
+    src: url('../fonts/cambria-math.eot');
+    src: url('../fonts/cambria-math.eot') format('embedded-opentype'),
+         url('../fonts/cambria-math.woff2') format('woff2'),
+         url('../fonts/cambria-math.woff') format('woff'),
+         url('../fonts/cambria-math.ttf') format('truetype'),
+         url('../fonts/cambria-math.svg#WorkSansRegular') format('svg');
+}
+
+@font-face {
     font-family: 'WorkSansRegular';
     src: url('../fonts/WorkSansRegular.eot');
     src: url('../fonts/WorkSansRegular.eot') format('embedded-opentype'),
@@ -190,13 +200,20 @@ a:focus{text-decoration: none;}
 .span-medit{
    font-family: 'RobotoMediumItalic', sans-serif;
 }
+.span-formula {
+    font-family: 'cambria-math', serif;
+    font-size: 25px;
+    /*padding-top: -10px;*/
+    /*vertical-align:middle*/
+}
 .bold{
    font-family: 'RobotoBold', sans-serif;
 }
 
 
 .span-med{
-   font-family: 'RobotoMedium', sans-serif;
+    font-family: 'RobotoMedium', sans-serif;
+    font-size: 30px;
 }
 .img-block.pages{
        height: inherit;
@@ -577,6 +594,10 @@ li.lang .dropdown-menu img{    width: 30px;height: 20px;}
     -moz-box-shadow: 0px 8px 30px -2px rgba(0,0,0,0.75);
     box-shadow: 0px 8px 30px -2px rgba(0,0,0,0.75);
     border-radius: 10px;
+}
+.not-shadow-img, .img-wrapper.wallet {
+    width: 100%;
+    margin: 40px auto;
 }
 
 .hum-be{
@@ -2332,16 +2353,15 @@ footer .hvr-radial-out:before{    background: #03e3f8;}
 .inl-f{
         display: inline-block;
     vertical-align: middle;
-    text-align:center;
+    text-align:left;
 }
 .inl-f.first{
-        vertical-align: top;
-    padding-top: 14px;
+        vertical-align: middle;
 }
 
 .bl-f{
         display: block;
-    border-bottom: 1px solid;
+    /*border-bottom: 1px solid;*/
 }
 .formla-wrap{
         margin: 20px 0;
@@ -5106,6 +5126,19 @@ img.mob-sign{    width: 40px;}
 }
 .maintain {
     top: 26%;    padding-left: 1%;
+}
+.maintain {
+     padding-left: 5%;
+     text-shadow: 0px 1px 0px #fff;
+     color: #269310;
+     font-family: 'RobotoBold', sans-serif;
+     position: absolute;
+     top: 23%;
+     text-align: initial;
+     right: -40%;
+     width: 37%;
+     line-height: 1;
+     font-size: 18px;
 }
 .descript .equal-blocks .h3 {
     font-size: 42px;}

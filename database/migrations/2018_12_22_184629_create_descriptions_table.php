@@ -10,15 +10,15 @@ class CreateDescriptionsTable extends Migration
     {
         Schema::create('descriptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->json('text_block')->nullable();
-            $table->unsignedInteger('menu_id');
+            $table->json('content')->nullable();
+            $table->unsignedInteger('desc_block_id');
             $table->integer('sort');
             $table->timestamps();
         });
 
         Schema::table('descriptions', function (Blueprint $table) {
-            $table->foreign('menu_id')->references('id')
-                ->on('menus')->onDelete('cascade');
+            $table->foreign('desc_block_id')->references('id')
+                ->on('desc_blocks')->onDelete('cascade');
         });
     }
 

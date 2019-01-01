@@ -28,24 +28,32 @@
             <span class="pull-right-container"></span>
         </a>
     </li>
-    <li>
-        <a href="{{route('descriptions.index')}}">
-            <i class="fa fa-th-large" aria-hidden="true"></i> <span>@lang('admin.descriptions')</span>
-            <span class="pull-right-container"></span>
-        </a>
-    </li>
 
     <li class="treeview">
         <a href="#">
             <i class="fa fa-image"></i>
             <span>@lang('admin.images')</span>
             <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-    </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li><a href="{{ route('image_categories.index') }}"><i class="fa fa-list-alt"></i> @lang('admin.images_categories')</a></li>
             <li><a href="{{ route('images.index') }}"><i class="fa fa-image"></i> @lang('admin.images')</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-th-large"></i>
+            <span>@lang('admin.descriptions')</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ route('desc_blocks.index') }}"><i class="fa fa-th-large"></i> @lang('admin.des_blocks')</a></li>
+            <li><a href="{{ route('descriptions.index') }}"><i class="fa fa-bars"></i> @lang('admin.descriptions')</a></li>
         </ul>
     </li>
     <li class="treeview">

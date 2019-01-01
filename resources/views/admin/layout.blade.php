@@ -192,7 +192,7 @@
                             <img src="{{ asset('uploads/flags_svg/'.LaravelLocalization::getCurrentLocale().'.svg') }}" alt="" width="20">  {{ LaravelLocalization::getCurrentLocaleNative() }}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown" >
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                @if(LaravelLocalization::getCurrentLocale() != $localeCode)
+                                @if(LaravelLocalization::getCurrentLocale() !== $localeCode)
                                 <ul>
                                     <a class="img-lg" style="height: 35px; width: 110px;" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                         <img src="{{ asset('uploads/flags_svg/'.$localeCode.'.svg') }}" alt="" width="30">

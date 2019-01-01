@@ -16,20 +16,24 @@
     </div>
     <table class="full-equal constitution descript">
         <tbody>
-        @foreach( $page->title->description->chunk( 2 ) as $key => $block)
+        @foreach( $page->title->desc_block->chunk( 2 ) as $key => $block)
             <tr>
                 @foreach( $block as $k => $element)
                     @if( $k %2 === 0)
                         <td class=" equal-blocks" id="block-{{$k}}">
-                            {!! json_decode($element->text_block)->$cur_lang !!}
+                            @foreach( $element->description->sortBy('sort') as $block )
+                                @include( 'Information.pages.description_text' )
+                            @endforeach
                             <div class="next-block">
                                 <a href="#" onclick="scroll_to('block-{{$k}}')" class="next">@lang('app.next')</a>
                             </div>
                         </td>
                     @else
                         <td class=" equal-blocks" id="block-{{$k}}">
-                            {!! json_decode($element->text_block)->$cur_lang !!}
-                            @if( ( $key + 1 )  !== $page->title->description->chunk( 2 )->count() )
+                            @foreach( $element->description->sortBy('sort') as $block )
+                                @include( 'Information.pages.description_text' )
+                            @endforeach
+                            @if( ( $key + 1 )  !== $page->title->desc_block->chunk( 2 )->count() )
                                 <div class="next-block">
                                     <a href="#" onclick="scroll_to('block-{{$k + 1}}')" class="next sec">@lang('app.next')</a>
                                 </div>

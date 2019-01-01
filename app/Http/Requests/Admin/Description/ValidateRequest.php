@@ -11,11 +11,11 @@ class ValidateRequest extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            'menu_id' => 'required|numeric',
-            'text_block:en' => 'required|string',
+            'desc_block_id' => 'required|numeric',
+            'content' => 'nullable',
             'sort' => 'required|numeric'
         ];
     }

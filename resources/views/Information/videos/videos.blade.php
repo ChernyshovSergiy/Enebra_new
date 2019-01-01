@@ -1,7 +1,9 @@
 @foreach( $block as $element )
     @php($key = $element->sort)
     @php($element = json_decode($element->info))
+    {{--@php($flagLang = 'en')--}}
     @if( $key % 2  !== 0)
+        {{--<div class="vid-block" id="{{'scroll-'. mb_strtolower((string) explode(' ', $element->title->$flagLang)[0])}}">--}}
         <div class="vid-block">
             <div class="col-sm-5 col-xs-12 custom-float padding-left">
                 <h1 class="into-h1 videos-h1">
@@ -24,6 +26,7 @@
             <div class="clearfix"></div>
         </div>
     @else
+        {{--<div class="vid-block sec"  id="{{'scroll-'. mb_strtolower((string) explode(' ', $element->title->$flagLang)[0])}}">--}}
         <div class="vid-block sec">
             <div class="col-sm-5 col-xs-12 align-right ">
                 <h1 class="into-h1 videos-h1">

@@ -11,6 +11,6 @@ trait Descriptions
      */
     public function description(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Description::class, 'menu_id', 'id');
+        return $this->hasMany(Description::class, 'desc_block_id', 'id');
     }
 }

@@ -203,4 +203,12 @@ return[
     'it_add_text_block_here'     => 'it add text block here',
     'edit_text_block'            => 'Edit Text Block',
     'it_edit_text_block_here'    => 'it edit text block here',
+
+    'des_blocks'                 => 'Description Blocks',
+    'listing_des_blocks'         => 'Listing Description Blocks',
+    'it_all_des_blocks_here'     => 'it all description blocks here',
+    'add_des_block'              => 'Add Description Block',
+    'it_add_des_block_here'      => 'it add description block here',
+    'edit_des_block'             => 'Edit Description Block',
+    'it_edit_des_block_here'     => 'it edit description block here',
 ];

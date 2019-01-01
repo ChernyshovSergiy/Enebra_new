@@ -17,7 +17,7 @@
         </section>
 
         <!-- Main content -->
-        <section class="content">
+        <section class="content container-fluid">
         {{ Form::open([
             'route' => 'descriptions.store'
         ]) }}
@@ -36,8 +36,20 @@
                         <thead>
                         <tr>
                             <th>@lang('column.id')</th>
-                            <th>@lang('column.page')</th>
-                            <th>@lang('column.text_block')</th>
+                            <th>@lang('column.desc_block')</th>
+                            <th>@lang('column.title')</th>
+                            <th>@lang('column.sub_title')</th>
+                            <th>@lang('column.italic_text')</th>
+                            <th>@lang('column.bold_text')</th>
+                            <th>@lang('column.regular_text')</th>
+                            <th>@lang('column.image_text_1')</th>
+                            <th>@lang('column.image_text_2')</th>
+                            <th>@lang('column.link_text')</th>
+                            <th>@lang('column.link')</th>
+                            <th>@lang('column.bg_image_id')</th>
+                            <th>@lang('column.shadow_bg')</th>
+                            <th>@lang('column.in_image_id_1')</th>
+                            <th>@lang('column.in_image_id_2')</th>
                             <th>@lang('column.sort')</th>
                             <th>@lang('column.action')</th>
                         </tr>
@@ -46,8 +58,26 @@
                         @foreach($descriptions as $text_block)
                             <tr>
                                 <td>{{ $text_block->id }}</td>
-                                <td>{{ $text_block->getPageTitle() }}</td>
-                                <td>{!! $text_block->text_block ? $text_block->text_block->$locale : '' !!}</td>
+                                <td>{{ $text_block->getBlockTitle() }}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->title->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->sub_title->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->italic_text->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->bold_text->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->regular_text->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->image_text_1->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->image_text_2->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->link_text->$locale, 20 ) : '' !!}</td>
+                                <td>{!! $text_block->content ? str_limit($text_block->content->link->$locale, 20 ) : '' !!}</td>
+                                <td>
+                                    <img src="{{ $text_block->getBGImage() }}" alt="" width="60">
+                                </td>
+                                <td>{{ $text_block->shadow }}</td>
+                                <td>
+                                    <img src="{{ $text_block->getImageIn1() }}" alt="" width="60">
+                                </td>
+                                <td>
+                                    <img src="{{ $text_block->getImageIn2() }}" alt="" width="60">
+                                </td>
                                 <td>{{ $text_block->sort }}</td>
                                 <td>
                                     {{--<a href="{{route('introduction_points.show', $inf_intr_point->id)}}" class="fa fa-eye"></a>--}}

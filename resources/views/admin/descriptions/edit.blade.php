@@ -30,19 +30,52 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">@lang('column.page')</label>
-                            {{ Form::select('menu_id',
-                                $page_names,
-                                $description->menu_id,
+                            {{ Form::select('desc_block_id',
+                                $desc_blocks,
+                                $description->desc_block_id,
                                 ['class' => 'form-control select2'])
                             }}
                         </div>
-                        @foreach($languages as $language)
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">@lang('column.text_block'): {{$language}}</label>
-                                <textarea name="{{'text_block'.':'.$language}}" id="" cols="80" rows="10" class="form-control">
-                                    {{ $description->text_block ? $description->text_block->$language : ''}}</textarea>
-                            </div>
+                        @foreach($text_blocks as $block)
+                            @foreach($languages as $language)
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> @lang('column'.'.'.$block): {{$language}}</label>
+                                    <textarea name="{{ $block.':'.$language}}" id="{{ $block.':'.$language}}" cols="80" rows="10" class="form-control" title="{{ $block.':'.$language}}"
+                                    >{!! $description->content ? $description->content->$block->$language : '' !!}</textarea>
+                                </div>
+                            @endforeach
                         @endforeach
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@lang('column.bg_image_id')</label>
+                            {{ Form::select('image_id',
+                                $images,
+                                $description->image_id,
+                                ['class' => 'form-control select2',
+                                'placeholder' => Lang::get('admin.select_image')])
+                            }}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@lang('shadow_bg')</label>
+                            <input type="text" name="shadow" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $description->shadow }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@lang('column.in_image_id_1')</label>
+                            {{ Form::select('in_image_id_1',
+                                $images,
+                                $description->in_image_id_1,
+                                ['class' => 'form-control select2',
+                                'placeholder' => Lang::get('admin.select_image')])
+                            }}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@lang('column.in_image_id_2')</label>
+                            {{ Form::select('in_image_id_2',
+                                $images,
+                                $description->in_image_id_2,
+                                ['class' => 'form-control select2',
+                                'placeholder' => Lang::get('admin.select_image')])
+                            }}
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">@lang('column.sort')</label>
                             <input type="text" name="sort" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $description->sort }}">

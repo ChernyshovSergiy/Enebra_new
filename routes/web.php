@@ -62,6 +62,7 @@ Route::group([
             Route::get('/social_links/toggle/{id}', 'SocialLinkController@toggle');
             Route::resource('/subscribers', 'SubscribersController');
             Route::resource('/purposes', 'PurposesController');
+            Route::resource('/desc_blocks', 'DescBlockController');
             Route::resource('/descriptions', 'DescriptionController');
         });
 });
