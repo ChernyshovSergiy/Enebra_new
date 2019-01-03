@@ -7432,8 +7432,14 @@ li.lang .dropdown-menu img{    width: 30px;height: 20px;}
 }
 
 
-
 .f-block {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+        font-family: 'georgia', sans-serif;
+}
+
+.f-blocks {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
@@ -7499,7 +7505,7 @@ li.lang .dropdown-menu img{    width: 30px;height: 20px;}
     position: absolute;
     top: 23%;
     text-align: initial;
-    right: -40%;
+    right: -42%;
         width: 37%;
     line-height: 1;
     font-size: 18px;
@@ -7883,11 +7889,11 @@ ul.bot-ul li{width: 33.333%;font-size:12px;text-align: center;}
     position: absolute;
     right: 0;
     margin-top: -11px;
-    transform: rotate(180deg);
+    transform: rotate(0deg);
 
 }
 .accord-block .panel-heading .accordion-toggle.collapsed:before {
-  transform: rotate(360deg);
+  transform: rotate(180deg);
 }
 
 .accord-block .panel.empty .panel-heading .accordion-toggle:before{
@@ -8026,7 +8032,7 @@ table.action .panel-body:before, table.action .panel-body:after{
 }
 .what-do a:hover{text-decoration: none;}
 .what-do ul li span{
-    background: url('../img/what-ul.png')no-repeat center center;
+    background: url('../img/what-ul.svg')no-repeat center center;
     background-size: contain;
         width: 17px;
     height: 28px;
@@ -11246,6 +11252,11 @@ li.lang.open>.languages{display:block;}
         float: none;
         text-align: center;
     }
+    .f-blocks .navbar-header {
+        width:100%;
+        float: none;
+        text-align: center;
+    }
     .navbar-toggle {
         display: block;
     }
@@ -12024,7 +12035,7 @@ img.mob-sign{    width: 40px;}
      position: absolute;
      top: 23%;
      text-align: initial;
-     right: -40%;
+     right: -42%;
      width: 37%;
      line-height: 1;
      font-size: 18px;

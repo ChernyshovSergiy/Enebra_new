@@ -9,6 +9,7 @@ use App\Traits\Relations\HasMany\DescBlocks;
 use App\Traits\Relations\HasMany\Descriptions;
 use App\Traits\Relations\HasMany\Purposes;
 use App\Traits\Relations\HasMany\Titles;
+use App\Traits\Relations\HasMany\WhatToDoPoints;
 use Illuminate\Database\Eloquent\Model;
 use Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -39,10 +40,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Purpose[] $purpose
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Description[] $description
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Desc_block[] $desc_block
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\WhatToDoPoint[] $what_to_do_points
  */
 class Menu extends Model
 {
-    use BuildJson, PrepareLangStrForJsonMethods, Titles, GetTitleFromMenu, Purposes, DescBlocks;
+    use BuildJson, PrepareLangStrForJsonMethods, Titles, GetTitleFromMenu, Purposes, DescBlocks, WhatToDoPoints;
 
     protected $fillable = [
         'id',

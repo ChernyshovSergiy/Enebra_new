@@ -25,6 +25,8 @@
 		'use_materials'		=> 'Use material of Enebra project is allowed only with the reference to the source.',
 		'all_right'			=> 'All rights to images and text is property of their respective owners.',
 		'author'			=> 'author',
+		'right'			    => 'Right',
+		'left'			    => 'Left',
 		'sergey'			=> 'Sergiy Chernyshov',
 		'read_more'			=> 'Read more',
 		'more'				=> 'MORE',

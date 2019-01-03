@@ -2,8 +2,7 @@
 
     @include( 'Information.common.header' )
 
-    {{--<div class="f-block pages-title">--}}
-    <div class="pages-title" style="padding-top: 100px">
+    <div class="f-blocks pages-title">
         <h1>{!! json_decode($menu->title)->$cur_lang !!}</h1>
     </div>
 

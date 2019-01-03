@@ -210,4 +210,12 @@ return[
     'it_add_des_block_here'      => 'добавте блок в страницу описание',
     'edit_des_block'             => 'Изменить Блок на Странице Описание',
     'it_edit_des_block_here'     => 'измените блок на странице описание',
+
+    'what_to_do'                 => 'Что Делать?',
+    'listing_points'             => 'Список Пунктов',
+    'it_all_points_here'         => 'здесь полный список пунктов',
+    'add_point'                  => 'Добавить Пункт',
+    'it_add_point_here'          => 'добавте пункт',
+    'edit_point'                 => 'Изменить Пункт',
+    'it_edit_point_here'         => 'измените пункт',
 ];

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
 use App\Traits\Relations\BelongsToMany\Countries;
+use App\Traits\Relations\HasMany\PlanPhases;
 use Illuminate\Database\Eloquent\Model;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -21,10 +22,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Inf_plan_phase whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Inf_plan_section_point[] $plan_points
  */
 class Inf_plan_phase extends Model
 {
-    use Countries, PrepareLangStrForJsonMethods;
+    use PlanPhases, Countries, PrepareLangStrForJsonMethods;
 
     protected $fillable = [
         'title'

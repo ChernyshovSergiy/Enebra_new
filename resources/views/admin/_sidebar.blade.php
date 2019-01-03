@@ -28,6 +28,12 @@
             <span class="pull-right-container"></span>
         </a>
     </li>
+    <li>
+        <a href="{{route('what_to_do_points.index')}}">
+            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>@lang('admin.what_to_do')</span>
+            <span class="pull-right-container"></span>
+        </a>
+    </li>
 
     <li class="treeview">
         <a href="#">

@@ -211,4 +211,12 @@ return[
     'it_add_des_block_here'      => 'it add description block here',
     'edit_des_block'             => 'Edit Description Block',
     'it_edit_des_block_here'     => 'it edit description block here',
+
+    'what_to_do'                 => 'What To Do?',
+    'listing_points'             => 'Listing Points',
+    'it_all_points_here'         => 'it all points here',
+    'add_point'                  => 'Add Point',
+    'it_add_point_here'          => 'it add point here',
+    'edit_point'                 => 'Edit Point',
+    'it_edit_point_here'         => 'it edit point here',
 ];

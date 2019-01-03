@@ -19,7 +19,7 @@ class CreateDescBlocksTable extends Migration
 
         Schema::table('desc_blocks', function (Blueprint $table) {
             $table->foreign('menu_id')->references('id')
-                ->on('menus')->onDelete('cascade');
+                ->on('menus');
         });
     }
 

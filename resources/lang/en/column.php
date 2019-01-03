@@ -83,6 +83,7 @@ return[
     'point'                 => 'Point',
     'link'                  => 'Link',
     'sort'                  => 'Sort',
+    'side'                  => 'Side',
     'language'              => 'Language',
     'language_id'	        => 'Language ID',
     'status'                => 'Status',
