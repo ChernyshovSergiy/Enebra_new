@@ -37,6 +37,20 @@
 
     <li class="treeview">
         <a href="#">
+            <i class="fa fa-balance-scale"></i>
+            <span>@lang('admin.constitution')</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ route('const_sections.index') }}"><i class="fa fa-balance-scale"></i> @lang('admin.const_sections')</a></li>
+            <li><a href="{{ route('const_articles.index') }}"><i class="fa fa-gavel"></i> @lang('admin.const_articles')</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-image"></i>
             <span>@lang('admin.images')</span>
             <span class="pull-right-container">

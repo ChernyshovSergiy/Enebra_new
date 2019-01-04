@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\Methods\BuildJson;
 use App\Traits\Methods\GetTitleFromMenu;
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
+use App\Traits\Relations\HasMany\ConstSections;
 use App\Traits\Relations\HasMany\DescBlocks;
 use App\Traits\Relations\HasMany\Descriptions;
 use App\Traits\Relations\HasMany\Purposes;
@@ -41,10 +42,17 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Description[] $description
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Desc_block[] $desc_block
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\WhatToDoPoint[] $what_to_do_points
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Const_section[] $const_sections
  */
 class Menu extends Model
 {
-    use BuildJson, PrepareLangStrForJsonMethods, Titles, GetTitleFromMenu, Purposes, DescBlocks, WhatToDoPoints;
+    use BuildJson,
+        PrepareLangStrForJsonMethods,
+        Titles, GetTitleFromMenu,
+        Purposes,
+        DescBlocks,
+        ConstSections,
+        WhatToDoPoints;
 
     protected $fillable = [
         'id',

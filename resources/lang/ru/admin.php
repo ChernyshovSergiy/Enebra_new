@@ -11,6 +11,7 @@ return[
     'images'	                => 'Картинки',
     'images_categories'	        => 'Категории Картинок',
     'components'	            => 'Компоненты',
+    'constitution'	            => 'Проект Конституции',
     'languages'	                => 'Языки',
     'documents_id'	            => 'Документы',
     'countries'	                => 'Страны',
@@ -218,4 +219,20 @@ return[
     'it_add_point_here'          => 'добавте пункт',
     'edit_point'                 => 'Изменить Пункт',
     'it_edit_point_here'         => 'измените пункт',
+
+    'const_sections'             => 'Разделы Конституции',
+    'listing_sections'           => 'Список Разделов Конституции',
+    'it_all_sections_here'       => 'здесь полный список разделов',
+    'add_section'                => 'Добавить Раздел',
+    'it_add_section_here'        => 'добавте раздеп',
+    'edit_section'               => 'Изменить Раздел',
+    'it_edit_section_here'       => 'измените раздел',
+
+    'const_articles'             => 'Статьи Конституции',
+    'listing_articles'           => 'Список Статей Конституции',
+    'it_all_articles_here'       => 'здесь полный список статей',
+    'add_article'                => 'Добавить Статью',
+    'it_add_article_here'        => 'добавте статью',
+    'edit_article'               => 'Изменить Статью',
+    'it_edit_article_here'       => 'измените статью',
 ];

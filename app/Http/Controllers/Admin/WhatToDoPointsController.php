@@ -7,7 +7,6 @@ use App\Services\JsonService;
 use App\Services\LanguagesService;
 use App\Services\PagesService;
 use App\WhatToDoPoint;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -75,6 +74,6 @@ class WhatToDoPointsController extends Controller
     {
         $this->model->removePoint($id);
 
-        return redirect()->route('purposes.index');
+        return redirect()->route('what_to_do_points.index');
     }
 }

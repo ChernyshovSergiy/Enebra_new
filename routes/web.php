@@ -65,5 +65,7 @@ Route::group([
             Route::resource('/desc_blocks', 'DescBlockController');
             Route::resource('/descriptions', 'DescriptionController');
             Route::resource('/what_to_do_points', 'WhatToDoPointsController');
+            Route::resource('/const_sections', 'ConstSectionController');
+            Route::resource('/const_articles', 'ConstArticleController');
         });
 });

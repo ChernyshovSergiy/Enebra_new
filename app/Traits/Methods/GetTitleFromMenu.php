@@ -29,4 +29,5 @@ trait GetTitleFromMenu
             ->where('is_active', '=','1')
             ->firstOrFail();
     }
+
 }

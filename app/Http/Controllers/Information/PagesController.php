@@ -6,7 +6,6 @@ use App\Inf_page;
 use App\Menu;
 use App\Services\JsonService;
 use App\socialLink;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

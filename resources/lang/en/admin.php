@@ -11,6 +11,7 @@ return[
     'images'	                => 'Images',
     'images_categories'	        => 'Image categories',
     'components'	            => 'Components',
+    'constitution'	            => 'Constitution Draft',
     'languages'	                => 'Languages',
     'documents_id'	            => 'ID Documents',
     'countries'	                => 'Countries',
@@ -219,4 +220,20 @@ return[
     'it_add_point_here'          => 'it add point here',
     'edit_point'                 => 'Edit Point',
     'it_edit_point_here'         => 'it edit point here',
+
+    'const_sections'             => 'Sections of Constitution',
+    'listing_sections'           => 'Listing Constitution Sections',
+    'it_all_sections_here'       => 'it all sections here',
+    'add_section'                => 'Add Section',
+    'it_add_section_here'        => 'it add section here',
+    'edit_section'               => 'Edit Section',
+    'it_edit_section_here'       => 'it edit section here',
+
+    'const_articles'             => 'Articles  of Constitution',
+    'listing_articles'           => 'Listing Constitution Articles',
+    'it_all_articles_here'       => 'it all articles here',
+    'add_article'                => 'Add Article',
+    'it_add_article_here'        => 'it add article here',
+    'edit_article'               => 'Edit Article',
+    'it_edit_article_here'       => 'it edit article here',
 ];

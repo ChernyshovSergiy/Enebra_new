@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\Traits\Methods\GetTitleFromMenu;
 use App\Traits\Methods\PrepareLangStrForJsonMethods;
 use App\Traits\Relations\HasOne\MenuId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 /**
  * App\WhatToDoPoint
@@ -38,6 +40,7 @@ class WhatToDoPoint extends Model
         'side',
         'sort'
     ];
+
 
     public function getPageTitle():string
     {

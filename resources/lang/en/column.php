@@ -3,6 +3,7 @@ return[
 
     'id'                    => 'ID',
     'action'                => 'Action',
+    'article'               => 'Article',
     'title'                 => 'Title',
     'token'                 => 'Token',
     'remember_token'        => 'Remember token',

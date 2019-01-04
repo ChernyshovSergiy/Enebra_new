@@ -13,7 +13,7 @@ use App\Image;
 
 class ImagesService
 {
-    public function getImageNameByCategory($category_id)
+    public function getImageNameByCategory($category_id): \Illuminate\Support\Collection
     {
         return Image::where( 'category_id','=', $category_id )->pluck('title', 'id');
     }
