@@ -67,5 +67,7 @@ Route::group([
             Route::resource('/what_to_do_points', 'WhatToDoPointsController');
             Route::resource('/const_sections', 'ConstSectionController');
             Route::resource('/const_articles', 'ConstArticleController');
+            Route::resource('/faq_questions', 'FaqQuestionController');
+            Route::resource('/faq_answers', 'FaqAnswerController');
         });
 });

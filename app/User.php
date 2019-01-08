@@ -2,8 +2,13 @@
 
 namespace App;
 
+use App\Traits\Relations\HasMany\InfPages;
+use App\Traits\Relations\HasMany\Languages;
+use App\Traits\Relations\HasMany\UserFAQAnswers;
+use App\Traits\Relations\HasMany\UserFaqQuestions;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * App\User
@@ -69,7 +74,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,
+        Languages,
+        InfPages,
+        UserFAQAnswers,
+        UserFaqQuestions;
 
     protected $fillable = [
         'parent_referral_id', 'citizen_country_id',
@@ -85,13 +94,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function language()
+    public function getUserNames() :array
     {
-        return $this->hasMany(Language::class, 'id', 'language_id');
-    }
-
-    public function page()
-    {
-        return $this->hasMany(Inf_page::class, 'id', 'user_id');
+        $locale = LaravelLocalization::getCurrentLocale();
+        $lang_id = Language::whereSlug($locale)->first();
+        $users = self::all();
+        $user_names = [];
+        foreach($users as $user){
+            if ($lang_id->id === $user->language_id){
+                $user_names[$user->id] = $user->first_name. ' '. $user->last_name;
+            } else{
+                $user_names[$user->id] = $user->first_name_en. ' '. $user->last_name_en;
+            }
+        }
+        return $user_names;
     }
 }

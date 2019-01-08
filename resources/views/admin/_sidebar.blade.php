@@ -37,6 +37,20 @@
 
     <li class="treeview">
         <a href="#">
+            <i class="fa fa-question-circle"></i>
+            <span>@lang('admin.faq')</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ route('faq_questions.index') }}"><i class="fa fa-question-circle"></i> @lang('admin.faq_questions')</a></li>
+            <li><a href="{{ route('faq_answers.index') }}"><i class="fa fa-info-circle"></i> @lang('admin.faq_answers')</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-balance-scale"></i>
             <span>@lang('admin.constitution')</span>
             <span class="pull-right-container">

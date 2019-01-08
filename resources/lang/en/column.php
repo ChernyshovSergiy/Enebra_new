@@ -105,5 +105,7 @@ return[
     'regData'	            => 'Date of Registration',
     'goal'	                => 'Goal',
     'page'	                => 'Page',
+    'question'	            => 'Question',
+    'answer'	            => 'Answer',
 
 ];

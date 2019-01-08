@@ -35,6 +35,7 @@ return[
     'menu'	                    => 'Menu Points',
     'social_links'	            => 'Social Links',
     'select_image'	            => 'Select image',
+    'select_question'	        => 'Select question',
     'select_section'	        => 'Select section',
     'subscribers'	            => 'Subscribers',
     'anonymous'	                => 'Anonymous',
@@ -236,4 +237,22 @@ return[
     'it_add_article_here'        => 'it add article here',
     'edit_article'               => 'Edit Article',
     'it_edit_article_here'       => 'it edit article here',
+
+    'faq'                        => 'FAQ',
+    'faq_questions'              => 'Questions',
+    'listing_questions'          => 'Listing Questions',
+    'it_all_questions_here'      => 'it all questions here',
+    'add_question'               => 'Add Question',
+    'it_add_question_here'       => 'it add question here',
+    'edit_question'              => 'Edit Question',
+    'it_edit_question_here'      => 'it edit question here',
+
+    'faq_answers'                => 'Answers',
+    'listing_answers'            => 'Listing Answers',
+    'it_all_answers_here'        => 'it all answers here',
+    'add_answer'                 => 'Add Answer',
+    'it_add_answer_here'         => 'it add answer here',
+    'edit_answer'                => 'Edit Answer',
+    'it_edit_answer_here'        => 'it edit answer here',
+
 ];

@@ -35,9 +35,14 @@ class Language extends Model
         return self::select('id')->get();
     }
 
-    public function flag_image()
+    public function flag_image(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Image::class, 'id', 'flag_image_id');
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'language_id');
     }
 
     protected $fillable = [
@@ -48,7 +53,7 @@ class Language extends Model
 
     public function getFlagImageCategoryId()
     {
-        return ($this->flag_image != null)
+        return ($this->flag_image !== null)
             ? $this->flag_image->category_id
             : 'don`t have category';
     }
