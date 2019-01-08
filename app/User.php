@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Relations\HasMany\Images;
 use App\Traits\Relations\HasMany\InfPages;
 use App\Traits\Relations\HasMany\Languages;
 use App\Traits\Relations\HasMany\UserFAQAnswers;
@@ -77,6 +78,7 @@ class User extends Authenticatable
     use Notifiable,
         Languages,
         InfPages,
+        Images,
         UserFAQAnswers,
         UserFaqQuestions;
 
@@ -108,5 +110,18 @@ class User extends Authenticatable
             }
         }
         return $user_names;
+    }
+
+    public static function getFullName($id) :string
+    {
+        $locale = LaravelLocalization::getCurrentLocale();
+        $lang_id = Language::whereSlug($locale)->first();
+        $user = self::find($id);
+        if ($lang_id->id === $user->language_id){
+            return $user->first_name. ' '. $user->last_name;
+        }
+        return $user->first_name_en. ' '. $user->last_name_en;
+
+
     }
 }

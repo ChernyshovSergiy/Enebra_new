@@ -8,6 +8,7 @@ use App\Traits\Methods\PrepareLangStrForJsonMethods;
 use App\Traits\Relations\HasMany\ConstSections;
 use App\Traits\Relations\HasMany\DescBlocks;
 use App\Traits\Relations\HasMany\Descriptions;
+use App\Traits\Relations\HasMany\FaqQuestions;
 use App\Traits\Relations\HasMany\Purposes;
 use App\Traits\Relations\HasMany\Titles;
 use App\Traits\Relations\HasMany\WhatToDoPoints;
@@ -52,7 +53,8 @@ class Menu extends Model
         Purposes,
         DescBlocks,
         ConstSections,
-        WhatToDoPoints;
+        WhatToDoPoints,
+        FaqQuestions;
 
     protected $fillable = [
         'id',
