@@ -18,7 +18,7 @@ toastr.options = {
 }
 
 	//atctive menu start 
-		if( $('.home a').attr('href') == window.location.href)
+		if( $('.home a').attr('href') === window.location.href)
 				$('.home').addClass('active')
 
 		//active menu end

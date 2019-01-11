@@ -69,5 +69,6 @@ Route::group([
             Route::resource('/const_articles', 'ConstArticleController');
             Route::resource('/faq_questions', 'FaqQuestionController');
             Route::resource('/faq_answers', 'FaqAnswerController');
+            Route::resource('/terms', 'TermsController');
         });
 });

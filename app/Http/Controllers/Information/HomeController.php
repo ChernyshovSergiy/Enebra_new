@@ -9,6 +9,7 @@ use App\Inf_video_group;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
 use App\socialLink;
+use App\Term;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class HomeController extends Controller
@@ -17,6 +18,7 @@ class HomeController extends Controller
     public $IntroductionPointModel;
     public $InfVideoGroupModel;
     public $PageModel;
+    public $TermModel;
     public $SocialLinkModel;
     public $json;
 
@@ -25,6 +27,7 @@ class HomeController extends Controller
         Inf_introduction_point $introduction_point,
         Inf_video_group $inf_video_group,
         Inf_page $inf_page,
+        Term $term,
         SocialLink $socialLink,
         JsonService $jsonService)
     {
@@ -32,6 +35,7 @@ class HomeController extends Controller
         $this->IntroductionPointModel = $introduction_point;
         $this->InfVideoGroupModel = $inf_video_group;
         $this->PageModel = $inf_page;
+        $this->TermModel = $term;
         $this->SocialLinkModel = $socialLink;
         $this->json = $jsonService;
     }
@@ -51,6 +55,7 @@ class HomeController extends Controller
             ->sortBy('sort');
         $pages = $this->json
             ->build($this->PageModel ,'text')->sortBy('sort');
+        $terms = $this->json->build($this->TermModel ,'content')->first();
         return view('Information.index',
             compact('status',
                 'introduction',
@@ -58,6 +63,8 @@ class HomeController extends Controller
                 'video_groups',
                 'socials',
                 'cur_lang',
-                'pages'));
+                'pages',
+                'terms'
+            ));
     }
 }

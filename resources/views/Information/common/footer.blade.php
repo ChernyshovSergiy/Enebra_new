@@ -31,7 +31,7 @@
                 <div class="find-us col-md-3 hidden-sm hidden-xs">
                     <h3>@lang('app.find_on_us')</h3>
                     @foreach( $socials as $social)
-                        @if($social && $social->is_active != 0)
+                        @if($social && $social->is_active !== 0)
                             <a href="{{$social->url->$cur_lang}}" target="_blank"><img src="{{ asset( $social->getImage() )}}"/>  {{ $social->name }}</a>
                         @endif
                     @endforeach
@@ -145,7 +145,7 @@
             <div class="find-us col-xs-3">
                 <h3>@lang('app.find_on_us')</h3>
                 @foreach( $socials as $social)
-                    @if($social && $social->is_active != 0)
+                    @if($social && $social->is_active !== 0)
                         <a href="{{$social->url->$cur_lang}}" target="_blank">
                         <img src="{{ asset( $social->getImage() )}}"/>
                         {{$social -> name}}</a>

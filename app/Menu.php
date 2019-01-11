@@ -44,6 +44,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Desc_block[] $desc_block
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\WhatToDoPoint[] $what_to_do_points
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Const_section[] $const_sections
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Faq_question[] $faq_questions
  */
 class Menu extends Model
 {

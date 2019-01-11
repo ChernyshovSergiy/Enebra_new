@@ -56,26 +56,6 @@ class Faq_answer extends Model
             : '';
     }
 
-    public function splitAnswerMiddle($answer, $side) :string
-    {
-        $splitString1 = substr($answer, 0, floor(strlen($answer) / 2));
-        $splitString2 = substr($answer, floor(strlen($answer) / 2));
-
-        if (substr($splitString1, 0, -1) !== ' ' && substr($splitString2, 0, 1) !== ' ')
-            {
-                $middle = strlen($splitString1) + strpos($splitString2, ' ') + 1;
-            }
-        else {
-                $middle = strrpos(substr($answer, 0, floor(strlen($answer) / 2)), ' ') + 1;
-            }
-
-        if ($side === 'left'){
-            return substr($answer, 0, $middle);
-        }
-
-        return substr($answer, $middle);
-    }
-
     public function getUserName():string
     {
         $locale = LaravelLocalization::getCurrentLocale();

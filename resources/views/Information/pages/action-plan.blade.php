@@ -11,7 +11,6 @@
     <table class="full-equal constitution action">
         <tbody>
         @php($phases = App\Inf_plan_phase::all())
-        {{--{{dd($phases)}}--}}
         @foreach( $phases->chunk( 2 ) as $ph => $phase)
             <tr>
                 @foreach( $phase as $key => $element)
@@ -32,12 +31,16 @@
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
                                                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionaccordion{{($key + 1) + ( $k + 1)}}" href="#collapse{{ $point->id}}">
+                                                                    @if($point->is_done === 1)
+                                                                        <img src="{{ asset( 'uploads/info_page_icon_svg/check-box-done.svg' )}}" alt="" width="28">&nbsp;
+                                                                    @else
+                                                                        <img src="{{ asset( 'uploads/info_page_icon_svg/check-box.svg' ) }}" alt="" width="20"> &nbsp;&nbsp;
+                                                                    @endif
                                                                     {{$p+1 .') '.$item->point->$cur_lang}}
                                                                 </a>
                                                             </h4>
                                                         </div>
                                                         @if($item->description->$cur_lang !== null)
-                                                           {{--{{dd($item->description, $point->id)}}--}}
                                                             <div id="collapse{{$point->id}}" class="panel-collapse collapse in">
                                                                 <div class="panel-body">{!! htmlspecialchars_decode( $item->description->$cur_lang ) !!}</div>
                                                             </div>

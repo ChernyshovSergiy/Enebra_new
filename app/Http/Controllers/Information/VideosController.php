@@ -7,6 +7,7 @@ use App\Menu;
 use App\Services\JsonService;
 use App\socialLink;
 use App\Http\Controllers\Controller;
+use App\Term;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class VideosController extends Controller
@@ -15,17 +16,21 @@ class VideosController extends Controller
     public $MenuModel;
     public $SocialLinkModel;
     public $json;
+    public $TermModel;
 
     public function __construct(
         Inf_video_group $inf_video_group,
         Menu $menu,
         SocialLink $socialLink,
-        JsonService $jsonService)
+        JsonService $jsonService,
+        Term $term
+    )
     {
         $this->InfVideoGroupModel = $inf_video_group;
         $this->MenuModel = $menu;
         $this->SocialLinkModel = $socialLink;
         $this->json = $jsonService;
+        $this->TermModel = $term;
     }
     public function index($slug)
     {
@@ -33,7 +38,7 @@ class VideosController extends Controller
         $status = 'page '.$slug;
         $menu = $this->MenuModel->getVideoMenuPoint($slug);
         $video_group = $this->InfVideoGroupModel->getVideoGroup($slug);
-//        dd($video_group);
+        $terms = $this->json->build($this->TermModel ,'content')->first();
         $keywords = $video_group->content->keywords->$cur_lang;
         $meta_desc = $video_group->content->meta_desc->$cur_lang;
         $socials = $this->json
@@ -46,7 +51,8 @@ class VideosController extends Controller
                 'menu',
                 'keywords',
                 'meta_desc',
-                'cur_lang'
+                'cur_lang',
+                'terms'
             ));
     }
 }

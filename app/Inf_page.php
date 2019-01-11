@@ -197,13 +197,10 @@ class Inf_page extends Model
             $splitString1 = substr($answer, 0, floor(strlen($answer) / 2));
             $splitString2 = substr($answer, floor(strlen($answer) / 2));
 
-            if (substr($splitString1, 0, -1) !== ' ' && substr($splitString2, 0, 1) !== ' ')
-            {
-                $middle = strlen($splitString1) + strpos($splitString2, ' ') + 1;
-            }
-            else {
-                $middle = strrpos(substr($answer, 0, floor(strlen($answer) / 2)), ' ') + 1;
-            }
+            $middle = strpos($splitString1, ' ') !== 0
+            && $splitString2[0] !== ' '
+                ? strlen($splitString1) + strpos($splitString2, ' ') + 1
+                : strrpos(substr($answer, 0, floor(strlen($answer) / 2)), ' ') + 1;
 
             if ($side === 'left'){
                 return substr($answer, 0, $middle);

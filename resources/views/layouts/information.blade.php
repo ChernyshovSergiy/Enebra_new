@@ -6,12 +6,12 @@
     </head>
 
     <body class="{{$status}}" id="body">
-        {{--<div id="app">--}}
+        <div id="app">
 
-            {{--<elevator-component></elevator-component>--}}
+            <elevator-component></elevator-component>
 
-            {{--@include('vendor.loader')--}}
-            {{--<div href="#" id="go-to-top" onclick="scroll_to('body')" ></div>--}}
+            @include('vendor.loader')
+            <div href="#" id="go-to-top" onclick="scroll_to('body')" ></div>
 
             <div class="wrapper">
 
@@ -47,7 +47,7 @@
 
         @include( 'Information.common.footer' )
 
-        {{--@include( 'Information.modals.answer' )--}}
+        @include( 'Information.modals.answer' )
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         {{--<script src="{{ asset( 'js/app.js' ) }}"></script>--}}

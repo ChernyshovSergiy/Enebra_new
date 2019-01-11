@@ -255,4 +255,12 @@ return[
     'edit_answer'                => 'Edit Answer',
     'it_edit_answer_here'        => 'it edit answer here',
 
+    'terms'                      => 'Terms & Conditions ',
+    'listing_terms'              => 'Listing Terms',
+    'it_all_terms_here'          => 'it all terms here',
+    'add_term'                   => 'Add Term',
+    'it_add_term_here'           => 'it add term here',
+    'edit_term'                  => 'Edit Term',
+    'it_edit_term_here'          => 'it edit term here',
+
 ];

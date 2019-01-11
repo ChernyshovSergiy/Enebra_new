@@ -39,12 +39,12 @@ class Inf_introduction extends Model
         'conclusion'
     ];
 
-    public static function getTextColumnsForTranslate(): array
+    public function getTextColumnsForTranslate(): array
     {
         return (new static)->text_blocks;
     }
 
-    public static function addContent($request): void
+    public function addContent($request): void
     {
         $introduction = new static;
         $introduction->fill($request->all());
@@ -53,7 +53,7 @@ class Inf_introduction extends Model
         $introduction->save();
     }
 
-    public static function editContent($request, $id): void
+    public function editContent($request, $id): void
     {
         $introduction = self::find($id);
         $introduction->fill($request->all());
@@ -78,8 +78,8 @@ class Inf_introduction extends Model
             : 'don`t have language';
     }
 
-    public function removeContent(): void
+    public function removeContent($id): void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 }

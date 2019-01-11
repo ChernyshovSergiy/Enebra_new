@@ -72,6 +72,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereStatusId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Image[] $avatar
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Faq_answer[] $faq_answers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Faq_question[] $faq_questions
  */
 class User extends Authenticatable
 {

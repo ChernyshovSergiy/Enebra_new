@@ -16,7 +16,8 @@
         "laravelcollective/html": "^5.4.0",
         "lavary/laravel-menu": "^1.7",
         "mcamara/laravel-localization": "^1.3",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "ext-mysql_xdevapi": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

@@ -34,6 +34,12 @@
             <span class="pull-right-container"></span>
         </a>
     </li>
+    <li>
+        <a href="{{route('terms.index')}}">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>@lang('admin.terms')</span>
+            <span class="pull-right-container"></span>
+        </a>
+    </li>
 
     <li class="treeview">
         <a href="#">

@@ -26,6 +26,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Language whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Language whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\User $user
  */
 class Language extends Model
 {

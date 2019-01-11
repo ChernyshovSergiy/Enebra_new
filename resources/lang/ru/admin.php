@@ -253,4 +253,12 @@ return[
     'it_add_answer_here'         => 'добавте ответ',
     'edit_answer'                => 'Изменить Ответ',
     'it_edit_answer_here'        => 'измените ответ',
+
+    'terms'                      => 'Правила и Условия',
+    'listing_terms'              => 'Список Правил',
+    'it_all_terms_here'          => 'здесь полный список правил',
+    'add_term'                   => 'Добавить Правило',
+    'it_add_term_here'           => 'добавте правило',
+    'edit_term'                  => 'Изменить Правило',
+    'it_edit_term_here'          => 'измените правило',
 ];

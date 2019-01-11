@@ -40,7 +40,7 @@ class InfIntroductionsController extends Controller
     {
         $titles = $this->titleFromMenu->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();
-        $text_blocks = Inf_introduction::getTextColumnsForTranslate();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
 
         return view('admin.inf_introductions.create', compact(
             'languages', 'titles', 'text_blocks'));
@@ -48,7 +48,7 @@ class InfIntroductionsController extends Controller
 
     public function store(ValidateRequest $request)
     {
-       Inf_introduction::addContent($request);
+        $this->model->addContent($request);
 
         return redirect()->route('introductions.index');
     }
@@ -57,7 +57,7 @@ class InfIntroductionsController extends Controller
     {
         $introduction = $this->json->build($this->model ,'content')->find($id);
         $languages = $this->languages->getActiveLanguages();
-        $text_blocks = Inf_introduction::getTextColumnsForTranslate();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
         $titles = $this->titleFromMenu->getActivePagesName();
 
 
@@ -67,14 +67,14 @@ class InfIntroductionsController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        Inf_introduction::editContent($request, $id);
+        $this->model->editContent($request, $id);
 
         return redirect()->route('introductions.index');
     }
 
     public function destroy($id)
     {
-        Inf_introduction::find($id)->removeContent();
+        $this->model->removeContent($id);
         return redirect()->route('introductions.index');
     }
 }

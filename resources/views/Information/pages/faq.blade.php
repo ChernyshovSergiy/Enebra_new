@@ -16,8 +16,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq-accordion" href="#faq-collapse{{$key}}">
-                                <img class="act-quest-r" src="{{asset('img/active-quest.png')}}" /> {!! substr(json_decode($question->question)->$cur_lang,3,-4) !!}
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq-accordion" href="#faq-collapse{{$key}}" onclick="scroll_to('faq-collapse{{$key}}')">
+                                <img class="act-quest-r" src="{{asset('uploads/info_page_icon_svg/active-quest.svg')}}" /> {!! substr(json_decode($question->question)->$cur_lang,3,-4) !!}
                             </a>
                         </h4>
                     </div>
@@ -86,6 +86,6 @@
         </div>
     </div>
     @include('Information.partials.shared')
-    {{--@include( 'Information.modals.create_question' )--}}
-    {{--@include( 'Information.modals.create_answer' )--}}
+    @include( 'Information.modals.create_question' )
+    @include( 'Information.modals.create_answer' )
 @endsection
