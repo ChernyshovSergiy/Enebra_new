@@ -59,7 +59,7 @@ class InfPagesController extends Controller
     }
     public function store(ValidateRequest $request)
     {
-        Inf_page::addPage($request);
+        $this->model->addPage($request);
         return redirect()->route('inf_pages.index');
     }
     public function edit($id)
@@ -68,7 +68,7 @@ class InfPagesController extends Controller
         $users = $this->users->getUsers();
         $page_names = $this->pages->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();
-        $text_blocks = Inf_page::getTextColumnsForTranslate();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
         $images = $this->images->getImageNameByCategory(5);
         return view('admin.inf_pages.edit', compact(
                 'page','users','page_names',
@@ -77,12 +77,12 @@ class InfPagesController extends Controller
     }
     public function update(ValidateRequest $request, $id)
     {
-        Inf_page::find($id)->editPage($request);
+        $this->model->editPage($request, $id);
         return redirect()->route('inf_pages.index');
     }
     public function destroy($id)
     {
-        Inf_page::find($id)->removePage();
+        $this->model->removePage($id);
         return redirect()->route('inf_pages.index');
     }
 }

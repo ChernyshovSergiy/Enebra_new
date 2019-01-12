@@ -60,7 +60,6 @@ class InfIntroductionsController extends Controller
         $text_blocks = $this->model->getTextColumnsForTranslate();
         $titles = $this->titleFromMenu->getActivePagesName();
 
-
         return view('admin.inf_introductions.edit', compact(
             'introduction','languages', 'text_blocks', 'titles'));
     }
@@ -75,6 +74,7 @@ class InfIntroductionsController extends Controller
     public function destroy($id)
     {
         $this->model->removeContent($id);
+
         return redirect()->route('introductions.index');
     }
 }

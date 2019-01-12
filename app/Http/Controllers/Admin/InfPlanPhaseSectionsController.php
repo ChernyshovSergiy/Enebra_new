@@ -65,7 +65,8 @@ class InfPlanPhaseSectionsController extends Controller
 
     public function destroy($id)
     {
-        $this->model::find($id)->removePhaseSection();
+        $this->model->removePhaseSection($id);
+
         return redirect()->route('inf_plan_phase_sections.index');
     }
 }

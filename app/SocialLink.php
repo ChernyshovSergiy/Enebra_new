@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\socialLink whereUrl($value)
  * @mixin \Eloquent
  */
-class socialLink extends Model
+class SocialLink extends Model
 {
     use Images, PrepareLangStrForJsonMethods;
 
@@ -48,50 +48,27 @@ class socialLink extends Model
         $social_link->save();
     }
 
-    public function editLink($fields) :void
+    public function editLink($fields, $id) :void
     {
-        $this->fill($fields->all());
-        $this->setImage($fields->get('image_id'));
-        $this->url = json_encode($this->createLangString($fields, 'url'));
-        $this->update($fields->all());
+        $social_link = self::find($id);
+        $social_link->fill($fields->all());
+        $social_link->setImage($fields->get('image_id'));
+        $social_link->url = json_encode($social_link->createLangString($fields, 'url'));
+        $social_link->update($fields->all());
     }
 
-    public function removeSocialLink() :void
+    public function removeSocialLink($id) :void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 
-    public function getImageCategoryId()
+    public function getImage(): string
     {
-        return ($this->image != null)
-            ? $this->image->category_id
-            : 'don`t have category';
-    }
-
-    public function getImageIdTitle()
-    {
-        $category = ImageCategory::find($this->getImageCategoryId());
-        return ($category != null)
-            ? $category->title
-            : 'don`t have category';
-    }
-
-    public function getImage()
-    {
-        $icon = Image::find($this->image_id);
-        if ($icon == null){
+        if ($this->image->id === null){
             return '/img/no-image.png';
         }
-        return '/uploads/'. $this->getImageIdTitle() .'/'. $icon->image;
-    }
-
-    public function setImage($id)
-    {
-        if ($id == null){
-            return;
-        }
-        $this->image_id = $id;
-        $this->make();
+        return '/uploads/'. $this->image->image_category->title
+            .'/'. $this->image->image;
     }
 
     public function active()
@@ -106,13 +83,14 @@ class socialLink extends Model
         $this->save();
     }
 
-    public function toggleActive()
+    public function toggleActive($id)
     {
-        if ($this->is_active == 0)
+        $toggle = self::find($id);
+        if ($toggle->is_active === 0)
         {
-            return $this->active();
+            return $toggle->active();
         }
-        return $this->notActive();
+        return $toggle->notActive();
     }
 
 }

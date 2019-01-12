@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\ImageCategories\ValidateRequest;
 use App\ImageCategory;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ImageCategoriesController extends Controller
 {
+    public $model;
+
+    public function __construct(
+        ImageCategory $imageCategory
+    )
+    {
+        $this->model = $imageCategory;
+    }
+
     public function index()
     {
-        $image_categories = ImageCategory::all();
+        $image_categories = $this->model::all();
         return view('admin.image_categories.index',
             compact('image_categories'));
     }
@@ -20,45 +29,30 @@ class ImageCategoriesController extends Controller
         return view('admin.image_categories.create');
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required'
-        ]);
-        ImageCategory::create($request->all());
+        $this->model::create($request->all());
 
         return redirect()->route('image_categories.index');
-    }
-
-    public function show(ImageCategory $imageCategory)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $imageCategory = ImageCategory::find($id);
+        $imageCategory = $this->model::find($id);
         return view('admin.image_categories.edit', compact('imageCategory'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateRequest $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required'
-        ]);
-        $imageCategory = ImageCategory::find($id);
-        $imageCategory->update($request->all());
+        $this->model->updateImageCategory($request, $id);
+
         return redirect()->route('image_categories.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        ImageCategory::find($id)->delete();
+        $this->model->removeImageCategory($id);
+
         return redirect()->route('image_categories.index');
     }
 }

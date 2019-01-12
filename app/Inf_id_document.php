@@ -28,10 +28,25 @@ class Inf_id_document extends Model
     protected $fillable = [
         'name'
     ];
-    public function editDoc($request, $model) :void
+
+    public function addIdDocument($request) :void
     {
-        $items = $this->createLangString($request, 'name');
-        $model->name = json_encode($items);
-        $model->update($request->all());
+        $id_document = new static;
+        $id_document->fill($request->all());
+        $id_document->name = json_encode($id_document->createLangString($request, 'name'));
+        $id_document->save();
+    }
+
+    public function editIdDocument($request, $id) :void
+    {
+        $id_document = self::find($id);
+        $id_document->fill($request->all());
+        $id_document->name = json_encode($id_document->createLangString($request, 'name'));
+        $id_document->update($request->all());
+    }
+
+    public function removeIdDocument($id) :void
+    {
+        self::find($id)->delete();
     }
 }

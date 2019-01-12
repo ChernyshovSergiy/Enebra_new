@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Country;
 use App\Http\Requests\Admin\Countries\ValidateRequest;
-use App\Inf_id_document;
 use App\Services\ImagesService;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
@@ -20,20 +19,20 @@ class CountriesController extends Controller
 
     public function __construct(
         JsonService $jsonService,
-        Inf_id_document $id_document,
+        Country $country,
         LanguagesService $language,
         ImagesService $imagesService
     )
     {
         $this->json = $jsonService;
-        $this->model = $id_document;
+        $this->model = $country;
         $this->language = $language;
         $this->images = $imagesService;
     }
 
     public function index()
     {
-        $countries = Country::all();
+        $countries = $this->model::all();
 
         return view('admin.countries.index', compact('countries'));
     }
@@ -42,7 +41,7 @@ class CountriesController extends Controller
     {
         $language = $this->language->getLanguages();
         $flag_image = $this->images->getImageNameByCategory(1);
-        $id_documents = (new Country)->getIdDocNameByCurrentLocale();
+        $id_documents = $this->model->getIdDocNameByCurrentLocale();
 
         return view('admin.countries.create', compact(
             'language', 'flag_image', 'id_documents'));
@@ -50,17 +49,17 @@ class CountriesController extends Controller
 
     public function store(ValidateRequest $request)
     {
-        Country::addCountry($request);
+        $this->model->addCountry($request);
 
         return redirect()->route('countries.index');
     }
 
     public function edit($id)
     {
-        $country = Country::find($id);
+        $country = $this->model::find($id);
         $language = $this->language->getLanguages();
         $flag_image = $this->images->getImageNameByCategory(1);
-        $id_documents = (new Country)->getIdDocNameByCurrentLocale();
+        $id_documents = $this->model->getIdDocNameByCurrentLocale();
 
         return view('admin.countries.edit', compact(
             'country','language', 'flag_image', 'id_documents'));
@@ -68,14 +67,15 @@ class CountriesController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        Country::find($id)->editCountry($request);
+        $this->model->editCountry($request, $id);
 
         return redirect()->route('countries.index');
     }
 
     public function destroy($id)
     {
-        Country::find($id)->removeCountry();
+        $this->model->removeCountry($id);
+
         return redirect()->route('countries.index');
     }
 }

@@ -69,7 +69,7 @@ class Inf_page extends Model
         'meta_desc',
     ];
 
-    public static function getTextColumnsForTranslate() :array
+    public function getTextColumnsForTranslate() :array
     {
         return (new static)->text_blocks;
     }
@@ -83,7 +83,7 @@ class Inf_page extends Model
         $this->save();
     }
 
-    public static function addPage( $fields) :void //add new page
+    public function addPage( $fields) :void //add new page
     {
         $page = new static;
         $page->fill($fields->all());
@@ -92,17 +92,18 @@ class Inf_page extends Model
         $page->save();
     }
 
-    public function editPage($fields) :void //edit(change) page
+    public function editPage($fields, $id) :void //edit(change) page
     {
-        $this->fill($fields->all());
-        $this->setImage($fields->get('image_id'));
-        $this->text = $this->setJson($fields, $this->text_blocks);
-        $this->update($fields->all());
+        $page = self::find($id);
+        $page->fill($fields->all());
+        $page->setImage($fields->get('image_id'));
+        $page->text = $page->setJson($fields, $this->text_blocks);
+        $page->update($fields->all());
     }
 
-    public function removePage() :void //delete page
+    public function removePage($id) :void //delete page
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 
     public function getPage($slug)

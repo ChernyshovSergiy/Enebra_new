@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfVideos\ValidateRequest;
-use App\Image;
 use App\Inf_video;
 use App\Inf_video_group;
 use App\Inf_video_group_section;
 use App\Http\Controllers\Controller;
-use App\Language;
 use App\Services\ImagesService;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
@@ -43,6 +41,7 @@ class InfVideosController extends Controller
     {
         $videos = $this->json->build($this->model ,'info');
         $locale = LaravelLocalization::getCurrentLocale();
+
         return view('admin.inf_videos.index',
             compact('videos', 'locale'));
     }
@@ -93,14 +92,15 @@ class InfVideosController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        $this->model::find($id)->editVideo($request);
+        $this->model->editVideo($request, $id);
 
         return redirect()->route('inf_videos.index');
     }
 
     public function destroy($id)
     {
-        $this->model::find($id)->removeVideo();
+        $this->model->removeVideo($id);
+
         return redirect()->route('inf_videos.index');
     }
 }

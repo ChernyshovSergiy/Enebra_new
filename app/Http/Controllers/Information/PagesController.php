@@ -43,9 +43,6 @@ class PagesController extends Controller
         $page = $this->InfPageModel->getPage($slug);
         $languages = $this->Languages->getFullActiveLanguages();
         $terms = $this->json->build($this->TermModel ,'content')->first();
-//        dd($terms);
-//        dd($slug, $page->title->faq_questions);
-//        dd((int) count($page->title->purpose));
         $keywords = $page->text->keywords->$cur_lang;
         $meta_desc = $page->text->meta_desc->$cur_lang;
         $socials = $this->json

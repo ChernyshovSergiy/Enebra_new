@@ -72,12 +72,13 @@ class Inf_plan_section_point extends Model
         $plan_point->save();
     }
 
-    public function editPlanPoint($request): void
+    public function editPlanPoint($request, $id): void
     {
-        $this->fill($request->all());
-        $this->is_done = $request->get('is_done') ? self::IS_DONE : self::IS_NOT_DONE;
-        $this->entry = $this->setJson($request, $this->text_blocks);
-        $this->update($request->all());
+        $plan_point = self::find($id);
+        $plan_point->fill($request->all());
+        $plan_point->is_done = $request->get('is_done') ? self::IS_DONE : self::IS_NOT_DONE;
+        $plan_point->entry = $plan_point->setJson($request, $this->text_blocks);
+        $plan_point->update($request->all());
     }
 
     public function getPhase() :string
@@ -108,17 +109,18 @@ class Inf_plan_section_point extends Model
         $this->save();
     }
 
-    public function toggleDone()
+    public function toggleDone($id)
     {
-        if ($this->is_done === 0)
+        $toggle = self::find($id);
+        if ($toggle->is_done === 0)
         {
-            return $this->setDone();
+            return $toggle->setDone();
         }
-        return $this->setNotDone();
+        return $toggle->setNotDone();
     }
 
-    public function removePlanPoint() :void
+    public function removePlanPoint($id) :void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 }

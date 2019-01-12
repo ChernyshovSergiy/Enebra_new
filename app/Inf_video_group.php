@@ -89,15 +89,16 @@ class Inf_video_group extends Model
         $video_group->save();
     }
 
-    public function editInfVideoGroup($request): void
+    public function editInfVideoGroup($request, $id): void
     {
-        $this->fill($request->all());
-        $this->content = $this->setJson($request, $this->text_blocks);
-        $this->update($request->all());
+        $video_group = self::find($id);
+        $video_group->fill($request->all());
+        $video_group->content = $this->setJson($request, $this->text_blocks);
+        $video_group->update($request->all());
     }
 
-    public function removeInfVideoGroup() :void
+    public function removeInfVideoGroup($id) :void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App;
 
+use App\Traits\Relations\HasMany\FlagImages;
+use App\Traits\Relations\HasMany\UserLanguages;
 use Illuminate\Database\Eloquent\Model;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * App\Language
@@ -30,59 +31,41 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Language extends Model
 {
-
-    public static function getLanguages()
-    {
-        return self::select('id')->get();
-    }
-
-    public function flag_image(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(Image::class, 'id', 'flag_image_id');
-    }
-
-    public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(User::class, 'id', 'language_id');
-    }
+    use FlagImages, UserLanguages;
 
     protected $fillable = [
         'slug',
         'title',
-        'localization'
+        'localization',
+        'flag_image_id'
     ];
 
-    public function getFlagImageCategoryId()
+    public function addNewLanguage($request): void
     {
-        return ($this->flag_image !== null)
-            ? $this->flag_image->category_id
-            : 'don`t have category';
+        $language = new static;
+        $language->fill($request->all());
+        $language->save();
     }
 
-    public function getFlagImageIdTitle()
+    public function editLanguage($request, $id): void
     {
-        $category = ImageCategory::find($this->getFlagImageCategoryId());
-        return ($category != null)
-            ? $category->title
-            : 'don`t have category';
+        $language = self::find($id);
+        $language->fill($request->all());
+        $language->update($request->all());
     }
 
-    public function getFlagImage()
+    public function removeLanguage($id): void
     {
-        $flag = Image::find($this->flag_image_id);
-        if ($flag == null){
+        self::find($id)->delete();
+    }
+
+    public function getFlagImage(): string
+    {
+        if ($this->flag_image_id === null){
             return '/img/no-image.png';
         }
-        return '/uploads/'. $this->getFlagImageIdTitle() .'/'. $this->flag_image->image;
-    }
-
-    public function setFlagImage($id)
-    {
-        if ($id == null){
-            return;
-        }
-        $this->flag_image_id = $id;
-        $this->save();
+        return '/uploads/'. $this->flag_image->image_category->title
+            .'/'. $this->flag_image->image;
     }
 
     public function active()
@@ -97,13 +80,14 @@ class Language extends Model
         $this->save();
     }
 
-    public function toggleActive()
+    public function toggleActive($id)
     {
-        if ($this->is_active == 0)
+        $toggle = self::find($id);
+        if ($toggle->is_active === 0)
         {
-            return $this->active();
+            return $toggle->active();
         }
-        return $this->notActive();
+        return $toggle->notActive();
     }
 
 }

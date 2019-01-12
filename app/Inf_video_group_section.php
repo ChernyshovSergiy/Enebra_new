@@ -73,9 +73,9 @@ class Inf_video_group_section extends Model
         return $video_group_section_names;
     }
 
-    public function removeVideoGroupSection() :void
+    public function removeVideoGroupSection($id) :void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 
 }

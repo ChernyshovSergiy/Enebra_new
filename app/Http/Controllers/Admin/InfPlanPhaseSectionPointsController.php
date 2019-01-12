@@ -36,6 +36,7 @@ class InfPlanPhaseSectionPointsController extends Controller
     {
         $plan_phase_section_points = $this->json->build($this->model ,'entry');
         $locale = LaravelLocalization::getCurrentLocale();
+
         return view('admin.inf_plan_phase_section_points.index',
             compact('plan_phase_section_points', 'locale'));
     }
@@ -72,21 +73,21 @@ class InfPlanPhaseSectionPointsController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        $this->model::find($id)->editPlanPoint($request);
+        $this->model->editPlanPoint($request, $id);
 
         return redirect()->route('inf_plan_phase_section_points.index');
     }
 
     public function destroy($id)
     {
-        $this->model::find($id)->removePlanPoint();
+        $this->model->removePlanPoint($id);
 
         return redirect()->route('inf_plan_phase_section_points.index');
     }
 
     public function toggle($id)
     {
-        $this->model::find($id)->toggleDone();
+        $this->model->toggleDone($id);
 
         return redirect()->back();
     }

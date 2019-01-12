@@ -33,6 +33,7 @@ class InfVideoGroupSectionsController extends Controller
     {
         $video_group_sections = $this->json->build($this->model, 'title');
         $locale = LaravelLocalization::getCurrentLocale();
+
         return view('admin.inf_video_group_sections.index',
             compact('video_group_sections', 'locale'));
     }
@@ -73,7 +74,8 @@ class InfVideoGroupSectionsController extends Controller
 
     public function destroy($id)
     {
-        $this->model::find($id)->removeVideoGroupSection();
+        $this->model->removeVideoGroupSection($id);
+
         return redirect()->route('inf_video_group_sections.index');
     }
 }

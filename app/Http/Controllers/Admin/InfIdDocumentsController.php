@@ -31,20 +31,21 @@ class InfIdDocumentsController extends Controller
         $id_documents = $this->json->build($this->model, 'name');
         $locale = LaravelLocalization::getCurrentLocale();
 
-        return view('admin.id_documents.index', compact('id_documents', 'locale'));
+        return view('admin.id_documents.index',
+            compact('id_documents', 'locale'));
     }
 
     public function create()
     {
         $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.id_documents.create', compact('languages'));
+        return view('admin.id_documents.create',
+            compact('languages'));
     }
 
     public function store(ValidateRequest $request)
     {
-        $model = $this->json->createLangString($request, 'name', $this->model);
-        $model->save();
+        $this->model->addIdDocument($request);
 
         return redirect()->route('id_documents.index');
     }
@@ -59,20 +60,15 @@ class InfIdDocumentsController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        $model = Inf_id_document::find($id);
-        $model->editDoc($request, $model);
+        $this->model->editIdDocument($request, $id);
 
         return redirect()->route('id_documents.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Inf_id_document::find($id)->delete();
+        $this->model->removeIdDocument($id);
+
         return redirect()->route('id_documents.index');
     }
 }

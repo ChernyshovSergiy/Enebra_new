@@ -34,7 +34,8 @@ class InfIntroductionPointsController extends Controller
         $inf_intr_points = $this->json->build($this->model, 'point');
         $locale = LaravelLocalization::getCurrentLocale();
 
-        return view('admin.inf_int_points.index', compact('inf_intr_points', 'locale'));
+        return view('admin.inf_int_points.index',
+            compact('inf_intr_points', 'locale'));
     }
 
     public function create()
@@ -42,12 +43,13 @@ class InfIntroductionPointsController extends Controller
         $page_names = $this->linkName->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();
 
-        return view('admin.inf_int_points.create', compact('languages', 'page_names'));
+        return view('admin.inf_int_points.create',
+            compact('languages', 'page_names'));
     }
 
     public function store(ValidateRequest $request)
     {
-        Inf_introduction_point::addPoint($request);
+        $this->model::addPoint($request);
 
         return redirect()->route('introduction_points.index');
     }
@@ -58,19 +60,21 @@ class InfIntroductionPointsController extends Controller
         $inf_intr_point = $this->json->build($this->model, 'point')->find($id);
         $page_names = $this->linkName->getActivePagesName();
 
-        return view('admin.inf_int_points.edit', compact('inf_intr_point','languages','page_names'));
+        return view('admin.inf_int_points.edit',
+            compact('inf_intr_point','languages','page_names'));
     }
 
     public function update(ValidateRequest $request, $id)
     {
-        Inf_introduction_point::editPoint($request, $id);
+        $this->model::editPoint($request, $id);
 
         return redirect()->route('introduction_points.index');
     }
 
     public function destroy($id)
     {
-        Inf_introduction_point::removePoint($id);
+        $this->model::removePoint($id);
+
         return redirect()->route('introduction_points.index');
     }
 }

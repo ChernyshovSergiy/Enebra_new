@@ -8,10 +8,7 @@
 
 namespace App\Services;
 
-
-use App\Menu;
 use App\Traits\Methods\GetTitleFromMenu;
-use Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class PagesService

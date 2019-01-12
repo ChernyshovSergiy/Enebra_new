@@ -40,7 +40,7 @@ class Country extends Model
         'image_id'
     ];
 
-    public static function addCountry($fields) :void
+    public function addCountry($fields) :void
     {
         $country = new static;
         $country->fill($fields->all());
@@ -50,27 +50,28 @@ class Country extends Model
         $country->save();
     }
 
-    public function editCountry($fields) :void //edit(change) post
+    public function editCountry($fields, $id) :void //edit(change) post
     {
-        $this->fill($fields->all());
-        $this->setLanguage($fields->get('language_id'));
-        $this->setFlagImage($fields->get('image_id'));
-        $this->setIdDocuments($fields->get('id_documents'));
-        $this->update($fields->all());
+        $country = self::find($id);
+        $country->fill($fields->all());
+        $country->setLanguage($fields->get('language_id'));
+        $country->setFlagImage($fields->get('image_id'));
+        $country->setIdDocuments($fields->get('id_documents'));
+        $country->update($fields->all());
     }
 
     public function getLanguage() :string
     {
-        return ($this->language !== null)
-            ? $this->language->title
-            : 'don`t have language';
+        return ($this->language === null)
+            ? 'don`t have language'
+            : $this->language->title;
     }
 
     public function getFlagImageCategoryId() :string
     {
-        return ($this->images !== null)
-            ? $this->images->category_id
-            : 'don`t have category';
+        return ($this->images === null)
+            ? 'don`t have category'
+            : $this->images->category_id;
     }
 
     public function getFlagImageIdTitle() :string
@@ -84,7 +85,7 @@ class Country extends Model
     public function getFlagImage() :string
     {
         $flag = Image::find($this->image_id);
-        if ($flag == null){
+        if ($flag === null){
             return '/img/no-image.png';
         }
         return '/uploads/'. $this->getFlagImageIdTitle() .'/'. $flag->image;
@@ -92,7 +93,7 @@ class Country extends Model
 
     public function setFlagImage($id) :void
     {
-        if ($id == null){
+        if ($id === null){
             return;
         }
         $this->image_id = $id;
@@ -101,7 +102,7 @@ class Country extends Model
 
     public function setLanguage($id) :void
     {
-        if ($id == null){
+        if ($id === null){
             return;
         }
         $this->language_id = $id;
@@ -110,7 +111,7 @@ class Country extends Model
 
     public function setIdDocuments($ids) :void
     {
-        if ($ids == null) {
+        if ($ids === null) {
             return;
         }
         $this->id_documents()->sync($ids);
@@ -127,7 +128,7 @@ class Country extends Model
             $doc_names = [];
             foreach($id_docs as $key => $title){
                 $doc_names[$key] = $title;
-            };
+            }
             $doc_names = implode(', ', $doc_names);
             return $doc_names;
         }
@@ -146,9 +147,9 @@ class Country extends Model
         return $id_documents;
     }
 
-    public function removeCountry() :void
+    public function removeCountry($id) :void
     {
-        $this->delete();
+        self::where('id', $id)->delete();
     }
 
 }

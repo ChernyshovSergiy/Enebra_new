@@ -30,20 +30,22 @@ class MenusController extends Controller
         $inf_menu_points = $this->json->build($this->model, 'title');
         $locale = LaravelLocalization::getCurrentLocale();
 
-        return view('admin.menus.index', compact('inf_menu_points', 'locale'));
+        return view('admin.menus.index',
+            compact('inf_menu_points', 'locale'));
     }
 
     public function create()
     {
         $languages = $this->languages->getActiveLanguages();
-        $page_names = Menu::getMenuPointName();
+        $page_names = $this->model::getMenuPointName();
 
-        return view('admin.menus.create', compact('page_names', 'languages'));
+        return view('admin.menus.create',
+            compact('page_names', 'languages'));
     }
 
     public function store(ValidateRequest $request)
     {
-        Menu::addMenuPoint($request);
+        $this->model::addMenuPoint($request);
 
         return redirect()->route('inf_menus.index');
     }
@@ -52,7 +54,7 @@ class MenusController extends Controller
     {
         $languages = $this->languages->getActiveLanguages();
         $inf_menu_point = $this->json->build($this->model, 'title')->find($id);
-        $page_names = Menu::getMenuPointName();
+        $page_names = $this->model::getMenuPointName();
 
         return view('admin.menus.edit', compact(
             'inf_menu_point',
@@ -61,21 +63,21 @@ class MenusController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        Menu::editMenuPoint($request, $id);
+        $this->model::editMenuPoint($request, $id);
 
         return redirect()->route('inf_menus.index');
     }
 
     public function destroy($id)
     {
-        Menu::removeMenuPoint($id);
+        $this->model::removeMenuPoint($id);
 
         return redirect()->route('inf_menus.index');
     }
 
     public function toggle($id)
     {
-        Menu::find($id)->toggleActive();
+        $this->model->toggleActive($id);
 
         return redirect()->back();
     }

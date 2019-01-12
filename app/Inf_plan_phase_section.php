@@ -60,8 +60,8 @@ class Inf_plan_phase_section extends Model
         return $section_names;
     }
 
-    public function removePhaseSection() :void
+    public function removePhaseSection($id) :void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 }

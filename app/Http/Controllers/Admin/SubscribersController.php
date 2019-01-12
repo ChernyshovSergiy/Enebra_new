@@ -32,7 +32,7 @@ class SubscribersController extends Controller
         ]);
         $subs = Inf_subscriber::create($request->all());
         $subs->setUserLanguage($request->get('language_id'));
-        if($request->get('token') != null){
+        if($request->get('token') !== null){
             $subs->generateToken();
             App::setLocale(Inf_subscriber::setSlugLanguage($request->get('language_id')));
 
@@ -40,21 +40,6 @@ class SubscribersController extends Controller
         }
 
         return redirect()->route('subscribers.index');
-    }
-
-    public function show(Inf_subscriber $inf_subscriber)
-    {
-        //
-    }
-
-    public function edit(Inf_subscriber $inf_subscriber)
-    {
-        //
-    }
-
-    public function update(Request $request, Inf_subscriber $inf_subscriber)
-    {
-        //
     }
 
     public function destroy($id)

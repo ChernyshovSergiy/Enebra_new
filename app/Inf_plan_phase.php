@@ -41,11 +41,11 @@ class Inf_plan_phase extends Model
         $planPhase->save();
     }
 
-    public function editPlanPhase($request, $model) :void
+    public function editPlanPhase($request, $id) :void
     {
-        $items = $this->createLangString($request, 'title');
-        $model->title = json_encode($items);
-        $model->update($request->all());
+        $phase = self::find($id);
+        $phase->title = json_encode($phase->createLangString($request, 'title'));
+        $phase->update($request->all());
     }
 
     public function getPhaseNames() :array
@@ -59,9 +59,9 @@ class Inf_plan_phase extends Model
         return $phase_names;
     }
 
-    public function removePlanPhase():void
+    public function removePlanPhase($id):void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 
 }

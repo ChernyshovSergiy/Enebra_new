@@ -46,7 +46,7 @@
                             <label>@lang('column.author')</label>
                             {{ Form::select('user_id',
                                 $users,
-                                $image->getUserIdName(),
+                                $image->user_id,
                                 ['class' => 'form-control select2'])
                             }}
                         </div>

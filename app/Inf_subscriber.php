@@ -37,12 +37,11 @@ class Inf_subscriber extends Model
         return $this->hasOne(Language::class, 'id', 'language_id');
     }
 
-
     public function getName()
     {
-        if ($this->email != null){
+        if ($this->email !== null){
             $name = User::whereEmail($this->email)->first();
-            if ($name != null){
+            if ($name !== null){
                 return $name->first_name . ' '. $name->last_name;
             }
             return Lang::get('admin.anonymous');
@@ -53,7 +52,7 @@ class Inf_subscriber extends Model
 
     public function getStatus()
     {
-        if ($this->token == null){
+        if ($this->token === null){
             return Lang::get('status.active');
         }
         return Lang::get('status.wait');
@@ -68,7 +67,7 @@ class Inf_subscriber extends Model
         return $sub;
     }
 
-    public function generateToken()
+    public function generateToken(): void
     {
         $this->token = str_random(100);
         $this->save();
@@ -83,7 +82,7 @@ class Inf_subscriber extends Model
 
     public function setUserLanguage($id)
     {
-        if ($id == null){
+        if ($id === null){
             return;
         }
         $this->language_id = $id;

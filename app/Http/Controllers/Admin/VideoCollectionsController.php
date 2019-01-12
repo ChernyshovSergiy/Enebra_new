@@ -26,11 +26,6 @@ class VideoCollectionsController extends Controller
         return redirect()->route('video_collections.index');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $inf_video_group = Inf_video_group::find($id);

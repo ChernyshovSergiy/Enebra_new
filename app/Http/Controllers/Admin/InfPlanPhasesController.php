@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfPlanPhases\ValidateRequest;
 use App\Inf_plan_phase;
-use App\Language;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -31,6 +29,7 @@ class InfPlanPhasesController extends Controller
     {
         $plan_phases = $this->json->build($this->model, 'title');
         $locale = LaravelLocalization::getCurrentLocale();
+
         return view('admin.inf_plan_phases.index',compact(
             'plan_phases', 'locale'));
     }
@@ -60,15 +59,15 @@ class InfPlanPhasesController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        $plan_phase = Inf_plan_phase::find($id);
-        $plan_phase->editPlanPhase($request, $plan_phase);
+        $this->model->editPlanPhase($request, $id);
 
         return redirect()->route('inf_plan_phases.index');
     }
 
     public function destroy($id)
     {
-        Inf_plan_phase::find($id)->removePlanPhase();
+        $this->model->removePlanPhase($id);
+
         return redirect()->route('inf_plan_phases.index');
     }
 }

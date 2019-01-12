@@ -2,9 +2,14 @@
 
 namespace App;
 
+use App\Traits\Relations\BelongsTo\Authors;
+use App\Traits\Relations\BelongsTo\ImagesCategories;
+use App\Traits\Relations\HasOne\SocialLinks;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 /**
@@ -34,29 +39,16 @@ use Illuminate\Support\Facades\Storage;
  */
 class Image extends Model
 {
-    use Sluggable;
-
-    public function image_category()
-    {
-        return $this->belongsTo(ImageCategory::class, 'category_id', 'id');
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    public function socialLink()
-    {
-        return $this->hasOne(SocialLink::class, 'image_id', 'id');
-    }
+    use Sluggable, ImagesCategories, Authors, SocialLinks;
 
     protected $fillable = [
         'title',
-        'image', 'category_id', 'user_id'
+        'image',
+        'category_id',
+        'user_id'
     ];
 
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -65,43 +57,53 @@ class Image extends Model
         ];
     }
 
-    public static function add($fields)
+    public function addImage($request)
     {
         $image = new static;
-        $image->fill($fields);
-        $image->user_id = 1;
+        $image->fill($request->all());
+        $image->save();
+        $image->uploadImage($request->file('image'));
+        $image->user_id = $request->user_id ?? Auth::user()->id;
         $image->save();
 
         return $image;
     }
 
-    public function edit($fields)
+    public function clearPreviousEntry($request, $id): void
     {
-//        dd($fields);
-        $this->fill($fields);
-        $this->save();
-
+        $image = self::find($id);
+        $image->removeImage();
+        $image->title = $request->title;
+        $image->slug = null;
+        $image->save();
     }
 
-    public function removeImage()
+    public function editImage($fields, $id): void
     {
-        if ($this->image != null) {
+        $image = self::find($id);
+        $image->fill($fields->all());
+        $image->save();
+        $image->uploadImage($fields->file('image'));
+        $image->save();
+    }
+
+    public function removeImage(): void
+    {
+        if ($this->image !== null) {
             Storage::delete('/uploads/'. $this->getCategoryIdTitle() .'/'. $this->image); // delete previous image
         }
     }
 
-    /**
-     * @throws \Exception
-     */
-    public function remove()
+    public function remove($id): void
     {
-        $this->removeImage(); // delete image
-        $this->delete();
+        $image = self::find($id);
+        $image->removeImage(); // delete image
+        $image->delete();
     }
 
-    public function uploadImage($image)
+    public function uploadImage($image): void
     {
-        if($image == null)
+        if($image === null)
         {
             return;
         }
@@ -110,38 +112,36 @@ class Image extends Model
         $filename = $this->slug.'.'.$image->extension();
         $image->storeAs('uploads/'. $this->getCategoryIdTitle(), $filename);
         $this->image = $filename;
-        $this->save();
+        $this->make();
     }
 
-    public function getImage()
+    public function getImage(): string
     {
-        if ($this->image == null){
+        if ($this->image === null){
             return '/img/no-image.png';
         }
         return '/uploads/'. $this->getCategoryIdTitle() .'/'. $this->image;
     }
 
-    public function setCategory($id)
+    public function getCategoryIdTitle(): string
     {
-        if ($id == null){
-            return;
-        }
-        $this->category_id = $id;
-        $this->save();
-    }
-
-    public function getCategoryIdTitle()
-    {
-        return ($this->image_category != null)
+        return ($this->image_category !== null)
             ? $this->image_category->title
             : 'don`t have category';
     }
 
-    public function getUserIdName()
+    public function getUserName():string
     {
-        return($this->author != null)
-            ? $this->author->first_name
-            : 'don`t have author';
+        $locale = LaravelLocalization::getCurrentLocale();
+        if ($this->author->language->first()->slug === $locale) {
+            return ($this->user_id !== null)
+                ? $this->author->first_name . ' ' . $this->author->last_name
+                : '';
+        }
+
+        return ($this->user_id !== null)
+            ? $this->author->first_name_en . ' ' . $this->author->last_name_en
+            : '';
     }
 
 }

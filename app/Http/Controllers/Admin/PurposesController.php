@@ -32,6 +32,7 @@ class PurposesController extends Controller
     public function index()
     {
         $purposes = $this->json->build($this->model, 'goal');
+
         $locale = LaravelLocalization::getCurrentLocale();
         return view('admin.purposes.index',
             compact('purposes', 'locale'));

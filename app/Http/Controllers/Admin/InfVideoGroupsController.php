@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfVideoGroup\ValidateRequest;
 use App\Inf_video_group;
-use App\Language;
 use App\Menu;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
@@ -33,6 +32,7 @@ class InfVideoGroupsController extends Controller
     {
         $video_groups = $this->json->build($this->model ,'content');
         $locale = LaravelLocalization::getCurrentLocale();
+
         return view('admin.inf_video_groups.index',
             compact('video_groups', 'locale'));
     }
@@ -67,14 +67,14 @@ class InfVideoGroupsController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        $this->model::find($id)->editInfVideoGroup($request);
+        $this->model->editInfVideoGroup($request, $id);
 
         return redirect()->route('inf_video_groups.index');
     }
 
     public function destroy($id)
     {
-        $this->model::find($id)->removeInfVideoGroup();
+        $this->model->removeInfVideoGroup($id);
 
         return redirect()->route('inf_video_groups.index');
     }

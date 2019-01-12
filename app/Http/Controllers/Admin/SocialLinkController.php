@@ -46,7 +46,7 @@ class SocialLinkController extends Controller
 
     public function store(ValidateRequest $request)
     {
-        SocialLink::addSocialLink($request);
+        $this->model::addSocialLink($request);
 
         return redirect()->route('social_links.index');
     }
@@ -62,21 +62,21 @@ class SocialLinkController extends Controller
 
     public function update(ValidateRequest $request, $id)
     {
-        SocialLink::find($id)->editLink($request);
+        $this->model->editLink($request, $id);
 
         return redirect()->route('social_links.index');
     }
 
     public function destroy($id)
     {
-        SocialLink::find($id)->removeSocialLink();
+        $this->model->removeSocialLink($id);
 
         return redirect()->route('social_links.index');
     }
 
     public function toggle($id)
     {
-        SocialLink::find($id)->toggleActive();
+        $this->model->toggleActive($id);
 
         return redirect()->back();
     }

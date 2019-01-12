@@ -104,25 +104,26 @@ class Menu extends Model
         }
     }
 
-    public function active() :void
+    public function active()
     {
         $this->is_active = 1;
         $this->save();
     }
 
-    public function notActive() :void
+    public function notActive()
     {
         $this->is_active = 0;
         $this->save();
     }
 
-    public function toggleActive()
+    public function toggleActive($id)
     {
-        if ($this->is_active === 0)
+        $toggle = self::find($id);
+        if ($toggle->is_active === 0)
         {
-            return $this->active();
+            return $toggle->active();
         }
-        return $this->notActive();
+        return $toggle->notActive();
     }
 
     public static function addMenuPoint($request) :void//add new page

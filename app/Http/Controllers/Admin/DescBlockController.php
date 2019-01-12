@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Desc_block;
 use App\Http\Requests\Admin\DescBlocks\ValidateRequest;
 use App\Services\PagesService;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DescBlockController extends Controller

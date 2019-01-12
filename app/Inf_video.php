@@ -92,20 +92,17 @@ class Inf_video extends Model
         $infVideo->save();
     }
 
-    public function editVideo($fields) :void
+    public function editVideo($fields, $id) :void
     {
-        $this->fill($fields->all());
-        $this->info = $this->setJson($fields, $this->text_blocks);
-        $this->update($fields->all());
+        $infVideo = self::find($id);
+        $infVideo->fill($fields->all());
+        $infVideo->info = $infVideo->setJson($fields, $this->text_blocks);
+        $infVideo->update($fields->all());
     }
 
-    public function removeVideo() :void
+    public function removeVideo($id) :void
     {
-        $this->delete();
+        self::find($id)->delete();
     }
 
-    public function decode($element): string
-    {
-        return 'ok';
-    }
 }

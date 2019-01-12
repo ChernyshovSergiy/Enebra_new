@@ -2,81 +2,71 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Image;
+use App\Http\Requests\Admin\Languages\ValidateRequest;
 use App\Language;
-use Illuminate\Http\Request;
+use App\Services\ImagesService;
 use App\Http\Controllers\Controller;
 
 class LanguagesController extends Controller
 {
+    public $model;
+    public $images;
+
+    public function __construct(
+        Language $language,
+        ImagesService $imagesService)
+    {
+        $this->model = $language;
+        $this->images = $imagesService;
+    }
+
     public function index()
     {
-        $languages = Language::all();
+        $languages = $this->model::all();
+
         return view('admin.languages.index', compact('languages'));
     }
 
     public function create()
     {
-        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
+        $flag_image = $this->images->getImageNameByCategory(1);
+
         return view('admin.languages.create', compact('flag_image'));
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'slug' => 'max:2|min:2',
-            'title' => 'required',
-            'localization' => 'required',
-            'flag_image_id' => 'required'
-        ]);
-        $language = Language::create($request->all());
-        $language->setFlagImage($request->get('flag_image_id'));
+        $this->model->addNewLanguage($request);
 
         return redirect()->route('languages.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
     {
-        $language = Language::find($id);
-        $flag_image = Image::where( 'category_id','=', 1 )->pluck('title', 'id');
-        return view('admin.languages.edit', compact('language', 'flag_image'));
+        $language = $this->model::find($id);
+        $flag_image = $this->images->getImageNameByCategory(1);
+
+        return view('admin.languages.edit',
+            compact('language', 'flag_image'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateRequest $request, $id)
     {
-        $this->validate($request, [
-            'slug' => 'max:2|min:2',
-            'title' => 'required',
-            'localization' => 'required',
-            'flag_image_id' => 'required'
-        ]);
-        $language = Language::find($id);
-        $language->setFlagImage($request->get('flag_image_id'));
-        $language->update($request->all());
+        $this->model->editLanguage($request, $id);
 
         return redirect()->route('languages.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        Language::find($id)->delete();
+        $this->model->removeLanguage($id);
+
         return redirect()->route('languages.index');
     }
 
     public function toggle($id)
     {
-        $point = Language::find($id);
-        $point->toggleActive();
+        $this->model->toggleActive($id);
 
         return redirect()->back();
     }
