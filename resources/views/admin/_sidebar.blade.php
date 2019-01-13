@@ -151,22 +151,22 @@
             <li><a href="{{route('inf_videos.index')}}"><i class="fa fa-file-video-o"></i> @lang('admin.videos')</a></li>
         </ul>
     </li>
-    <li class="treeview">
-        <a href="{{route('video_collections.index')}}">
-            <i class="fa fa-youtube-play"></i>
-            <span>@lang('admin.videos_collections')</span>
-            <span class="pull-right-container">
-      <span class="label label-primary pull-right">4</span>
-    </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="{{route('video_collections.index')}}"><i class="fa fa-tv"></i> @lang('admin.all_part')</a></li>
-            <li><a href="#"><i class="fa fa-info-circle"></i> @lang('admin.informative_part')</a></li>
-            <li><a href="#"><i class="fa fa-wrench"></i> @lang('admin.technology_part')</a></li>
-            <li><a href="#"><i class="fa fa-heart"></i> @lang('admin.enebra_videos_part')</a></li>
-            <li><a href="#"><i class="fa  fa-rocket"></i> @lang('admin.motivation_part')</a></li>
-        </ul>
-    </li>
+    {{--<li class="treeview">--}}
+        {{--<a href="{{route('video_collections.index')}}">--}}
+            {{--<i class="fa fa-youtube-play"></i>--}}
+            {{--<span>@lang('admin.videos_collections')</span>--}}
+            {{--<span class="pull-right-container">--}}
+      {{--<span class="label label-primary pull-right">4</span>--}}
+    {{--</span>--}}
+        {{--</a>--}}
+        {{--<ul class="treeview-menu">--}}
+            {{--<li><a href="{{route('video_collections.index')}}"><i class="fa fa-tv"></i> @lang('admin.all_part')</a></li>--}}
+            {{--<li><a href="#"><i class="fa fa-info-circle"></i> @lang('admin.informative_part')</a></li>--}}
+            {{--<li><a href="#"><i class="fa fa-wrench"></i> @lang('admin.technology_part')</a></li>--}}
+            {{--<li><a href="#"><i class="fa fa-heart"></i> @lang('admin.enebra_videos_part')</a></li>--}}
+            {{--<li><a href="#"><i class="fa  fa-rocket"></i> @lang('admin.motivation_part')</a></li>--}}
+        {{--</ul>--}}
+    {{--</li>--}}
     <li>
         <a href="{{route('subscribers.index')}}">
             <i class="fa fa-user-plus"></i> <span>@lang('admin.subscribers')</span>

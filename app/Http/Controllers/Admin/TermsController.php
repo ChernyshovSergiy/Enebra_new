@@ -73,6 +73,7 @@ class TermsController extends Controller
     public function destroy($id)
     {
         $this->model->removeContent($id);
+
         return redirect()->route('terms.index');
     }
 }

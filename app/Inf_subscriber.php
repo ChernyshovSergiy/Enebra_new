@@ -2,8 +2,13 @@
 
 namespace App;
 
+use App;
+use App\Mail\Information\VerifySubscriberMail;
+use App\Traits\Relations\HasOne\Languages;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Lang;
+use Mail;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
@@ -26,15 +31,29 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Inf_subscriber extends Model
 {
+    use Languages;
+
     protected $fillable = [
         'email', 'language_id'
     ];
     protected $hidden = [
         'token'
     ];
-    public function language()
+
+    public static function addSubscriber($fields) :void
     {
-        return $this->hasOne(Language::class, 'id', 'language_id');
+        $subscriber = new static;
+        $subscriber->fill($fields->all());
+        $subscriber->setUserLanguage($fields->get('language_id'));
+        $subscriber->save();
+
+        if($fields->get('token') !== null){
+            $subscriber->generateToken();
+            App::setLocale(self::setSlugLanguage($fields->get('language_id')));
+
+            Mail::to($subscriber)->send(new VerifySubscriberMail($subscriber));
+//            Mail::to($subscriber)->queue(new VerifySubscriberMail($subscriber));
+        }
     }
 
     public function getName()
@@ -42,12 +61,16 @@ class Inf_subscriber extends Model
         if ($this->email !== null){
             $name = User::whereEmail($this->email)->first();
             if ($name !== null){
-                return $name->first_name . ' '. $name->last_name;
+                $locale = LaravelLocalization::getCurrentLocale();
+                if ($name->language->first()->slug === $locale){
+                    return $name->first_name .' '. $name->last_name;
+                }
+                return $name->first_name_en .' '. $name->last_name_en;
             }
             return Lang::get('admin.anonymous');
         }
 
-        return redirect()->back()->with('status', 'Почта не указанна');
+        return redirect()->back()->with('status', Lang::get('status.mail_not_specified'));
     }
 
     public function getStatus()
@@ -72,15 +95,16 @@ class Inf_subscriber extends Model
         $this->token = str_random(100);
         $this->save();
     }
-    public function setLanguage()
+
+    public function setLanguage(): void
     {
         $cur_lang = LaravelLocalization::getCurrentLocale();
-        $this->language_id = Language::where('slug', '=', $cur_lang)->FirstOrFail();
-        $this->language_id = $this->language_id->id;
+        $this->language_id = Language::where('slug', '=', $cur_lang)
+            ->first()->id;
         $this->save();
     }
 
-    public function setUserLanguage($id)
+    public function setUserLanguage($id): void
     {
         if ($id === null){
             return;
@@ -91,13 +115,13 @@ class Inf_subscriber extends Model
 
     public static function setSlugLanguage($id)
     {
-        $slugLang = Language::find($id);
-        return $slugLang->slug;
+        return Language::find($id)->slug;
     }
 
-    public function remove()
+    public function removeSubscriber($id): void
     {
-        $this->delete();
+        $subscriber = self::find($id);
+        $subscriber->delete();
     }
 
 }

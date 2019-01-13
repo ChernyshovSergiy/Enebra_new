@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Information;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Subscribers\ValidateRequest;
 use App\Inf_subscriber;
 use App\Mail\Information\VerifySubscriberMail;
 use Illuminate\Http\Request;
@@ -11,17 +12,21 @@ use Mail;
 
 class InfSubscribersController extends Controller
 {
-    public  function subscribe(Request $request){
-        $this->validate($request, [
-            'email' => 'required|email|unique:inf_subscribers'
-        ]);
+    public $model;
 
-        $subs = Inf_subscriber::add($request->get('email'));
+    public function __construct(Inf_subscriber $subscriber)
+    {
+        $this->model = $subscriber;
+    }
+
+    public  function subscribe(ValidateRequest $request)
+    {
+        $subs = $this->model::add($request->get('email'));
         $subs -> generateToken();
         $subs -> setLanguage();
 
-//        Mail::to($subs)->send(new VerifySubscriberMail($subs));
-        Mail::to($subs)->queue(new VerifySubscriberMail($subs));
+        Mail::to($subs)->send(new VerifySubscriberMail($subs));
+//        Mail::to($subs)->queue(new VerifySubscriberMail($subs));
 
         return redirect()->back()->with('status', Lang::get('mail.check_your_email'));
     }
@@ -29,7 +34,7 @@ class InfSubscribersController extends Controller
 
     public function verify($token)
     {
-        $subs = Inf_subscriber::where('token', $token)->firstOrFail();
+        $subs = $this->model::where('token', $token)->firstOrFail();
         $subs->token = null;
         $subs->save();
         return redirect('/')->with('status', Lang::get('mail.your_email_is_confirmed'));

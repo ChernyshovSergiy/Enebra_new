@@ -3,48 +3,51 @@
 namespace App\Http\Controllers\Admin;
 
 use App;
+use App\Http\Requests\Admin\Subscribers\ValidateRequest;
 use App\Inf_subscriber;
-use App\Language;
-use App\Mail\Information\VerifySubscriberMail;
-use Illuminate\Http\Request;
+use App\Services\LanguagesService;
 use App\Http\Controllers\Controller;
-use Mail;
 
 class SubscribersController extends Controller
 {
+    public $model;
+    public $languages;
+
+    public function __construct(
+        Inf_subscriber $subscriber,
+        LanguagesService $languagesService
+    )
+    {
+        $this->model = $subscriber;
+        $this->languages = $languagesService;
+    }
+
     public function index()
     {
-        $subs = Inf_subscriber::all()->sortByDesc('updated_at');
+        $subs = $this->model::all()->sortByDesc('updated_at');
+
         return view('admin.subscribers.index', compact('subs'));
     }
 
     public function create()
     {
-        $languages = Language::where('is_active', '=','1')
-            ->pluck( 'title', 'id')->all();
+        $languages = $this->languages->getActiveLanguages();
+
         return view('admin.subscribers.create', compact('languages'));
     }
 
-    public function store(Request $request)
+    public function store(ValidateRequest $request)
     {
-        $this->validate($request, [
-            'email' => 'required|string|email|max:255|unique:inf_subscribers'
-        ]);
-        $subs = Inf_subscriber::create($request->all());
-        $subs->setUserLanguage($request->get('language_id'));
-        if($request->get('token') !== null){
-            $subs->generateToken();
-            App::setLocale(Inf_subscriber::setSlugLanguage($request->get('language_id')));
-
-            Mail::to($subs)->send(new VerifySubscriberMail($subs));
-        }
+        $this->model::addSubscriber($request);
 
         return redirect()->route('subscribers.index');
     }
 
     public function destroy($id)
     {
-        Inf_subscriber::find($id)->remove();
+
+        $this->model->removeSubscriber($id);
+
         return redirect()->route('subscribers.index');
     }
 }

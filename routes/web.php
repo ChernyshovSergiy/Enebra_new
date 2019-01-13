@@ -55,7 +55,6 @@ Route::group([
             Route::resource('/inf_video_group_sections', 'InfVideoGroupSectionsController');
             Route::resource('/inf_videos', 'InfVideosController');
             Route::resource('/inf_pages', 'InfPagesController');
-//            Route::get('/inf_pages/translate/{id}', 'InfPagesController@translate')->name('translate');
             Route::resource('/inf_menus', 'MenusController');
             Route::get('/inf_menus/toggle/{id}', 'MenusController@toggle');
             Route::resource('/social_links', 'SocialLinkController');
