@@ -49,7 +49,7 @@
                             <tr>
                                 <td>{{ $image->id }}</td>
                                 <td>{{ $image->title }}</td>
-                                <td>{{ $image->getCategoryIdTitle() }}</td>
+                                <td>{{ $image->image_category->title }}</td>
                                 <td>{{ $image->getUserName() }}</td>
                                 <td>
                                     <img src="{{ $image->getImage() }}" alt="" width="30">

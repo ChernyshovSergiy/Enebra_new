@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Traits\Relations\BelongsTo\Authors;
-use App\Traits\Relations\BelongsTo\ImagesCategories;
+use App\Traits\Relations\HasOne\ImagesCategory;
 use App\Traits\Relations\HasOne\SocialLinks;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -39,7 +39,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
  */
 class Image extends Model
 {
-    use Sluggable, ImagesCategories, Authors, SocialLinks;
+    use Sluggable, ImagesCategory, Authors, SocialLinks;
 
     protected $fillable = [
         'title',
@@ -90,7 +90,7 @@ class Image extends Model
     public function removeImage(): void
     {
         if ($this->image !== null) {
-            Storage::delete('/uploads/'. $this->getCategoryIdTitle() .'/'. $this->image); // delete previous image
+            Storage::delete('/uploads/'. $this->image_category->title .'/'. $this->image); // delete previous image
         }
     }
 
@@ -110,7 +110,7 @@ class Image extends Model
         $this->removeImage();
 
         $filename = $this->slug.'.'.$image->extension();
-        $image->storeAs('uploads/'. $this->getCategoryIdTitle(), $filename);
+        $image->storeAs('uploads/'. $this->image_category->title , $filename);
         $this->image = $filename;
         $this->make();
     }
@@ -120,14 +120,7 @@ class Image extends Model
         if ($this->image === null){
             return '/img/no-image.png';
         }
-        return '/uploads/'. $this->getCategoryIdTitle() .'/'. $this->image;
-    }
-
-    public function getCategoryIdTitle(): string
-    {
-        return ($this->image_category !== null)
-            ? $this->image_category->title
-            : 'don`t have category';
+        return '/uploads/'. $this->image_category->title .'/'. $this->image;
     }
 
     public function getUserName():string

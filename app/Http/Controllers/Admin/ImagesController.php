@@ -44,7 +44,6 @@ class ImagesController extends Controller
 
     public function store(StoreRequest $request)
     {
-
         $this->model->addImage($request);
 
         return redirect()->route('images.index');

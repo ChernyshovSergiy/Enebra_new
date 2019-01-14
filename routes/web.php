@@ -38,7 +38,6 @@ Route::group([
             'namespace' => 'Admin'
         ], function (){
             Route::get('/', 'DashboardController@index')->name('admin');
-            Route::resource('/video_collections', 'VideoCollectionsController');
             Route::resource('/image_categories', 'ImageCategoriesController');
             Route::resource('/images', 'ImagesController');
             Route::resource('/languages', 'LanguagesController');
