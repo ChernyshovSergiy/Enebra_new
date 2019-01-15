@@ -47,7 +47,7 @@ class InfPagesController extends Controller
         $users = $this->users->getUsers();
         $page_names = $this->pages->getActivePagesName();
         $languages = $this->languages->getActiveLanguages();
-        $text_blocks = Inf_page::getTextColumnsForTranslate();
+        $text_blocks = $this->model->getTextColumnsForTranslate();
         $images = $this->images->getImageNameByCategory(5);
         return view('admin.inf_pages.create', compact(
             'users',
