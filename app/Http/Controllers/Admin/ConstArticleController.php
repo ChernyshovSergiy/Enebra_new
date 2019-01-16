@@ -50,7 +50,8 @@ class ConstArticleController extends Controller
     {
         $this->model->addArticle($request);
 
-        return redirect()->route('const_articles.index');
+        return redirect()->route('const_articles.index')
+            ->with('status', 'success');
     }
 
     public function edit($id)
