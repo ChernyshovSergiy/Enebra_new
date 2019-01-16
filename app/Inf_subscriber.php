@@ -124,4 +124,21 @@ class Inf_subscriber extends Model
         $subscriber->delete();
     }
 
+    public function addSubs($request): void
+    {
+        $subs = self::add($request->get('email'));
+        $subs -> generateToken();
+        $subs -> setLanguage();
+
+        Mail::to($subs)->send(new VerifySubscriberMail($subs));
+//        Mail::to($subs)->queue(new VerifySubscriberMail($subs));
+    }
+
+    public function verifySuds($token): void
+    {
+        $subs = self::where('token', $token)->firstOrFail();
+        $subs->token = null;
+        $subs->save();
+    }
+
 }
