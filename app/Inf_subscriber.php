@@ -40,6 +40,18 @@ class Inf_subscriber extends Model
         'token'
     ];
 
+    public function getAvatar(): string
+    {
+        if ($this->email !== null){
+            $user = User::whereEmail($this->email)->first();
+            if ($user !== null){
+                return '/uploads/avatar/'.$user->avatar->first()->image;
+            }
+            return 'https://www.gravatar.com/avatar/'.md5($this->email).'?s=80&d=mm';
+        }
+        return '/uploads/avatar/empty-avatar.svg';
+    }
+
     public static function addSubscriber($fields) :void
     {
         $subscriber = new static;

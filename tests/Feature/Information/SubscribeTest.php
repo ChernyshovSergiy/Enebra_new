@@ -49,7 +49,7 @@ class SubscribeTest extends TestCase
         $response = $this->get($link);
         $response
             ->assertStatus(404)
-            ->assertSee('Sorry, the page you are looking for could not be found');
+            ->assertSee('Page not found');
     }
 
     public function testVerify(): void

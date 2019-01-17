@@ -39,6 +39,37 @@ class ConstArticleTest extends TestCase
         ]);
     }
 
+   /** @test
+     * @throws \Exception
+     */
+    public function error_add_constitution_article(): void
+    {
+        $constitution_article = factory(Const_article::class)->make();
+        $response = $this->post('admin/const_articles',[
+            'const_sections_id' => '',
+            'article:en' => '',
+            'article:ru' => '',
+            'side' => '',
+            'sort' => ''
+        ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertSessionHasErrors([
+                'const_sections_id',
+                'article:en',
+                'side',
+                'sort'
+            ]);
+
+        $this->assertDatabaseMissing('const_articles', [
+            'article' => $this->castToJson('{"en": "", "ru": ""}'),
+            'const_sections_id' => $constitution_article->const_sections_id,
+            'side' => $constitution_article->side,
+            'sort' => $constitution_article->sort
+        ]);
+    }
+
     /** @test
      * @throws \Exception
      */

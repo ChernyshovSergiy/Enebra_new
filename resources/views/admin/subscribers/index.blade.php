@@ -17,9 +17,10 @@
         </section>
 
         <!-- Main content -->
-        <section class="content container-fluid">
+        <section class="content">
         {{ Form::open([
-            'route' => 'subscribers.store'
+            'route' => 'subscribers.index',
+            'files' => true
         ]) }}
         <!-- Default box -->
             <div class="box">
@@ -37,6 +38,7 @@
                         <tr>
                             <th>@lang('column.id')</th>
                             <th>@lang('column.name')</th>
+                            <th>@lang('column.avatar')</th>
                             <th>@lang('column.email')</th>
                             <th>@lang('column.status')</th>
                             <th>@lang('column.language')</th>
@@ -49,6 +51,10 @@
                             <tr>
                                 <td>{{ $k + 1 }}</td>
                                 <td>{{ $sub->getName() }}</td>
+                                <td>
+                                    <img src="{{ $sub->getAvatar() }}" alt="" width="60"
+                                         style="-moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;">
+                                </td>
                                 <td>{{ $sub->email }}</td>
                                 <td>{{ $sub->getStatus() }}</td>
                                 <td>{{ $sub->language_id ? $sub->language->title : '' }}</td>

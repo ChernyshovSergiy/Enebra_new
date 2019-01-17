@@ -45,24 +45,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($images as $image)
-                            <tr>
-                                <td>{{ $image->id }}</td>
-                                <td>{{ $image->title }}</td>
-                                <td>{{ $image->image_category->title }}</td>
-                                <td>{{ $image->getUserName() }}</td>
-                                <td>
-                                    <img src="{{ $image->getImage() }}" alt="" width="30">
-                                <td>
-                                    {{--<a href="{{route('images.show', $image->id)}}" class="fa fa-eye"></a>--}}
-                                    <a href="{{route('images.edit', $image->id)}}" class="text-yellow fa fa-pencil"></a>
-                                    {{ Form::open(['route'=>['images.destroy', $image->id], 'method'=>'delete']) }}
-                                        <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-                                            <i class="text-red fa fa-remove"></i>
-                                        </button>
-                                    {{ Form::close() }}
-                                </td>
-                            </tr>
+                        @foreach($images->chunk( 10 ) as $parts)
+                            @foreach($parts as $image)
+                                <tr>
+                                    <td>{{ $image->id }}</td>
+                                    <td>{{ $image->title }}</td>
+                                    <td>{{ $image->image_category->title }}</td>
+                                    <td>{{ $image->getUserName() }}</td>
+                                    <td>
+                                        <img src="{{ $image->getImage() }}" alt="" width="30">
+                                    <td>
+                                        {{--<a href="{{route('images.show', $image->id)}}" class="fa fa-eye"></a>--}}
+                                        <a href="{{route('images.edit', $image->id)}}" class="text-yellow fa fa-pencil"></a>
+                                        {{ Form::open(['route'=>['images.destroy', $image->id], 'method'=>'delete']) }}
+                                            <button onclick="return confirm('are you sure?')" type="submit" class="delete">
+                                                <i class="text-red fa fa-remove"></i>
+                                            </button>
+                                        {{ Form::close() }}
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                         </tbody>
                     </table>
