@@ -29,6 +29,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('status', 'success');
 
         $this->assertDatabaseHas('const_articles', [
+            'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
             'article' => $this->castToJson('{"en": "Create_Ok_en", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
@@ -54,6 +55,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('status', 'success');
 
         $this->assertDatabaseHas('const_articles', [
+            'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
             'article' => $this->castToJson('{"en": "Create_Ok_ru", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
@@ -75,6 +77,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('message', 'article update successful');
 
         $this->assertDatabaseHas('const_articles', [
+            'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
             'article' => $this->castToJson('{"en": "Update_Ok_en", "ru": "Update_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
@@ -100,6 +103,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('status', 'success');
 
         $this->assertDatabaseHas('const_articles', [
+            'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
             'article' => $this->castToJson('{"en": "Create_Ok_en", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
@@ -113,6 +117,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('message', 'article delete successful');
 
         $this->assertDatabaseMissing('const_articles', [
+            'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
             'article' => $this->castToJson('{"en": "Create_Ok_en", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
