@@ -42,8 +42,8 @@ class ConstArticle extends TestCase
         $constitution_article = factory(Const_article::class)->make();
         $response = $this->post('admin/const_articles',[
             'const_sections_id' => $constitution_article->const_sections_id,
-            'article:en' => 'Old_en',
-            'article:ru' => 'Old_ru',
+            'article:en' => 'Create_Ok_en',
+            'article:ru' => 'Create_Ok_ru',
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
         ]);
@@ -54,7 +54,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('status', 'success');
 
         $this->assertDatabaseHas('const_articles', [
-            'article' => $this->castToJson('{"en": "Old_en", "ru": "Old_ru"}'),
+            'article' => $this->castToJson('{"en": "Create_Ok_ru", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
@@ -62,8 +62,8 @@ class ConstArticle extends TestCase
 
         $data = [
             'const_sections_id' => $constitution_article->const_sections_id,
-            'article:en' => 'Ok_en',
-            'article:ru' => 'Ok_ru',
+            'article:en' => 'Update_Ok_en',
+            'article:ru' => 'Update_Ok_ru',
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
         ];
@@ -75,7 +75,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('message', 'article update successful');
 
         $this->assertDatabaseHas('const_articles', [
-            'article' => $this->castToJson('{"en": "Ok_en", "ru": "Ok_ru"}'),
+            'article' => $this->castToJson('{"en": "Update_Ok_en", "ru": "Update_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
@@ -88,8 +88,8 @@ class ConstArticle extends TestCase
         $constitution_article = factory(Const_article::class)->make();
         $response = $this->post('admin/const_articles',[
             'const_sections_id' => $constitution_article->const_sections_id,
-            'article:en' => 'Ok_en',
-            'article:ru' => 'Ok_ru',
+            'article:en' => 'Create_Ok_en',
+            'article:ru' => 'Create_Ok_ru',
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
         ]);
@@ -100,7 +100,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('status', 'success');
 
         $this->assertDatabaseHas('const_articles', [
-            'article' => $this->castToJson('{"en": "Ok_en", "ru": "Ok_ru"}'),
+            'article' => $this->castToJson('{"en": "Create_Ok_en", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
@@ -113,7 +113,7 @@ class ConstArticle extends TestCase
             ->assertSessionHas('message', 'article delete successful');
 
         $this->assertDatabaseMissing('const_articles', [
-            'article' => $this->castToJson('{"en": "Ok_en", "ru": "Ok_ru"}'),
+            'article' => $this->castToJson('{"en": "Create_Ok_en", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
