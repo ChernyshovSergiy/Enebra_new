@@ -68,13 +68,15 @@ class ConstArticleController extends Controller
     {
         $this->model->editArticle($request, $id);
 
-        return redirect()->route('const_articles.index');
+        return redirect()->route('const_articles.index')
+            ->with('message', 'article update successful');
     }
 
     public function destroy($id)
     {
         $this->model->removeArticle($id);
 
-        return redirect()->route('const_articles.index');
+        return redirect()->route('const_articles.index')
+            ->with('message', 'article delete successful');
     }
 }

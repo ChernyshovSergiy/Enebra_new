@@ -55,6 +55,13 @@ class Const_article extends Model
             : Lang::get('app.right');
     }
 
+    public function addArticleTest($request):void
+    {
+        $this->fill($request->all());
+        $this->article = json_encode($this->createLangString($request, 'article'));
+        $this->save();
+    }
+
     public function addArticle($request):void
     {
         $article = new static;
