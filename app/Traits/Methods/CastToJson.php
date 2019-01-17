@@ -20,7 +20,7 @@ trait CastToJson
         }
         // Or check if the value is malformed.
         elseif ($json === null || json_decode($json) === null) {
-            throw new \RuntimeException('A valid JSON string was not provided.');
+            throw new \Exception('A valid JSON string was not provided.');
         }
         return DB::raw("CAST('{$json}' AS JSON)");
     }

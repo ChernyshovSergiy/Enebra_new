@@ -7,11 +7,13 @@ use App\Traits\Methods\CastToJson;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
-class ConstArticle extends TestCase
+class ConstArticleTest extends TestCase
 {
     use DatabaseTransactions, CastToJson;
 
-    /** @test */
+    /** @test
+     * @throws \Exception
+     */
     public function add_constitution_article(): void
     {
         $constitution_article = factory(Const_article::class)->make();
@@ -37,7 +39,9 @@ class ConstArticle extends TestCase
         ]);
     }
 
-    /** @test */
+    /** @test
+     * @throws \Exception
+     */
     public function edit_constitution_article(): void
     {
         $constitution_article = factory(Const_article::class)->make();
@@ -56,7 +60,7 @@ class ConstArticle extends TestCase
 
         $this->assertDatabaseHas('const_articles', [
             'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
-            'article' => $this->castToJson('{"en": "Create_Ok_ru", "ru": "Create_Ok_ru"}'),
+            'article' => $this->castToJson('{"en": "Create_Ok_en", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
@@ -76,16 +80,18 @@ class ConstArticle extends TestCase
             ->assertRedirect('admin/const_articles')
             ->assertSessionHas('message', 'article update successful');
 
-        $this->assertDatabaseHas('const_articles', [
+        $this->assertDatabaseHas('const_articles', array(
             'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
             'article' => $this->castToJson('{"en": "Update_Ok_en", "ru": "Update_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
             'sort' => $constitution_article->sort
-        ]);
+        ));
     }
 
-    /** @test */
+    /** @test
+     * @throws \Exception
+     */
     public function delete_constitution_article(): void
     {
         $constitution_article = factory(Const_article::class)->make();
@@ -117,7 +123,6 @@ class ConstArticle extends TestCase
             ->assertSessionHas('message', 'article delete successful');
 
         $this->assertDatabaseMissing('const_articles', [
-            'id' => Const_article::whereSort($constitution_article->sort)->first()->id,
             'article' => $this->castToJson('{"en": "Create_Ok_en", "ru": "Create_Ok_ru"}'),
             'const_sections_id' => $constitution_article->const_sections_id,
             'side' => $constitution_article->side,
