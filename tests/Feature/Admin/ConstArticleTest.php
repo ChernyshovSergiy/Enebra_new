@@ -44,13 +44,13 @@ class ConstArticleTest extends TestCase
      */
     public function error_add_constitution_article(): void
     {
-        $constitution_article = factory(Const_article::class)->make();
+        factory(Const_article::class)->make();
         $response = $this->post('admin/const_articles',[
-            'const_sections_id' => '',
+            'const_sections_id' => null,
             'article:en' => '',
             'article:ru' => '',
-            'side' => '',
-            'sort' => ''
+            'side' => null,
+            'sort' => null
         ]);
 
         $response
@@ -64,9 +64,9 @@ class ConstArticleTest extends TestCase
 
         $this->assertDatabaseMissing('const_articles', [
             'article' => $this->castToJson('{"en": "", "ru": ""}'),
-            'const_sections_id' => $constitution_article->const_sections_id,
-            'side' => $constitution_article->side,
-            'sort' => $constitution_article->sort
+            'const_sections_id' => null,
+            'side' => null,
+            'sort' => null
         ]);
     }
 
