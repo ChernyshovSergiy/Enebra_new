@@ -1,6 +1,6 @@
 <?php
 
-use App\Const_article;
+use App\Models\Const_article;
 use Faker\Generator as Faker;
 
 $factory->define(Const_article::class, function (Faker $faker) {

@@ -8,7 +8,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Inf_video_group_section;
+use App\Models\Inf_video_group_section;
 
 trait VideoGroupSections
 {

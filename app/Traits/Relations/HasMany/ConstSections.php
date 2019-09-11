@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Const_section;
+use App\Models\Const_section;
 
 trait ConstSections
 {

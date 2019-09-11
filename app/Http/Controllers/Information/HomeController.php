@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Information;
 
-use App\Inf_introduction;
-use App\Inf_introduction_point;
-use App\Inf_page;
-use App\Inf_video_group;
+use App\Models\Inf_introduction;
+use App\Models\Inf_introduction_point;
+use App\Models\Inf_page;
+use App\Models\Inf_video_group;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
-use App\socialLink;
-use App\Term;
+use App\Models\SocialLink;
+use App\Models\Term;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class HomeController extends Controller

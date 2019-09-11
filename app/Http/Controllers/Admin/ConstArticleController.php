@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Const_article;
-use App\Const_section;
+use App\Models\Const_article;
+use App\Models\Const_section;
 use App\Http\Requests\Admin\ConstArticles\ValidateRequest;
 use App\Services\JsonService;
 use App\Services\LanguagesService;

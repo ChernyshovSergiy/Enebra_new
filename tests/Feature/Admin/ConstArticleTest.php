@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Const_article;
+use App\Models\Const_article;
 use App\Traits\Methods\CastToJson;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;

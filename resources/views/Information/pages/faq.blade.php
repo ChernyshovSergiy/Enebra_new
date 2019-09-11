@@ -28,7 +28,7 @@
                                     <div class="owl-item" style="width: 176px;">
                                         <div class="block-carousel">
                                             <img class="img focus-img" src="{{asset('/uploads/avatar/'.$question->user->avatar->where('category_id', 3)->first()->image)}}">
-                                            <div class="name-auth-carousel">{!! explode(' ', \App\User::getFullName($question->user->id))[0] !!}<br>{!! explode(' ', \App\User::getFullName($question->user->id))[1] !!}</div>
+                                            <div class="name-auth-carousel">{!! explode(' ', \App\Models\User::getFullName($question->user->id))[0] !!}<br>{!! explode(' ', \App\Models\User::getFullName($question->user->id))[1] !!}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="purpose-top">
                                 <div class="left-bl col-md-6 ">
-                                    <div class="author-block">@lang('app.by') <span>{{\App\User::getFullName($question->user->id)}}</span></div>
+                                    <div class="author-block">@lang('app.by') <span>{{\App\Models\User::getFullName($question->user->id)}}</span></div>
                                     <span class="date"><img src="{{ asset( 'uploads/info_page_icon_svg/calendar.svg' )}}"> {{  $question->faq_answers->first()->created_at }}</span>
                                     <span class="views"><img src="{{ asset( 'uploads/info_page_icon_svg/view.svg' ) }}"> {{  $question->faq_answers->first()->views ?? random_int(300, 12000)}}</span>
                                 </div>

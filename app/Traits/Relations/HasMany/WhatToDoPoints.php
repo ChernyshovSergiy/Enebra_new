@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\WhatToDoPoint;
+use App\Models\WhatToDoPoint;
 
 trait WhatToDoPoints
 {

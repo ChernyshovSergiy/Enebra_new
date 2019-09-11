@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\ImageCategories\ValidateRequest;
-use App\ImageCategory;
+use App\Models\ImageCategory;
 use App\Http\Controllers\Controller;
 
 class ImageCategoriesController extends Controller

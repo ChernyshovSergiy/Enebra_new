@@ -8,7 +8,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Inf_video;
+use App\Models\Inf_video;
 
 trait Videos
 {

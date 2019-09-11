@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Information;
 
-use App\Inf_video_group;
-use App\Menu;
+use App\Models\Inf_video_group;
+use App\Models\Menu;
 use App\Services\JsonService;
-use App\socialLink;
+use App\Models\SocialLink;
 use App\Http\Controllers\Controller;
-use App\Term;
+use App\Models\Term;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class VideosController extends Controller

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Faq_question;
+use App\Models\Faq_question;
 use App\Http\Requests\Admin\FaqQuestions\ValidateRequest;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
 use App\Services\PagesService;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class FaqQuestionController extends Controller

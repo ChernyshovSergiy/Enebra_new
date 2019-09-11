@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Information;
 
-use App\Inf_subscriber;
+use App\Models\Inf_subscriber;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Lang;
 use Tests\TestCase;

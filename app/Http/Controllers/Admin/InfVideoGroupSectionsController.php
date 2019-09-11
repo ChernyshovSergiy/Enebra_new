@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfVideoGroupSections\ValidateRequest;
-use App\Inf_video_group;
-use App\Inf_video_group_section;
+use App\Models\Inf_video_group;
+use App\Models\Inf_video_group_section;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
 use App\Http\Controllers\Controller;

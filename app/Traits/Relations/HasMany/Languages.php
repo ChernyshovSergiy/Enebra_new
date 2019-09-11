@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Language;
+use App\Models\Language;
 
 trait Languages
 {

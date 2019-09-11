@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\Inf_plan_phase;
+use App\Models\Inf_plan_phase;
 
 trait Phases{
     /**

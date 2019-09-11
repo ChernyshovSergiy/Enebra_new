@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Const_section;
+use App\Models\Const_section;
 use App\Http\Requests\Admin\ConstSections\ValidateRequest;
 use App\Services\JsonService;
 use App\Services\LanguagesService;

@@ -9,7 +9,7 @@
 namespace App\Services;
 
 
-use App\Image;
+use App\Models\Image;
 
 class ImagesService
 {

@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\Faq_question;
+use App\Models\Faq_question;
 
 trait FAQuestion{
     /**

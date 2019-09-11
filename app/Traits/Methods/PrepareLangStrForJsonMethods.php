@@ -3,7 +3,7 @@
 namespace App\Traits\Methods;
 
 
-use App\Language;
+use App\Models\Language;
 
 trait PrepareLangStrForJsonMethods
 {

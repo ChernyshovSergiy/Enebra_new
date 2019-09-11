@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\BelongsTo;
 
-use App\Image;
+use App\Models\Image;
 
 trait Images{
 

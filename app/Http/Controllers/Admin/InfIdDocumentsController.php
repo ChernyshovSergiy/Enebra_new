@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\IdDocument\ValidateRequest;
-use App\Inf_id_document;
+use App\Models\Inf_id_document;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
 use App\Services\LanguagesService;

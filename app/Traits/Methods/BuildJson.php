@@ -2,8 +2,8 @@
 
 namespace App\Traits\Methods;
 
-use App\Image;
-use App\Language;
+use App\Models\Image;
+use App\Models\Language;
 
 trait BuildJson
 {

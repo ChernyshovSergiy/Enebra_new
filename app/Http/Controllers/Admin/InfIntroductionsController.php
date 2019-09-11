@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfIntroduction\ValidateRequest;
-use App\Inf_introduction;
+use App\Models\Inf_introduction;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
 use App\Services\LanguagesService;

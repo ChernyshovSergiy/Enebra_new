@@ -9,7 +9,7 @@
 namespace App\Services;
 
 
-use App\Language;
+use App\Models\Language;
 
 class LanguagesService
 {

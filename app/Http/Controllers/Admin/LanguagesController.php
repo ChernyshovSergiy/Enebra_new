@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Languages\ValidateRequest;
-use App\Language;
+use App\Models\Language;
 use App\Services\ImagesService;
 use App\Http\Controllers\Controller;
 

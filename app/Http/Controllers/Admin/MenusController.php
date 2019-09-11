@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Menus\ValidateRequest;
-use App\Menu;
+use App\Models\Menu;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
 use App\Services\LanguagesService;

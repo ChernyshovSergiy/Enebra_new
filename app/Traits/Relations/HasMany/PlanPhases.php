@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Inf_plan_section_point;
+use App\Models\Inf_plan_section_point;
 
 trait PlanPhases
 {

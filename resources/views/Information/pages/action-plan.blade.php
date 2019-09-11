@@ -10,7 +10,7 @@
     </div>
     <table class="full-equal constitution action">
         <tbody>
-        @php($phases = App\Inf_plan_phase::all())
+        @php($phases = App\Models\Inf_plan_phase::all())
         @foreach( $phases->chunk( 2 ) as $ph => $phase)
             <tr>
                 @foreach( $phase as $key => $element)
@@ -18,13 +18,13 @@
                         <div class="h3">{!! json_decode($element->title)->$cur_lang !!}</div>
                         <div class="bord-hidden">
                             <div class="border-left">
-                                @php($sections = App\Inf_plan_phase_section::all())
+                                @php($sections = App\Models\Inf_plan_phase_section::all())
                                 @foreach( $sections as $k => $section)
                                     <div class="acc-full">
                                         <div class="accord-block inf-section section-background-{{$section -> id}}">
                                             <h4>{!! json_decode($section->sub_title)->$cur_lang !!}</h4>
                                             <div class="panel-group" id="accordion{{($key + 1) + ( $k + 1) }}">
-                                                @php($points = App\Inf_plan_section_point::wherePhaseId($element->id)->where('section_id','=', $section->id)->get())
+                                                @php($points = App\Models\Inf_plan_section_point::wherePhaseId($element->id)->where('section_id','=', $section->id)->get())
                                                 @foreach( $points as $p => $point )
                                                     @php($item = json_decode($point->entry))
                                                     <div class="panel panel-default {{$item->description->$cur_lang === null ? ' empty': ''}}">

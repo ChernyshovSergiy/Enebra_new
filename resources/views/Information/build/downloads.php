@@ -173,15 +173,15 @@
                     <form method="post" action="">
                         <h3>Authentication</h3>
                          <div class="form-group col-xs-12 no-pad">
-                            <label for="inputlogin" class="col-sm-3 form-control-label">Login</label>
+                            <label for="inputAuthenticationLogin" class="col-sm-3 form-control-label">Login</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" id="inputlogin"/>
+                              <input type="text" class="form-control" id="inputAuthenticationLogin"/>
                             </div>
                           </div>
                           <div class="form-group col-xs-12 no-pad">
-                            <label for="inputpass" class="col-sm-3 form-control-label">Password</label>
+                            <label for="inputAuthenticationPass" class="col-sm-3 form-control-label">Password</label>
                             <div class="col-sm-9">
-                              <input type="password" class="form-control" id="inputpass"/>
+                              <input type="password" class="form-control" id="inputAuthenticationPass"/>
                             </div>
                           </div>
                         <button type="submit" class="btn btn-default hvr-radial-out right-but">Signin</button>
@@ -189,15 +189,15 @@
                         
                            <h3 class="forg">Forgot your password?</h3>
                          <div class="form-group col-xs-12 no-pad">
-                            <label for="inputemail" class="col-sm-3 form-control-label">Email</label>
+                            <label for="inputAuthenticationEmail" class="col-sm-3 form-control-label">Email</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" id="inputemail"/>
+                                <input type="text" class="form-control" id="inputAuthenticationEmail"/>
                             </div>
                           </div>
                           <div class="form-group col-xs-12 no-pad">
-                            <label for="inputphone" class="col-sm-3 form-control-label">Phone</label>
+                            <label for="inputAuthenticationPhone" class="col-sm-3 form-control-label">Phone</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" id="inputphone"/>
+                              <input type="text" class="form-control" id="inputAuthenticationPhone"/>
                             </div>
                           </div>
                         <button type="submit" class="btn btn-default hvr-radial-out right-but">Send</button>
@@ -893,20 +893,20 @@
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 form-control-label">Name</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName"/>
+                              <input type="text" class="form-control" id="inputContactName"/>
                             </div>
                           </div>
                     
                          <div class="form-group row">
                             <label for="inputEmail" class="col-sm-2 form-control-label">Email</label>
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputEmail"/>
+                              <input type="email" class="form-control" id="inputContactEmail"/>
                             </div>
                           </div>
                         <div class="form-group row">
                             <label for="inputmess" class="col-sm-2 form-control-label">Message</label>
                             <div class="col-sm-10">
-                              <textarea class="form-control" id="inputmess" rows="5"></textarea>
+                              <textarea class="form-control" id="inputContactMess" rows="5"></textarea>
                             </div>
                           </div>
                      <button type="submit" class="btn btn-default hvr-radial-out">Send</button>

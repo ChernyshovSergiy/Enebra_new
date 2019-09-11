@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfPages\ValidateRequest;
-use App\Inf_page;
+use App\Models\Inf_page;
 use App\Http\Controllers\Controller;
 use App\Services\ImagesService;
 use App\Services\JsonService;

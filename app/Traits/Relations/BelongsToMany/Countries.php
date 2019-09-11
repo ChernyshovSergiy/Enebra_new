@@ -3,7 +3,7 @@
 namespace App\Traits\Relations\BelongsToMany;
 
 
-use App\Country;
+use App\Models\Country;
 
 trait Countries
 {

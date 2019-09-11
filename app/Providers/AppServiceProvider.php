@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Inf_subscriber;
-use App\Menu;
+use App\Models\Inf_subscriber;
+use App\Models\Menu;
 use Illuminate\Support\ServiceProvider;
 use Schema;
 

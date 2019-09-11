@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Information;
 
-use App\Inf_page;
-use App\Menu;
+use App\Models\Inf_page;
+use App\Models\Menu;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
-use App\socialLink;
+use App\Models\SocialLink;
 use App\Http\Controllers\Controller;
-use App\Term;
+use App\Models\Term;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class PagesController extends Controller
@@ -43,8 +43,8 @@ class PagesController extends Controller
         $page = $this->InfPageModel->getPage($slug);
         $languages = $this->Languages->getFullActiveLanguages();
         $terms = $this->json->build($this->TermModel ,'content')->first();
-        $keywords = $page->text->keywords->$cur_lang;
-        $meta_desc = $page->text->meta_desc->$cur_lang;
+        $keywords = is_object($page) ? $page->text->keywords->$cur_lang : '';
+        $meta_desc = is_object($page) ? $page->text->meta_desc->$cur_lang : '';
         $socials = $this->json
             ->build($this->SocialLinkModel ,'url')->sortBy('sort');
         return view('Information.pages.'.$slug,

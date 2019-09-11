@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfPlanPhaseSectionPoint\ValidateRequest;
-use App\Inf_plan_phase;
-use App\Inf_plan_phase_section;
-use App\Inf_plan_section_point;
+use App\Models\Inf_plan_phase;
+use App\Models\Inf_plan_phase_section;
+use App\Models\Inf_plan_section_point;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
 use App\Services\LanguagesService;

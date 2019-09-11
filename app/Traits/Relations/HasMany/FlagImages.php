@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Image;
+use App\Models\Image;
 
 trait FlagImages
 {

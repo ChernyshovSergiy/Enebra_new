@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\ImageCategory;
+use App\Models\ImageCategory;
 
 trait ImagesCategory{
     /**

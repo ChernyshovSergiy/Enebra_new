@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\Inf_video_group;
+use App\Models\Inf_video_group;
 
 trait VideoGroups{
 

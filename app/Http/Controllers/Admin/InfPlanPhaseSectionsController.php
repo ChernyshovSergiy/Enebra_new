@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfPlanPhaseSections\ValidateRequest;
-use App\Inf_plan_phase_section;
+use App\Models\Inf_plan_phase_section;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
 use App\Http\Controllers\Controller;

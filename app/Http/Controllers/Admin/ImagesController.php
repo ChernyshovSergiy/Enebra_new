@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Images\StoreRequest;
 use App\Http\Requests\Admin\Images\ValidateRequest;
-use App\Image;
-use App\ImageCategory;
-use App\User;
+use App\Models\Image;
+use App\Models\ImageCategory;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class ImagesController extends Controller

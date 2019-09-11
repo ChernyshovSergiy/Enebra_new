@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Faq_answer;
+use App\Models\Faq_answer;
 
 trait UserFAQAnswers
 {

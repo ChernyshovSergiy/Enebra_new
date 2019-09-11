@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\Desc_block;
+use App\Models\Desc_block;
 
 trait DescBlocks{
     /**

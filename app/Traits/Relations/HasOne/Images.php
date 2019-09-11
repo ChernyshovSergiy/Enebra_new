@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\Image;
+use App\Models\Image;
 
 trait Images{
 

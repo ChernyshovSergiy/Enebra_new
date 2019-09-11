@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\SocialLink;
+use App\Models\SocialLink;
 
 trait SocialLinks{
     /**

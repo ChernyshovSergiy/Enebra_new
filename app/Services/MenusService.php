@@ -9,7 +9,7 @@
 namespace App\Services;
 
 
-use App\Menu;
+use App\Models\Menu;
 
 class MenusService
 {

@@ -9,7 +9,7 @@
 namespace App\Traits\Relations\HasMany;
 
 
-use App\Inf_page;
+use App\Models\Inf_page;
 
 trait Titles
 {

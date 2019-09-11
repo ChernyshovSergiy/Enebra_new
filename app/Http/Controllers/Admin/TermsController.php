@@ -6,7 +6,7 @@ use App\Http\Requests\Admin\Terms\ValidateRequest;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
 use App\Services\PagesService;
-use App\Term;
+use App\Models\Term;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;

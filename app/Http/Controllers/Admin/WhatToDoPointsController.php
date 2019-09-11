@@ -6,7 +6,7 @@ use App\Http\Requests\Admin\WhatToDoPoints\ValidateRequest;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
 use App\Services\PagesService;
-use App\WhatToDoPoint;
+use App\Models\WhatToDoPoint;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

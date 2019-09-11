@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\BelongsTo;
 
-use App\Inf_video_group;
+use App\Models\Inf_video_group;
 
 trait VideoGroups{
 

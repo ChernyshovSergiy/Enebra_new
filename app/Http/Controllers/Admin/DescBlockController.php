@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Desc_block;
+use App\Models\Desc_block;
 use App\Http\Requests\Admin\DescBlocks\ValidateRequest;
 use App\Services\PagesService;
 use App\Http\Controllers\Controller;

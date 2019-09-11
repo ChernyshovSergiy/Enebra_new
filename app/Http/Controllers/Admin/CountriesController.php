@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Country;
+use App\Models\Country;
 use App\Http\Requests\Admin\Countries\ValidateRequest;
 use App\Services\ImagesService;
 use App\Services\JsonService;

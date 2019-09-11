@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\InfVideos\ValidateRequest;
-use App\Inf_video;
-use App\Inf_video_group;
-use App\Inf_video_group_section;
+use App\Models\Inf_video;
+use App\Models\Inf_video_group;
+use App\Models\Inf_video_group_section;
 use App\Http\Controllers\Controller;
 use App\Services\ImagesService;
 use App\Services\JsonService;

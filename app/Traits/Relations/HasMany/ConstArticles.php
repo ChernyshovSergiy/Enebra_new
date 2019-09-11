@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Const_article;
+use App\Models\Const_article;
 
 trait ConstArticles
 {

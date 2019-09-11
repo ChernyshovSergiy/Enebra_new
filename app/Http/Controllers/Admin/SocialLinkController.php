@@ -6,7 +6,7 @@ use App\Http\Requests\Admin\SocialLink\ValidateRequest;
 use App\Services\ImagesService;
 use App\Services\JsonService;
 use App\Services\LanguagesService;
-use App\SocialLink;
+use App\Models\SocialLink;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Information;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Subscribers\ValidateRequest;
-use App\Inf_subscriber;
+use App\Models\Inf_subscriber;
 use Lang;
 
 class InfSubscribersController extends Controller

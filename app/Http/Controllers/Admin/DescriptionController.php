@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Desc_block;
-use App\Description;
+use App\Models\Desc_block;
+use App\Models\Description;
 use App\Http\Requests\Admin\Description\ValidateRequest;
 use App\Services\ImagesService;
 use App\Services\JsonService;

@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\Menu;
+use App\Models\Menu;
 
 trait Titles{
 

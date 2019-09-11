@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Description;
+use App\Models\Description;
 
 trait Descriptions
 {

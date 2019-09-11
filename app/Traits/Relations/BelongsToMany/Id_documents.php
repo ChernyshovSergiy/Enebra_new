@@ -3,7 +3,7 @@
 namespace App\Traits\Relations\BelongsToMany;
 
 
-use App\Inf_id_document;
+use App\Models\Inf_id_document;
 
 trait Id_documents
 {

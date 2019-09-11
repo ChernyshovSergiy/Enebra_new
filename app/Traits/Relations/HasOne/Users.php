@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasOne;
 
-use App\User;
+use App\Models\User;
 
 trait Users{
 

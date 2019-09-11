@@ -2,7 +2,7 @@
 
 namespace App\Traits\Methods;
 
-use App\Menu;
+use App\Models\Menu;
 
 trait GetTitleFromMenu
 {

@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relations\HasMany;
 
-use App\Purpose;
+use App\Models\Purpose;
 
 trait Purposes
 {
