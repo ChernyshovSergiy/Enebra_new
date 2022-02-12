@@ -22,7 +22,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "ajv": "^6.5.4",
+        "ajv": "^6.12.3",
         "ajv-keywords": "^3.2.0",
         "datatables": "^1.10.18",
         "imagemin": "^5.3.1",
