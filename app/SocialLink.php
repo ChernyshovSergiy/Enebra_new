@@ -6,7 +6,7 @@ use App\Traits\Methods\PrepareLangStrForJsonMethods;
 use App\Traits\Relations\BelongsTo\Images;
 use Illuminate\Database\Eloquent\Model;
 
-class socialLink extends Model
+class SocialLink extends Model
 {
     use Images, PrepareLangStrForJsonMethods;
 
