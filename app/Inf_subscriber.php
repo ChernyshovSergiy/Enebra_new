@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Lang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -70,7 +71,7 @@ class Inf_subscriber extends Model
 
     public function generateToken()
     {
-        $this->token = str_random(100);
+        $this->token = Str::random(100);
         $this->save();
     }
     public function setLanguage()

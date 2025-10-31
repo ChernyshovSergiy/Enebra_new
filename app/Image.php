@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string $image
  * @property-read \App\User|null $author
  * @property-read \App\ImageCategory $image_category
- * @property-read \App\socialLink $socialLink
+ * @property-read \App\SocialLink $socialLink
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Image findSimilarSlugs($attribute, $config, $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Image whereCreatedAt($value)

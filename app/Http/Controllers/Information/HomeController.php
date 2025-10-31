@@ -9,7 +9,7 @@ use App\Inf_video_group;
 use App\Language;
 use App\Http\Controllers\Controller;
 use App\Services\JsonService;
-use App\socialLink;
+use App\SocialLink;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class HomeController extends Controller

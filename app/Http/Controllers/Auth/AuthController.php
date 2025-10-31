@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -39,7 +40,7 @@ class AuthController extends Controller
         $user = User::whereEmail($request->email)->first();
 
         if($user && Hash::check($request->password, $user->password)){
-            $user->api_token = str_random(60);
+            $user->api_token = Str::random(60);
             $user->save();
 
             return response()->json([
